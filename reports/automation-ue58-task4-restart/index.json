@@ -1,0 +1,44 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "DESKTOP-JK4SRF5",
+			"instance": "96AD9FB7467FC563BA019E8648B082E9",
+			"instanceName": "DESKTOP-JK4SRF5-42480",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (24H2) [10.0.26100.8737] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 5070 Ti",
+			"cPUModel": "Intel(R) Core(TM) i7-14700KF",
+			"rAMInGB": 64,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.08.13-07.53.27",
+	"succeeded": 1,
+	"succeededWithWarnings": 0,
+	"failed": 0,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.0086272992193698883,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "ReloadAfterRestart",
+			"fullTestPath": "PBRTextureLab.Material.ReloadAfterRestart",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96AD9FB7467FC563BA019E8648B082E9"
+			],
+			"duration": 0.0086272992193698883,
+			"dateTime": "2026.08.13-07.53.27",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		}
+	]
+}

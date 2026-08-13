@@ -23,7 +23,7 @@ namespace
 		return FString::Printf(TEXT("T3Conflict%d%d"), PBRTEXTURELAB_ENGINE_MAJOR, PBRTEXTURELAB_ENGINE_MINOR);
 	}
 
-	PBRTextureLab::FPBRImageRgba8 MakeSolid(const int32 Width, const int32 Height, const FColor Color)
+	PBRTextureLab::FPBRImageRgba8 MakeImportSolid(const int32 Width, const int32 Height, const FColor Color)
 	{
 		PBRTextureLab::FPBRImageRgba8 Image;
 		Image.Width = Width;
@@ -40,7 +40,7 @@ namespace
 			EAutomationExpectedMessageFlags::Contains,
 			1);
 
-		const PBRTextureLab::FPBRImageRgba8 Input = MakeSolid(16, 16, FColor(180, 90, 40, 255));
+		const PBRTextureLab::FPBRImageRgba8 Input = MakeImportSolid(16, 16, FColor(180, 90, 40, 255));
 		PBRTextureLab::FPBRPixelParams Params;
 		Params.HeightBlurRadius = 0;
 		FString Disclaimer;

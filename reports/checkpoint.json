@@ -22,7 +22,12 @@
     "T3-import-asset-tasks",
     "T3-srgb-compression",
     "T3-cancel-conflict-cleanup",
-    "T3-reload-after-editor-restart"
+    "T3-reload-after-editor-restart",
+    "T4-parent-material-mr",
+    "T4-mic-task1-setters",
+    "T4-orm-bumpoffset-params",
+    "T4-cancel-conflict",
+    "T4-reload-after-editor-restart"
   ],
   "approvals": [],
   "loaded_sources": [
@@ -31,19 +36,20 @@
       "estimated_tokens": 550
     },
     {
-      "source": "tasks/03-texture-asset-import.md",
-      "estimated_tokens": 180
+      "source": "tasks/04-material-instance-generation.md",
+      "estimated_tokens": 160
     },
     {
-      "source": "UE_5.8 AssetImportTask.h / IAssetTools.h / IImageWrapperModule.h / TextureFactory.h",
+      "source": "UE MaterialEditingLibrary.h / MaterialInstanceConstant.h / MaterialExpressionBumpOffset.h",
       "estimated_tokens": 700
     }
   ],
-  "loaded_token_estimate": 1430,
+  "loaded_token_estimate": 1410,
   "edits": [
     "PBRTextureLabHost skeleton + PBRTextureLab Editor module + compat/probe",
     "PBRTextureLabPixelCore + Automation Tests",
-    "PBRTextureLabTextureImport + ImportAssetTasks + Automation Tests"
+    "PBRTextureLabTextureImport + ImportAssetTasks + Automation Tests",
+    "PBRTextureLabMaterial parent graph + MIC + Automation Tests"
   ],
   "evidence": [
     {
@@ -99,6 +105,60 @@
       "command": "UE_5.8 UnrealEditor-Cmd Automation RunTests PBRTextureLab.Import.ReloadAfterRestart",
       "exit_code": 0,
       "result": "1/1 Success"
+    },
+    {
+      "id": "build-ue56-task4",
+      "command": "UE_5.6\\Engine\\Build\\BatchFiles\\Build.bat PBRTextureLabHostEditor Win64 Development",
+      "exit_code": 0,
+      "result": "Succeeded (32.44s)"
+    },
+    {
+      "id": "build-ue57-task4",
+      "command": "UE_5.7\\Engine\\Build\\BatchFiles\\Build.bat PBRTextureLabHostEditor Win64 Development",
+      "exit_code": 0,
+      "result": "Succeeded (5.39s incremental after final code)"
+    },
+    {
+      "id": "build-ue58-task4",
+      "command": "UE_5.8\\Engine\\Build\\BatchFiles\\Build.bat PBRTextureLabHostEditor Win64 Development",
+      "exit_code": 0,
+      "result": "Succeeded (32.58s)"
+    },
+    {
+      "id": "test-ue56-task4",
+      "command": "UE_5.6 UnrealEditor-Cmd Automation RunTests PBRTextureLab",
+      "exit_code": 0,
+      "result": "15/15 Success"
+    },
+    {
+      "id": "test-ue57-task4",
+      "command": "UE_5.7 UnrealEditor-Cmd Automation RunTests PBRTextureLab",
+      "exit_code": 0,
+      "result": "15/15 Success"
+    },
+    {
+      "id": "test-ue58-task4",
+      "command": "UE_5.8 UnrealEditor-Cmd Automation RunTests PBRTextureLab",
+      "exit_code": 0,
+      "result": "15/15 Success"
+    },
+    {
+      "id": "restart-ue56-task4",
+      "command": "UE_5.6 UnrealEditor-Cmd Automation RunTests PBRTextureLab.Material.ReloadAfterRestart",
+      "exit_code": 0,
+      "result": "1/1 Success"
+    },
+    {
+      "id": "restart-ue57-task4",
+      "command": "UE_5.7 UnrealEditor-Cmd Automation RunTests PBRTextureLab.Material.ReloadAfterRestart",
+      "exit_code": 0,
+      "result": "1/1 Success"
+    },
+    {
+      "id": "restart-ue58-task4",
+      "command": "UE_5.8 UnrealEditor-Cmd Automation RunTests PBRTextureLab.Material.ReloadAfterRestart",
+      "exit_code": 0,
+      "result": "1/1 Success"
     }
   ],
   "evidence_fresh": true,
@@ -106,6 +166,6 @@
     "Engine/Plugins/Connecter is third-party; Marketplace move still pending elevated write access",
     "MSVC 14.44 is not UE 5.6 preferred 14.38"
   ],
-  "next_action": "Task 4 material instance generation; Task 5 UV presets may start in parallel",
-  "updated_at": "2026-08-13T07:05:00+00:00"
+  "next_action": "Task 5 UV absolute 100x/500x presets",
+  "updated_at": "2026-08-13T07:55:00+00:00"
 }

@@ -39,7 +39,8 @@ public class PBRTextureLabEditor : ModuleRules
 			"ContentBrowser",
 			"Projects",
 			"ImageCore",
-			"ImageWrapper"
+			"ImageWrapper",
+			"MaterialEditor"
 		});
 	}
 }

@@ -5,8 +5,9 @@
 - **Task 1 通过**（2026-08-13）：最小 C++ Host `PBRTextureLabHost` + Editor-only 插件 `PBRTextureLab` 骨架、兼容层、API 编译探针。未实现 PBR / 材质 / UI / UV。
 - **Task 2 通过**（2026-08-13）：离线、无 UObject 的 Metallic/Roughness 像素核心 + Automation Tests（纯色 / 水平渐变 / 垂直渐变 / 棋盘格 / 确定性 / Metallic / 非法输入）。三版本 Development Editor 编译退出码 0，各版本 `UnrealEditor-Cmd` 跑测 6/6 Success。报告见 `reports/02-offline-pbr-pixel-core.md`。未创建纹理资产、材质或 UI。
 - **Task 3 通过**（2026-08-13）：ImageWrapper PNG + `UAssetImportTask`/`ImportAssetTasks` 导入 BaseColor/Normal/ORM/灰度贴图；处理取消、冲突、失败清理。三版本编译退出码 0；Automation 11/11；各版本第二次 Editor 进程 `ReloadAfterRestart` 1/1。报告见 `reports/03-texture-asset-import.md`。未创建材质实例。
-- **三版本 Development Editor 编译通过**：UE 5.6 / 5.7 / 5.8，均用各引擎本机 `Build.bat`，退出码 0。报告见 `reports/01-ue-api-and-build-baseline.md`、`reports/02-offline-pbr-pixel-core.md`、`reports/03-texture-asset-import.md`。
-- **Git**：仓库 `https://github.com/sgyueran/UE-PBRUV`，分支 `develop`，Task 2 提交 `f061c9d`。约定每个 Task 完成后单独提交并推送。
+- **Task 4 通过**（2026-08-13）：插件内容参数化 Metallic/Roughness 母材质 + `UMaterialInstanceConstant`；ORM 连线、可关闭 BumpOffset。三版本编译退出码 0；Automation 15/15；各版本第二次 Editor 进程 `Material.ReloadAfterRestart` 1/1。报告见 `reports/04-material-instance-generation.md`。未做 UV / UI。
+- **三版本 Development Editor 编译通过**：UE 5.6 / 5.7 / 5.8，均用各引擎本机 `Build.bat`，退出码 0。报告见 `reports/01-ue-api-and-build-baseline.md`、`reports/02-offline-pbr-pixel-core.md`、`reports/03-texture-asset-import.md`、`reports/04-material-instance-generation.md`。
+- **Git**：仓库 `https://github.com/sgyueran/UE-PBRUV`，分支 `develop`，Task 3 提交 `ba7dba1`。约定每个 Task 完成后单独提交并推送。
 - **Connecter RulesError**：根因是 Design Connected 插件被装进安装版引擎 `Engine/Plugins/Connecter` 且 5.6/5.7 `EnabledByDefault: true`，UBT 去只读预编译 `UE5Rules.dll` 里找不到 `ConnecterUEPlugin`。已在本工程 `.uproject` 禁用；已把 5.6/5.7 引擎描述改成 `EnabledByDefault: false`（与 5.8 一致）。真正启用需要把插件挪到 `Engine/Plugins/Marketplace/Connecter`。该搬家会改 Program Files，需在可写系统目录的模式下执行，见 `sessions/2026-08-13-init-task1.md`。
 
 ## 项目目标

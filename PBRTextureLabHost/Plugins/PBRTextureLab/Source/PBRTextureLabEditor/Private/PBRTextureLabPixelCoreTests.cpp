@@ -8,7 +8,7 @@ namespace
 	constexpr EAutomationTestFlags PixelCoreTestFlags =
 		EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter;
 
-	PBRTextureLab::FPBRImageRgba8 MakeSolid(const int32 Width, const int32 Height, const FColor Color)
+	PBRTextureLab::FPBRImageRgba8 MakePixelCoreSolid(const int32 Width, const int32 Height, const FColor Color)
 	{
 		PBRTextureLab::FPBRImageRgba8 Image;
 		Image.Width = Width;
@@ -137,7 +137,7 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(
 bool FPBRTextureLabPixelCoreSolidColor::RunTest(const FString& Parameters)
 {
 	using namespace PBRTextureLab;
-	const FPBRImageRgba8 Input = MakeSolid(16, 16, FColor(128, 64, 32, 200));
+	const FPBRImageRgba8 Input = MakePixelCoreSolid(16, 16, FColor(128, 64, 32, 200));
 	FPBRPixelParams Params;
 	Params.HeightBlurRadius = 1;
 	FPBRMaps Maps;
