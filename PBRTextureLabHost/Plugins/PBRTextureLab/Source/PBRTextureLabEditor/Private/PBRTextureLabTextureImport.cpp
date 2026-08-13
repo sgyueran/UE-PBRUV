@@ -61,7 +61,7 @@ namespace PBRTextureLab
 			FString Directory;
 		};
 
-		bool IsGameThread(FString* OutError)
+		bool ImportIsGameThread(FString* OutError)
 		{
 			if (IsInGameThread())
 			{
@@ -76,7 +76,7 @@ namespace PBRTextureLab
 			return false;
 		}
 
-		void SetError(FString* OutError, const FString& Message)
+		void ImportSetError(FString* OutError, const FString& Message)
 		{
 			UE_LOG(LogPBRTextureLab, Error, TEXT("%s"), *Message);
 			if (OutError)
@@ -85,7 +85,7 @@ namespace PBRTextureLab
 			}
 		}
 
-		FString NormalizeContentPath(const FString& InPath)
+		FString ImportNormalizeContentPath(const FString& InPath)
 		{
 			FString Path = InPath;
 			Path.ReplaceInline(TEXT("\\"), TEXT("/"));
@@ -96,7 +96,7 @@ namespace PBRTextureLab
 			return Path;
 		}
 
-		bool GetExistingPackageFilename(const FString& PackageName, FString& OutFilename)
+		bool ImportGetExistingPackageFilename(const FString& PackageName, FString& OutFilename)
 		{
 			if (FPackageName::DoesPackageExist(PackageName, &OutFilename))
 			{
@@ -112,10 +112,10 @@ namespace PBRTextureLab
 			return false;
 		}
 
-		bool AssetExists(const FString& PackageName, const FString& AssetName)
+		bool ImportAssetExists(const FString& PackageName, const FString& AssetName)
 		{
 			FString UnusedFilename;
-			if (GetExistingPackageFilename(PackageName, UnusedFilename))
+			if (ImportGetExistingPackageFilename(PackageName, UnusedFilename))
 			{
 				return true;
 			}
@@ -126,7 +126,7 @@ namespace PBRTextureLab
 		bool PrepareExistingPackageForReplace(const FString& PackageName, FString* OutError)
 		{
 			FString Filename;
-			if (!GetExistingPackageFilename(PackageName, Filename))
+			if (!ImportGetExistingPackageFilename(PackageName, Filename))
 			{
 				return true;
 			}
@@ -158,7 +158,7 @@ namespace PBRTextureLab
 				if (IFileManager::Get().FileExists(*File)
 					&& !IFileManager::Get().Delete(*File, false, true, true))
 				{
-					SetError(OutError, FString::Printf(TEXT("Cannot replace unloadable package file: %s"), *File));
+					ImportSetError(OutError, FString::Printf(TEXT("Cannot replace unloadable package file: %s"), *File));
 					return false;
 				}
 			}
@@ -181,12 +181,12 @@ namespace PBRTextureLab
 			TArray64<uint8> Compressed;
 			if (!ImageWrapperModule.CompressImage(Compressed, EImageFormat::PNG, Encoded, static_cast<int32>(EImageCompressionQuality::Uncompressed)))
 			{
-				SetError(OutError, FString::Printf(TEXT("ImageWrapper failed to encode PNG: %s"), *Filename));
+				ImportSetError(OutError, FString::Printf(TEXT("ImageWrapper failed to encode PNG: %s"), *Filename));
 				return false;
 			}
 			if (!FFileHelper::SaveArrayToFile(Compressed, *Filename))
 			{
-				SetError(OutError, FString::Printf(TEXT("Failed to write staging file: %s"), *Filename));
+				ImportSetError(OutError, FString::Printf(TEXT("Failed to write staging file: %s"), *Filename));
 				return false;
 			}
 			return true;
@@ -269,7 +269,7 @@ namespace PBRTextureLab
 	{
 		OutTextures = FPBRImportedTextures();
 
-		if (!IsGameThread(OutError))
+		if (!ImportIsGameThread(OutError))
 		{
 			return EPBRImportStatus::Failed;
 		}
@@ -288,21 +288,21 @@ namespace PBRTextureLab
 			|| !IsValidImage(Maps.AO) || !IsValidImage(Maps.Roughness) || !IsValidImage(Maps.Metallic)
 			|| !IsValidImage(Maps.ORM))
 		{
-			SetError(OutError, TEXT("ImportPBRMaps rejected invalid pixel maps."));
+			ImportSetError(OutError, TEXT("ImportPBRMaps rejected invalid pixel maps."));
 			return EPBRImportStatus::Failed;
 		}
 
-		const FString DestinationPath = NormalizeContentPath(Request.DestinationPath);
+		const FString DestinationPath = ImportNormalizeContentPath(Request.DestinationPath);
 		if (!DestinationPath.StartsWith(TEXT("/Game")))
 		{
-			SetError(OutError, FString::Printf(TEXT("Destination path must be under /Game: %s"), *DestinationPath));
+			ImportSetError(OutError, FString::Printf(TEXT("Destination path must be under /Game: %s"), *DestinationPath));
 			return EPBRImportStatus::Failed;
 		}
 
 		const FString SanitizedBase = ObjectTools::SanitizeObjectName(Request.BaseName);
 		if (SanitizedBase.IsEmpty())
 		{
-			SetError(OutError, TEXT("BaseName is empty after sanitizing."));
+			ImportSetError(OutError, TEXT("BaseName is empty after sanitizing."));
 			return EPBRImportStatus::Failed;
 		}
 
@@ -330,11 +330,11 @@ namespace PBRTextureLab
 			FString PackageName = DestinationPath / AssetName;
 			if (!FPackageName::IsValidLongPackageName(PackageName))
 			{
-				SetError(OutError, FString::Printf(TEXT("Invalid package name: %s"), *PackageName));
+				ImportSetError(OutError, FString::Printf(TEXT("Invalid package name: %s"), *PackageName));
 				return EPBRImportStatus::Failed;
 			}
 
-			const bool bExists = AssetExists(PackageName, AssetName);
+			const bool bExists = ImportAssetExists(PackageName, AssetName);
 			if (bExists)
 			{
 				switch (Request.ConflictPolicy)
@@ -351,7 +351,7 @@ namespace PBRTextureLab
 					{
 						return EPBRImportStatus::Failed;
 					}
-					Resolved[Index].bReplaceExisting = AssetExists(PackageName, AssetName);
+					Resolved[Index].bReplaceExisting = ImportAssetExists(PackageName, AssetName);
 					break;
 				case EPBRImportConflictPolicy::UniqueName:
 					{
@@ -418,7 +418,7 @@ namespace PBRTextureLab
 			{
 				RollbackCreated(NewlyCreated);
 				OutTextures = FPBRImportedTextures();
-				SetError(OutError, FString::Printf(TEXT("Import failed for %s"), *Resolved[Index].AssetName));
+				ImportSetError(OutError, FString::Printf(TEXT("Import failed for %s"), *Resolved[Index].AssetName));
 				return EPBRImportStatus::Failed;
 			}
 			*Jobs[Index].OutTexture = Texture;
@@ -442,7 +442,7 @@ namespace PBRTextureLab
 			{
 				RollbackCreated(NewlyCreated);
 				OutTextures = FPBRImportedTextures();
-				SetError(OutError, TEXT("Failed to save imported texture packages."));
+				ImportSetError(OutError, TEXT("Failed to save imported texture packages."));
 				return EPBRImportStatus::Failed;
 			}
 		}

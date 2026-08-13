@@ -48,7 +48,7 @@ namespace PBRTextureLab
 			return MountedRoot + TEXT("Materials/M_PBRTextureLabMR");
 		}
 
-		void SetError(FString* OutError, const FString& Message)
+		void MaterialSetError(FString* OutError, const FString& Message)
 		{
 			UE_LOG(LogPBRTextureLab, Error, TEXT("%s"), *Message);
 			if (OutError)
@@ -57,17 +57,17 @@ namespace PBRTextureLab
 			}
 		}
 
-		bool IsGameThread(FString* OutError)
+		bool MaterialIsGameThread(FString* OutError)
 		{
 			if (IsInGameThread())
 			{
 				return true;
 			}
-			SetError(OutError, TEXT("PBR material APIs must run on the Game Thread."));
+			MaterialSetError(OutError, TEXT("PBR material APIs must run on the Game Thread."));
 			return false;
 		}
 
-		FString NormalizeContentPath(const FString& InPath)
+		FString MaterialNormalizeContentPath(const FString& InPath)
 		{
 			FString Path = InPath;
 			Path.ReplaceInline(TEXT("\\"), TEXT("/"));
@@ -78,7 +78,7 @@ namespace PBRTextureLab
 			return Path;
 		}
 
-		bool GetExistingPackageFilename(const FString& PackageName, FString& OutFilename)
+		bool MaterialGetExistingPackageFilename(const FString& PackageName, FString& OutFilename)
 		{
 			if (FPackageName::DoesPackageExist(PackageName, &OutFilename))
 			{
@@ -94,10 +94,10 @@ namespace PBRTextureLab
 			return false;
 		}
 
-		bool AssetExists(const FString& PackageName, const FString& AssetName)
+		bool MaterialAssetExists(const FString& PackageName, const FString& AssetName)
 		{
 			FString UnusedFilename;
-			if (GetExistingPackageFilename(PackageName, UnusedFilename))
+			if (MaterialGetExistingPackageFilename(PackageName, UnusedFilename))
 			{
 				return true;
 			}
@@ -124,7 +124,7 @@ namespace PBRTextureLab
 		void DiscardUnloadablePackage(const FString& PackageName)
 		{
 			FString Filename;
-			const bool bHasFile = GetExistingPackageFilename(PackageName, Filename);
+			const bool bHasFile = MaterialGetExistingPackageFilename(PackageName, Filename);
 			UPackage* Package = FindPackage(nullptr, *PackageName);
 			if (!Package && bHasFile)
 			{
@@ -176,7 +176,7 @@ namespace PBRTextureLab
 			}
 
 			FString LegacyFilename;
-			if (GetExistingPackageFilename(LegacyPackageName, LegacyFilename))
+			if (MaterialGetExistingPackageFilename(LegacyPackageName, LegacyFilename))
 			{
 				UE_LOG(LogPBRTextureLab, Log, TEXT("Removing cross-version parent leftover: %s"), *LegacyFilename);
 				DeletePackageFiles(LegacyFilename);
@@ -198,7 +198,7 @@ namespace PBRTextureLab
 		{
 			if (!UMaterialEditingLibrary::ConnectMaterialExpressions(From, FromOutput, To, ToInput))
 			{
-				SetError(OutError, FString::Printf(
+				MaterialSetError(OutError, FString::Printf(
 					TEXT("Failed to connect %s.%s -> %s.%s"),
 					From ? *From->GetClass()->GetName() : TEXT("null"),
 					FromOutput,
@@ -217,7 +217,7 @@ namespace PBRTextureLab
 		{
 			if (!UMaterialEditingLibrary::ConnectMaterialProperty(From, FromOutput, Property))
 			{
-				SetError(OutError, FString::Printf(TEXT("Failed to connect material property %d"), static_cast<int32>(Property)));
+				MaterialSetError(OutError, FString::Printf(TEXT("Failed to connect material property %d"), static_cast<int32>(Property)));
 				return false;
 			}
 			return true;
@@ -286,7 +286,7 @@ namespace PBRTextureLab
 				|| !BaseColor || !NormalSample || !OrmSample || !NormalStrength
 				|| !FlatNormal || !NormalBlend || !NormalOut)
 			{
-				SetError(OutError, TEXT("Failed to create parent material expressions."));
+				MaterialSetError(OutError, TEXT("Failed to create parent material expressions."));
 				return false;
 			}
 
@@ -367,14 +367,14 @@ namespace PBRTextureLab
 		{
 			if (!Asset)
 			{
-				SetError(OutError, TEXT("Cannot save a null material asset."));
+				MaterialSetError(OutError, TEXT("Cannot save a null material asset."));
 				return false;
 			}
 			TArray<UPackage*> Packages;
 			Packages.Add(Asset->GetOutermost());
 			if (!UEditorLoadingAndSavingUtils::SavePackages(Packages, false))
 			{
-				SetError(OutError, FString::Printf(TEXT("Failed to save %s"), *Asset->GetPathName()));
+				MaterialSetError(OutError, FString::Printf(TEXT("Failed to save %s"), *Asset->GetPathName()));
 				return false;
 			}
 			return true;
@@ -396,7 +396,7 @@ namespace PBRTextureLab
 
 	UMaterial* GetOrCreateParentMaterial(FString* OutError)
 	{
-		if (!IsGameThread(OutError))
+		if (!MaterialIsGameThread(OutError))
 		{
 			return nullptr;
 		}
@@ -431,7 +431,7 @@ namespace PBRTextureLab
 			const TArray<FString> Errors = RecompileParent(Existing);
 			if (Errors.Num() > 0)
 			{
-				SetError(OutError, FString::Join(Errors, TEXT("; ")));
+				MaterialSetError(OutError, FString::Join(Errors, TEXT("; ")));
 				return nullptr;
 			}
 			Existing->MarkPackageDirty();
@@ -452,7 +452,7 @@ namespace PBRTextureLab
 		UPackage* Package = CreatePackage(*PackageName);
 		if (!Package)
 		{
-			SetError(OutError, FString::Printf(TEXT("Failed to create package %s"), *PackageName));
+			MaterialSetError(OutError, FString::Printf(TEXT("Failed to create package %s"), *PackageName));
 			return nullptr;
 		}
 		if (!Package->IsFullyLoaded())
@@ -470,7 +470,7 @@ namespace PBRTextureLab
 			GWarn));
 		if (!Material)
 		{
-			SetError(OutError, TEXT("UMaterialFactoryNew failed to create the parent material."));
+			MaterialSetError(OutError, TEXT("UMaterialFactoryNew failed to create the parent material."));
 			return nullptr;
 		}
 
@@ -487,7 +487,7 @@ namespace PBRTextureLab
 		const TArray<FString> Errors = RecompileParent(Material);
 		if (Errors.Num() > 0)
 		{
-			SetError(OutError, FString::Join(Errors, TEXT("; ")));
+			MaterialSetError(OutError, FString::Join(Errors, TEXT("; ")));
 			return nullptr;
 		}
 
@@ -507,7 +507,7 @@ namespace PBRTextureLab
 	{
 		OutInstance = nullptr;
 
-		if (!IsGameThread(OutError))
+		if (!MaterialIsGameThread(OutError))
 		{
 			return EPBRImportStatus::Failed;
 		}
@@ -523,7 +523,7 @@ namespace PBRTextureLab
 
 		if (!Textures.HasAll())
 		{
-			SetError(OutError, TEXT("CreateMaterialInstance requires all Task 3 textures."));
+			MaterialSetError(OutError, TEXT("CreateMaterialInstance requires all Task 3 textures."));
 			return EPBRImportStatus::Failed;
 		}
 
@@ -533,29 +533,29 @@ namespace PBRTextureLab
 			return EPBRImportStatus::Failed;
 		}
 
-		const FString DestinationPath = NormalizeContentPath(Request.DestinationPath);
+		const FString DestinationPath = MaterialNormalizeContentPath(Request.DestinationPath);
 		if (!DestinationPath.StartsWith(TEXT("/Game")))
 		{
-			SetError(OutError, FString::Printf(TEXT("Destination path must be under /Game: %s"), *DestinationPath));
+			MaterialSetError(OutError, FString::Printf(TEXT("Destination path must be under /Game: %s"), *DestinationPath));
 			return EPBRImportStatus::Failed;
 		}
 
 		FString AssetName = ObjectTools::SanitizeObjectName(Request.BaseName + TEXT("_Inst"));
 		if (AssetName.IsEmpty())
 		{
-			SetError(OutError, TEXT("BaseName is empty after sanitizing."));
+			MaterialSetError(OutError, TEXT("BaseName is empty after sanitizing."));
 			return EPBRImportStatus::Failed;
 		}
 
 		FString PackageName = DestinationPath / AssetName;
 		if (!FPackageName::IsValidLongPackageName(PackageName))
 		{
-			SetError(OutError, FString::Printf(TEXT("Invalid package name: %s"), *PackageName));
+			MaterialSetError(OutError, FString::Printf(TEXT("Invalid package name: %s"), *PackageName));
 			return EPBRImportStatus::Failed;
 		}
 
 		bool bReplaceExisting = false;
-		if (AssetExists(PackageName, AssetName))
+		if (MaterialAssetExists(PackageName, AssetName))
 		{
 			switch (Request.ConflictPolicy)
 			{
@@ -598,7 +598,7 @@ namespace PBRTextureLab
 					UPackageTools::UnloadPackages(ToUnload, UnloadError, true);
 				}
 				FString ExistingFilename;
-				if (GetExistingPackageFilename(PackageName, ExistingFilename))
+				if (MaterialGetExistingPackageFilename(PackageName, ExistingFilename))
 				{
 					DeletePackageFiles(ExistingFilename);
 				}
@@ -624,7 +624,7 @@ namespace PBRTextureLab
 
 			if (!Instance)
 			{
-				SetError(OutError, TEXT("Failed to create UMaterialInstanceConstant."));
+				MaterialSetError(OutError, TEXT("Failed to create UMaterialInstanceConstant."));
 				return EPBRImportStatus::Failed;
 			}
 

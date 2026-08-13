@@ -16,7 +16,7 @@ namespace
 	constexpr EAutomationTestFlags MaterialTestFlags =
 		EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter;
 
-	FString PersistBaseName()
+	FString PersistMaterialBaseName()
 	{
 		return FString::Printf(TEXT("T4Inst%d%d"), PBRTEXTURELAB_ENGINE_MAJOR, PBRTEXTURELAB_ENGINE_MINOR);
 	}
@@ -124,14 +124,14 @@ bool FPBRTextureLabMaterialCreateInstance::RunTest(const FString& Parameters)
 {
 	using namespace PBRTextureLab;
 	FPBRImportedTextures Textures;
-	if (!GenerateAndImport(*this, Textures, PersistBaseName() + TEXT("Maps")))
+	if (!GenerateAndImport(*this, Textures, PersistMaterialBaseName() + TEXT("Maps")))
 	{
 		return false;
 	}
 
 	FPBRMaterialInstanceRequest Request;
 	Request.DestinationPath = TEXT("/Game/PBRTextureLab/Automation");
-	Request.BaseName = PersistBaseName();
+	Request.BaseName = PersistMaterialBaseName();
 	Request.ConflictPolicy = EPBRImportConflictPolicy::Replace;
 	Request.NormalStrength = 0.75f;
 	Request.HeightAmount = 0.0f;
@@ -243,7 +243,7 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(
 bool FPBRTextureLabMaterialReloadAfterRestart::RunTest(const FString& Parameters)
 {
 	using namespace PBRTextureLab;
-	const FString AssetName = PersistBaseName() + TEXT("_Inst");
+	const FString AssetName = PersistMaterialBaseName() + TEXT("_Inst");
 	const FString ObjectPath = TEXT("/Game/PBRTextureLab/Automation/") + AssetName + TEXT(".") + AssetName;
 	UMaterialInstanceConstant* Instance = LoadObject<UMaterialInstanceConstant>(nullptr, *ObjectPath);
 	TestNotNull(TEXT("Reload material instance"), Instance);

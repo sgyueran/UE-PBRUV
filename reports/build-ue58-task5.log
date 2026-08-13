@@ -1,0 +1,138 @@
+Log started at 08/13/2026 16:18:45 (2026-08-13T08:18:45Z)
+Resolved project argument C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\PBRTextureLabHost.uproject to C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\PBRTextureLabHost.uproject
+No config file at C:\ProgramData\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+No config file at C:\Users\Administrator\AppData\Local\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+No config file at C:\Users\Administrator\Documents\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Configuration will be read from:
+  C:\Users\Administrator\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Reading configuration file from cache (C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\Intermediate\Build\XmlConfigCache.bin): C:\Users\Administrator\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Reading configuration file from cache (C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\Intermediate\Build\XmlConfigCache.bin): C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\Saved\UnrealBuildTool\BuildConfiguration.xml
+Reading configuration file from cache (C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\Intermediate\Build\XmlConfigCache.bin): C:\Users\Administrator\AppData\Local\UnrealEngine\Intermediate\Build\UnrealBuildTool.Env.BuildConfiguration.xml
+Setting temp directory to 'C:\Users\Administrator\AppData\Local\Temp\UnrealBuildTool\eb6d2d82'
+    Registering build platform: UnrealBuildTool.AndroidPlatformFactory
+Android Installed SDK(s): MinVersion_Sdk=r27c, MaxVersion_Sdk=r29, CurrentVersion_Sdk=r27c, Version_AutoSdk=r27c, CurrentVersion_AutoSdk=
+        Registering build platform: Android - buildable: True
+    Registering build platform: UnrealBuildTool.IOSPlatformFactory
+    Registering build platform: UnrealBuildTool.LinuxPlatformFactory
+    Registering build platform: UnrealBuildTool.MacPlatformFactory
+    Registering build platform: UnrealBuildTool.TVOSPlatformFactory
+    Registering build platform: UnrealBuildTool.WindowsPlatformFactory
+Found Windows 10 SDK root at C:\Program Files\Windows Kits\10 (1)
+Found Windows 10 SDK root at C:\Program Files (x86)\Windows Kits\10 (2)
+Found Windows 10 SDK version 10.0.22621.0 at C:\Program Files (x86)\Windows Kits\10
+Found Universal CRT version 10.0.22621.0 at C:\Program Files (x86)\Windows Kits\10
+Found Windows 10 SDK version 10.0.26100.0 at C:\Program Files (x86)\Windows Kits\10
+Found Universal CRT version 10.0.26100.0 at C:\Program Files (x86)\Windows Kits\10
+Win64 Installed SDK(s): MinVersion_Sdk=10.0.19041.0, MaxVersion_Sdk=10.9.99999.0, CurrentVersion_Sdk=10.0.22621.0, Version_AutoSdk=10.0.22621.0, CurrentVersion_AutoSdk=
+        Registering build platform: Win64 - buildable: True
+    Registering build platform: UnrealBuildTool.VisionOSPlatformFactory
+Command line: "C:\Program Files\Epic Games\UE_5.8\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" PBRTextureLabHostEditor Win64 Development -Project=C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\PBRTextureLabHost.uproject -WaitMutex
+Log file: C:\Users\Administrator\AppData\Local\UnrealBuildTool\Log.txt
+Deleting old log file: C:\Users\Administrator\AppData\Local\UnrealBuildTool\Log-backup-2026.08.13-07.31.31.txt
+Deleting old log file: C:\Users\Administrator\AppData\Local\UnrealBuildTool\Log-backup-2026.08.13-06.23.02.json
+
+Determining max actions to execute in parallel (20 physical cores, 28 logical cores)
+  Executing up to 20 processes, one per physical core
+Using 'git status' to determine working set for adaptive non-unity build (C:\Users\Administrator\Desktop\Plughins).
+UbaStorageServer - Database loaded from C:\ProgramData\Epic\UnrealBuildAccelerator\cas\casdb (v32) in <1ms (contained 0 entries estimated to 0b)
+UbaServer - Listening on 0.0.0.0:1345
+Skipping C:\Program Files\Epic Games\UE_5.8\Engine\Intermediate\Build\BuildRules\UE5Rules.dll: File is installed
+Skipping C:\Program Files\Epic Games\UE_5.8\Engine\Intermediate\Build\BuildRules\UE5ProgramRules.dll: File is installed
+C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\Config\DefaultEngine.ini has been modified since makefile was built.
+Invalidating makefile for PBRTextureLabHostEditor (DefaultEngine.ini modified)
+Compiler: C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe
+Linker: C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\link.exe
+Library Manager: C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\link.exe
+Resource Compiler: C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\rc.exe
+Resource Converter: C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cvtres.exe
+Using EngineIncludeOrderVersion.Unreal5_8 for target PBRTextureLabHostEditor.Target.cs
+Building UnrealEditor - PBRTextureLabHostEditor - Win64 - Development
+VerseVMBytecodeGenerator.Generate, generating CPP headers in: 'C:\Program Files\Epic Games\UE_5.8\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\VerseVMBytecode'
+	Writing out generated header file. Changed:False Path:'C:\Program Files\Epic Games\UE_5.8\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\VerseVMBytecode\VVMBytecodeOps.gen.h'
+	Writing out generated header file. Changed:False Path:'C:\Program Files\Epic Games\UE_5.8\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\VerseVMBytecode\VVMBytecodesAndCaptures.gen.h'
+	Writing out generated header file. Changed:False Path:'C:\Program Files\Epic Games\UE_5.8\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\VerseVMBytecode\VVMMakeCapturesFuncs.gen.h'
+	Writing out generated header file. Changed:False Path:'C:\Program Files\Epic Games\UE_5.8\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\VerseVMBytecode\VVMCaptureSwitch.gen.h'
+Generated code is up to date.
+Found 5 shared PCH headers (listed in order of preference):
+	UnrealEd
+	Engine
+	Slate
+	CoreUObject
+	Core
+Checking for live coding mutex: Global\LiveCoding_C++Program Files+Epic Games+UE_5.8+Engine+Binaries+Win64+UnrealEditor.exe
+Deleting outdated item: C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\Plugins\PBRTextureLab\Binaries\Win64\UnrealEditor-PBRTextureLabEditor.pdb
+Deleting outdated item: C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\Plugins\PBRTextureLab\Intermediate\Build\Win64\x64\UnrealEditor\Development\PBRTextureLabEditor\UnrealEditor-PBRTextureLabEditor.lib
+Building PBRTextureLabHostEditor...
+===== Toolchain Information =====
+Using ISPC compiler (C:\Program Files\Epic Games\UE_5.8\Engine\Source\ThirdParty\Intel\ISPC\bin\Windows\ispc.exe)
+  Intel(r) Implicit SPMD Program Compiler (Intel(r) ISPC), 1.24.0 (build commit  @ 20250404, LLVM 18.1.2) 
+Using Visual Studio 14.44.35228 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207) and Windows 10.0.22621.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+[Adaptive Build] Excluded from PBRTextureLabEditor unity file: PBRTextureLabApiProbe.cpp, PBRTextureLabMaterial.cpp, PBRTextureLabMaterialTests.cpp, PBRTextureLabTextureImport.cpp, PBRTextureLabTextureImportTests.cpp, PBRTextureLabUV.cpp, PBRTextureLabUVTests.cpp
+=================================
+Using Unreal Build Accelerator local executor to run 5 action(s)
+  CPU 20 physical cores, 28 logical cores
+  Memory 63.83 GB physical, 42 GB/83.37 GB committed
+  UBA Storage capacity 40 GB
+  UBA RootDir C:\ProgramData\Epic\UnrealBuildAccelerator
+Cache bucket 2129408169 used. Action: Compile [x64] PBRTextureLabUV.cpp ()
+Cache bucket 416513229 used. Action: Link [x64] UnrealEditor-PBRTextureLabEditor.dll ()
+All processes queued
+[1/5] Compile [x64] PBRTextureLabUV.cpp
+[2/5] Compile [x64] PBRTextureLabUVTests.cpp
+[3/5] Link [x64] UnrealEditor-PBRTextureLabEditor.lib
+  正在创建库 C:/Users/Administrator/Desktop/Plughins/PBRTextureLabHost/Plugins/PBRTextureLab/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabEditor/UnrealEditor-PBRTextureLabEditor.lib 和对象 C:/Users/Administrator/Desktop/Plughins/PBRTextureLabHost/Plugins/PBRTextureLab/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabEditor/UnrealEditor-PBRTextureLabEditor.exp
+[4/5] Link [x64] UnrealEditor-PBRTextureLabEditor.dll
+[5/5] WriteMetadata PBRTextureLabHostEditor.target [NoUba]
+
+Total time in Unreal Build Accelerator local executor: 3.89 seconds
+Output binary: C:\Program Files\Epic Games\UE_5.8\Engine\Binaries\Win64\UnrealEditor.exe
+UbaStorageServer - Database saved in <1ms (0 file entries, 0 cas entries. deleted 0 dropped cas files)
+WriteFileIfChanged() wrote 0 changed files of 1 requested writes.
+
+Timeline:
+[  0.000]  +0.202 Main
+   0.010          [  0.010]  +0.055 Apply XmlConfig
+   0.067          [  0.066]  +0.047 AddTelemetry
+   0.130          [  0.130]  +0.072 RegisterPlatforms
+[  0.216]  +0.016 ParseCommandLine
+[  0.267]  +0.075 LoadMakefile
+   0.286          [  0.019]  +0.015 EngineRulesPlugins
+   0.304          [  0.036]  +0.010 EngineRulesFetchDirs
+   0.320          [  0.053]  +0.006 EngineRulesAssembly
+   0.327          [  0.060]  +0.000 ProgramRulesAssembly
+   0.330          [  0.063]  +0.000 ProjectRulesAssembly
+   0.331          [  0.064]  +0.143 CreateTargetRules
+   0.345             0.078          [  0.014]  +0.000 FindPlugins
+   0.354             0.087          [  0.023]  +0.117 MakefileValid
+[  0.508]  +0.003 CppDependencyCache
+[  0.519]  +0.882 PBRTextureLabHostEditor Win64 Development
+   0.519          [  0.000]  +0.389 <unknown>
+   0.909          [  0.389]  +0.037 UHTModules
+   1.001          [  0.481]  +0.012 UHTManifest
+   1.014          [  0.494]  +0.010 UHTTimestamps
+   1.175          [  0.655]  +0.000 GitWait
+   1.175          [  0.656]  +0.220 <unknown>
+   1.396          [  0.876]  +0.000 WaitOnWrites
+[  1.401]  +0.040 SavingMakefile
+   1.402          [  0.000]  +0.001 UHTWait
+   1.416          [  0.014]  +0.002 CppDependencyCache
+   1.419          [  0.017]  +0.048 Preparing ActionGraph
+   1.430             0.028          [  0.011]  +0.003 LinkActions
+   1.434             0.032          [  0.015]  +0.000 GatherPrerequisiteActions
+   1.435             0.033          [  0.016]  +0.000 CppDependencyCacheWait
+   1.436             0.034          [  0.017]  +0.019 GatherOutdatedActions
+   1.457             0.056          [  0.038]  +0.004 LinkActions
+   1.463             0.061          [  0.044]  +0.000 DeleteOutdatedProducedItems
+   1.464             0.062          [  0.045]  +0.002 SaveActionHistory
+   1.467             0.065          [  0.048]  +0.000 CreateDirectoriesForProducedItems
+[  1.476]  +0.122 GarbageCollect
+[  1.598]  +3.769 <unknown>
+[  5.367]  +0.000 Deploying targets
+[  5.368]  +0.000 DisconnectCache
+[  5.371]  +0.010 SaveCasTable
+[  5.384]  +0.103 Saving caches
+[  5.487]  +0.001 TelemetryService.FlushEvents
+[  5.489]
+
+Result: Succeeded
+Total execution time: 5.49 seconds

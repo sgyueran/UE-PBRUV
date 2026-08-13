@@ -38,6 +38,16 @@ namespace PBRTextureLab
 		}
 	}
 
+	inline bool ModifyStaticMeshDescription(UStaticMesh* Mesh, int32 LodIndex, const bool bAlwaysMarkDirty = true)
+	{
+		return Mesh ? Mesh->ModifyMeshDescription(LodIndex, bAlwaysMarkDirty) : false;
+	}
+
+	inline bool IsStaticMeshDescriptionValid(const UStaticMesh* Mesh, int32 LodIndex)
+	{
+		return Mesh && Mesh->IsMeshDescriptionValid(LodIndex);
+	}
+
 	inline int32 GetStaticMeshSourceModelCount(const UStaticMesh* Mesh)
 	{
 		return Mesh ? Mesh->GetNumSourceModels() : 0;

@@ -13,7 +13,7 @@ namespace
 	constexpr EAutomationTestFlags ImportTestFlags =
 		EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter;
 
-	FString PersistBaseName()
+	FString PersistImportBaseName()
 	{
 		return FString::Printf(TEXT("T3Reload%d%d"), PBRTEXTURELAB_ENGINE_MAJOR, PBRTEXTURELAB_ENGINE_MINOR);
 	}
@@ -235,7 +235,7 @@ bool FPBRTextureLabImportCreateAndSave::RunTest(const FString& Parameters)
 
 	FPBRTextureImportRequest Request;
 	Request.DestinationPath = TEXT("/Game/PBRTextureLab/Automation");
-	Request.BaseName = PersistBaseName();
+	Request.BaseName = PersistImportBaseName();
 	Request.ConflictPolicy = EPBRImportConflictPolicy::Replace;
 	Request.bSave = true;
 
@@ -247,7 +247,7 @@ bool FPBRTextureLabImportCreateAndSave::RunTest(const FString& Parameters)
 	ExpectAllSettings(*this, Imported);
 	TestEqual(TEXT("Staging cleaned after CreateAndSave"), CountStagingPngs(), 0);
 
-	const FString Base = PersistBaseName();
+	const FString Base = PersistImportBaseName();
 	const TCHAR* Suffixes[] = {
 		TEXT("_BaseColor"), TEXT("_Height"), TEXT("_Normal"), TEXT("_AO"),
 		TEXT("_Roughness"), TEXT("_Metallic"), TEXT("_ORM")
@@ -274,7 +274,7 @@ bool FPBRTextureLabImportReloadAfterRestart::RunTest(const FString& Parameters)
 		bool bSRGB;
 	};
 
-	const FString Base = PersistBaseName();
+	const FString Base = PersistImportBaseName();
 	const FExpected Expected[] = {
 		{ TEXT("_BaseColor"), TC_Default, true },
 		{ TEXT("_Height"), TC_Grayscale, false },
