@@ -67,6 +67,8 @@ Editor 启动加载、PIE、UV 操作：**未运行，未验证**。
 
 该插件不属于 Epic 发行物，不得归因于 `PBRTextureLab`。
 
+引擎侧已把 5.6/5.7 的 `ConnecterUEPlugin.uplugin` 改成 `EnabledByDefault: false`（与 5.8 安装包一致）。这只阻止它污染所有工程的编译；若在 `.uproject` 里重新 Enabled，RulesError 仍会回来，因为 `ConnecterUEPlugin` 不在只读的预编译 `UE5Rules.dll` 里。要真正启用 Connecter，必须把它从 `Engine/Plugins/Connecter` 挪到 `Engine/Plugins/Marketplace/Connecter`（或工程 `Plugins/`），让 UBT 单独编译可写的 rules 程序集。插件目录里只有 `Build.cs` 和预编译 DLL，没有 C++ 源码。
+
 ## 兼容层
 
 `PBRTextureLabCompat.h` + `PBRTextureLabEditorApi.h` 集中版本差异：
