@@ -32,6 +32,7 @@ namespace PBRTextureLab
 		bool bCancelled = false;
 		bool bRebaseline = false;
 		bool bSave = false;
+		bool bTransact = true;
 	};
 
 	int32 GetAppliedUVScale(const UStaticMesh* Mesh);

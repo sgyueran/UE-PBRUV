@@ -458,7 +458,7 @@ namespace PBRTextureLab
 			Records = Existing->Lods;
 		}
 
-		FScopedTransaction Transaction(NSLOCTEXT("PBRTextureLab", "ApplyUVPreset", "PBR Texture Lab UV Preset"));
+		FScopedTransaction Transaction(NSLOCTEXT("PBRTextureLab", "ApplyUVPreset", "PBR Texture Lab UV Preset"), Request.bTransact);
 		Mesh->Modify();
 		UPBRTextureLabUVPresetData* Data = GetOrCreateUvData(Mesh);
 		Data->Modify();
