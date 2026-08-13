@@ -6,6 +6,7 @@
 #include "AssetRegistry/AssetData.h"
 #include "DesktopPlatformModule.h"
 #include "Engine/Texture2D.h"
+#include "Materials/MaterialInterface.h"
 #include "Framework/Application/SlateApplication.h"
 #include "IDesktopPlatform.h"
 #include "Misc/Paths.h"
@@ -22,6 +23,7 @@
 #include "Widgets/Layout/SScrollBox.h"
 #include "Widgets/Layout/SSeparator.h"
 #include "Widgets/Layout/SUniformGridPanel.h"
+#include "Widgets/Layout/SWidgetSwitcher.h"
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/Text/STextBlock.h"
 
@@ -38,11 +40,11 @@ namespace
 
 	PBRTextureLab::EPBRMetallicMode NomadMetallicFromLabel(const FString& Label)
 	{
-		if (Label.Contains(TEXT("Constant")))
+		if (Label.Contains(TEXT("常量")) || Label.Contains(TEXT("Constant")))
 		{
 			return PBRTextureLab::EPBRMetallicMode::Constant;
 		}
-		if (Label.Contains(TEXT("Threshold")))
+		if (Label.Contains(TEXT("阈值")) || Label.Contains(TEXT("Threshold")))
 		{
 			return PBRTextureLab::EPBRMetallicMode::ThresholdMask;
 		}
@@ -51,31 +53,47 @@ namespace
 
 	PBRTextureLab::EPBRImportConflictPolicy NomadConflictFromLabel(const FString& Label)
 	{
-		if (Label.Contains(TEXT("Replace")))
+		if (Label.Contains(TEXT("覆盖")) || Label.Contains(TEXT("Replace")))
 		{
 			return PBRTextureLab::EPBRImportConflictPolicy::Replace;
 		}
-		if (Label.Contains(TEXT("Unique")))
+		if (Label.Contains(TEXT("改名")) || Label.Contains(TEXT("Unique")))
 		{
 			return PBRTextureLab::EPBRImportConflictPolicy::UniqueName;
 		}
 		return PBRTextureLab::EPBRImportConflictPolicy::Cancel;
 	}
+
+	FString NomadNextNumberedName(const FString& Name)
+	{
+		int32 DigitStart = Name.Len();
+		while (DigitStart > 0 && FChar::IsDigit(Name[DigitStart - 1]))
+		{
+			--DigitStart;
+		}
+		if (DigitStart == Name.Len())
+		{
+			return Name + TEXT("_2");
+		}
+		const int32 Value = FCString::Atoi(*Name.Mid(DigitStart));
+		return Name.Left(DigitStart) + FString::FromInt(FMath::Max(Value, 1) + 1);
+	}
 }
 
 void SPBRTextureLabNomad::Construct(const FArguments& InArgs)
 {
-	MetallicOptions.Add(MakeShared<FString>(TEXT("All Black")));
-	MetallicOptions.Add(MakeShared<FString>(TEXT("Constant")));
-	MetallicOptions.Add(MakeShared<FString>(TEXT("Threshold Mask")));
+	MetallicOptions.Add(MakeShared<FString>(TEXT("全黑")));
+	MetallicOptions.Add(MakeShared<FString>(TEXT("常量")));
+	MetallicOptions.Add(MakeShared<FString>(TEXT("亮度阈值")));
 	SelectedMetallic = MetallicOptions[0];
 
-	ConflictOptions.Add(MakeShared<FString>(TEXT("Cancel")));
-	ConflictOptions.Add(MakeShared<FString>(TEXT("Replace")));
-	ConflictOptions.Add(MakeShared<FString>(TEXT("Unique Name")));
-	SelectedConflict = ConflictOptions[0];
+	ConflictOptions.Add(MakeShared<FString>(TEXT("取消")));
+	ConflictOptions.Add(MakeShared<FString>(TEXT("覆盖")));
+	ConflictOptions.Add(MakeShared<FString>(TEXT("自动改名")));
+	SelectedConflict = ConflictOptions[2];
+	ExportFlags.bORM = false;
 
-	StatusMessage = TEXT("Select a Texture2D or a local image, then Preview or Generate.");
+	StatusMessage = TEXT("选择源图和母材质，然后预览或生成。贴图会放进与材质同名的文件夹。");
 	Disclaimer = PBRTextureLab::MetallicDisclaimer;
 
 	ChildSlot
@@ -88,15 +106,14 @@ void SPBRTextureLabNomad::Construct(const FArguments& InArgs)
 			+ SScrollBox::Slot()
 			[
 				SNew(SVerticalBox)
-				+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 0.0f, 0.0f, 8.0f)[BuildSourceSection()]
-				+ SVerticalBox::Slot().AutoHeight()[SNew(SSeparator)]
-				+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f)[BuildOutputSection()]
-				+ SVerticalBox::Slot().AutoHeight()[SNew(SSeparator)]
-				+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f)[BuildParameterSection()]
-				+ SVerticalBox::Slot().AutoHeight()[SNew(SSeparator)]
-				+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f)[BuildPreviewSection()]
-				+ SVerticalBox::Slot().AutoHeight()[SNew(SSeparator)]
-				+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f)[BuildActionSection()]
+				+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 0.0f, 0.0f, 8.0f)[BuildModeTabs()]
+				+ SVerticalBox::Slot().AutoHeight()
+				[
+					SNew(SWidgetSwitcher)
+					.WidgetIndex_Lambda([this]() { return ActivePage; })
+					+ SWidgetSwitcher::Slot()[BuildGeneratePage()]
+					+ SWidgetSwitcher::Slot()[BuildAssemblePage()]
+				]
 				+ SVerticalBox::Slot().AutoHeight()[SNew(SSeparator)]
 				+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f)[BuildUvSection()]
 			]
@@ -104,12 +121,130 @@ void SPBRTextureLabNomad::Construct(const FArguments& InArgs)
 	];
 }
 
+TSharedRef<SWidget> SPBRTextureLabNomad::BuildModeTabs()
+{
+	return SNew(SHorizontalBox)
+		+ SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 8.0f, 0.0f)
+		[
+			SNew(SButton)
+			.Text(LOCTEXT("PageGenerate", "单图生成"))
+			.OnClicked(this, &SPBRTextureLabNomad::SwitchToGeneratePage)
+		]
+		+ SHorizontalBox::Slot().AutoWidth()
+		[
+			SNew(SButton)
+			.Text(LOCTEXT("PageAssemble", "现成贴图组材质"))
+			.OnClicked(this, &SPBRTextureLabNomad::SwitchToAssemblePage)
+		];
+}
+
+TSharedRef<SWidget> SPBRTextureLabNomad::BuildGeneratePage()
+{
+	return SNew(SVerticalBox)
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 0.0f, 0.0f, 8.0f)[BuildSourceSection()]
+		+ SVerticalBox::Slot().AutoHeight()[SNew(SSeparator)]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f)[BuildOutputSection()]
+		+ SVerticalBox::Slot().AutoHeight()[SNew(SSeparator)]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f)[BuildParameterSection()]
+		+ SVerticalBox::Slot().AutoHeight()[SNew(SSeparator)]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f)[BuildPreviewSection()]
+		+ SVerticalBox::Slot().AutoHeight()[SNew(SSeparator)]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f)[BuildActionSection()];
+}
+
+TSharedRef<SWidget> SPBRTextureLabNomad::BuildAssemblePage()
+{
+	return SNew(SVerticalBox)
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 0.0f, 0.0f, 8.0f)
+		[
+			NomadSectionLabel(LOCTEXT("AssembleHeading", "现成贴图组材质"))
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 0.0f, 0.0f, 4.0f)
+		[
+			SNew(STextBlock)
+			.AutoWrapText(true)
+			.Text(LOCTEXT("AssembleHint", "选择母材质和已有 PBR 贴图，直接生成子材质。贴图会复制到与材质同名的文件夹。"))
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f)[BuildOutputSection()]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f)
+		[
+			MakeAssembleTextureRow(LOCTEXT("AsmBase", "基础贴图"), &SPBRTextureLabNomad::AssembleBaseColor)
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 4.0f)
+		[
+			MakeAssembleTextureRow(LOCTEXT("AsmNormal", "法线贴图"), &SPBRTextureLabNomad::AssembleNormal)
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 4.0f)
+		[
+			MakeAssembleTextureRow(LOCTEXT("AsmRough", "粗糙贴图"), &SPBRTextureLabNomad::AssembleRoughness)
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 4.0f)
+		[
+			MakeAssembleTextureRow(LOCTEXT("AsmMetal", "金属贴图"), &SPBRTextureLabNomad::AssembleMetallic)
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 4.0f)
+		[
+			MakeAssembleTextureRow(LOCTEXT("AsmHeight", "置换/高度"), &SPBRTextureLabNomad::AssembleHeight)
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 4.0f)
+		[
+			MakeAssembleTextureRow(LOCTEXT("AsmAO", "AO"), &SPBRTextureLabNomad::AssembleAO)
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 4.0f)
+		[
+			MakeAssembleTextureRow(LOCTEXT("AsmORM", "ORM"), &SPBRTextureLabNomad::AssembleORM)
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f)
+		[
+			MakeCheckRow(
+				LOCTEXT("CopyToFolder", "把选中贴图复制到材质同名文件夹"),
+				TAttribute<ECheckBoxState>::CreateLambda([this]()
+				{
+					return bCopyExistingTextures ? ECheckBoxState::Checked : ECheckBoxState::Unchecked;
+				}),
+				[this](ECheckBoxState State) { bCopyExistingTextures = State == ECheckBoxState::Checked; })
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f)
+		[
+			SNew(SButton)
+			.Text(LOCTEXT("AssembleBtn", "用选中贴图生成材质"))
+			.OnClicked(this, &SPBRTextureLabNomad::OnCreateFromExisting)
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 6.0f, 0.0f, 0.0f)
+		[
+			SNew(STextBlock)
+			.AutoWrapText(true)
+			.Text_Lambda([this]() { return FText::FromString(StatusMessage); })
+		];
+}
+
+TSharedRef<SWidget> SPBRTextureLabNomad::MakeAssembleTextureRow(
+	const FText& Label,
+	TWeakObjectPtr<UTexture2D> SPBRTextureLabNomad::* Slot)
+{
+	return SNew(SHorizontalBox)
+		+ SHorizontalBox::Slot().FillWidth(0.25f).VAlign(VAlign_Center)
+		[SNew(STextBlock).Text(Label)]
+		+ SHorizontalBox::Slot().FillWidth(0.75f)
+		[
+			SNew(SObjectPropertyEntryBox)
+			.AllowedClass(UTexture2D::StaticClass())
+			.AllowClear(true)
+			.DisplayThumbnail(true)
+			.ObjectPath_Lambda([this, Slot]() { return GetAssembleTexturePath(Slot); })
+			.OnObjectChanged_Lambda([this, Slot](const FAssetData& AssetData)
+			{
+				OnAssembleTextureChanged(AssetData, Slot);
+			})
+		];
+}
+
 TSharedRef<SWidget> SPBRTextureLabNomad::BuildSourceSection()
 {
 	return SNew(SVerticalBox)
 		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 0.0f, 0.0f, 4.0f)
 		[
-			NomadSectionLabel(LOCTEXT("SourceHeading", "Source"))
+			NomadSectionLabel(LOCTEXT("SourceHeading", "源"))
 		]
 		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 2.0f)
 		[
@@ -126,13 +261,13 @@ TSharedRef<SWidget> SPBRTextureLabNomad::BuildSourceSection()
 			+ SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 8.0f, 0.0f)
 			[
 				SNew(SButton)
-				.Text(LOCTEXT("UseSelected", "Use Content Browser Texture2D"))
+				.Text(LOCTEXT("UseSelected", "使用内容浏览器中的 Texture2D"))
 				.OnClicked(this, &SPBRTextureLabNomad::OnUseContentBrowserTexture)
 			]
 			+ SHorizontalBox::Slot().AutoWidth()
 			[
 				SNew(SButton)
-				.Text(LOCTEXT("BrowseLocal", "Browse Local Image..."))
+				.Text(LOCTEXT("BrowseLocal", "浏览本地图片..."))
 				.OnClicked(this, &SPBRTextureLabNomad::OnBrowseLocalImage)
 			]
 		]
@@ -145,16 +280,16 @@ TSharedRef<SWidget> SPBRTextureLabNomad::BuildSourceSection()
 				if (!LocalImagePath.IsEmpty())
 				{
 					return FText::Format(
-						LOCTEXT("LocalPathFmt", "Local file: {0}"),
+						LOCTEXT("LocalPathFmt", "本地文件：{0}"),
 						FText::FromString(LocalImagePath));
 				}
 				if (SourceTexture.IsValid())
 				{
 					return FText::Format(
-						LOCTEXT("AssetPathFmt", "Texture2D: {0}"),
+						LOCTEXT("AssetPathFmt", "Texture2D：{0}"),
 						FText::FromString(SourceTexture->GetPathName()));
 				}
-				return LOCTEXT("NoSource", "No source selected.");
+				return LOCTEXT("NoSource", "尚未选择源。");
 			})
 		];
 }
@@ -164,13 +299,13 @@ TSharedRef<SWidget> SPBRTextureLabNomad::BuildOutputSection()
 	return SNew(SVerticalBox)
 		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 0.0f, 0.0f, 4.0f)
 		[
-			NomadSectionLabel(LOCTEXT("OutputHeading", "Output"))
+			NomadSectionLabel(LOCTEXT("OutputHeading", "输出与命名"))
 		]
 		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 2.0f)
 		[
 			SNew(SHorizontalBox)
 			+ SHorizontalBox::Slot().FillWidth(0.25f).VAlign(VAlign_Center)
-			[SNew(STextBlock).Text(LOCTEXT("DestLabel", "Destination"))]
+			[SNew(STextBlock).Text(LOCTEXT("DestLabel", "输出目录"))]
 			+ SHorizontalBox::Slot().FillWidth(0.75f)
 			[
 				SNew(SEditableTextBox)
@@ -185,7 +320,35 @@ TSharedRef<SWidget> SPBRTextureLabNomad::BuildOutputSection()
 		[
 			SNew(SHorizontalBox)
 			+ SHorizontalBox::Slot().FillWidth(0.25f).VAlign(VAlign_Center)
-			[SNew(STextBlock).Text(LOCTEXT("NameLabel", "Base Name"))]
+			[SNew(STextBlock).Text(LOCTEXT("ParentLabel", "母材质"))]
+			+ SHorizontalBox::Slot().FillWidth(0.75f)
+			[
+				SNew(SObjectPropertyEntryBox)
+				.AllowedClass(UMaterialInterface::StaticClass())
+				.AllowClear(true)
+				.DisplayThumbnail(true)
+				.ObjectPath(this, &SPBRTextureLabNomad::GetParentMaterialPath)
+				.OnObjectChanged(this, &SPBRTextureLabNomad::OnParentMaterialChanged)
+			]
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 2.0f)
+		[
+			SNew(STextBlock)
+			.AutoWrapText(true)
+			.ColorAndOpacity(FSlateColor::UseSubduedForeground())
+			.Text_Lambda([this]()
+			{
+				return FText::Format(
+					LOCTEXT("FolderHint", "贴图将写入：{0}/{1}/"),
+					FText::FromString(DestinationPath),
+					FText::FromString(MaterialInstanceName));
+			})
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 2.0f)
+		[
+			SNew(SHorizontalBox)
+			+ SHorizontalBox::Slot().FillWidth(0.25f).VAlign(VAlign_Center)
+			[SNew(STextBlock).Text(LOCTEXT("NameLabel", "贴图前缀"))]
 			+ SHorizontalBox::Slot().FillWidth(0.75f)
 			[
 				SNew(SEditableTextBox)
@@ -193,6 +356,10 @@ TSharedRef<SWidget> SPBRTextureLabNomad::BuildOutputSection()
 				.OnTextCommitted_Lambda([this](const FText& Text, ETextCommit::Type)
 				{
 					BaseName = Text.ToString();
+					if (!bInstanceNameCustomized)
+					{
+						MaterialInstanceName = BaseName + TEXT("_Inst");
+					}
 				})
 			]
 		]
@@ -200,7 +367,23 @@ TSharedRef<SWidget> SPBRTextureLabNomad::BuildOutputSection()
 		[
 			SNew(SHorizontalBox)
 			+ SHorizontalBox::Slot().FillWidth(0.25f).VAlign(VAlign_Center)
-			[SNew(STextBlock).Text(LOCTEXT("SizeLabel", "Size (0 = source)"))]
+			[SNew(STextBlock).Text(LOCTEXT("InstNameLabel", "材质实例名"))]
+			+ SHorizontalBox::Slot().FillWidth(0.75f)
+			[
+				SNew(SEditableTextBox)
+				.Text_Lambda([this]() { return FText::FromString(MaterialInstanceName); })
+				.OnTextCommitted_Lambda([this](const FText& Text, ETextCommit::Type)
+				{
+					MaterialInstanceName = Text.ToString();
+					bInstanceNameCustomized = true;
+				})
+			]
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 2.0f)
+		[
+			SNew(SHorizontalBox)
+			+ SHorizontalBox::Slot().FillWidth(0.25f).VAlign(VAlign_Center)
+			[SNew(STextBlock).Text(LOCTEXT("SizeLabel", "尺寸（0=源尺寸）"))]
 			+ SHorizontalBox::Slot().FillWidth(0.375f).Padding(0.0f, 0.0f, 4.0f, 0.0f)
 			[
 				SNew(SSpinBox<int32>)
@@ -222,7 +405,7 @@ TSharedRef<SWidget> SPBRTextureLabNomad::BuildOutputSection()
 		[
 			SNew(SHorizontalBox)
 			+ SHorizontalBox::Slot().FillWidth(0.25f).VAlign(VAlign_Center)
-			[SNew(STextBlock).Text(LOCTEXT("ConflictLabel", "Name Conflict"))]
+			[SNew(STextBlock).Text(LOCTEXT("ConflictLabel", "重名策略"))]
 			+ SHorizontalBox::Slot().FillWidth(0.75f)
 			[
 				SNew(SComboBox<TSharedPtr<FString>>)
@@ -255,12 +438,83 @@ TSharedRef<SWidget> SPBRTextureLabNomad::BuildParameterSection()
 	return SNew(SVerticalBox)
 		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 0.0f, 0.0f, 4.0f)
 		[
-			NomadSectionLabel(LOCTEXT("ParamsHeading", "Parameters"))
+			NomadSectionLabel(LOCTEXT("ParamsHeading", "参数与贴图开关"))
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 2.0f)
+		[
+			SNew(SHorizontalBox)
+			+ SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 8.0f, 0.0f)
+			[
+				MakeCheckRow(LOCTEXT("ExpBase", "基础贴图"),
+					TAttribute<ECheckBoxState>::CreateLambda([this]()
+					{
+						return ExportFlags.bBaseColor ? ECheckBoxState::Checked : ECheckBoxState::Unchecked;
+					}),
+					[this](ECheckBoxState State) { ExportFlags.bBaseColor = State == ECheckBoxState::Checked; })
+			]
+			+ SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 8.0f, 0.0f)
+			[
+				MakeCheckRow(LOCTEXT("ExpNormal", "法线"),
+					TAttribute<ECheckBoxState>::CreateLambda([this]()
+					{
+						return ExportFlags.bNormal ? ECheckBoxState::Checked : ECheckBoxState::Unchecked;
+					}),
+					[this](ECheckBoxState State) { ExportFlags.bNormal = State == ECheckBoxState::Checked; })
+			]
+			+ SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 8.0f, 0.0f)
+			[
+				MakeCheckRow(LOCTEXT("ExpRough", "粗糙"),
+					TAttribute<ECheckBoxState>::CreateLambda([this]()
+					{
+						return ExportFlags.bRoughness ? ECheckBoxState::Checked : ECheckBoxState::Unchecked;
+					}),
+					[this](ECheckBoxState State) { ExportFlags.bRoughness = State == ECheckBoxState::Checked; })
+			]
+			+ SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 8.0f, 0.0f)
+			[
+				MakeCheckRow(LOCTEXT("ExpMetal", "金属"),
+					TAttribute<ECheckBoxState>::CreateLambda([this]()
+					{
+						return ExportFlags.bMetallic ? ECheckBoxState::Checked : ECheckBoxState::Unchecked;
+					}),
+					[this](ECheckBoxState State) { ExportFlags.bMetallic = State == ECheckBoxState::Checked; })
+			]
+		]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 2.0f)
+		[
+			SNew(SHorizontalBox)
+			+ SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 8.0f, 0.0f)
+			[
+				MakeCheckRow(LOCTEXT("ExpHeight", "置换/高度"),
+					TAttribute<ECheckBoxState>::CreateLambda([this]()
+					{
+						return ExportFlags.bHeight ? ECheckBoxState::Checked : ECheckBoxState::Unchecked;
+					}),
+					[this](ECheckBoxState State) { ExportFlags.bHeight = State == ECheckBoxState::Checked; })
+			]
+			+ SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 8.0f, 0.0f)
+			[
+				MakeCheckRow(LOCTEXT("ExpAO", "AO"),
+					TAttribute<ECheckBoxState>::CreateLambda([this]()
+					{
+						return ExportFlags.bAO ? ECheckBoxState::Checked : ECheckBoxState::Unchecked;
+					}),
+					[this](ECheckBoxState State) { ExportFlags.bAO = State == ECheckBoxState::Checked; })
+			]
+			+ SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 8.0f, 0.0f)
+			[
+				MakeCheckRow(LOCTEXT("ExpORM", "ORM"),
+					TAttribute<ECheckBoxState>::CreateLambda([this]()
+					{
+						return ExportFlags.bORM ? ECheckBoxState::Checked : ECheckBoxState::Unchecked;
+					}),
+					[this](ECheckBoxState State) { ExportFlags.bORM = State == ECheckBoxState::Checked; })
+			]
 		]
 		+ SVerticalBox::Slot().AutoHeight()
 		[
 			MakeFloatRow(
-				LOCTEXT("HeightContrast", "Height Contrast"),
+				LOCTEXT("HeightContrast", "高度对比度"),
 				TAttribute<float>::CreateLambda([this]() { return PixelParams.HeightContrast; }),
 				[this](float Value) { PixelParams.HeightContrast = Value; },
 				0.0f,
@@ -527,6 +781,121 @@ TSharedRef<SWidget> SPBRTextureLabNomad::MakeFloatRow(
 		];
 }
 
+TSharedRef<SWidget> SPBRTextureLabNomad::MakeCheckRow(
+	const FText& Label,
+	TAttribute<ECheckBoxState> IsChecked,
+	TFunction<void(ECheckBoxState)> Setter)
+{
+	return SNew(SHorizontalBox)
+		+ SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Center).Padding(0.0f, 0.0f, 4.0f, 0.0f)
+		[
+			SNew(SCheckBox)
+			.IsChecked(IsChecked)
+			.OnCheckStateChanged_Lambda([Setter](ECheckBoxState State) { Setter(State); })
+		]
+		+ SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Center)
+		[SNew(STextBlock).Text(Label)];
+}
+
+void SPBRTextureLabNomad::ApplySourceName(const FString& SourceName)
+{
+	const FString Sanitized = FPaths::GetBaseFilename(SourceName);
+	if (Sanitized.IsEmpty())
+	{
+		return;
+	}
+	BaseName = Sanitized;
+	if (!bInstanceNameCustomized)
+	{
+		MaterialInstanceName = Sanitized;
+	}
+}
+
+void SPBRTextureLabNomad::AdvanceNamesAfterGenerate()
+{
+	BaseName = NomadNextNumberedName(BaseName);
+	MaterialInstanceName = NomadNextNumberedName(MaterialInstanceName);
+}
+
+FString SPBRTextureLabNomad::GetParentMaterialPath() const
+{
+	return ParentMaterial.IsValid() ? ParentMaterial->GetPathName() : FString();
+}
+
+void SPBRTextureLabNomad::OnParentMaterialChanged(const FAssetData& AssetData)
+{
+	ParentMaterial = Cast<UMaterialInterface>(AssetData.GetAsset());
+	SetStatus(ParentMaterial.IsValid()
+		? FString::Printf(TEXT("母材质：%s"), *ParentMaterial->GetName())
+		: TEXT("未选择母材质时，使用插件内置 Metallic/Roughness 母球。"));
+}
+
+FReply SPBRTextureLabNomad::SwitchToGeneratePage()
+{
+	ActivePage = 0;
+	return FReply::Handled();
+}
+
+FReply SPBRTextureLabNomad::SwitchToAssemblePage()
+{
+	ActivePage = 1;
+	return FReply::Handled();
+}
+
+FString SPBRTextureLabNomad::GetAssembleTexturePath(TWeakObjectPtr<UTexture2D> SPBRTextureLabNomad::* Slot) const
+{
+	const TWeakObjectPtr<UTexture2D>& Texture = this->*Slot;
+	return Texture.IsValid() ? Texture->GetPathName() : FString();
+}
+
+void SPBRTextureLabNomad::OnAssembleTextureChanged(
+	const FAssetData& AssetData,
+	TWeakObjectPtr<UTexture2D> SPBRTextureLabNomad::* Slot)
+{
+	this->*Slot = Cast<UTexture2D>(AssetData.GetAsset());
+	if ((this->*Slot).IsValid() && !bInstanceNameCustomized && MaterialInstanceName == TEXT("PBR_Inst"))
+	{
+		ApplySourceName((this->*Slot)->GetName());
+	}
+}
+
+FReply SPBRTextureLabNomad::OnCreateFromExisting()
+{
+	PBRTextureLab::FPBRImportedTextures Selected;
+	Selected.BaseColor = AssembleBaseColor.Get();
+	Selected.Normal = AssembleNormal.Get();
+	Selected.Roughness = AssembleRoughness.Get();
+	Selected.Metallic = AssembleMetallic.Get();
+	Selected.Height = AssembleHeight.Get();
+	Selected.AO = AssembleAO.Get();
+	Selected.ORM = AssembleORM.Get();
+
+	PBRTextureLab::FPBRGenerateRequest Request = MakeRequest();
+	Request.bCopyExistingTexturesToFolder = bCopyExistingTextures;
+
+	PBRTextureLab::FPBRGenerateResult Result;
+	FString Error;
+	const PBRTextureLab::EPBRImportStatus Status = PBRTextureLab::CreateMaterialFromExistingTextures(
+		Request,
+		Selected,
+		Result,
+		&Error);
+	if (Status != PBRTextureLab::EPBRImportStatus::Success)
+	{
+		SetStatus(Error.IsEmpty()
+			? FString::Printf(TEXT("用现成贴图生成失败（%d）。"), static_cast<int32>(Status))
+			: Error);
+		return FReply::Handled();
+	}
+
+	const FString Created = Result.MaterialInstance
+		? Result.MaterialInstance->GetPathName()
+		: Result.OutputFolder;
+	SetStatus(FString::Printf(TEXT("已生成 %s（贴图在 %s）"), *Created, *Result.OutputFolder));
+	AdvanceNamesAfterGenerate();
+	return FReply::Handled();
+}
+
 TSharedRef<SWidget> SPBRTextureLabNomad::MakeIntRow(
 	const FText& Label,
 	TAttribute<int32> Value,
@@ -558,9 +927,10 @@ void SPBRTextureLabNomad::OnSourceTextureChanged(const FAssetData& AssetData)
 	if (SourceTexture.IsValid())
 	{
 		LocalImagePath.Empty();
+		ApplySourceName(SourceTexture->GetName());
 	}
 	ClearPreview();
-	SetStatus(TEXT("Texture2D source updated."));
+	SetStatus(TEXT("已更新 Texture2D 源。"));
 }
 
 FReply SPBRTextureLabNomad::OnBrowseLocalImage()
@@ -586,8 +956,9 @@ FReply SPBRTextureLabNomad::OnBrowseLocalImage()
 	{
 		LocalImagePath = Files[0];
 		SourceTexture.Reset();
+		ApplySourceName(LocalImagePath);
 		ClearPreview();
-		SetStatus(FString::Printf(TEXT("Local image: %s"), *LocalImagePath));
+		SetStatus(FString::Printf(TEXT("本地图片：%s"), *LocalImagePath));
 	}
 	return FReply::Handled();
 }
@@ -602,8 +973,9 @@ FReply SPBRTextureLabNomad::OnUseContentBrowserTexture()
 		{
 			SourceTexture = Texture;
 			LocalImagePath.Empty();
+			ApplySourceName(Texture->GetName());
 			ClearPreview();
-			SetStatus(FString::Printf(TEXT("Using Texture2D %s"), *Texture->GetPathName()));
+			SetStatus(FString::Printf(TEXT("使用 Texture2D %s"), *Texture->GetPathName()));
 			return FReply::Handled();
 		}
 	}
@@ -638,7 +1010,10 @@ PBRTextureLab::FPBRGenerateRequest SPBRTextureLabNomad::MakeRequest() const
 	Request.PixelParams = PixelParams;
 	Request.DestinationPath = DestinationPath;
 	Request.BaseName = BaseName;
+	Request.MaterialInstanceName = MaterialInstanceName;
+	Request.ParentMaterial = ParentMaterial.Get();
 	Request.ConflictPolicy = ConflictPolicy;
+	Request.ExportFlags = ExportFlags;
 	Request.MaterialNormalStrength = PixelParams.NormalStrength;
 	Request.MaterialHeightAmount = MaterialHeightAmount;
 	Request.MaterialUVScale = MaterialUVScale;
@@ -761,10 +1136,11 @@ FReply SPBRTextureLabNomad::OnGenerate()
 
 	Disclaimer = Result.Disclaimer;
 	ApplyPreviewMaps(Result.Maps, Result.WorkingImage);
-	const FString InstanceName = Result.MaterialInstance
+	const FString Created = Result.MaterialInstance
 		? Result.MaterialInstance->GetPathName()
-		: TEXT("(no material)");
-	SetStatus(FString::Printf(TEXT("Generated %s"), *InstanceName));
+		: Result.OutputFolder;
+	SetStatus(FString::Printf(TEXT("已生成 %s（贴图在 %s）"), *Created, *Result.OutputFolder));
+	AdvanceNamesAfterGenerate();
 	return FReply::Handled();
 }
 

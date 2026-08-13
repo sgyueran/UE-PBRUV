@@ -4,6 +4,7 @@
 #include "PBRTextureLabTextureImport.h"
 
 class UMaterial;
+class UMaterialInterface;
 class UMaterialInstanceConstant;
 
 /**
@@ -17,6 +18,8 @@ namespace PBRTextureLab
 	{
 		FString DestinationPath = TEXT("/Game/PBRTextureLab");
 		FString BaseName = TEXT("PBR");
+		FString InstanceName;
+		UMaterialInterface* ParentMaterial = nullptr;
 		EPBRImportConflictPolicy ConflictPolicy = EPBRImportConflictPolicy::Cancel;
 		float NormalStrength = 1.0f;
 		float HeightAmount = 0.0f;

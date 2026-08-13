@@ -1,4 +1,6 @@
 #include "PBRTextureLabMaterial.h"
+
+#include <initializer_list>
 #include "PBRTextureLabCompat.h"
 #include "PBRTextureLabEditorApi.h"
 #include "PBRTextureLabPixelCore.h"
@@ -10,9 +12,13 @@
 #include "FileHelpers.h"
 #include "HAL/FileManager.h"
 #include "Interfaces/IPluginManager.h"
+#include "Engine/Texture.h"
+#include "Engine/Texture2D.h"
 #include "MaterialEditingLibrary.h"
 #include "Materials/Material.h"
+#include "Materials/MaterialInterface.h"
 #include "Materials/MaterialExpressionBumpOffset.h"
+#include "Materials/MaterialExpressionUtils.h"
 #include "Materials/MaterialExpressionConstant3Vector.h"
 #include "Materials/MaterialExpressionLinearInterpolate.h"
 #include "Materials/MaterialExpressionMultiply.h"
@@ -223,6 +229,156 @@ namespace PBRTextureLab
 			return true;
 		}
 
+		bool SamplerMatchesTexture(const UMaterialExpressionTextureSampleParameter2D* Sample, const EMaterialSamplerType Expected)
+		{
+			return Sample
+				&& Sample->SamplerType == Expected
+				&& Sample->Texture
+				&& MaterialExpressionUtils::GetSamplerTypeForTexture(Sample->Texture) == Expected;
+		}
+
+		UTexture* LoadEngineTexture(const TCHAR* ObjectPath)
+		{
+			return LoadObject<UTexture>(nullptr, ObjectPath, nullptr, LOAD_None, nullptr);
+		}
+
+		UTexture2D* CreatePluginSamplerTexture(const EMaterialSamplerType SamplerType)
+		{
+			FString Suffix = TEXT("Color");
+			TextureCompressionSettings Compression = TC_Default;
+			bool bSRGB = true;
+			FColor Pixel(255, 255, 255, 255);
+			switch (SamplerType)
+			{
+			case SAMPLERTYPE_Normal:
+				Suffix = TEXT("Normal");
+				Compression = TC_Normalmap;
+				bSRGB = false;
+				Pixel = FColor(128, 128, 255, 255);
+				break;
+			case SAMPLERTYPE_Masks:
+				Suffix = TEXT("Masks");
+				Compression = TC_Masks;
+				bSRGB = false;
+				Pixel = FColor(255, 128, 0, 255);
+				break;
+			case SAMPLERTYPE_LinearGrayscale:
+				Suffix = TEXT("Gray");
+				Compression = TC_Grayscale;
+				bSRGB = false;
+				Pixel = FColor(128, 128, 128, 255);
+				break;
+			default:
+				break;
+			}
+
+			const TSharedPtr<IPlugin> Plugin = IPluginManager::Get().FindPlugin(TEXT("PBRTextureLab"));
+			FString Root = Plugin.IsValid() ? Plugin->GetMountedAssetPath() : FString(TEXT("/PBRTextureLab/"));
+			Root.ReplaceInline(TEXT("\\"), TEXT("/"));
+			if (!Root.EndsWith(TEXT("/")))
+			{
+				Root += TEXT("/");
+			}
+			const FString AssetName = FString::Printf(
+				TEXT("T_PBRDefault_%s_%d%d"),
+				*Suffix,
+				PBRTEXTURELAB_ENGINE_MAJOR,
+				PBRTEXTURELAB_ENGINE_MINOR);
+			const FString PackageName = Root + TEXT("Materials/") + AssetName;
+			const FString ObjectPath = PackageName + TEXT(".") + AssetName;
+			if (UTexture2D* Existing = LoadObject<UTexture2D>(nullptr, *ObjectPath, nullptr, LOAD_NoWarn | LOAD_Quiet))
+			{
+				if (MaterialExpressionUtils::GetSamplerTypeForTexture(Existing) == SamplerType)
+				{
+					return Existing;
+				}
+				DiscardUnloadablePackage(PackageName);
+			}
+
+			if (Plugin.IsValid())
+			{
+				IFileManager::Get().MakeDirectory(*(Plugin->GetContentDir() / TEXT("Materials")), true);
+			}
+
+			UPackage* Package = CreatePackage(*PackageName);
+			if (!Package)
+			{
+				return nullptr;
+			}
+			if (!Package->IsFullyLoaded())
+			{
+				Package->MarkAsFullyLoaded();
+			}
+
+			UTexture2D* Texture = NewObject<UTexture2D>(Package, FName(*AssetName), RF_Public | RF_Standalone);
+			const uint8 Bytes[4] = { Pixel.B, Pixel.G, Pixel.R, Pixel.A };
+			Texture->Source.Init(1, 1, 1, 1, TSF_BGRA8, Bytes);
+			Texture->CompressionSettings = Compression;
+			Texture->SRGB = bSRGB;
+			Texture->LODGroup = (SamplerType == SAMPLERTYPE_Normal) ? TEXTUREGROUP_WorldNormalMap : TEXTUREGROUP_World;
+			Texture->UpdateResource();
+			Texture->PostEditChange();
+			FAssetRegistryModule::AssetCreated(Texture);
+			Texture->MarkPackageDirty();
+			TArray<UPackage*> Packages;
+			Packages.Add(Package);
+			UEditorLoadingAndSavingUtils::SavePackages(Packages, false);
+			return Texture;
+		}
+
+		UTexture* ResolveSamplerDefaultTexture(const EMaterialSamplerType SamplerType)
+		{
+			const TCHAR* Path = TEXT("/Engine/EngineResources/DefaultTexture.DefaultTexture");
+			switch (SamplerType)
+			{
+			case SAMPLERTYPE_Normal:
+				Path = TEXT("/Engine/EngineMaterials/DefaultNormal.DefaultNormal");
+				break;
+			case SAMPLERTYPE_Masks:
+				Path = TEXT("/Engine/EngineMaterials/DefaultDiffuse_TC_Masks.DefaultDiffuse_TC_Masks");
+				break;
+			case SAMPLERTYPE_LinearGrayscale:
+				Path = TEXT("/Engine/EngineMaterials/BaseFlattenGrayscaleMap.BaseFlattenGrayscaleMap");
+				break;
+			default:
+				break;
+			}
+
+			UTexture* Texture = LoadEngineTexture(Path);
+			if (Texture && MaterialExpressionUtils::GetSamplerTypeForTexture(Texture) == SamplerType)
+			{
+				return Texture;
+			}
+
+			if (SamplerType == SAMPLERTYPE_LinearGrayscale)
+			{
+				Texture = LoadEngineTexture(TEXT("/Engine/EngineMaterials/DefaultCalibrationGrayscale.DefaultCalibrationGrayscale"));
+				if (Texture && MaterialExpressionUtils::GetSamplerTypeForTexture(Texture) == SamplerType)
+				{
+					return Texture;
+				}
+			}
+
+			return CreatePluginSamplerTexture(SamplerType);
+		}
+
+		void AssignSamplerDefault(UMaterialExpressionTextureSampleParameter2D* Sample, const EMaterialSamplerType SamplerType)
+		{
+			if (!Sample)
+			{
+				return;
+			}
+			Sample->SamplerType = SamplerType;
+			if (UTexture* Texture = ResolveSamplerDefaultTexture(SamplerType))
+			{
+				Sample->Texture = Texture;
+			}
+			else
+			{
+				Sample->SetDefaultTexture();
+			}
+		}
+
 		bool ParentHasExpectedParameters(UMaterial* Material)
 		{
 			if (!Material)
@@ -245,13 +401,24 @@ namespace PBRTextureLab
 					continue;
 				}
 				const FName ParameterName = Expression->HasAParameterName() ? Expression->GetParameterName() : NAME_None;
-				bHasBaseColor |= ParameterName == FName(PBRTEXTURELAB_PARAM_BaseColorTexture);
-				bHasNormal |= ParameterName == FName(PBRTEXTURELAB_PARAM_NormalTexture);
-				bHasOrm |= ParameterName == FName(PBRTEXTURELAB_PARAM_ORMTexture);
-				bHasHeight |= ParameterName == FName(PBRTEXTURELAB_PARAM_HeightTexture);
-				bHasNormalStrength |= ParameterName == FName(PBRTEXTURELAB_PARAM_NormalStrength);
-				bHasHeightAmount |= ParameterName == FName(PBRTEXTURELAB_PARAM_HeightAmount);
-				bHasUvScale |= ParameterName == FName(PBRTEXTURELAB_PARAM_UVScale);
+				if (const UMaterialExpressionTextureSampleParameter2D* Sample =
+					Cast<UMaterialExpressionTextureSampleParameter2D>(Expression))
+				{
+					bHasBaseColor |= ParameterName == FName(PBRTEXTURELAB_PARAM_BaseColorTexture)
+						&& SamplerMatchesTexture(Sample, SAMPLERTYPE_Color);
+					bHasNormal |= ParameterName == FName(PBRTEXTURELAB_PARAM_NormalTexture)
+						&& SamplerMatchesTexture(Sample, SAMPLERTYPE_Normal);
+					bHasOrm |= ParameterName == FName(PBRTEXTURELAB_PARAM_ORMTexture)
+						&& SamplerMatchesTexture(Sample, SAMPLERTYPE_Masks);
+					bHasHeight |= ParameterName == FName(PBRTEXTURELAB_PARAM_HeightTexture)
+						&& SamplerMatchesTexture(Sample, SAMPLERTYPE_LinearGrayscale);
+				}
+				else
+				{
+					bHasNormalStrength |= ParameterName == FName(PBRTEXTURELAB_PARAM_NormalStrength);
+					bHasHeightAmount |= ParameterName == FName(PBRTEXTURELAB_PARAM_HeightAmount);
+					bHasUvScale |= ParameterName == FName(PBRTEXTURELAB_PARAM_UVScale);
+				}
 			}
 
 			return bHasBaseColor && bHasNormal && bHasOrm && bHasHeight
@@ -294,35 +461,38 @@ namespace PBRTextureLab
 
 			UvScale->ParameterName = PBRTEXTURELAB_PARAM_UVScale;
 			UvScale->DefaultValue = 1.0f;
-			UvScale->Group = TEXT("PBRTextureLab");
+			UvScale->Group = PBRTEXTURELAB_PARAM_GROUP;
+			UvScale->SortPriority = 6;
 
 			HeightAmount->ParameterName = PBRTEXTURELAB_PARAM_HeightAmount;
 			HeightAmount->DefaultValue = 0.0f;
-			HeightAmount->Group = TEXT("PBRTextureLab");
+			HeightAmount->Group = PBRTEXTURELAB_PARAM_GROUP;
+			HeightAmount->SortPriority = 5;
 
 			NormalStrength->ParameterName = PBRTEXTURELAB_PARAM_NormalStrength;
 			NormalStrength->DefaultValue = 1.0f;
-			NormalStrength->Group = TEXT("PBRTextureLab");
+			NormalStrength->Group = PBRTEXTURELAB_PARAM_GROUP;
+			NormalStrength->SortPriority = 4;
 
 			HeightSample->ParameterName = PBRTEXTURELAB_PARAM_HeightTexture;
-			HeightSample->SamplerType = SAMPLERTYPE_LinearGrayscale;
-			HeightSample->Group = TEXT("PBRTextureLab");
-			HeightSample->SetDefaultTexture();
+			HeightSample->Group = PBRTEXTURELAB_PARAM_GROUP;
+			HeightSample->SortPriority = 3;
+			AssignSamplerDefault(HeightSample, SAMPLERTYPE_LinearGrayscale);
 
 			BaseColor->ParameterName = PBRTEXTURELAB_PARAM_BaseColorTexture;
-			BaseColor->SamplerType = SAMPLERTYPE_Color;
-			BaseColor->Group = TEXT("PBRTextureLab");
-			BaseColor->SetDefaultTexture();
+			BaseColor->Group = PBRTEXTURELAB_PARAM_GROUP;
+			BaseColor->SortPriority = 0;
+			AssignSamplerDefault(BaseColor, SAMPLERTYPE_Color);
 
 			NormalSample->ParameterName = PBRTEXTURELAB_PARAM_NormalTexture;
-			NormalSample->SamplerType = SAMPLERTYPE_Normal;
-			NormalSample->Group = TEXT("PBRTextureLab");
-			NormalSample->SetDefaultTexture();
+			NormalSample->Group = PBRTEXTURELAB_PARAM_GROUP;
+			NormalSample->SortPriority = 1;
+			AssignSamplerDefault(NormalSample, SAMPLERTYPE_Normal);
 
 			OrmSample->ParameterName = PBRTEXTURELAB_PARAM_ORMTexture;
-			OrmSample->SamplerType = SAMPLERTYPE_Masks;
-			OrmSample->Group = TEXT("PBRTextureLab");
-			OrmSample->SetDefaultTexture();
+			OrmSample->Group = PBRTEXTURELAB_PARAM_GROUP;
+			OrmSample->SortPriority = 2;
+			AssignSamplerDefault(OrmSample, SAMPLERTYPE_Masks);
 
 			FlatNormal->Constant = FLinearColor(0.0f, 0.0f, 1.0f, 0.0f);
 
@@ -361,6 +531,109 @@ namespace PBRTextureLab
 			UMaterialEditingLibrary::RecompileMaterial(Material);
 			return TArray<FString>();
 #endif
+		}
+
+		FName FindExistingParameter(const TArray<FName>& Names, std::initializer_list<const TCHAR*> Aliases)
+		{
+			for (const TCHAR* Alias : Aliases)
+			{
+				const FName Candidate(Alias);
+				if (Names.Contains(Candidate))
+				{
+					return Candidate;
+				}
+			}
+			for (const TCHAR* Alias : Aliases)
+			{
+				const FString AliasString(Alias);
+				for (const FName& Name : Names)
+				{
+					if (Name.ToString().Equals(AliasString, ESearchCase::IgnoreCase))
+					{
+						return Name;
+					}
+				}
+			}
+			return NAME_None;
+		}
+
+		void BindTextureIfPresent(
+			UMaterialInstanceConstant* Instance,
+			const TArray<FName>& TextureParams,
+			const TArray<FName>& ScalarParams,
+			UTexture* Texture,
+			std::initializer_list<const TCHAR*> TextureAliases,
+			std::initializer_list<const TCHAR*> EnableSwitchAliases)
+		{
+			if (!Instance || !Texture)
+			{
+				return;
+			}
+			const FName TextureName = FindExistingParameter(TextureParams, TextureAliases);
+			if (TextureName.IsNone())
+			{
+				return;
+			}
+			SetMaterialInstanceTexture(Instance, TextureName, Texture);
+			const FName SwitchName = FindExistingParameter(ScalarParams, EnableSwitchAliases);
+			if (!SwitchName.IsNone())
+			{
+				SetMaterialInstanceScalar(Instance, SwitchName, 1.0f);
+			}
+		}
+
+		void BindGeneratedTextures(UMaterialInstanceConstant* Instance, const FPBRImportedTextures& Textures, const FPBRMaterialInstanceRequest& Request)
+		{
+			if (!Instance)
+			{
+				return;
+			}
+
+			TArray<FName> TextureParams;
+			TArray<FName> ScalarParams;
+			UMaterialEditingLibrary::GetTextureParameterNames(Instance, TextureParams);
+			UMaterialEditingLibrary::GetScalarParameterNames(Instance, ScalarParams);
+
+			BindTextureIfPresent(Instance, TextureParams, ScalarParams, Textures.BaseColor,
+				{ PBRTEXTURELAB_PARAM_BaseColorTexture, TEXT("基础贴图"), TEXT("BaseColorTexture"), TEXT("BaseColor"), TEXT("Diffuse"), TEXT("Albedo") },
+				{ TEXT("基础贴图开关") });
+			BindTextureIfPresent(Instance, TextureParams, ScalarParams, Textures.Normal,
+				{ PBRTEXTURELAB_PARAM_NormalTexture, TEXT("法线贴图"), TEXT("NormalTexture"), TEXT("Normal") },
+				{ TEXT("法线贴图开关") });
+			BindTextureIfPresent(Instance, TextureParams, ScalarParams, Textures.Height,
+				{ PBRTEXTURELAB_PARAM_HeightTexture, TEXT("置换贴图"), TEXT("HeightTexture"), TEXT("Height"), TEXT("Displacement") },
+				{ TEXT("置换贴图开关") });
+			BindTextureIfPresent(Instance, TextureParams, ScalarParams, Textures.Roughness,
+				{ TEXT("粗糙贴图"), TEXT("粗糙度"), TEXT("Roughness") },
+				{ TEXT("粗糙贴图开关") });
+			BindTextureIfPresent(Instance, TextureParams, ScalarParams, Textures.Metallic,
+				{ TEXT("金属贴图"), TEXT("金属度"), TEXT("Metallic") },
+				{ TEXT("金属贴图开关") });
+			BindTextureIfPresent(Instance, TextureParams, ScalarParams, Textures.AO,
+				{ TEXT("AO"), TEXT("AmbientOcclusion"), TEXT("环境光遮蔽") },
+				{});
+			BindTextureIfPresent(Instance, TextureParams, ScalarParams, Textures.ORM,
+				{ PBRTEXTURELAB_PARAM_ORMTexture, TEXT("ORMTexture"), TEXT("ORM贴图") },
+				{});
+
+			const FName NormalStrengthName = FindExistingParameter(ScalarParams,
+				{ PBRTEXTURELAB_PARAM_NormalStrength, TEXT("法线强度"), TEXT("NormalStrength") });
+			if (!NormalStrengthName.IsNone())
+			{
+				SetMaterialInstanceScalar(Instance, NormalStrengthName, Request.NormalStrength);
+			}
+			const FName HeightAmountName = FindExistingParameter(ScalarParams,
+				{ PBRTEXTURELAB_PARAM_HeightAmount, TEXT("置换强度"), TEXT("高度强度"), TEXT("HeightAmount") });
+			if (!HeightAmountName.IsNone())
+			{
+				SetMaterialInstanceScalar(Instance, HeightAmountName, Request.HeightAmount);
+			}
+			const FName UvScaleName = FindExistingParameter(ScalarParams,
+				{ PBRTEXTURELAB_PARAM_UVScale, TEXT("UV缩放"), TEXT("UVScale") });
+			if (!UvScaleName.IsNone())
+			{
+				SetMaterialInstanceScalar(Instance, UvScaleName, Request.UVScale);
+			}
 		}
 
 		bool SaveAssetPackage(UObject* Asset, FString* OutError)
@@ -477,6 +750,7 @@ namespace PBRTextureLab
 		FAssetRegistryModule::AssetCreated(Material);
 		UE_LOG(LogPBRTextureLab, Log, TEXT("Created Metallic/Roughness parent material (not OpenPBR): %s"), *ObjectPath);
 
+		UMaterialEditingLibrary::DeleteAllMaterialExpressions(Material);
 		if (!BuildParentGraph(Material, OutError))
 		{
 			return nullptr;
@@ -521,13 +795,16 @@ namespace PBRTextureLab
 			return EPBRImportStatus::Cancelled;
 		}
 
-		if (!Textures.HasAll())
+		if (!Textures.HasAny())
 		{
-			MaterialSetError(OutError, TEXT("CreateMaterialInstance requires all Task 3 textures."));
-			return EPBRImportStatus::Failed;
+			UE_LOG(LogPBRTextureLab, Log, TEXT("CreateMaterialInstance using parent defaults; no generated textures bound."));
 		}
 
-		UMaterial* Parent = GetOrCreateParentMaterial(OutError);
+		UMaterialInterface* Parent = Request.ParentMaterial;
+		if (!Parent)
+		{
+			Parent = GetOrCreateParentMaterial(OutError);
+		}
 		if (!Parent)
 		{
 			return EPBRImportStatus::Failed;
@@ -540,10 +817,13 @@ namespace PBRTextureLab
 			return EPBRImportStatus::Failed;
 		}
 
-		FString AssetName = ObjectTools::SanitizeObjectName(Request.BaseName + TEXT("_Inst"));
+		const FString RequestedInstanceName = Request.InstanceName.IsEmpty()
+			? Request.BaseName + TEXT("_Inst")
+			: Request.InstanceName;
+		FString AssetName = ObjectTools::SanitizeObjectName(RequestedInstanceName);
 		if (AssetName.IsEmpty())
 		{
-			MaterialSetError(OutError, TEXT("BaseName is empty after sanitizing."));
+			MaterialSetError(OutError, TEXT("Material instance name is empty after sanitizing."));
 			return EPBRImportStatus::Failed;
 		}
 
@@ -629,13 +909,7 @@ namespace PBRTextureLab
 			}
 
 			Instance->SetParentEditorOnly(Parent);
-			SetMaterialInstanceTexture(Instance, PBRTEXTURELAB_PARAM_BaseColorTexture, Textures.BaseColor);
-			SetMaterialInstanceTexture(Instance, PBRTEXTURELAB_PARAM_NormalTexture, Textures.Normal);
-			SetMaterialInstanceTexture(Instance, PBRTEXTURELAB_PARAM_ORMTexture, Textures.ORM);
-			SetMaterialInstanceTexture(Instance, PBRTEXTURELAB_PARAM_HeightTexture, Textures.Height);
-			SetMaterialInstanceScalar(Instance, PBRTEXTURELAB_PARAM_NormalStrength, Request.NormalStrength);
-			SetMaterialInstanceScalar(Instance, PBRTEXTURELAB_PARAM_HeightAmount, Request.HeightAmount);
-			SetMaterialInstanceScalar(Instance, PBRTEXTURELAB_PARAM_UVScale, Request.UVScale);
+			BindGeneratedTextures(Instance, Textures, Request);
 			Instance->PostEditChange();
 			Instance->MarkPackageDirty();
 		}

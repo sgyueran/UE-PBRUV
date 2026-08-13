@@ -29,6 +29,7 @@ namespace PBRTextureLab
 			bool bSRGB = false;
 			TextureGroup Group = TEXTUREGROUP_World;
 			ETextureSourceColorSpace ColorSpace = ETextureSourceColorSpace::Linear;
+			bool bEnabled = true;
 		};
 
 		class FStagingSession
@@ -284,12 +285,10 @@ namespace PBRTextureLab
 			return EPBRImportStatus::Cancelled;
 		}
 
-		if (!IsValidImage(Maps.BaseColor) || !IsValidImage(Maps.Height) || !IsValidImage(Maps.Normal)
-			|| !IsValidImage(Maps.AO) || !IsValidImage(Maps.Roughness) || !IsValidImage(Maps.Metallic)
-			|| !IsValidImage(Maps.ORM))
+		if (!Request.ExportFlags.WantsAnyTexture())
 		{
-			ImportSetError(OutError, TEXT("ImportPBRMaps rejected invalid pixel maps."));
-			return EPBRImportStatus::Failed;
+			UE_LOG(LogPBRTextureLab, Log, TEXT("ImportPBRMaps skipped: no map export flags enabled."));
+			return EPBRImportStatus::Success;
 		}
 
 		const FString DestinationPath = ImportNormalizeContentPath(Request.DestinationPath);
@@ -307,14 +306,23 @@ namespace PBRTextureLab
 		}
 
 		FChannelJob Jobs[] = {
-			{ TEXT("_BaseColor"), &Maps.BaseColor, &OutTextures.BaseColor, TC_Default, true, TEXTUREGROUP_World, ETextureSourceColorSpace::SRGB },
-			{ TEXT("_Height"), &Maps.Height, &OutTextures.Height, TC_Grayscale, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear },
-			{ TEXT("_Normal"), &Maps.Normal, &OutTextures.Normal, TC_Normalmap, false, TEXTUREGROUP_WorldNormalMap, ETextureSourceColorSpace::Linear },
-			{ TEXT("_AO"), &Maps.AO, &OutTextures.AO, TC_Grayscale, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear },
-			{ TEXT("_Roughness"), &Maps.Roughness, &OutTextures.Roughness, TC_Grayscale, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear },
-			{ TEXT("_Metallic"), &Maps.Metallic, &OutTextures.Metallic, TC_Grayscale, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear },
-			{ TEXT("_ORM"), &Maps.ORM, &OutTextures.ORM, TC_Masks, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear }
+			{ TEXT("_BaseColor"), &Maps.BaseColor, &OutTextures.BaseColor, TC_Default, true, TEXTUREGROUP_World, ETextureSourceColorSpace::SRGB, Request.ExportFlags.bBaseColor },
+			{ TEXT("_Height"), &Maps.Height, &OutTextures.Height, TC_Grayscale, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear, Request.ExportFlags.bHeight },
+			{ TEXT("_Normal"), &Maps.Normal, &OutTextures.Normal, TC_Normalmap, false, TEXTUREGROUP_WorldNormalMap, ETextureSourceColorSpace::Linear, Request.ExportFlags.bNormal },
+			{ TEXT("_AO"), &Maps.AO, &OutTextures.AO, TC_Grayscale, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear, Request.ExportFlags.bAO },
+			{ TEXT("_Roughness"), &Maps.Roughness, &OutTextures.Roughness, TC_Grayscale, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear, Request.ExportFlags.bRoughness },
+			{ TEXT("_Metallic"), &Maps.Metallic, &OutTextures.Metallic, TC_Grayscale, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear, Request.ExportFlags.bMetallic },
+			{ TEXT("_ORM"), &Maps.ORM, &OutTextures.ORM, TC_Masks, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear, Request.ExportFlags.bORM }
 		};
+
+		for (const FChannelJob& Job : Jobs)
+		{
+			if (Job.bEnabled && !IsValidImage(*Job.Image))
+			{
+				ImportSetError(OutError, TEXT("ImportPBRMaps rejected invalid pixel maps."));
+				return EPBRImportStatus::Failed;
+			}
+		}
 
 		struct FResolvedName
 		{
@@ -326,6 +334,10 @@ namespace PBRTextureLab
 
 		for (int32 Index = 0; Index < UE_ARRAY_COUNT(Jobs); ++Index)
 		{
+			if (!Jobs[Index].bEnabled)
+			{
+				continue;
+			}
 			FString AssetName = ObjectTools::SanitizeObjectName(SanitizedBase + Jobs[Index].Suffix);
 			FString PackageName = DestinationPath / AssetName;
 			if (!FPackageName::IsValidLongPackageName(PackageName))
@@ -379,6 +391,10 @@ namespace PBRTextureLab
 
 		for (int32 Index = 0; Index < UE_ARRAY_COUNT(Jobs); ++Index)
 		{
+			if (!Jobs[Index].bEnabled)
+			{
+				continue;
+			}
 			const FString StagingFile = FPaths::Combine(SessionDir, Resolved[Index].AssetName + TEXT(".png"));
 			if (!EncodePng(*Jobs[Index].Image, Jobs[Index].bSRGB, StagingFile, OutError))
 			{
@@ -411,9 +427,15 @@ namespace PBRTextureLab
 			ImportAssetTasks(Tasks);
 		}
 
+		int32 TaskIndex = 0;
 		for (int32 Index = 0; Index < UE_ARRAY_COUNT(Jobs); ++Index)
 		{
-			UTexture2D* Texture = FindImportedTexture(Tasks[Index], Resolved[Index].AssetName);
+			if (!Jobs[Index].bEnabled)
+			{
+				continue;
+			}
+			UTexture2D* Texture = FindImportedTexture(Tasks[TaskIndex], Resolved[Index].AssetName);
+			++TaskIndex;
 			if (!Texture)
 			{
 				RollbackCreated(NewlyCreated);

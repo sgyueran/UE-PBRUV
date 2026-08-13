@@ -195,6 +195,18 @@ bool FPBRTextureLabPipelineFromTexture2D::RunTest(const FString& Parameters)
 	TestEqual(TEXT("Working size"), Result.WorkingImage.Width, 8);
 	TestTrue(TEXT("Imported maps"), Result.Textures.HasAll());
 	TestNotNull(TEXT("Material instance"), Result.MaterialInstance);
+	TestTrue(TEXT("Output folder matches material name"),
+		Result.OutputFolder.EndsWith(TEXT("/") + Result.CreatedMaterialName)
+		|| Result.OutputFolder.EndsWith(Result.CreatedMaterialName));
+	if (Result.MaterialInstance)
+	{
+		TestEqual(TEXT("MIC lives in material folder"), Result.MaterialInstance->GetOutermost()->GetName(), Result.OutputFolder / Result.CreatedMaterialName);
+	}
+	if (Result.Textures.BaseColor)
+	{
+		TestTrue(TEXT("BaseColor lives in material folder"),
+			Result.Textures.BaseColor->GetOutermost()->GetName().StartsWith(Result.OutputFolder + TEXT("/")));
+	}
 	if (Result.MaterialInstance)
 	{
 		TestEqual(
@@ -257,6 +269,70 @@ bool FPBRTextureLabPipelineFromLocalFile::RunTest(const FString& Parameters)
 	TestTrue(TEXT("File imported maps"), Result.Textures.HasAll());
 	TestNotNull(TEXT("File material instance"), Result.MaterialInstance);
 	IFileManager::Get().Delete(*Filename);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(
+	FPBRTextureLabPipelineAssembleExisting,
+	"PBRTextureLab.Pipeline.AssembleExisting",
+	PipelineTestFlags)
+
+bool FPBRTextureLabPipelineAssembleExisting::RunTest(const FString& Parameters)
+{
+	using namespace PBRTextureLab;
+	AddExpectedMessagePlain(
+		FString(MetallicDisclaimer),
+		ELogVerbosity::Warning,
+		EAutomationExpectedMessageFlags::Contains,
+		1);
+
+	UTexture2D* Source = CreatePipelineSourceTexture(
+		GetTransientPackage(),
+		TEXT("T7AssembleSrc"),
+		8,
+		8,
+		FColor(90, 140, 70, 255));
+	FPBRGenerateRequest Seed;
+	Seed.SourceTexture = Source;
+	Seed.PixelParams.HeightBlurRadius = 0;
+	Seed.DestinationPath = TEXT("/Game/PBRTextureLab/Automation");
+	Seed.BaseName = FString::Printf(TEXT("T7Seed%d%d"), PBRTEXTURELAB_ENGINE_MAJOR, PBRTEXTURELAB_ENGINE_MINOR);
+	Seed.ConflictPolicy = EPBRImportConflictPolicy::Replace;
+	Seed.bSave = true;
+	FPBRGenerateResult Seeded;
+	FString Error;
+	TestEqual(
+		TEXT("Seed generate"),
+		static_cast<int32>(GenerateAndImportFromSource(Seed, Seeded, &Error)),
+		static_cast<int32>(EPBRImportStatus::Success));
+	TestTrue(TEXT("Seed textures"), Seeded.Textures.HasAny());
+
+	FPBRGenerateRequest Assemble;
+	Assemble.DestinationPath = TEXT("/Game/PBRTextureLab/Automation");
+	Assemble.MaterialInstanceName = FString::Printf(TEXT("T7Asm%d%d"), PBRTEXTURELAB_ENGINE_MAJOR, PBRTEXTURELAB_ENGINE_MINOR);
+	Assemble.ConflictPolicy = EPBRImportConflictPolicy::Replace;
+	Assemble.bCopyExistingTexturesToFolder = true;
+	Assemble.bSave = true;
+
+	FPBRImportedTextures Selected;
+	Selected.BaseColor = Seeded.Textures.BaseColor;
+	Selected.Normal = Seeded.Textures.Normal;
+	Selected.Roughness = Seeded.Textures.Roughness;
+
+	FPBRGenerateResult Assembled;
+	TestEqual(
+		TEXT("Assemble status"),
+		static_cast<int32>(CreateMaterialFromExistingTextures(Assemble, Selected, Assembled, &Error)),
+		static_cast<int32>(EPBRImportStatus::Success));
+	TestNotNull(TEXT("Assemble MIC"), Assembled.MaterialInstance);
+	TestEqual(TEXT("Assemble folder name"), Assembled.CreatedMaterialName, Assemble.MaterialInstanceName);
+	TestTrue(TEXT("Assemble folder path"), Assembled.OutputFolder.EndsWith(Assemble.MaterialInstanceName));
+	if (Assembled.Textures.BaseColor)
+	{
+		TestTrue(
+			TEXT("Copied BaseColor into material folder"),
+			Assembled.Textures.BaseColor->GetOutermost()->GetName().StartsWith(Assembled.OutputFolder + TEXT("/")));
+	}
 	return true;
 }
 
@@ -439,8 +515,8 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(
 bool FPBRTextureLabIntegrationReloadAfterRestart::RunTest(const FString& Parameters)
 {
 	using namespace PBRTextureLab;
-	const FString InstanceName = PersistPipelineBaseName() + TEXT("_Inst");
-	const FString InstancePath = TEXT("/Game/PBRTextureLab/Automation/") + InstanceName + TEXT(".") + InstanceName;
+	const FString InstanceName = PersistPipelineBaseName();
+	const FString InstancePath = TEXT("/Game/PBRTextureLab/Automation/") + InstanceName + TEXT("/") + InstanceName + TEXT(".") + InstanceName;
 	UMaterialInstanceConstant* Instance = LoadObject<UMaterialInstanceConstant>(nullptr, *InstancePath);
 	TestNotNull(TEXT("Reload integration MIC"), Instance);
 	if (Instance)

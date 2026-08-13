@@ -5,6 +5,8 @@
 #include "Engine/Texture2D.h"
 #include "MaterialEditingLibrary.h"
 #include "Materials/Material.h"
+#include "Materials/MaterialExpressionTextureSampleParameter2D.h"
+#include "Materials/MaterialExpressionUtils.h"
 #include "Materials/MaterialInstanceConstant.h"
 #include "Misc/AutomationTest.h"
 #include "Misc/PackageName.h"
@@ -112,6 +114,38 @@ bool FPBRTextureLabMaterialParentCompiles::RunTest(const FString& Parameters)
 
 	TestTrue(TEXT("Parent package exists on disk"),
 		FPackageName::DoesPackageExist(FPackageName::ObjectPathToPackageName(GetParentMaterialObjectPath())));
+
+	auto ExpectSampler = [this](UMaterial* Material, const TCHAR* ParamName, EMaterialSamplerType Expected)
+	{
+		for (UMaterialExpression* Expression : Material->GetExpressions())
+		{
+			UMaterialExpressionTextureSampleParameter2D* Sample =
+				Cast<UMaterialExpressionTextureSampleParameter2D>(Expression);
+			if (!Sample || Sample->ParameterName != FName(ParamName))
+			{
+				continue;
+			}
+			UTexture* DefaultTexture = Sample->Texture;
+			TestTrue(FString::Printf(TEXT("%s has a default texture"), ParamName), DefaultTexture != nullptr);
+			if (DefaultTexture)
+			{
+				TestEqual(
+					FString::Printf(TEXT("%s sampler type"), ParamName),
+					static_cast<int32>(Sample->SamplerType),
+					static_cast<int32>(Expected));
+				TestEqual(
+					FString::Printf(TEXT("%s default texture sampler"), ParamName),
+					static_cast<int32>(MaterialExpressionUtils::GetSamplerTypeForTexture(DefaultTexture)),
+					static_cast<int32>(Expected));
+			}
+			return;
+		}
+		AddError(FString::Printf(TEXT("Missing texture parameter %s"), ParamName));
+	};
+	ExpectSampler(Parent, PBRTEXTURELAB_PARAM_BaseColorTexture, SAMPLERTYPE_Color);
+	ExpectSampler(Parent, PBRTEXTURELAB_PARAM_NormalTexture, SAMPLERTYPE_Normal);
+	ExpectSampler(Parent, PBRTEXTURELAB_PARAM_ORMTexture, SAMPLERTYPE_Masks);
+	ExpectSampler(Parent, PBRTEXTURELAB_PARAM_HeightTexture, SAMPLERTYPE_LinearGrayscale);
 	return true;
 }
 

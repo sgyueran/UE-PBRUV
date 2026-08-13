@@ -6,6 +6,7 @@
 #include "PBRTextureLabTextureImport.h"
 
 class UMaterialInstanceConstant;
+class UMaterialInterface;
 class UTexture2D;
 struct FImage;
 
@@ -27,11 +28,15 @@ namespace PBRTextureLab
 		FPBRPixelParams PixelParams;
 		FString DestinationPath = TEXT("/Game/PBRTextureLab");
 		FString BaseName = TEXT("PBR");
-		EPBRImportConflictPolicy ConflictPolicy = EPBRImportConflictPolicy::Cancel;
+		FString MaterialInstanceName;
+		UMaterialInterface* ParentMaterial = nullptr;
+		EPBRImportConflictPolicy ConflictPolicy = EPBRImportConflictPolicy::UniqueName;
+		FPBRMapExportFlags ExportFlags;
 		float MaterialNormalStrength = 1.0f;
 		float MaterialHeightAmount = 0.0f;
 		float MaterialUVScale = 1.0f;
 		bool bCreateMaterial = true;
+		bool bCopyExistingTexturesToFolder = true;
 		bool bSave = true;
 		bool bCancelled = false;
 	};
@@ -42,6 +47,8 @@ namespace PBRTextureLab
 		FPBRMaps Maps;
 		FPBRImportedTextures Textures;
 		UMaterialInstanceConstant* MaterialInstance = nullptr;
+		FString OutputFolder;
+		FString CreatedMaterialName;
 		FString Disclaimer;
 	};
 
@@ -67,6 +74,12 @@ namespace PBRTextureLab
 
 	EPBRImportStatus GenerateAndImportFromSource(
 		const FPBRGenerateRequest& Request,
+		FPBRGenerateResult& OutResult,
+		FString* OutError = nullptr);
+
+	EPBRImportStatus CreateMaterialFromExistingTextures(
+		const FPBRGenerateRequest& Request,
+		const FPBRImportedTextures& ExistingTextures,
 		FPBRGenerateResult& OutResult,
 		FString* OutError = nullptr);
 }

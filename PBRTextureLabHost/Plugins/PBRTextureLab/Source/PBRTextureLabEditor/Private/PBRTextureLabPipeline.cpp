@@ -1,4 +1,5 @@
 #include "PBRTextureLabPipeline.h"
+#include "PBRTextureLabEditorApi.h"
 #include "PBRTextureLabPixelCore.h"
 
 #include "Engine/Texture2D.h"
@@ -6,7 +7,9 @@
 #include "ImageCore.h"
 #include "ImageUtils.h"
 #include "Misc/FileHelper.h"
+#include "Misc/PackageName.h"
 #include "Misc/Paths.h"
+#include "ObjectTools.h"
 
 namespace PBRTextureLab
 {
@@ -19,6 +22,82 @@ namespace PBRTextureLab
 			{
 				*OutError = Message;
 			}
+		}
+
+		EPBRImportStatus ResolveMaterialFolder(
+			const FPBRGenerateRequest& Request,
+			FString& OutFolder,
+			FString& OutMaterialName,
+			FString* OutError)
+		{
+			FString RootDest = Request.DestinationPath;
+			RootDest.ReplaceInline(TEXT("\\"), TEXT("/"));
+			while (RootDest.Len() > 1 && RootDest.EndsWith(TEXT("/")))
+			{
+				RootDest.LeftChopInline(1);
+			}
+			if (!RootDest.StartsWith(TEXT("/Game")))
+			{
+				PipelineSetError(OutError, FString::Printf(TEXT("Destination path must be under /Game: %s"), *RootDest));
+				return EPBRImportStatus::Failed;
+			}
+
+			OutMaterialName = ObjectTools::SanitizeObjectName(
+				Request.MaterialInstanceName.IsEmpty() ? Request.BaseName : Request.MaterialInstanceName);
+			if (OutMaterialName.IsEmpty())
+			{
+				PipelineSetError(OutError, TEXT("Material name is empty after sanitizing."));
+				return EPBRImportStatus::Failed;
+			}
+
+			auto FolderHasMaterial = [&RootDest](const FString& Name)
+			{
+				return FPackageName::DoesPackageExist(RootDest / Name / Name);
+			};
+
+			if (FolderHasMaterial(OutMaterialName))
+			{
+				switch (Request.ConflictPolicy)
+				{
+				case EPBRImportConflictPolicy::Cancel:
+					if (OutError)
+					{
+						*OutError = FString::Printf(TEXT("Name conflict: %s/%s"), *RootDest, *OutMaterialName);
+					}
+					UE_LOG(LogPBRTextureLab, Warning, TEXT("Name conflict (cancel): %s/%s"), *RootDest, *OutMaterialName);
+					return EPBRImportStatus::NameConflict;
+				case EPBRImportConflictPolicy::UniqueName:
+					{
+						int32 Suffix = 2;
+						FString Candidate = FString::Printf(TEXT("%s_%d"), *OutMaterialName, Suffix);
+						while (FolderHasMaterial(Candidate))
+						{
+							++Suffix;
+							Candidate = FString::Printf(TEXT("%s_%d"), *OutMaterialName, Suffix);
+						}
+						OutMaterialName = Candidate;
+					}
+					break;
+				case EPBRImportConflictPolicy::Replace:
+					break;
+				}
+			}
+
+			OutFolder = RootDest / OutMaterialName;
+			return EPBRImportStatus::Success;
+		}
+
+		UTexture2D* DuplicateTextureIntoFolder(UTexture2D* Source, const FString& Folder, const FString& AssetName)
+		{
+			if (!Source)
+			{
+				return nullptr;
+			}
+			if (UObject* Duplicated = GetAssetTools().DuplicateAsset(AssetName, Folder, Source))
+			{
+				return Cast<UTexture2D>(Duplicated);
+			}
+			return Source;
 		}
 
 		bool PipelineCopyBgra(const FImage& Bgra, FPBRImageRgba8& OutImage, FString* OutError)
@@ -243,16 +322,33 @@ namespace PBRTextureLab
 			return EPBRImportStatus::Failed;
 		}
 
+		if (!Request.ExportFlags.WantsAnyTexture() && !Request.bCreateMaterial)
+		{
+			PipelineSetError(OutError, TEXT("Select at least one map or enable material creation."));
+			return EPBRImportStatus::Failed;
+		}
+
 		if (!GeneratePBRMaps(OutResult.WorkingImage, Request.PixelParams, OutResult.Maps, &OutResult.Disclaimer))
 		{
 			PipelineSetError(OutError, TEXT("GeneratePBRMaps failed."));
 			return EPBRImportStatus::Failed;
 		}
 
+		FString OutputFolder;
+		FString MaterialName;
+		const EPBRImportStatus FolderStatus = ResolveMaterialFolder(Request, OutputFolder, MaterialName, OutError);
+		if (FolderStatus != EPBRImportStatus::Success)
+		{
+			return FolderStatus;
+		}
+		OutResult.OutputFolder = OutputFolder;
+		OutResult.CreatedMaterialName = MaterialName;
+
 		FPBRTextureImportRequest ImportRequest;
-		ImportRequest.DestinationPath = Request.DestinationPath;
-		ImportRequest.BaseName = Request.BaseName;
+		ImportRequest.DestinationPath = OutputFolder;
+		ImportRequest.BaseName = MaterialName;
 		ImportRequest.ConflictPolicy = Request.ConflictPolicy;
+		ImportRequest.ExportFlags = Request.ExportFlags;
 		ImportRequest.bSave = Request.bSave;
 		ImportRequest.bCancelled = false;
 
@@ -272,8 +368,10 @@ namespace PBRTextureLab
 		}
 
 		FPBRMaterialInstanceRequest MaterialRequest;
-		MaterialRequest.DestinationPath = Request.DestinationPath;
-		MaterialRequest.BaseName = Request.BaseName;
+		MaterialRequest.DestinationPath = OutputFolder;
+		MaterialRequest.BaseName = MaterialName;
+		MaterialRequest.InstanceName = MaterialName;
+		MaterialRequest.ParentMaterial = Request.ParentMaterial;
 		MaterialRequest.ConflictPolicy = Request.ConflictPolicy;
 		MaterialRequest.NormalStrength = Request.MaterialNormalStrength;
 		MaterialRequest.HeightAmount = Request.MaterialHeightAmount;
@@ -281,6 +379,72 @@ namespace PBRTextureLab
 		MaterialRequest.bSave = Request.bSave;
 		MaterialRequest.bCancelled = false;
 
+		return CreateMaterialInstance(
+			OutResult.Textures,
+			MaterialRequest,
+			OutResult.MaterialInstance,
+			OutError);
+	}
+
+	EPBRImportStatus CreateMaterialFromExistingTextures(
+		const FPBRGenerateRequest& Request,
+		const FPBRImportedTextures& ExistingTextures,
+		FPBRGenerateResult& OutResult,
+		FString* OutError)
+	{
+		OutResult = FPBRGenerateResult();
+		OutResult.Textures = ExistingTextures;
+
+		if (Request.bCancelled)
+		{
+			if (OutError)
+			{
+				*OutError = TEXT("Generate cancelled.");
+			}
+			return EPBRImportStatus::Cancelled;
+		}
+		if (!IsInGameThread())
+		{
+			PipelineSetError(OutError, TEXT("CreateMaterialFromExistingTextures must run on the Game Thread."));
+			return EPBRImportStatus::Failed;
+		}
+		if (!ExistingTextures.HasAny())
+		{
+			PipelineSetError(OutError, TEXT("Select at least one existing PBR texture."));
+			return EPBRImportStatus::Failed;
+		}
+
+		FString OutputFolder;
+		FString MaterialName;
+		const EPBRImportStatus FolderStatus = ResolveMaterialFolder(Request, OutputFolder, MaterialName, OutError);
+		if (FolderStatus != EPBRImportStatus::Success)
+		{
+			return FolderStatus;
+		}
+		OutResult.OutputFolder = OutputFolder;
+		OutResult.CreatedMaterialName = MaterialName;
+
+		if (Request.bCopyExistingTexturesToFolder)
+		{
+			OutResult.Textures.BaseColor = DuplicateTextureIntoFolder(ExistingTextures.BaseColor, OutputFolder, MaterialName + TEXT("_BaseColor"));
+			OutResult.Textures.Normal = DuplicateTextureIntoFolder(ExistingTextures.Normal, OutputFolder, MaterialName + TEXT("_Normal"));
+			OutResult.Textures.Height = DuplicateTextureIntoFolder(ExistingTextures.Height, OutputFolder, MaterialName + TEXT("_Height"));
+			OutResult.Textures.AO = DuplicateTextureIntoFolder(ExistingTextures.AO, OutputFolder, MaterialName + TEXT("_AO"));
+			OutResult.Textures.Roughness = DuplicateTextureIntoFolder(ExistingTextures.Roughness, OutputFolder, MaterialName + TEXT("_Roughness"));
+			OutResult.Textures.Metallic = DuplicateTextureIntoFolder(ExistingTextures.Metallic, OutputFolder, MaterialName + TEXT("_Metallic"));
+			OutResult.Textures.ORM = DuplicateTextureIntoFolder(ExistingTextures.ORM, OutputFolder, MaterialName + TEXT("_ORM"));
+		}
+
+		FPBRMaterialInstanceRequest MaterialRequest;
+		MaterialRequest.DestinationPath = OutputFolder;
+		MaterialRequest.BaseName = MaterialName;
+		MaterialRequest.InstanceName = MaterialName;
+		MaterialRequest.ParentMaterial = Request.ParentMaterial;
+		MaterialRequest.ConflictPolicy = Request.ConflictPolicy;
+		MaterialRequest.NormalStrength = Request.MaterialNormalStrength;
+		MaterialRequest.HeightAmount = Request.MaterialHeightAmount;
+		MaterialRequest.UVScale = Request.MaterialUVScale;
+		MaterialRequest.bSave = Request.bSave;
 		return CreateMaterialInstance(
 			OutResult.Textures,
 			MaterialRequest,

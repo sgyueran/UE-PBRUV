@@ -22,14 +22,15 @@
 #define PBRTEXTURELAB_HAS_MIC_PARAMETER_COLLECTION_EDITORONLY 0
 #endif
 
-// Shared Metallic/Roughness contract used by later tasks.
-#define PBRTEXTURELAB_PARAM_BaseColorTexture TEXT("BaseColorTexture")
-#define PBRTEXTURELAB_PARAM_NormalTexture TEXT("NormalTexture")
-#define PBRTEXTURELAB_PARAM_ORMTexture TEXT("ORMTexture")
-#define PBRTEXTURELAB_PARAM_HeightTexture TEXT("HeightTexture")
-#define PBRTEXTURELAB_PARAM_NormalStrength TEXT("NormalStrength")
-#define PBRTEXTURELAB_PARAM_HeightAmount TEXT("HeightAmount")
-#define PBRTEXTURELAB_PARAM_UVScale TEXT("UVScale")
+// Names shown in the Material Instance parameter panel.
+#define PBRTEXTURELAB_PARAM_BaseColorTexture TEXT("基础颜色")
+#define PBRTEXTURELAB_PARAM_NormalTexture TEXT("法线")
+#define PBRTEXTURELAB_PARAM_ORMTexture TEXT("ORM")
+#define PBRTEXTURELAB_PARAM_HeightTexture TEXT("高度")
+#define PBRTEXTURELAB_PARAM_NormalStrength TEXT("法线强度")
+#define PBRTEXTURELAB_PARAM_HeightAmount TEXT("高度强度")
+#define PBRTEXTURELAB_PARAM_UVScale TEXT("UV缩放")
+#define PBRTEXTURELAB_PARAM_GROUP TEXT("PBR贴图实验室")
 
 #define PBRTEXTURELAB_UV_CHANNEL_INDEX 0
 #define PBRTEXTURELAB_UV_PRESET_100 100

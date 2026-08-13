@@ -29,11 +29,28 @@ namespace PBRTextureLab
 		UniqueName = 2
 	};
 
+	struct FPBRMapExportFlags
+	{
+		bool bBaseColor = true;
+		bool bHeight = true;
+		bool bNormal = true;
+		bool bAO = true;
+		bool bRoughness = true;
+		bool bMetallic = true;
+		bool bORM = true;
+
+		bool WantsAnyTexture() const
+		{
+			return bBaseColor || bHeight || bNormal || bAO || bRoughness || bMetallic || bORM;
+		}
+	};
+
 	struct FPBRTextureImportRequest
 	{
 		FString DestinationPath = TEXT("/Game/PBRTextureLab");
 		FString BaseName = TEXT("PBR");
 		EPBRImportConflictPolicy ConflictPolicy = EPBRImportConflictPolicy::Cancel;
+		FPBRMapExportFlags ExportFlags;
 		bool bSave = true;
 		bool bCancelled = false;
 	};
@@ -51,6 +68,11 @@ namespace PBRTextureLab
 		bool HasAll() const
 		{
 			return BaseColor && Height && Normal && AO && Roughness && Metallic && ORM;
+		}
+
+		bool HasAny() const
+		{
+			return BaseColor || Height || Normal || AO || Roughness || Metallic || ORM;
 		}
 	};
 
