@@ -8,7 +8,7 @@
     "engine_association": "5.8",
     "plugin": "PBRTextureLab"
   },
-  "baseline_revision": "3028b3d",
+  "baseline_revision": "f061c9d",
   "requirements": [
     "T1-host-plugin-skeleton",
     "T1-api-inventory-5.6-5.8",
@@ -17,68 +17,88 @@
     "T2-channels-orm-normal-direction",
     "T2-automation-solid-gradient-checker",
     "T2-deterministic-output",
-    "T2-metallic-disclaimer"
+    "T2-metallic-disclaimer",
+    "T3-imagewrapper-staging",
+    "T3-import-asset-tasks",
+    "T3-srgb-compression",
+    "T3-cancel-conflict-cleanup",
+    "T3-reload-after-editor-restart"
   ],
   "approvals": [],
   "loaded_sources": [
     {
       "source": "AGENTS.md",
-      "estimated_tokens": 500
+      "estimated_tokens": 550
     },
     {
-      "source": "tasks/02-offline-pbr-pixel-core.md",
-      "estimated_tokens": 200
+      "source": "tasks/03-texture-asset-import.md",
+      "estimated_tokens": 180
     },
     {
-      "source": "skills/ue-development-orchestrator/SKILL.md",
-      "estimated_tokens": 800
-    },
-    {
-      "source": "UE_5.8 AutomationTest.h EAutomationTestFlags",
-      "estimated_tokens": 400
+      "source": "UE_5.8 AssetImportTask.h / IAssetTools.h / IImageWrapperModule.h / TextureFactory.h",
+      "estimated_tokens": 700
     }
   ],
-  "loaded_token_estimate": 1900,
+  "loaded_token_estimate": 1430,
   "edits": [
     "PBRTextureLabHost skeleton + PBRTextureLab Editor module + compat/probe",
-    "PBRTextureLabPixelCore + Automation Tests"
+    "PBRTextureLabPixelCore + Automation Tests",
+    "PBRTextureLabTextureImport + ImportAssetTasks + Automation Tests"
   ],
   "evidence": [
     {
-      "id": "build-ue56-task2",
+      "id": "build-ue56-task3",
       "command": "UE_5.6\\Engine\\Build\\BatchFiles\\Build.bat PBRTextureLabHostEditor Win64 Development",
       "exit_code": 0,
-      "result": "Succeeded (32.76s)"
+      "result": "Succeeded (36.19s)"
     },
     {
-      "id": "build-ue57-task2",
+      "id": "build-ue57-task3",
       "command": "UE_5.7\\Engine\\Build\\BatchFiles\\Build.bat PBRTextureLabHostEditor Win64 Development",
       "exit_code": 0,
-      "result": "Succeeded (34.16s)"
+      "result": "Succeeded (35.25s first full; final log incremental 3.47s)"
     },
     {
-      "id": "build-ue58-task2",
+      "id": "build-ue58-task3",
       "command": "UE_5.8\\Engine\\Build\\BatchFiles\\Build.bat PBRTextureLabHostEditor Win64 Development",
       "exit_code": 0,
-      "result": "Succeeded (31.49s)"
+      "result": "Succeeded (32.77s)"
     },
     {
-      "id": "test-ue56-task2",
+      "id": "test-ue56-task3",
       "command": "UE_5.6 UnrealEditor-Cmd Automation RunTests PBRTextureLab",
       "exit_code": 0,
-      "result": "6/6 Success"
+      "result": "11/11 Success"
     },
     {
-      "id": "test-ue57-task2",
+      "id": "test-ue57-task3",
       "command": "UE_5.7 UnrealEditor-Cmd Automation RunTests PBRTextureLab",
       "exit_code": 0,
-      "result": "6/6 Success"
+      "result": "11/11 Success"
     },
     {
-      "id": "test-ue58-task2",
+      "id": "test-ue58-task3",
       "command": "UE_5.8 UnrealEditor-Cmd Automation RunTests PBRTextureLab",
       "exit_code": 0,
-      "result": "6/6 Success"
+      "result": "11/11 Success"
+    },
+    {
+      "id": "restart-ue56-task3",
+      "command": "UE_5.6 UnrealEditor-Cmd Automation RunTests PBRTextureLab.Import.ReloadAfterRestart",
+      "exit_code": 0,
+      "result": "1/1 Success"
+    },
+    {
+      "id": "restart-ue57-task3",
+      "command": "UE_5.7 UnrealEditor-Cmd Automation RunTests PBRTextureLab.Import.ReloadAfterRestart",
+      "exit_code": 0,
+      "result": "1/1 Success"
+    },
+    {
+      "id": "restart-ue58-task3",
+      "command": "UE_5.8 UnrealEditor-Cmd Automation RunTests PBRTextureLab.Import.ReloadAfterRestart",
+      "exit_code": 0,
+      "result": "1/1 Success"
     }
   ],
   "evidence_fresh": true,
@@ -86,6 +106,6 @@
     "Engine/Plugins/Connecter is third-party; Marketplace move still pending elevated write access",
     "MSVC 14.44 is not UE 5.6 preferred 14.38"
   ],
-  "next_action": "Task 3 texture asset import; Task 5 UV presets may start in parallel",
-  "updated_at": "2026-08-13T06:30:00+00:00"
+  "next_action": "Task 4 material instance generation; Task 5 UV presets may start in parallel",
+  "updated_at": "2026-08-13T07:05:00+00:00"
 }

@@ -1,0 +1,183 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "DESKTOP-JK4SRF5",
+			"instance": "53584FEC489A673EE716C787D3B03458",
+			"instanceName": "DESKTOP-JK4SRF5-12860",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (24H2) [10.0.26100.8737] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 5070 Ti",
+			"cPUModel": "Intel(R) Core(TM) i7-14700KF",
+			"rAMInGB": 64,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.08.13-06.57.02",
+	"succeeded": 11,
+	"succeededWithWarnings": 0,
+	"failed": 0,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.32221052050590515,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "CancelAndConflict",
+			"fullTestPath": "PBRTextureLab.Import.CancelAndConflict",
+			"state": "Success",
+			"deviceInstance": [
+				"53584FEC489A673EE716C787D3B03458"
+			],
+			"duration": 0.095802702009677887,
+			"dateTime": "2026.08.13-06.57.01",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CreateAndSave",
+			"fullTestPath": "PBRTextureLab.Import.CreateAndSave",
+			"state": "Success",
+			"deviceInstance": [
+				"53584FEC489A673EE716C787D3B03458"
+			],
+			"duration": 0.084691897034645081,
+			"dateTime": "2026.08.13-06.57.02",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "FailureCleanup",
+			"fullTestPath": "PBRTextureLab.Import.FailureCleanup",
+			"state": "Success",
+			"deviceInstance": [
+				"53584FEC489A673EE716C787D3B03458"
+			],
+			"duration": 0.0081695988774299622,
+			"dateTime": "2026.08.13-06.57.02",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "HappyPath",
+			"fullTestPath": "PBRTextureLab.Import.HappyPath",
+			"state": "Success",
+			"deviceInstance": [
+				"53584FEC489A673EE716C787D3B03458"
+			],
+			"duration": 0.077095597982406616,
+			"dateTime": "2026.08.13-06.57.02",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ReloadAfterRestart",
+			"fullTestPath": "PBRTextureLab.Import.ReloadAfterRestart",
+			"state": "Success",
+			"deviceInstance": [
+				"53584FEC489A673EE716C787D3B03458"
+			],
+			"duration": 0.0083946026861667633,
+			"dateTime": "2026.08.13-06.57.02",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Checkerboard",
+			"fullTestPath": "PBRTextureLab.PixelCore.Checkerboard",
+			"state": "Success",
+			"deviceInstance": [
+				"53584FEC489A673EE716C787D3B03458"
+			],
+			"duration": 0.0079291015863418579,
+			"dateTime": "2026.08.13-06.57.02",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "DeterminismAndMetallic",
+			"fullTestPath": "PBRTextureLab.PixelCore.DeterminismAndMetallic",
+			"state": "Success",
+			"deviceInstance": [
+				"53584FEC489A673EE716C787D3B03458"
+			],
+			"duration": 0.008322499692440033,
+			"dateTime": "2026.08.13-06.57.02",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "HorizontalGradient",
+			"fullTestPath": "PBRTextureLab.PixelCore.HorizontalGradient",
+			"state": "Success",
+			"deviceInstance": [
+				"53584FEC489A673EE716C787D3B03458"
+			],
+			"duration": 0.0072107985615730286,
+			"dateTime": "2026.08.13-06.57.02",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "InvalidInput",
+			"fullTestPath": "PBRTextureLab.PixelCore.InvalidInput",
+			"state": "Success",
+			"deviceInstance": [
+				"53584FEC489A673EE716C787D3B03458"
+			],
+			"duration": 0.0078328996896743774,
+			"dateTime": "2026.08.13-06.57.02",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "SolidColor",
+			"fullTestPath": "PBRTextureLab.PixelCore.SolidColor",
+			"state": "Success",
+			"deviceInstance": [
+				"53584FEC489A673EE716C787D3B03458"
+			],
+			"duration": 0.0082783997058868408,
+			"dateTime": "2026.08.13-06.57.02",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "VerticalGradient",
+			"fullTestPath": "PBRTextureLab.PixelCore.VerticalGradient",
+			"state": "Success",
+			"deviceInstance": [
+				"53584FEC489A673EE716C787D3B03458"
+			],
+			"duration": 0.0084824003279209137,
+			"dateTime": "2026.08.13-06.57.02",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		}
+	]
+}

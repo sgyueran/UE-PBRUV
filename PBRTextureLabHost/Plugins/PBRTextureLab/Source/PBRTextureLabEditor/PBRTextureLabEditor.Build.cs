@@ -37,7 +37,9 @@ public class PBRTextureLabEditor : ModuleRules
 			"StaticMeshDescription",
 			"LevelEditor",
 			"ContentBrowser",
-			"Projects"
+			"Projects",
+			"ImageCore",
+			"ImageWrapper"
 		});
 	}
 }
