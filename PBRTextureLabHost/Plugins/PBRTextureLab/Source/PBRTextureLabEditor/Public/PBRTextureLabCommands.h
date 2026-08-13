@@ -19,4 +19,5 @@ public:
 
 	TSharedPtr<FUICommandInfo> UVScale100;
 	TSharedPtr<FUICommandInfo> UVScale500;
+	TSharedPtr<FUICommandInfo> OpenNomadTab;
 };

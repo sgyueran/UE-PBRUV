@@ -40,7 +40,10 @@ public class PBRTextureLabEditor : ModuleRules
 			"Projects",
 			"ImageCore",
 			"ImageWrapper",
-			"MaterialEditor"
+			"MaterialEditor",
+			"WorkspaceMenuStructure",
+			"DesktopPlatform",
+			"PropertyEditor"
 		});
 	}
 }

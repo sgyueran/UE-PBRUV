@@ -38,7 +38,11 @@
     "T6-menus-toolbar-contentbrowser",
     "T6-duplicate-rebind-or-modify",
     "T6-empty-mixed-nonsm-prompts",
-    "T6-unselected-untouched"
+    "T6-unselected-untouched",
+    "T7-nomad-tab-source-dest-params-preview-generate",
+    "T7-hook-uv-commands",
+    "T7-build-test-restart-uv-undo-three-versions",
+    "T7-independent-review"
   ],
   "approvals": [],
   "loaded_sources": [
@@ -47,22 +51,23 @@
       "estimated_tokens": 550
     },
     {
-      "source": "tasks/06-editor-commands-and-selection.md",
-      "estimated_tokens": 180
+      "source": "tasks/07-integration-validation-review.md",
+      "estimated_tokens": 160
     },
     {
-      "source": "UE Commands.h / ToolMenus.h / Selection.h / IAssetTools.h / MessageDialog.h",
-      "estimated_tokens": 700
+      "source": "UE TabManager.h / WorkspaceMenuStructure.h / ImageUtils.h / SlateDynamicImageBrush.h / IDesktopPlatform.h",
+      "estimated_tokens": 800
     }
   ],
-  "loaded_token_estimate": 1430,
+  "loaded_token_estimate": 1510,
   "edits": [
     "PBRTextureLabHost skeleton + PBRTextureLab Editor module + compat/probe",
     "PBRTextureLabPixelCore + Automation Tests",
     "PBRTextureLabTextureImport + ImportAssetTasks + Automation Tests",
     "PBRTextureLabMaterial parent graph + MIC + Automation Tests",
     "PBRTextureLabUV absolute presets + AssetUserData + Automation Tests",
-    "PBRTextureLab commands + selection + duplicate/modify + Automation Tests"
+    "PBRTextureLab commands + selection + duplicate/modify + Automation Tests",
+    "Nomad Tab + GenerateAndImportFromSource + Integration Automation + independent review"
   ],
   "evidence": [
     {
@@ -262,14 +267,69 @@
       "command": "UE_5.8 UnrealEditor-Cmd Automation RunTests PBRTextureLab",
       "exit_code": 0,
       "result": "24/24 Success"
+    },
+    {
+      "id": "build-ue56-task7",
+      "command": "UE_5.6\\Engine\\Build\\BatchFiles\\Build.bat PBRTextureLabHostEditor Win64 Development",
+      "exit_code": 0,
+      "result": "Succeeded (35.74s)"
+    },
+    {
+      "id": "build-ue57-task7",
+      "command": "UE_5.7\\Engine\\Build\\BatchFiles\\Build.bat PBRTextureLabHostEditor Win64 Development",
+      "exit_code": 0,
+      "result": "Succeeded (36.59s)"
+    },
+    {
+      "id": "build-ue58-task7",
+      "command": "UE_5.8\\Engine\\Build\\BatchFiles\\Build.bat PBRTextureLabHostEditor Win64 Development",
+      "exit_code": 0,
+      "result": "Succeeded (38.57s clean Intermediate)"
+    },
+    {
+      "id": "test-ue56-task7",
+      "command": "UE_5.6 UnrealEditor-Cmd Automation RunTests PBRTextureLab",
+      "exit_code": 0,
+      "result": "30/30 Success"
+    },
+    {
+      "id": "test-ue57-task7",
+      "command": "UE_5.7 UnrealEditor-Cmd Automation RunTests PBRTextureLab",
+      "exit_code": 0,
+      "result": "30/30 Success"
+    },
+    {
+      "id": "test-ue58-task7",
+      "command": "UE_5.8 UnrealEditor-Cmd Automation RunTests PBRTextureLab",
+      "exit_code": 0,
+      "result": "30/30 Success"
+    },
+    {
+      "id": "restart-ue56-task7",
+      "command": "UE_5.6 UnrealEditor-Cmd Automation RunTests PBRTextureLab.Integration.ReloadAfterRestart",
+      "exit_code": 0,
+      "result": "1/1 Success"
+    },
+    {
+      "id": "restart-ue57-task7",
+      "command": "UE_5.7 UnrealEditor-Cmd Automation RunTests PBRTextureLab.Integration.ReloadAfterRestart",
+      "exit_code": 0,
+      "result": "1/1 Success"
+    },
+    {
+      "id": "restart-ue58-task7",
+      "command": "UE_5.8 UnrealEditor-Cmd Automation RunTests PBRTextureLab.Integration.ReloadAfterRestart",
+      "exit_code": 0,
+      "result": "1/1 Success"
     }
   ],
   "evidence_fresh": true,
   "open_risks": [
     "Engine/Plugins/Connecter is third-party; Marketplace move still pending elevated write access",
     "MSVC 14.44 is not UE 5.6 preferred 14.38",
-    "Shared Intermediate/ UHT headers are not compatible across 5.6/5.7/5.8"
+    "Shared Intermediate/ UHT headers are not compatible across 5.6/5.7/5.8",
+    "Nomad Tab interactive clicks were not verified in a windowed Editor"
   ],
-  "next_action": "Task 7 Nomad Tab, three-version integration, independent review",
-  "updated_at": "2026-08-13T08:52:00+00:00"
+  "next_action": "All tasks 01-07 complete",
+  "updated_at": "2026-08-13T09:40:00+00:00"
 }

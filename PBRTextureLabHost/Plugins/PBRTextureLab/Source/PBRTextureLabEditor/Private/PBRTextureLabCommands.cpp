@@ -16,6 +16,12 @@ void FPBRTextureLabCommands::RegisterCommands()
 		"Apply an absolute 500x UV0 scale to the selected Static Mesh.",
 		EUserInterfaceActionType::Button,
 		FInputChord());
+	UI_COMMAND(
+		OpenNomadTab,
+		"PBR Texture Lab",
+		"Open the PBR Texture Lab Nomad Tab to generate Metallic/Roughness maps.",
+		EUserInterfaceActionType::Button,
+		FInputChord());
 }
 
 #undef LOCTEXT_NAMESPACE

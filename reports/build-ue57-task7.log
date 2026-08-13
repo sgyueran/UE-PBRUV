@@ -1,0 +1,111 @@
+Log started at 08/13/2026 17:30:52 (2026-08-13T09:30:52Z)
+Resolved project argument C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\PBRTextureLabHost.uproject to C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\PBRTextureLabHost.uproject
+No config file at C:\ProgramData\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+No config file at C:\Users\Administrator\AppData\Local\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+No config file at C:\Users\Administrator\Documents\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Configuration will be read from:
+  C:\Users\Administrator\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Reading configuration file from: C:\Users\Administrator\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Reading configuration file from: C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\Saved\UnrealBuildTool\BuildConfiguration.xml
+Reading configuration file from: C:\Users\Administrator\AppData\Local\UnrealEngine\Intermediate\Build\UnrealBuildTool.Env.BuildConfiguration.xml
+Setting temp directory to 'C:\Users\Administrator\AppData\Local\Temp\UnrealBuildTool\9de8e132'
+    Registering build platform: UnrealBuildTool.AndroidPlatformFactory
+    Registering build platform: UnrealBuildTool.IOSPlatformFactory
+    Registering build platform: UnrealBuildTool.LinuxPlatformFactory
+    Registering build platform: UnrealBuildTool.MacPlatformFactory
+    Registering build platform: UnrealBuildTool.TVOSPlatformFactory
+    Registering build platform: UnrealBuildTool.WindowsPlatformFactory
+Found Windows 10 SDK root at C:\Program Files\Windows Kits\10 (1)
+Found Windows 10 SDK root at C:\Program Files (x86)\Windows Kits\10 (2)
+Found Windows 10 SDK version 10.0.22621.0 at C:\Program Files (x86)\Windows Kits\10
+Found Universal CRT version 10.0.22621.0 at C:\Program Files (x86)\Windows Kits\10
+Found Windows 10 SDK version 10.0.26100.0 at C:\Program Files (x86)\Windows Kits\10
+Found Universal CRT version 10.0.26100.0 at C:\Program Files (x86)\Windows Kits\10
+Win64 Installed SDK(s): MinVersion_Sdk=10.0.19041.0, MaxVersion_Sdk=10.9.99999.0, CurrentVersion_Sdk=10.0.22621.0, Version_AutoSdk=10.0.22621.0, CurrentVersion_AutoSdk=
+        Registering build platform: Win64 - buildable: True
+    Registering build platform: UnrealBuildTool.VisionOSPlatformFactory
+Command line: "C:\Program Files\Epic Games\UE_5.7\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" PBRTextureLabHostEditor Win64 Development -Project=C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\PBRTextureLabHost.uproject -WaitMutex
+Log file: C:\Users\Administrator\AppData\Local\UnrealBuildTool\Log.txt
+Deleting old log file: C:\Users\Administrator\AppData\Local\UnrealBuildTool\Log-backup-2026.08.13-08.18.45.txt
+
+Using 'git status' to determine working set for adaptive non-unity build (C:\Users\Administrator\Desktop\Plughins).
+Creating makefile for PBRTextureLabHostEditor (no existing makefile)
+Skipping C:\Program Files\Epic Games\UE_5.7\Engine\Intermediate\Build\BuildRules\UE5Rules.dll: File is installed
+Skipping C:\Program Files\Epic Games\UE_5.7\Engine\Intermediate\Build\BuildRules\UE5ProgramRules.dll: File is installed
+Compiling C:\Users\Administrator\AppData\Local\UnrealEngine\Intermediate\Build\BuildRules\MarketplaceRules.dll: Engine Version changed from 5.8.0 to 5.7.4
+Compiling C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\Intermediate\Build\BuildRules\PBRTextureLabHostModuleRules.dll: Assembly does not exist
+Found VisualStudio2022 installation: C:\Program Files\Microsoft Visual Studio\2022\Community (Product=Microsoft.VisualStudio.Product.Community, Version=17.14.37411.7)
+Found Visual Studio toolchain: C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207 (Family=14.44.35207, FamilyRank=0, Version=14.44.35228, HostArchitecture=x64, ReleaseChannel=Latest, Architecture=x64, Error=False, Redist=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Redist\MSVC\14.44.35112)
+Building UnrealEditor - PBRTextureLabHostEditor - Win64 - Development
+Compiler: C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe
+Linker: C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\link.exe
+Library Manager: C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\link.exe
+Resource Compiler: C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\rc.exe
+Using EngineIncludeOrderVersion.Unreal5_7 for target PBRTextureLabHostEditor.Target.cs
+UHT compiled-in object format Default
+Parsing headers for PBRTextureLabHostEditor
+  Running Internal UnrealHeaderTool C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\PBRTextureLabHost.uproject C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\Intermediate\Build\Win64\PBRTextureLabHostEditor\Development\PBRTextureLabHostEditor.uhtmanifest -WarningsAsErrors -installed
+Reading engine version from file: C:\Program Files\Epic Games\UE_5.7\Engine\Source\Runtime\Launch\Resources\Version.h
+Got engine version 5.7.4
+Step - Exports
+       Exporter Stats skipped
+       Exporter Json skipped
+       Running exporter CodeGen
+UHT processed PBRTextureLabHostEditor in 0.7253498 seconds (4 files written)
+Found 5 shared PCH headers (listed in order of preference):
+	UnrealEd
+	Engine
+	Slate
+	CoreUObject
+	Core
+VerseVMBytecodeGenerator.Generate, generating CPP headers in: 'C:\Program Files\Epic Games\UE_5.7\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\VerseVMBytecode'
+	Writing out generated header file. Changed:False Path:'C:\Program Files\Epic Games\UE_5.7\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\VerseVMBytecode\VVMBytecodeOps.gen.h'
+	Writing out generated header file. Changed:False Path:'C:\Program Files\Epic Games\UE_5.7\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\VerseVMBytecode\VVMBytecodesAndCaptures.gen.h'
+	Writing out generated header file. Changed:False Path:'C:\Program Files\Epic Games\UE_5.7\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\VerseVMBytecode\VVMMakeCapturesFuncs.gen.h'
+	Writing out generated header file. Changed:False Path:'C:\Program Files\Epic Games\UE_5.7\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\VerseVMBytecode\VVMCaptureSwitch.gen.h'
+Checking for live coding mutex: Global\LiveCoding_C++Program Files+Epic Games+UE_5.7+Engine+Binaries+Win64+UnrealEditor.exe
+Deleting outdated item: C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\Binaries\Win64\UnrealEditor-PBRTextureLabHost.pdb
+Deleting outdated item: C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\Plugins\PBRTextureLab\Binaries\Win64\UnrealEditor-PBRTextureLabEditor.pdb
+Building PBRTextureLabHostEditor...
+Using Visual Studio 2022 14.44.35228 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207) and Windows 10.0.22621.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+[Adaptive Build] Excluded from PBRTextureLabEditor unity file: PBRTextureLabCommands.cpp, PBRTextureLabEditorModule.cpp, PBRTextureLabNomad.cpp, PBRTextureLabPipeline.cpp, PBRTextureLabPipelineTests.cpp, SPBRTextureLabNomad.cpp
+Determining max actions to execute in parallel (20 physical cores, 28 logical cores)
+  Executing up to 20 processes, one per physical core
+Using Unreal Build Accelerator local executor to run 17 action(s)
+  Storage capacity 40Gb
+  RootDir C:\ProgramData\Epic\UnrealBuildAccelerator
+Deleting old log file: C:\Users\Administrator\AppData\Local\UnrealBuildTool\Log-backup-2026.08.13-07.33.24.uba
+---- Starting trace: 260813_173056 ----
+UbaSessionServer - Disable remote execution (remote sessions will finish current processes)
+Cache bucket 2713766342 used. Action: Compile [x64] SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.cpp ()
+Cache bucket 2611342960 used. Action: Resource Default.rc2 ()
+Cache bucket 563708459 used. Action: Compile [x64] PBRTextureLabHost.cpp ()
+Cache bucket 416513229 used. Action: Link [x64] UnrealEditor-PBRTextureLabHost.dll ()
+Cache bucket 1287712200 used. Action: Compile [x64] Module.PBRTextureLabEditor.cpp ()
+All processes queued
+[1/17] Resource Default.rc2
+[2/17] Resource Default.rc2
+[3/17] Compile [x64] SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.cpp
+[4/17] Compile [x64] PBRTextureLabHost.cpp
+[5/17] Compile [x64] PerModuleInline.gen.cpp
+[6/17] Compile [x64] PBRTextureLabNomad.cpp
+[7/17] Compile [x64] PBRTextureLabCommands.cpp
+[8/17] Compile [x64] PBRTextureLabPipeline.cpp
+[9/17] Link [x64] UnrealEditor-PBRTextureLabHost.lib
+  正在创建库 C:/Users/Administrator/Desktop/Plughins/PBRTextureLabHost/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabHost/UnrealEditor-PBRTextureLabHost.lib 和对象 C:/Users/Administrator/Desktop/Plughins/PBRTextureLabHost/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabHost/UnrealEditor-PBRTextureLabHost.exp
+[10/17] Link [x64] UnrealEditor-PBRTextureLabHost.dll
+[11/17] Compile [x64] PBRTextureLabEditorModule.cpp
+[12/17] Compile [x64] PBRTextureLabPipelineTests.cpp
+[13/17] Compile [x64] Module.PBRTextureLabEditor.cpp
+[14/17] Compile [x64] SPBRTextureLabNomad.cpp
+[15/17] Link [x64] UnrealEditor-PBRTextureLabEditor.lib
+  正在创建库 C:/Users/Administrator/Desktop/Plughins/PBRTextureLabHost/Plugins/PBRTextureLab/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabEditor/UnrealEditor-PBRTextureLabEditor.lib 和对象 C:/Users/Administrator/Desktop/Plughins/PBRTextureLabHost/Plugins/PBRTextureLab/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabEditor/UnrealEditor-PBRTextureLabEditor.exp
+[16/17] Link [x64] UnrealEditor-PBRTextureLabEditor.dll
+[17/17] WriteMetadata PBRTextureLabHostEditor.target [NoUba]
+
+Trace written to file C:/Users/Administrator/AppData/Local/UnrealBuildTool/Log.uba with size 8.4kb
+Total time in Unreal Build Accelerator local executor: 32.00 seconds
+WriteFileIfChanged() wrote 64 changed files of 65 requested writes.
+
+Result: Succeeded
+Total execution time: 36.59 seconds
