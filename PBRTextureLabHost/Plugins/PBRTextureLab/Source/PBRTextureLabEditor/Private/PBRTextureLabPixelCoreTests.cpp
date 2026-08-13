@@ -340,4 +340,36 @@ bool FPBRTextureLabPixelCoreInvalidInput::RunTest(const FString& Parameters)
 	return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(
+	FPBRTextureLabPixelCoreMakeSeamless,
+	"PBRTextureLab.PixelCore.MakeSeamless",
+	PixelCoreTestFlags)
+
+bool FPBRTextureLabPixelCoreMakeSeamless::RunTest(const FString& Parameters)
+{
+	using namespace PBRTextureLab;
+	FPBRImageRgba8 Image = MakeHorizontalGradient(32, 32);
+	TestTrue(TEXT("MakeSeamless accepts a valid image"), MakeSeamlessImage(Image, false));
+
+	for (int32 Y = 0; Y < Image.Height; ++Y)
+	{
+		const FColor Left = Image.Pixels[Y * Image.Width];
+		const FColor Right = Image.Pixels[Y * Image.Width + Image.Width - 1];
+		TestEqual(FString::Printf(TEXT("Horizontal wrap Y=%d R"), Y), int32(Left.R), int32(Right.R));
+		TestEqual(FString::Printf(TEXT("Horizontal wrap Y=%d G"), Y), int32(Left.G), int32(Right.G));
+		TestEqual(FString::Printf(TEXT("Horizontal wrap Y=%d B"), Y), int32(Left.B), int32(Right.B));
+	}
+	for (int32 X = 0; X < Image.Width; ++X)
+	{
+		const FColor Top = Image.Pixels[X];
+		const FColor Bottom = Image.Pixels[(Image.Height - 1) * Image.Width + X];
+		TestEqual(FString::Printf(TEXT("Vertical wrap X=%d R"), X), int32(Top.R), int32(Bottom.R));
+	}
+
+	FPBRImageRgba8 Solid = MakePixelCoreSolid(16, 16, FColor(40, 80, 120, 255));
+	TestTrue(TEXT("Solid MakeSeamless"), MakeSeamlessImage(Solid, false));
+	TestEqual(TEXT("Solid stays solid"), Solid.Pixels[0], FColor(40, 80, 120, 255));
+	return true;
+}
+
 #endif

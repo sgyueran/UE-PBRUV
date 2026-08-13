@@ -29,6 +29,17 @@ namespace PBRTextureLab
 		UniqueName = 2
 	};
 
+	enum class EPBRMapKind : uint8
+	{
+		Unknown = 0,
+		BaseColor = 1,
+		Normal = 2,
+		Roughness = 3,
+		Metallic = 4,
+		Height = 5,
+		AO = 6
+	};
+
 	struct FPBRMapExportFlags
 	{
 		bool bBaseColor = true;
@@ -37,11 +48,10 @@ namespace PBRTextureLab
 		bool bAO = true;
 		bool bRoughness = true;
 		bool bMetallic = true;
-		bool bORM = true;
 
 		bool WantsAnyTexture() const
 		{
-			return bBaseColor || bHeight || bNormal || bAO || bRoughness || bMetallic || bORM;
+			return bBaseColor || bHeight || bNormal || bAO || bRoughness || bMetallic;
 		}
 	};
 
@@ -51,6 +61,7 @@ namespace PBRTextureLab
 		FString BaseName = TEXT("PBR");
 		EPBRImportConflictPolicy ConflictPolicy = EPBRImportConflictPolicy::Cancel;
 		FPBRMapExportFlags ExportFlags;
+		bool bMakeSeamless = true;
 		bool bSave = true;
 		bool bCancelled = false;
 	};
@@ -63,20 +74,41 @@ namespace PBRTextureLab
 		UTexture2D* AO = nullptr;
 		UTexture2D* Roughness = nullptr;
 		UTexture2D* Metallic = nullptr;
-		UTexture2D* ORM = nullptr;
 
 		bool HasAll() const
 		{
-			return BaseColor && Height && Normal && AO && Roughness && Metallic && ORM;
+			return BaseColor && Height && Normal && AO && Roughness && Metallic;
 		}
 
 		bool HasAny() const
 		{
-			return BaseColor || Height || Normal || AO || Roughness || Metallic || ORM;
+			return BaseColor || Height || Normal || AO || Roughness || Metallic;
 		}
 	};
 
 	FString GetStagingRootDirectory();
+
+	EPBRMapKind GuessPBRMapKindFromFilename(const FString& Filename);
+
+	UTexture2D* ImportLocalImageFile(
+		const FString& Filename,
+		const FString& DestinationPath,
+		const FString& DesiredName,
+		EPBRMapKind Kind,
+		EPBRImportConflictPolicy ConflictPolicy,
+		bool bSave,
+		FString* OutError = nullptr,
+		bool bMakeSeamless = true);
+
+	EPBRImportStatus ImportPBRMapsFromLocalFolder(
+		const FString& FolderPath,
+		const FString& DestinationPath,
+		const FString& BaseName,
+		EPBRImportConflictPolicy ConflictPolicy,
+		bool bSave,
+		FPBRImportedTextures& OutTextures,
+		FString* OutError = nullptr,
+		bool bMakeSeamless = true);
 
 	EPBRImportStatus ImportPBRMaps(
 		const FPBRMaps& Maps,

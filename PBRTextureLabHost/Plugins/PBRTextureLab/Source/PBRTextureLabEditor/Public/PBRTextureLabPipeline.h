@@ -32,11 +32,17 @@ namespace PBRTextureLab
 		UMaterialInterface* ParentMaterial = nullptr;
 		EPBRImportConflictPolicy ConflictPolicy = EPBRImportConflictPolicy::UniqueName;
 		FPBRMapExportFlags ExportFlags;
-		float MaterialNormalStrength = 1.0f;
+		float MaterialNormalStrength = 0.1f;
+		float MaterialRoughnessStrength = 1.0f;
+		float MaterialMetallicStrength = 1.0f;
 		float MaterialHeightAmount = 0.0f;
 		float MaterialUVScale = 1.0f;
+		float MaterialRoughnessBrightness = 0.0f;
+		UMaterialInstanceConstant* ExistingInstance = nullptr;
+		bool bModifyExisting = false;
 		bool bCreateMaterial = true;
 		bool bCopyExistingTexturesToFolder = true;
+		bool bMakeSeamless = true;
 		bool bSave = true;
 		bool bCancelled = false;
 	};

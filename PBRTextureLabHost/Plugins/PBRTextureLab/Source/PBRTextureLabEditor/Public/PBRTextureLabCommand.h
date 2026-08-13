@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "PBRTextureLabUV.h"
 
+class UMaterialInterface;
 class UStaticMesh;
 class UStaticMeshComponent;
 
@@ -31,6 +32,15 @@ namespace PBRTextureLab
 		Cancel = 3
 	};
 
+	enum class EPBRAssignMaterialStatus : uint8
+	{
+		Success = 0,
+		EmptySelection = 1,
+		Unsupported = 2,
+		NoMaterial = 3,
+		Failed = 4
+	};
+
 	struct FPBRUVSelectionItem
 	{
 		UStaticMesh* Mesh = nullptr;
@@ -49,6 +59,7 @@ namespace PBRTextureLab
 		EPBRUVPreset Preset = EPBRUVPreset::Scale100;
 		EPBRUVEditChoice EditChoice = EPBRUVEditChoice::Prompt;
 		bool bSave = false;
+		bool bApplyOtherLods = false;
 	};
 
 	FName GetUVCommandContextName();
@@ -69,4 +80,10 @@ namespace PBRTextureLab
 		FString* OutError = nullptr);
 
 	void ExecuteRegisteredUVCommand(EPBRUVPreset Preset);
+
+	void SyncContentBrowserToGeneratedFolder(const FString& FolderPath, UObject* HighlightAsset = nullptr);
+
+	EPBRAssignMaterialStatus AssignMaterialToSelection(
+		UMaterialInterface* Material,
+		FString* OutError = nullptr);
 }

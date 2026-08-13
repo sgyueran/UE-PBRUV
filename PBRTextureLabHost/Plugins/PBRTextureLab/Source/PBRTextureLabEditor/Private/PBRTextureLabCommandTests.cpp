@@ -8,7 +8,11 @@
 #include "Engine/StaticMesh.h"
 #include "Engine/StaticMeshActor.h"
 #include "Engine/TargetPoint.h"
+#include "Materials/Material.h"
+#include "Materials/MaterialInterface.h"
 #include "Framework/Commands/InputBindingManager.h"
+#include "Framework/Commands/InputChord.h"
+#include "InputCoreTypes.h"
 #include "MeshDescription.h"
 #include "Misc/AutomationTest.h"
 #include "Misc/PackageName.h"
@@ -182,15 +186,23 @@ bool FPBRTextureLabCommandShortcuts::RunTest(const FString& Parameters)
 	TestTrue(TEXT("UVScale500 exists"), Scale500.IsValid());
 	if (Scale100.IsValid())
 	{
-		TestFalse(
-			TEXT("UVScale100 has no default chord"),
-			Scale100->GetDefaultChord(EMultipleKeyBindingIndex::Primary).IsValidChord());
+		TestEqual(TEXT("UVScale100 menu label"), Scale100->GetLabel().ToString(), FString(TEXT("Set UV Tiling 100x100")));
+		const FInputChord Chord100 = Scale100->GetDefaultChord(EMultipleKeyBindingIndex::Primary);
+		TestTrue(TEXT("UVScale100 default chord"), Chord100.IsValidChord());
+		TestEqual(TEXT("UVScale100 default key"), Chord100.Key, EKeys::One);
+		TestTrue(TEXT("UVScale100 default Ctrl"), Chord100.NeedsControl());
+		TestTrue(TEXT("UVScale100 default Alt"), Chord100.NeedsAlt());
+		TestFalse(TEXT("UVScale100 default Shift"), Chord100.NeedsShift());
 	}
 	if (Scale500.IsValid())
 	{
-		TestFalse(
-			TEXT("UVScale500 has no default chord"),
-			Scale500->GetDefaultChord(EMultipleKeyBindingIndex::Primary).IsValidChord());
+		TestEqual(TEXT("UVScale500 menu label"), Scale500->GetLabel().ToString(), FString(TEXT("Set UV Tiling 500x500")));
+		const FInputChord Chord500 = Scale500->GetDefaultChord(EMultipleKeyBindingIndex::Primary);
+		TestTrue(TEXT("UVScale500 default chord"), Chord500.IsValidChord());
+		TestEqual(TEXT("UVScale500 default key"), Chord500.Key, EKeys::Five);
+		TestTrue(TEXT("UVScale500 default Ctrl"), Chord500.NeedsControl());
+		TestTrue(TEXT("UVScale500 default Alt"), Chord500.NeedsAlt());
+		TestFalse(TEXT("UVScale500 default Shift"), Chord500.NeedsShift());
 	}
 
 	UToolMenus* Menus = UToolMenus::Get();
@@ -373,6 +385,78 @@ bool FPBRTextureLabCommandAssetSelection::RunTest(const FString& Parameters)
 		static_cast<int32>(ExecuteUVCommand(Request, Selection, &Error)),
 		static_cast<int32>(EPBRUVCommandStatus::Success));
 	TestEqual(TEXT("Asset UV is 100x"), ReadFirstUv0X(Mesh), BaselineX * 100.0f);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(
+	FPBRTextureLabCommandAssignMaterial,
+	"PBRTextureLab.Command.AssignMaterial",
+	CommandTestFlags)
+
+bool FPBRTextureLabCommandAssignMaterial::RunTest(const FString& Parameters)
+{
+	using namespace PBRTextureLab;
+	UWorld* World = CommandEditorWorld();
+	TestNotNull(TEXT("Editor world"), World);
+	UMaterialInterface* Material = UMaterial::GetDefaultMaterial(MD_Surface);
+	TestNotNull(TEXT("Default material"), Material);
+	if (!World || !GEditor || !Material)
+	{
+		return false;
+	}
+
+	UStaticMesh* Mesh = CreateSavedCommandMesh(CommandPersistName(TEXT("Asg")));
+	AStaticMeshActor* SelectedActor = SpawnCommandMeshActor(World, Mesh, FVector(0.0f, 0.0f, 300.0f));
+	AStaticMeshActor* OtherActor = SpawnCommandMeshActor(World, Mesh, FVector(200.0f, 0.0f, 300.0f));
+	TestNotNull(TEXT("Selected actor"), SelectedActor);
+	TestNotNull(TEXT("Unselected actor"), OtherActor);
+	if (!SelectedActor || !OtherActor)
+	{
+		return false;
+	}
+
+	UStaticMeshComponent* SelectedComponent = SelectedActor->GetStaticMeshComponent();
+	UStaticMeshComponent* OtherComponent = OtherActor->GetStaticMeshComponent();
+	TestNotNull(TEXT("Selected component"), SelectedComponent);
+	TestNotNull(TEXT("Unselected component"), OtherComponent);
+	if (!SelectedComponent || !OtherComponent)
+	{
+		return false;
+	}
+
+	UMaterialInterface* OtherBefore = OtherComponent->GetMaterial(0);
+	FString Error;
+	SelectOnly(nullptr);
+	AddExpectedMessagePlain(
+		TEXT("empty selection"),
+		ELogVerbosity::Warning,
+		EAutomationExpectedMessageFlags::Contains,
+		1);
+	TestEqual(
+		TEXT("Empty assign"),
+		static_cast<int32>(AssignMaterialToSelection(Material, &Error)),
+		static_cast<int32>(EPBRAssignMaterialStatus::EmptySelection));
+
+	AddExpectedMessagePlain(
+		TEXT("no generated material"),
+		ELogVerbosity::Error,
+		EAutomationExpectedMessageFlags::Contains,
+		1);
+	TestEqual(
+		TEXT("Null material"),
+		static_cast<int32>(AssignMaterialToSelection(nullptr, &Error)),
+		static_cast<int32>(EPBRAssignMaterialStatus::NoMaterial));
+
+	SelectOnly(SelectedActor);
+	TestEqual(
+		TEXT("Assign selected"),
+		static_cast<int32>(AssignMaterialToSelection(Material, &Error)),
+		static_cast<int32>(EPBRAssignMaterialStatus::Success));
+	TestTrue(TEXT("Selected got material"), SelectedComponent->GetMaterial(0) == Material);
+	TestTrue(TEXT("Unselected unchanged"), OtherComponent->GetMaterial(0) == OtherBefore);
+
+	World->DestroyActor(SelectedActor);
+	World->DestroyActor(OtherActor);
 	return true;
 }
 

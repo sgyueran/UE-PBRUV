@@ -21,6 +21,9 @@ PBRTextureLabHost/Saved/
 PBRTextureLabHost/.vs/
 PBRTextureLabHost/*.sln
 PBRTextureLabHost/Content/PBRTextureLab/
-PBRTextureLabHost/Plugins/PBRTextureLab/Content/
+PBRTextureLabHost/Content/NEW/
+PBRTextureLabHost/Plugins/PBRTextureLab/Content/*
+!PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/
+!PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/**
 __pycache__/
 *.pyc

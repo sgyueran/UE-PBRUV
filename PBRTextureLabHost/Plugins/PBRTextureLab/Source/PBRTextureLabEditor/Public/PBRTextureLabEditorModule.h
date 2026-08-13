@@ -17,6 +17,7 @@ private:
 	void RegisterMenus();
 	void BindCommands();
 	TSharedRef<SDockTab> SpawnNomadTab(const FSpawnTabArgs& Args);
+	TSharedRef<SDockTab> SpawnAssetBrowserTab(const FSpawnTabArgs& Args);
 
 	TSharedPtr<FUICommandList> CommandList;
 };

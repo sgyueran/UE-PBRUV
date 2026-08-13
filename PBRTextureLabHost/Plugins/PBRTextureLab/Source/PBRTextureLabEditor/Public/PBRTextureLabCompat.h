@@ -22,15 +22,27 @@
 #define PBRTEXTURELAB_HAS_MIC_PARAMETER_COLLECTION_EDITORONLY 0
 #endif
 
-// Names shown in the Material Instance parameter panel.
-#define PBRTEXTURELAB_PARAM_BaseColorTexture TEXT("基础颜色")
-#define PBRTEXTURELAB_PARAM_NormalTexture TEXT("法线")
-#define PBRTEXTURELAB_PARAM_ORMTexture TEXT("ORM")
-#define PBRTEXTURELAB_PARAM_HeightTexture TEXT("高度")
+// Fallback titles when no user parent is selected. Match 000基础材质 custom parameter names.
+#define PBRTEXTURELAB_PARAM_BaseColorTexture TEXT("基础贴图")
+#define PBRTEXTURELAB_PARAM_NormalTexture TEXT("法线贴图")
+#define PBRTEXTURELAB_PARAM_RoughnessTexture TEXT("粗糙贴图")
+#define PBRTEXTURELAB_PARAM_MetallicTexture TEXT("金属贴图")
+#define PBRTEXTURELAB_PARAM_AOTexture TEXT("AO")
+#define PBRTEXTURELAB_PARAM_HeightTexture TEXT("置换贴图")
 #define PBRTEXTURELAB_PARAM_NormalStrength TEXT("法线强度")
-#define PBRTEXTURELAB_PARAM_HeightAmount TEXT("高度强度")
+#define PBRTEXTURELAB_PARAM_HeightAmount TEXT("置换强度")
 #define PBRTEXTURELAB_PARAM_UVScale TEXT("UV缩放")
+#define PBRTEXTURELAB_PARAM_BaseColor TEXT("基础色")
+#define PBRTEXTURELAB_PARAM_Roughness TEXT("粗糙度")
+#define PBRTEXTURELAB_PARAM_Specular TEXT("高光度")
+#define PBRTEXTURELAB_PARAM_Metallic TEXT("金属度")
 #define PBRTEXTURELAB_PARAM_GROUP TEXT("PBR贴图实验室")
+#define PBRTEXTURELAB_GROUP_Base TEXT("1基础贴图参数")
+#define PBRTEXTURELAB_GROUP_Normal TEXT("2法线参数")
+#define PBRTEXTURELAB_GROUP_Specular TEXT("3高光贴图参数")
+#define PBRTEXTURELAB_GROUP_Rough TEXT("4粗糙贴图参数")
+#define PBRTEXTURELAB_GROUP_Metal TEXT("5金属度")
+#define PBRTEXTURELAB_GROUP_UV TEXT("整体UV")
 
 #define PBRTEXTURELAB_UV_CHANNEL_INDEX 0
 #define PBRTEXTURELAB_UV_PRESET_100 100

@@ -4,6 +4,7 @@
 #include "PBRTextureLabPixelCore.h"
 #include "PBRTextureLabUVPresetData.h"
 
+#include "Components/StaticMeshComponent.h"
 #include "Editor.h"
 #include "Engine/StaticMesh.h"
 #include "FileHelpers.h"
@@ -12,6 +13,7 @@
 #include "ScopedTransaction.h"
 #include "StaticMeshAttributes.h"
 #include "UObject/Package.h"
+#include "UObject/UObjectIterator.h"
 
 namespace PBRTextureLab
 {
@@ -158,7 +160,7 @@ namespace PBRTextureLab
 				return false;
 			}
 
-			const float ScaleValue = static_cast<float>(Scale);
+			const FVector2f Tiling(static_cast<float>(Scale), static_cast<float>(Scale));
 			int32 Index = 0;
 			for (const FVertexInstanceID VertexInstanceID : MeshDescription.VertexInstances().GetElementIDs())
 			{
@@ -169,7 +171,7 @@ namespace PBRTextureLab
 				UVs.Set(
 					VertexInstanceID,
 					PBRTEXTURELAB_UV_CHANNEL_INDEX,
-					FVector2f(BaselineUVs[Index].X * ScaleValue, BaselineUVs[Index].Y * ScaleValue));
+					BaselineUVs[Index] * Tiling);
 				++Index;
 			}
 			return Index == BaselineUVs.Num();
@@ -226,9 +228,13 @@ namespace PBRTextureLab
 			return true;
 		}
 
-		bool CaptureAllLods(UStaticMesh* Mesh, TArray<FPBRTextureLabUVLodRecord>& OutRecords, FString* OutError)
+		bool CollectTargetLodIndices(
+			UStaticMesh* Mesh,
+			const bool bApplyOtherLods,
+			TArray<int32>& OutLodIndices,
+			FString* OutError)
 		{
-			OutRecords.Reset();
+			OutLodIndices.Reset();
 			const int32 LodCount = GetStaticMeshSourceModelCount(Mesh);
 			if (LodCount <= 0)
 			{
@@ -236,26 +242,124 @@ namespace PBRTextureLab
 				return false;
 			}
 
-			int32 EditableLods = 0;
-			for (int32 LodIndex = 0; LodIndex < LodCount; ++LodIndex)
+			auto TryAddLod = [Mesh, &OutLodIndices](const int32 LodIndex)
 			{
-				if (!IsStaticMeshDescriptionValid(Mesh, LodIndex))
+				if (IsStaticMeshDescriptionValid(Mesh, LodIndex))
 				{
-					continue;
+					OutLodIndices.AddUnique(LodIndex);
 				}
+			};
+
+			TryAddLod(0);
+			if (bApplyOtherLods)
+			{
+				for (int32 LodIndex = 1; LodIndex < LodCount; ++LodIndex)
+				{
+					TryAddLod(LodIndex);
+				}
+			}
+
+			if (OutLodIndices.Num() == 0)
+			{
+				UvSetError(
+					OutError,
+					bApplyOtherLods
+						? TEXT("Static Mesh has no editable source LODs.")
+						: TEXT("LOD0 has no editable mesh description."));
+				return false;
+			}
+			return true;
+		}
+
+		const FPBRTextureLabUVLodRecord* FindLodRecord(
+			const TArray<FPBRTextureLabUVLodRecord>& Records,
+			const int32 LodIndex)
+		{
+			return Records.FindByPredicate([LodIndex](const FPBRTextureLabUVLodRecord& Record)
+			{
+				return Record.LodIndex == LodIndex;
+			});
+		}
+
+		void MergeLodRecords(TArray<FPBRTextureLabUVLodRecord>& Dest, const TArray<FPBRTextureLabUVLodRecord>& Src)
+		{
+			for (const FPBRTextureLabUVLodRecord& Record : Src)
+			{
+				if (FPBRTextureLabUVLodRecord* Existing = Dest.FindByPredicate([&Record](const FPBRTextureLabUVLodRecord& Candidate)
+				{
+					return Candidate.LodIndex == Record.LodIndex;
+				}))
+				{
+					*Existing = Record;
+				}
+				else
+				{
+					Dest.Add(Record);
+				}
+			}
+		}
+
+		bool CaptureAllLods(UStaticMesh* Mesh, TArray<FPBRTextureLabUVLodRecord>& OutRecords, FString* OutError)
+		{
+			TArray<int32> LodIndices;
+			if (!CollectTargetLodIndices(Mesh, true, LodIndices, OutError))
+			{
+				return false;
+			}
+
+			OutRecords.Reset();
+			for (const int32 LodIndex : LodIndices)
+			{
 				FPBRTextureLabUVLodRecord Record;
 				if (!CaptureLodRecord(Mesh, LodIndex, Record, OutError))
 				{
 					return false;
 				}
 				OutRecords.Add(MoveTemp(Record));
-				++EditableLods;
 			}
+			return true;
+		}
 
-			if (EditableLods == 0)
+		bool CurrentMatchesRecord(
+			UStaticMesh* Mesh,
+			const FPBRTextureLabUVLodRecord& Record,
+			const int32 AppliedScale,
+			FString* OutError);
+
+		bool ResolveTargetLodRecords(
+			UStaticMesh* Mesh,
+			const TArray<int32>& LodIndices,
+			const UPBRTextureLabUVPresetData* Existing,
+			const bool bRebaseline,
+			TArray<FPBRTextureLabUVLodRecord>& OutRecords,
+			bool& bOutBaselineMismatch,
+			FString* OutError)
+		{
+			bOutBaselineMismatch = false;
+			OutRecords.Reset();
+			for (const int32 LodIndex : LodIndices)
 			{
-				UvSetError(OutError, TEXT("Static Mesh has no editable source LODs."));
-				return false;
+				const FPBRTextureLabUVLodRecord* ExistingRecord =
+					(!bRebaseline && Existing && Existing->AppliedScale > 0)
+						? FindLodRecord(Existing->Lods, LodIndex)
+						: nullptr;
+				if (ExistingRecord)
+				{
+					if (!CurrentMatchesRecord(Mesh, *ExistingRecord, Existing->AppliedScale, OutError))
+					{
+						bOutBaselineMismatch = true;
+						return false;
+					}
+					OutRecords.Add(*ExistingRecord);
+					continue;
+				}
+
+				FPBRTextureLabUVLodRecord Record;
+				if (!CaptureLodRecord(Mesh, LodIndex, Record, OutError))
+				{
+					return false;
+				}
+				OutRecords.Add(MoveTemp(Record));
 			}
 			return true;
 		}
@@ -362,8 +466,9 @@ namespace PBRTextureLab
 
 			if (GetLightMapUVChannel(Mesh) == PBRTEXTURELAB_UV_CHANNEL_INDEX)
 			{
-				UvSetWarning(OutError, TEXT("Refusing to modify UV0 because it is the Lightmap UV channel."));
-				return false;
+				UvSetWarning(
+					OutError,
+					TEXT("Lightmap coordinate index is UV0; scaling UV0 anyway. Rebuild lighting if this mesh is used for baked lightmaps."));
 			}
 			return true;
 		}
@@ -437,45 +542,67 @@ namespace PBRTextureLab
 			return EPBRUVStatus::Unsupported;
 		}
 
-		TArray<FPBRTextureLabUVLodRecord> Records;
-		UPBRTextureLabUVPresetData* Existing = FindUvData(Mesh);
-		if (Request.bRebaseline || !Existing || Existing->AppliedScale <= 0 || Existing->Lods.Num() == 0)
+		TArray<int32> TargetLods;
+		if (!CollectTargetLodIndices(Mesh, Request.bApplyOtherLods, TargetLods, OutError))
 		{
-			if (!CaptureAllLods(Mesh, Records, OutError))
-			{
-				return EPBRUVStatus::Unsupported;
-			}
-		}
-		else
-		{
-			for (const FPBRTextureLabUVLodRecord& Record : Existing->Lods)
-			{
-				if (!CurrentMatchesRecord(Mesh, Record, Existing->AppliedScale, OutError))
-				{
-					return EPBRUVStatus::BaselineMismatch;
-				}
-			}
-			Records = Existing->Lods;
+			return EPBRUVStatus::Unsupported;
 		}
 
-		FScopedTransaction Transaction(NSLOCTEXT("PBRTextureLab", "ApplyUVPreset", "PBR Texture Lab UV Preset"), Request.bTransact);
+		TArray<FPBRTextureLabUVLodRecord> Records;
+		bool bBaselineMismatch = false;
+		UPBRTextureLabUVPresetData* Existing = FindUvData(Mesh);
+		if (!ResolveTargetLodRecords(
+			Mesh,
+			TargetLods,
+			Existing,
+			Request.bRebaseline,
+			Records,
+			bBaselineMismatch,
+			OutError))
+		{
+			return bBaselineMismatch ? EPBRUVStatus::BaselineMismatch : EPBRUVStatus::Unsupported;
+		}
+
+		FScopedTransaction Transaction(NSLOCTEXT("PBRTextureLab", "ApplyUVPreset", "Set UV Tiling"), Request.bTransact);
 		Mesh->Modify();
 		UPBRTextureLabUVPresetData* Data = GetOrCreateUvData(Mesh);
 		Data->Modify();
-		Data->Lods = Records;
-		if (!WriteAllLods(Mesh, Data->Lods, Scale, OutError))
+		MergeLodRecords(Data->Lods, Records);
+		if (!WriteAllLods(Mesh, Records, Scale, OutError))
 		{
 			return EPBRUVStatus::Failed;
 		}
 		Data->AppliedScale = Scale;
 		Mesh->MarkPackageDirty();
+		if (!GIsAutomationTesting && !UE::GetIsEditorLoadingPackage())
+		{
+			UStaticMesh::FBuildParameters BuildParameters;
+			BuildParameters.bInSilent = true;
+			BuildParameters.bInRebuildUVChannelData = true;
+			Mesh->Build(BuildParameters);
+			for (TObjectIterator<UStaticMeshComponent> It; It; ++It)
+			{
+				UStaticMeshComponent* Component = *It;
+				if (IsValid(Component) && Component->GetStaticMesh() == Mesh)
+				{
+					Component->MarkRenderStateDirty();
+				}
+			}
+		}
 
 		if (!SaveMeshIfRequested(Mesh, Request.bSave, OutError))
 		{
 			return EPBRUVStatus::Failed;
 		}
 
-		UE_LOG(LogPBRTextureLab, Log, TEXT("Applied absolute UV0 %dx to %s"), Scale, *Mesh->GetPathName());
+		UE_LOG(
+			LogPBRTextureLab,
+			Log,
+			TEXT("Set UV0 tiling %dx%d on %s (LOD0%s)"),
+			Scale,
+			Scale,
+			*Mesh->GetPathName(),
+			Request.bApplyOtherLods ? TEXT(" + other LODs") : TEXT(" only"));
 		return EPBRUVStatus::Success;
 	}
 }

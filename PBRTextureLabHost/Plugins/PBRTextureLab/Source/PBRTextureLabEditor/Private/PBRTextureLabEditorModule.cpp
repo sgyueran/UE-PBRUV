@@ -2,8 +2,10 @@
 #include "PBRTextureLabCommand.h"
 #include "PBRTextureLabCommands.h"
 #include "PBRTextureLabCompat.h"
+#include "PBRTextureLabAssetBrowser.h"
 #include "PBRTextureLabNomad.h"
 #include "PBRTextureLabPixelCore.h"
+#include "SPBRTextureLabAssetBrowser.h"
 #include "SPBRTextureLabNomad.h"
 
 #include "Framework/Application/SlateApplication.h"
@@ -37,6 +39,13 @@ void FPBRTextureLabEditorModule::StartupModule()
 		.SetTooltipText(LOCTEXT("NomadTabTip", "Generate Metallic/Roughness maps from a Texture2D or local image and apply UV scale presets."))
 		.SetGroup(WorkspaceMenu::GetMenuStructure().GetToolsCategory())
 		.SetIcon(FSlateIcon(FAppStyle::GetAppStyleSetName(), TEXT("ClassIcon.Texture2D")));
+	FGlobalTabmanager::Get()->RegisterNomadTabSpawner(
+		PBRTextureLabAssetBrowser::GetTabId(),
+		FOnSpawnTab::CreateRaw(this, &FPBRTextureLabEditorModule::SpawnAssetBrowserTab))
+		.SetDisplayName(LOCTEXT("AssetBrowserTabTitle", "PBR Asset Browser"))
+		.SetTooltipText(LOCTEXT("AssetBrowserTabTip", "Browse Blueprints, interfaces, materials, models and other common assets."))
+		.SetGroup(WorkspaceMenu::GetMenuStructure().GetToolsCategory())
+		.SetIcon(FSlateIcon(FAppStyle::GetAppStyleSetName(), TEXT("ClassIcon.StaticMesh")));
 	UToolMenus::RegisterStartupCallback(
 		FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &FPBRTextureLabEditorModule::RegisterMenus));
 }
@@ -48,6 +57,7 @@ void FPBRTextureLabEditorModule::ShutdownModule()
 	if (FSlateApplication::IsInitialized())
 	{
 		FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(PBRTextureLab::GetNomadTabId());
+		FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(PBRTextureLabAssetBrowser::GetTabId());
 	}
 	FPBRTextureLabCommands::Unregister();
 	CommandList.Reset();
@@ -64,6 +74,17 @@ TSharedRef<SDockTab> FPBRTextureLabEditorModule::SpawnNomadTab(const FSpawnTabAr
 		];
 }
 
+TSharedRef<SDockTab> FPBRTextureLabEditorModule::SpawnAssetBrowserTab(const FSpawnTabArgs& Args)
+{
+	(void)Args;
+	return SNew(SDockTab)
+		.TabRole(ETabRole::NomadTab)
+		.Label(LOCTEXT("AssetBrowserTabTitle", "PBR Asset Browser"))
+		[
+			SNew(SPBRTextureLabAssetBrowser)
+		];
+}
+
 void FPBRTextureLabEditorModule::BindCommands()
 {
 	CommandList = MakeShared<FUICommandList>();
@@ -77,6 +98,9 @@ void FPBRTextureLabEditorModule::BindCommands()
 	CommandList->MapAction(
 		Commands.OpenNomadTab,
 		FExecuteAction::CreateStatic(&PBRTextureLab::InvokeNomadTab));
+	CommandList->MapAction(
+		Commands.OpenAssetBrowserTab,
+		FExecuteAction::CreateStatic(&PBRTextureLabAssetBrowser::InvokeTab));
 
 	FLevelEditorModule& LevelEditor = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
 	LevelEditor.GetGlobalLevelEditorActions()->Append(CommandList.ToSharedRef());
@@ -96,6 +120,7 @@ void FPBRTextureLabEditorModule::RegisterMenus()
 		Section.AddMenuEntryWithCommandList(Commands.UVScale100, CommandList, TAttribute<FText>(), TAttribute<FText>(), Icon);
 		Section.AddMenuEntryWithCommandList(Commands.UVScale500, CommandList, TAttribute<FText>(), TAttribute<FText>(), Icon);
 		Section.AddMenuEntryWithCommandList(Commands.OpenNomadTab, CommandList);
+		Section.AddMenuEntryWithCommandList(Commands.OpenAssetBrowserTab, CommandList);
 	}
 
 	if (UToolMenu* Toolbar = UToolMenus::Get()->ExtendMenu("LevelEditor.LevelEditorToolBar.User"))
@@ -104,6 +129,7 @@ void FPBRTextureLabEditorModule::RegisterMenus()
 		Section.AddMenuEntryWithCommandList(Commands.UVScale100, CommandList, TAttribute<FText>(), TAttribute<FText>(), Icon);
 		Section.AddMenuEntryWithCommandList(Commands.UVScale500, CommandList, TAttribute<FText>(), TAttribute<FText>(), Icon);
 		Section.AddMenuEntryWithCommandList(Commands.OpenNomadTab, CommandList);
+		Section.AddMenuEntryWithCommandList(Commands.OpenAssetBrowserTab, CommandList);
 	}
 
 	if (UToolMenu* AssetMenu = UToolMenus::Get()->ExtendMenu("ContentBrowser.AssetContextMenu"))
@@ -113,6 +139,7 @@ void FPBRTextureLabEditorModule::RegisterMenus()
 			LOCTEXT("AssetSection", "PBR Texture Lab"));
 		Section.AddMenuEntryWithCommandList(Commands.UVScale100, CommandList, TAttribute<FText>(), TAttribute<FText>(), Icon);
 		Section.AddMenuEntryWithCommandList(Commands.UVScale500, CommandList, TAttribute<FText>(), TAttribute<FText>(), Icon);
+		Section.AddMenuEntryWithCommandList(Commands.OpenAssetBrowserTab, CommandList);
 	}
 }
 

@@ -33,6 +33,8 @@ namespace PBRTextureLab
 		bool bRebaseline = false;
 		bool bSave = false;
 		bool bTransact = true;
+		/** Default: LOD0 only. When true, also scale other editable source LODs. */
+		bool bApplyOtherLods = false;
 	};
 
 	int32 GetAppliedUVScale(const UStaticMesh* Mesh);

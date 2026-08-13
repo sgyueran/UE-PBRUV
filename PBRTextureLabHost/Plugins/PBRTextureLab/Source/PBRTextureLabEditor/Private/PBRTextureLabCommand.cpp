@@ -10,6 +10,8 @@
 #include "Engine/StaticMesh.h"
 #include "Engine/StaticMeshActor.h"
 #include "GameFramework/Actor.h"
+#include "IContentBrowserSingleton.h"
+#include "Materials/MaterialInterface.h"
 #include "Misc/App.h"
 #include "Misc/MessageDialog.h"
 #include "Misc/PackageName.h"
@@ -98,17 +100,22 @@ namespace PBRTextureLab
 		FText MakePromptText(const FPBRUVSelection& Selection, const EPBRUVPreset Preset)
 		{
 			const int32 Scale = static_cast<int32>(Preset);
-			FString Body = FString::Printf(TEXT("Apply absolute UV0 %dx?\n\n"), Scale);
-			Body += TEXT("Yes: Duplicate the mesh and rebind only the selected component(s).\n");
-			Body += TEXT("No: Modify the source asset. Shared component count:\n");
+			FString Body = FString::Printf(
+				TEXT("把选中 Static Mesh 的 UV0 设为 %d×%d 平铺？\nNewUV = OldUV * (%d, %d)\n默认只改 LOD0，不展开、不重新切缝、不 Pack。\n\n"),
+				Scale,
+				Scale,
+				Scale,
+				Scale);
+			Body += TEXT("是：复制网格，只重绑当前选中的组件。\n");
+			Body += TEXT("否：直接改源资产。当前共享使用数量：\n");
 			for (const FPBRUVSelectionItem& Item : Selection.Items)
 			{
 				Body += FString::Printf(
-					TEXT("  %s -> %d component(s)\n"),
+					TEXT("  %s -> %d 个组件\n"),
 					*Item.Mesh->GetName(),
 					CountStaticMeshComponentUsers(Item.Mesh));
 			}
-			Body += TEXT("\nCancel: Do nothing.");
+			Body += TEXT("\n取消：不做任何修改。");
 			return FText::FromString(Body);
 		}
 
@@ -171,12 +178,19 @@ namespace PBRTextureLab
 			UStaticMesh* Mesh,
 			const EPBRUVPreset Preset,
 			const bool bSave,
+			const bool bApplyOtherLods,
 			FString* OutError)
 		{
 			FPBRUVScaleRequest ScaleRequest;
 			ScaleRequest.bSave = bSave;
 			ScaleRequest.bTransact = false;
-			const EPBRUVStatus Status = ApplyUVPreset(Mesh, Preset, ScaleRequest, OutError);
+			ScaleRequest.bApplyOtherLods = bApplyOtherLods;
+			EPBRUVStatus Status = ApplyUVPreset(Mesh, Preset, ScaleRequest, OutError);
+			if (Status == EPBRUVStatus::BaselineMismatch)
+			{
+				ScaleRequest.bRebaseline = true;
+				Status = ApplyUVPreset(Mesh, Preset, ScaleRequest, OutError);
+			}
 			switch (Status)
 			{
 			case EPBRUVStatus::Success:
@@ -366,7 +380,7 @@ namespace PBRTextureLab
 					return EPBRUVCommandStatus::Failed;
 				}
 
-				const EPBRUVCommandStatus ApplyStatus = ApplyToMesh(Copy, Request.Preset, Request.bSave, OutError);
+				const EPBRUVCommandStatus ApplyStatus = ApplyToMesh(Copy, Request.Preset, Request.bSave, Request.bApplyOtherLods, OutError);
 				if (ApplyStatus != EPBRUVCommandStatus::Success)
 				{
 					return ApplyStatus;
@@ -403,7 +417,7 @@ namespace PBRTextureLab
 					TEXT("Modifying source %s used by %d component(s)."),
 					*Item.Mesh->GetPathName(),
 					Shared);
-				const EPBRUVCommandStatus ApplyStatus = ApplyToMesh(Item.Mesh, Request.Preset, Request.bSave, OutError);
+				const EPBRUVCommandStatus ApplyStatus = ApplyToMesh(Item.Mesh, Request.Preset, Request.bSave, Request.bApplyOtherLods, OutError);
 				if (ApplyStatus != EPBRUVCommandStatus::Success)
 				{
 					return ApplyStatus;
@@ -421,5 +435,107 @@ namespace PBRTextureLab
 		Request.EditChoice = EPBRUVEditChoice::Prompt;
 		FString Error;
 		ExecuteUVCommand(Request, &Error);
+	}
+
+	void SyncContentBrowserToGeneratedFolder(const FString& FolderPath, UObject* HighlightAsset)
+	{
+		if (!IsInGameThread())
+		{
+			return;
+		}
+
+		IContentBrowserSingleton& Browser = IContentBrowserSingleton::Get();
+
+		FString Folder = FolderPath;
+		Folder.ReplaceInline(TEXT("\\"), TEXT("/"));
+		while (Folder.Len() > 1 && Folder.EndsWith(TEXT("/")))
+		{
+			Folder.LeftChopInline(1);
+		}
+		if (!Folder.IsEmpty())
+		{
+			TArray<FString> Folders;
+			Folders.Add(Folder);
+			Browser.SyncBrowserToFolders(Folders, false, true);
+		}
+
+		if (HighlightAsset)
+		{
+			TArray<UObject*> Assets;
+			Assets.Add(HighlightAsset);
+			Browser.SyncBrowserToAssets(Assets, false, true);
+		}
+	}
+
+	EPBRAssignMaterialStatus AssignMaterialToSelection(UMaterialInterface* Material, FString* OutError)
+	{
+		if (!CommandIsGameThread(OutError))
+		{
+			return EPBRAssignMaterialStatus::Failed;
+		}
+
+		if (!IsValid(Material))
+		{
+			CommandSetError(OutError, TEXT("PBRTextureLab assign material: no generated material."));
+			return EPBRAssignMaterialStatus::NoMaterial;
+		}
+
+		const FPBRUVSelection Selection = GatherUVSelection();
+		if (Selection.Items.Num() == 0 && Selection.ConsideredCount == 0)
+		{
+			CommandSetWarning(OutError, TEXT("PBRTextureLab assign material: empty selection."));
+			return EPBRAssignMaterialStatus::EmptySelection;
+		}
+		if (Selection.Items.Num() == 0)
+		{
+			CommandSetWarning(OutError, TEXT("PBRTextureLab assign material: selection is not a Static Mesh."));
+			return EPBRAssignMaterialStatus::Unsupported;
+		}
+
+		FScopedTransaction Transaction(NSLOCTEXT("PBRTextureLab", "AssignMaterial", "Assign PBR Texture Lab Material"));
+		int32 Assigned = 0;
+		for (const FPBRUVSelectionItem& Item : Selection.Items)
+		{
+			if (Item.SelectedComponents.Num() > 0)
+			{
+				for (UStaticMeshComponent* Component : Item.SelectedComponents)
+				{
+					if (!IsValid(Component))
+					{
+						continue;
+					}
+					Component->Modify();
+					if (AActor* Owner = Component->GetOwner())
+					{
+						Owner->Modify();
+					}
+					Component->SetMaterial(0, Material);
+					++Assigned;
+				}
+				continue;
+			}
+
+			if (!IsValid(Item.Mesh))
+			{
+				continue;
+			}
+			Item.Mesh->Modify();
+			Item.Mesh->SetMaterial(0, Material);
+			++Assigned;
+		}
+
+		if (Assigned == 0)
+		{
+			CommandSetError(OutError, TEXT("PBRTextureLab assign material: nothing was assigned."));
+			return EPBRAssignMaterialStatus::Failed;
+		}
+
+		UE_LOG(
+			LogPBRTextureLab,
+			Log,
+			TEXT("Assigned %s to %d selected Static Mesh target(s)."),
+			*Material->GetPathName(),
+			Assigned);
+		return EPBRAssignMaterialStatus::Success;
 	}
 }

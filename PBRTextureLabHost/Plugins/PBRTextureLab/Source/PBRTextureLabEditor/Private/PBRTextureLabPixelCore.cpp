@@ -40,11 +40,23 @@ namespace PBRTextureLab
 			Image.Pixels.SetNumUninitialized(Width * Height);
 		}
 
-		float SampleClamp(const TArray<float>& Buffer, const int32 Width, const int32 Height, int32 X, int32 Y)
+		int32 WrapIndex(int32 Value, const int32 Size)
 		{
-			X = FMath::Clamp(X, 0, Width - 1);
-			Y = FMath::Clamp(Y, 0, Height - 1);
-			return Buffer[Y * Width + X];
+			if (Size <= 0)
+			{
+				return 0;
+			}
+			Value %= Size;
+			if (Value < 0)
+			{
+				Value += Size;
+			}
+			return Value;
+		}
+
+		float SampleWrap(const TArray<float>& Buffer, const int32 Width, const int32 Height, const int32 X, const int32 Y)
+		{
+			return Buffer[WrapIndex(Y, Height) * Width + WrapIndex(X, Width)];
 		}
 
 		void BoxBlur(TArray<float>& InOut, const int32 Width, const int32 Height, const int32 Radius)
@@ -56,37 +68,31 @@ namespace PBRTextureLab
 
 			TArray<float> Temp;
 			Temp.SetNumUninitialized(Width * Height);
-
-			TArray<float> Prefix;
-			Prefix.SetNumUninitialized(FMath::Max(Width, Height) + 1);
+			const float Window = static_cast<float>(Radius * 2 + 1);
 
 			for (int32 Y = 0; Y < Height; ++Y)
 			{
-				Prefix[0] = 0.0f;
 				for (int32 X = 0; X < Width; ++X)
 				{
-					Prefix[X + 1] = Prefix[X] + InOut[Y * Width + X];
-				}
-				for (int32 X = 0; X < Width; ++X)
-				{
-					const int32 Left = FMath::Max(X - Radius, 0);
-					const int32 RightExclusive = FMath::Min(X + Radius + 1, Width);
-					Temp[Y * Width + X] = (Prefix[RightExclusive] - Prefix[Left]) / static_cast<float>(RightExclusive - Left);
+					float Sum = 0.0f;
+					for (int32 Offset = -Radius; Offset <= Radius; ++Offset)
+					{
+						Sum += InOut[Y * Width + WrapIndex(X + Offset, Width)];
+					}
+					Temp[Y * Width + X] = Sum / Window;
 				}
 			}
 
 			for (int32 X = 0; X < Width; ++X)
 			{
-				Prefix[0] = 0.0f;
 				for (int32 Y = 0; Y < Height; ++Y)
 				{
-					Prefix[Y + 1] = Prefix[Y] + Temp[Y * Width + X];
-				}
-				for (int32 Y = 0; Y < Height; ++Y)
-				{
-					const int32 Top = FMath::Max(Y - Radius, 0);
-					const int32 BottomExclusive = FMath::Min(Y + Radius + 1, Height);
-					InOut[Y * Width + X] = (Prefix[BottomExclusive] - Prefix[Top]) / static_cast<float>(BottomExclusive - Top);
+					float Sum = 0.0f;
+					for (int32 Offset = -Radius; Offset <= Radius; ++Offset)
+					{
+						Sum += Temp[WrapIndex(Y + Offset, Height) * Width + X];
+					}
+					InOut[Y * Width + X] = Sum / Window;
 				}
 			}
 		}
@@ -100,14 +106,14 @@ namespace PBRTextureLab
 			float& OutDx,
 			float& OutDy)
 		{
-			const float Tl = SampleClamp(Height, Width, HeightPixels, X - 1, Y - 1);
-			const float Tc = SampleClamp(Height, Width, HeightPixels, X, Y - 1);
-			const float Tr = SampleClamp(Height, Width, HeightPixels, X + 1, Y - 1);
-			const float Ml = SampleClamp(Height, Width, HeightPixels, X - 1, Y);
-			const float Mr = SampleClamp(Height, Width, HeightPixels, X + 1, Y);
-			const float Bl = SampleClamp(Height, Width, HeightPixels, X - 1, Y + 1);
-			const float Bc = SampleClamp(Height, Width, HeightPixels, X, Y + 1);
-			const float Br = SampleClamp(Height, Width, HeightPixels, X + 1, Y + 1);
+			const float Tl = SampleWrap(Height, Width, HeightPixels, X - 1, Y - 1);
+			const float Tc = SampleWrap(Height, Width, HeightPixels, X, Y - 1);
+			const float Tr = SampleWrap(Height, Width, HeightPixels, X + 1, Y - 1);
+			const float Ml = SampleWrap(Height, Width, HeightPixels, X - 1, Y);
+			const float Mr = SampleWrap(Height, Width, HeightPixels, X + 1, Y);
+			const float Bl = SampleWrap(Height, Width, HeightPixels, X - 1, Y + 1);
+			const float Bc = SampleWrap(Height, Width, HeightPixels, X, Y + 1);
+			const float Br = SampleWrap(Height, Width, HeightPixels, X + 1, Y + 1);
 
 			OutDx = -Tl + Tr - 2.0f * Ml + 2.0f * Mr - Bl + Br;
 			OutDy = -Tl - 2.0f * Tc - Tr + Bl + 2.0f * Bc + Br;
@@ -117,7 +123,7 @@ namespace PBRTextureLab
 		{
 			static constexpr int32 Scales[] = {1, 2, 4};
 			static constexpr float Weights[] = {0.50f, 0.35f, 0.15f};
-			const float Center = SampleClamp(Height, Width, HeightPixels, X, Y);
+			const float Center = SampleWrap(Height, Width, HeightPixels, X, Y);
 
 			float Occlusion = 0.0f;
 			for (int32 ScaleIndex = 0; ScaleIndex < UE_ARRAY_COUNT(Scales); ++ScaleIndex)
@@ -133,7 +139,7 @@ namespace PBRTextureLab
 						{
 							continue;
 						}
-						Sum += SampleClamp(Height, Width, HeightPixels, X + OffsetX, Y + OffsetY);
+						Sum += SampleWrap(Height, Width, HeightPixels, X + OffsetX, Y + OffsetY);
 						++Count;
 					}
 				}
@@ -152,7 +158,7 @@ namespace PBRTextureLab
 			{
 				for (int32 OffsetX = -Radius; OffsetX <= Radius; ++OffsetX)
 				{
-					Sum += SampleClamp(Values, Width, Height, X + OffsetX, Y + OffsetY);
+					Sum += SampleWrap(Values, Width, Height, X + OffsetX, Y + OffsetY);
 					++Count;
 				}
 			}
@@ -162,7 +168,7 @@ namespace PBRTextureLab
 			{
 				for (int32 OffsetX = -Radius; OffsetX <= Radius; ++OffsetX)
 				{
-					const float Delta = SampleClamp(Values, Width, Height, X + OffsetX, Y + OffsetY) - Mean;
+					const float Delta = SampleWrap(Values, Width, Height, X + OffsetX, Y + OffsetY) - Mean;
 					Variance += Delta * Delta;
 				}
 			}
@@ -176,6 +182,81 @@ namespace PBRTextureLab
 		return Image.Width > 0
 			&& Image.Height > 0
 			&& Image.Pixels.Num() == Image.Width * Image.Height;
+	}
+
+	bool MakeSeamlessImage(FPBRImageRgba8& Image, const bool bIsNormalMap)
+	{
+		if (!IsValidImage(Image))
+		{
+			return false;
+		}
+		if (Image.Width < 2 || Image.Height < 2)
+		{
+			return true;
+		}
+
+		const int32 Width = Image.Width;
+		const int32 Height = Image.Height;
+		const int32 BlendX = FMath::Clamp(Width / 8, 1, Width / 2);
+		const int32 BlendY = FMath::Clamp(Height / 8, 1, Height / 2);
+
+		auto ToLinear = [](const FColor& Color)
+		{
+			return FLinearColor(Color.R / 255.0f, Color.G / 255.0f, Color.B / 255.0f, Color.A / 255.0f);
+		};
+		auto ToColor = [bIsNormalMap](FLinearColor Value)
+		{
+			if (bIsNormalMap)
+			{
+				FVector3f Normal(Value.R * 2.0f - 1.0f, Value.G * 2.0f - 1.0f, Value.B * 2.0f - 1.0f);
+				Normal = Normal.GetSafeNormal();
+				Value.R = Normal.X * 0.5f + 0.5f;
+				Value.G = Normal.Y * 0.5f + 0.5f;
+				Value.B = Normal.Z * 0.5f + 0.5f;
+			}
+			return FColor(
+				Quantize01(Value.R),
+				Quantize01(Value.G),
+				Quantize01(Value.B),
+				Quantize01(Value.A));
+		};
+		auto BlendAmount = [](const int32 Distance, const int32 Blend)
+		{
+			const float T = 0.5f * (1.0f - FMath::Cos(PI * static_cast<float>(Distance) / static_cast<float>(Blend)));
+			return 0.5f * (1.0f - T);
+		};
+
+		TArray<FColor> Source = Image.Pixels;
+		for (int32 Y = 0; Y < Height; ++Y)
+		{
+			for (int32 X = 0; X < BlendX; ++X)
+			{
+				const float Amount = BlendAmount(X, BlendX);
+				const int32 LeftIndex = Y * Width + X;
+				const int32 RightIndex = Y * Width + (Width - 1 - X);
+				const FLinearColor Left = ToLinear(Source[LeftIndex]);
+				const FLinearColor Right = ToLinear(Source[RightIndex]);
+				Image.Pixels[LeftIndex] = ToColor(FMath::Lerp(Left, Right, Amount));
+				Image.Pixels[RightIndex] = ToColor(FMath::Lerp(Right, Left, Amount));
+			}
+		}
+
+		Source = Image.Pixels;
+		for (int32 Y = 0; Y < BlendY; ++Y)
+		{
+			const float Amount = BlendAmount(Y, BlendY);
+			for (int32 X = 0; X < Width; ++X)
+			{
+				const int32 TopIndex = Y * Width + X;
+				const int32 BottomIndex = (Height - 1 - Y) * Width + X;
+				const FLinearColor Top = ToLinear(Source[TopIndex]);
+				const FLinearColor Bottom = ToLinear(Source[BottomIndex]);
+				Image.Pixels[TopIndex] = ToColor(FMath::Lerp(Top, Bottom, Amount));
+				Image.Pixels[BottomIndex] = ToColor(FMath::Lerp(Bottom, Top, Amount));
+			}
+		}
+
+		return true;
 	}
 
 	bool GeneratePBRMaps(

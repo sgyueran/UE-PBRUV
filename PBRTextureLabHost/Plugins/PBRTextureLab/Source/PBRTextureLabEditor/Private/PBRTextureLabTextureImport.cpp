@@ -8,12 +8,15 @@
 #include "HAL/FileManager.h"
 #include "IImageWrapperModule.h"
 #include "ImageCore.h"
+#include "ImageUtils.h"
 #include "Misc/FileHelper.h"
+#include "Misc/Guid.h"
 #include "Misc/PackageName.h"
 #include "Misc/Paths.h"
 #include "Modules/ModuleManager.h"
 #include "ObjectTools.h"
 #include "ScopedTransaction.h"
+#include "Templates/UniquePtr.h"
 #include "UObject/Package.h"
 
 namespace PBRTextureLab
@@ -193,6 +196,71 @@ namespace PBRTextureLab
 			return true;
 		}
 
+		void ApplySeamlessAddressing(UTexture2D* Texture)
+		{
+			if (!Texture)
+			{
+				return;
+			}
+			Texture->AddressX = TA_Wrap;
+			Texture->AddressY = TA_Wrap;
+		}
+
+		bool CopyImageToRgba8(const FImage& Image, FPBRImageRgba8& OutImage, FString* OutError)
+		{
+			FImage Bgra;
+			Image.CopyTo(Bgra, ERawImageFormat::BGRA8, EGammaSpace::sRGB);
+			if (Bgra.Format != ERawImageFormat::BGRA8 || Bgra.SizeX <= 0 || Bgra.SizeY <= 0)
+			{
+				ImportSetError(OutError, TEXT("Converted image is not a valid BGRA8 buffer."));
+				return false;
+			}
+			const TArrayView64<const FColor> Colors = Bgra.AsBGRA8();
+			const int32 PixelCount = Bgra.SizeX * Bgra.SizeY;
+			if (Colors.Num() < PixelCount)
+			{
+				ImportSetError(OutError, TEXT("Converted BGRA buffer is smaller than Width*Height."));
+				return false;
+			}
+			OutImage.Width = Bgra.SizeX;
+			OutImage.Height = Bgra.SizeY;
+			OutImage.Pixels.SetNumUninitialized(PixelCount);
+			FMemory::Memcpy(OutImage.Pixels.GetData(), Colors.GetData(), sizeof(FColor) * PixelCount);
+			return true;
+		}
+
+		bool MakeLocalFileSeamless(
+			const FString& Filename,
+			const EPBRMapKind Kind,
+			const FString& StagingFile,
+			FString* OutError)
+		{
+			TArray64<uint8> FileData;
+			if (!FFileHelper::LoadFileToArray(FileData, *Filename))
+			{
+				ImportSetError(OutError, FString::Printf(TEXT("Failed to read image file: %s"), *Filename));
+				return false;
+			}
+			FImage Decoded;
+			if (!FImageUtils::DecompressImage(FileData.GetData(), FileData.Num(), Decoded))
+			{
+				ImportSetError(OutError, FString::Printf(TEXT("Failed to decode image file: %s"), *Filename));
+				return false;
+			}
+			FPBRImageRgba8 Image;
+			if (!CopyImageToRgba8(Decoded, Image, OutError))
+			{
+				return false;
+			}
+			if (!MakeSeamlessImage(Image, Kind == EPBRMapKind::Normal))
+			{
+				ImportSetError(OutError, TEXT("Failed to convert imported image to a seamless tile."));
+				return false;
+			}
+			const bool bSRGB = Kind == EPBRMapKind::Unknown || Kind == EPBRMapKind::BaseColor;
+			return EncodePng(Image, bSRGB, StagingFile, OutError);
+		}
+
 		void ApplyImportSettings(UTexture2D* Texture, const FChannelJob& Job)
 		{
 			if (!Texture)
@@ -202,6 +270,7 @@ namespace PBRTextureLab
 			Texture->CompressionSettings = Job.Compression;
 			Texture->SRGB = Job.bSRGB;
 			Texture->LODGroup = Job.Group;
+			ApplySeamlessAddressing(Texture);
 			Texture->PostEditChange();
 			Texture->MarkPackageDirty();
 		}
@@ -214,7 +283,6 @@ namespace PBRTextureLab
 			if (Textures.AO) { OutObjects.Add(Textures.AO); }
 			if (Textures.Roughness) { OutObjects.Add(Textures.Roughness); }
 			if (Textures.Metallic) { OutObjects.Add(Textures.Metallic); }
-			if (Textures.ORM) { OutObjects.Add(Textures.ORM); }
 		}
 
 		void RollbackCreated(const TArray<UTexture2D*>& NewlyCreated)
@@ -260,6 +328,421 @@ namespace PBRTextureLab
 	FString GetStagingRootDirectory()
 	{
 		return FPaths::ConvertRelativePathToFull(FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("PBRTextureLab"), TEXT("Staging")));
+	}
+
+	namespace
+	{
+		bool HasDelimitedToken(const FString& Stem, const TCHAR* Token)
+		{
+			const FString Needle = FString(Token).ToLower();
+			if (Needle.IsEmpty())
+			{
+				return false;
+			}
+			if (Stem.Equals(Needle))
+			{
+				return true;
+			}
+			FString Normalized = Stem;
+			Normalized.ReplaceInline(TEXT("-"), TEXT("_"));
+			Normalized.ReplaceInline(TEXT(" "), TEXT("_"));
+			Normalized.ReplaceInline(TEXT("."), TEXT("_"));
+			TArray<FString> Parts;
+			Normalized.ParseIntoArray(Parts, TEXT("_"), true);
+			for (const FString& Part : Parts)
+			{
+				if (Part.Equals(Needle))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		bool ContainsIgnoreCase(const FString& Stem, const TCHAR* Token)
+		{
+			return Stem.Contains(FString(Token), ESearchCase::IgnoreCase);
+		}
+
+		TextureCompressionSettings CompressionForKind(EPBRMapKind Kind)
+		{
+			switch (Kind)
+			{
+			case EPBRMapKind::Normal:
+				return TC_Normalmap;
+			case EPBRMapKind::BaseColor:
+				return TC_Default;
+			default:
+				return TC_Grayscale;
+			}
+		}
+
+		bool SRGBForKind(EPBRMapKind Kind)
+		{
+			return Kind == EPBRMapKind::BaseColor;
+		}
+
+		TextureGroup GroupForKind(EPBRMapKind Kind)
+		{
+			return Kind == EPBRMapKind::Normal ? TEXTUREGROUP_WorldNormalMap : TEXTUREGROUP_World;
+		}
+
+		ETextureSourceColorSpace ColorSpaceForKind(EPBRMapKind Kind)
+		{
+			return Kind == EPBRMapKind::BaseColor ? ETextureSourceColorSpace::SRGB : ETextureSourceColorSpace::Linear;
+		}
+
+		void ApplyKindSettings(UTexture2D* Texture, EPBRMapKind Kind)
+		{
+			if (!Texture || Kind == EPBRMapKind::Unknown)
+			{
+				return;
+			}
+			Texture->CompressionSettings = CompressionForKind(Kind);
+			Texture->SRGB = SRGBForKind(Kind);
+			Texture->LODGroup = GroupForKind(Kind);
+			Texture->AddressX = TA_Wrap;
+			Texture->AddressY = TA_Wrap;
+			Texture->PostEditChange();
+			Texture->MarkPackageDirty();
+		}
+
+		bool IsSupportedLocalImageExtension(const FString& Extension)
+		{
+			return Extension.Equals(TEXT("png"), ESearchCase::IgnoreCase)
+				|| Extension.Equals(TEXT("jpg"), ESearchCase::IgnoreCase)
+				|| Extension.Equals(TEXT("jpeg"), ESearchCase::IgnoreCase)
+				|| Extension.Equals(TEXT("bmp"), ESearchCase::IgnoreCase)
+				|| Extension.Equals(TEXT("tga"), ESearchCase::IgnoreCase);
+		}
+
+		UTexture2D** TextureSlotForKind(FPBRImportedTextures& Textures, EPBRMapKind Kind)
+		{
+			switch (Kind)
+			{
+			case EPBRMapKind::BaseColor:
+				return &Textures.BaseColor;
+			case EPBRMapKind::Normal:
+				return &Textures.Normal;
+			case EPBRMapKind::Roughness:
+				return &Textures.Roughness;
+			case EPBRMapKind::Metallic:
+				return &Textures.Metallic;
+			case EPBRMapKind::Height:
+				return &Textures.Height;
+			case EPBRMapKind::AO:
+				return &Textures.AO;
+			default:
+				return nullptr;
+			}
+		}
+	}
+
+	EPBRMapKind GuessPBRMapKindFromFilename(const FString& Filename)
+	{
+		const FString Stem = FPaths::GetBaseFilename(Filename).ToLower();
+		if (Stem.IsEmpty())
+		{
+			return EPBRMapKind::Unknown;
+		}
+
+		if (HasDelimitedToken(Stem, TEXT("normal"))
+			|| HasDelimitedToken(Stem, TEXT("norm"))
+			|| HasDelimitedToken(Stem, TEXT("nrm"))
+			|| HasDelimitedToken(Stem, TEXT("nor"))
+			|| HasDelimitedToken(Stem, TEXT("n"))
+			|| ContainsIgnoreCase(Stem, TEXT("法线")))
+		{
+			return EPBRMapKind::Normal;
+		}
+		if (HasDelimitedToken(Stem, TEXT("roughness"))
+			|| HasDelimitedToken(Stem, TEXT("rough"))
+			|| HasDelimitedToken(Stem, TEXT("rgh"))
+			|| HasDelimitedToken(Stem, TEXT("r"))
+			|| ContainsIgnoreCase(Stem, TEXT("粗糙度"))
+			|| ContainsIgnoreCase(Stem, TEXT("粗糙")))
+		{
+			return EPBRMapKind::Roughness;
+		}
+		if (HasDelimitedToken(Stem, TEXT("metallic"))
+			|| HasDelimitedToken(Stem, TEXT("metalness"))
+			|| HasDelimitedToken(Stem, TEXT("metal"))
+			|| HasDelimitedToken(Stem, TEXT("met"))
+			|| HasDelimitedToken(Stem, TEXT("m"))
+			|| ContainsIgnoreCase(Stem, TEXT("金属度"))
+			|| ContainsIgnoreCase(Stem, TEXT("金属")))
+		{
+			return EPBRMapKind::Metallic;
+		}
+		if (HasDelimitedToken(Stem, TEXT("height"))
+			|| HasDelimitedToken(Stem, TEXT("disp"))
+			|| HasDelimitedToken(Stem, TEXT("displacement"))
+			|| HasDelimitedToken(Stem, TEXT("bump"))
+			|| HasDelimitedToken(Stem, TEXT("h"))
+			|| ContainsIgnoreCase(Stem, TEXT("置换"))
+			|| ContainsIgnoreCase(Stem, TEXT("高度")))
+		{
+			return EPBRMapKind::Height;
+		}
+		if (HasDelimitedToken(Stem, TEXT("ambientocclusion"))
+			|| HasDelimitedToken(Stem, TEXT("occlusion"))
+			|| HasDelimitedToken(Stem, TEXT("ao"))
+			|| ContainsIgnoreCase(Stem, TEXT("环境光"))
+			|| ContainsIgnoreCase(Stem, TEXT("遮蔽")))
+		{
+			return EPBRMapKind::AO;
+		}
+		if (HasDelimitedToken(Stem, TEXT("basecolor"))
+			|| HasDelimitedToken(Stem, TEXT("albedo"))
+			|| HasDelimitedToken(Stem, TEXT("diffuse"))
+			|| HasDelimitedToken(Stem, TEXT("col"))
+			|| HasDelimitedToken(Stem, TEXT("color"))
+			|| HasDelimitedToken(Stem, TEXT("d"))
+			|| ContainsIgnoreCase(Stem, TEXT("基础色"))
+			|| ContainsIgnoreCase(Stem, TEXT("基础贴图")))
+		{
+			return EPBRMapKind::BaseColor;
+		}
+		return EPBRMapKind::Unknown;
+	}
+
+	UTexture2D* ImportLocalImageFile(
+		const FString& Filename,
+		const FString& DestinationPath,
+		const FString& DesiredName,
+		EPBRMapKind Kind,
+		EPBRImportConflictPolicy ConflictPolicy,
+		bool bSave,
+		FString* OutError,
+		const bool bMakeSeamless)
+	{
+		if (!ImportIsGameThread(OutError))
+		{
+			return nullptr;
+		}
+		if (Filename.IsEmpty() || !IFileManager::Get().FileExists(*Filename))
+		{
+			ImportSetError(OutError, FString::Printf(TEXT("Local image does not exist: %s"), *Filename));
+			return nullptr;
+		}
+		if (!IsSupportedLocalImageExtension(FPaths::GetExtension(Filename)))
+		{
+			ImportSetError(OutError, FString::Printf(TEXT("Unsupported image type: %s"), *Filename));
+			return nullptr;
+		}
+
+		const FString NormalizedDest = ImportNormalizeContentPath(DestinationPath);
+		if (!NormalizedDest.StartsWith(TEXT("/Game")))
+		{
+			ImportSetError(OutError, FString::Printf(TEXT("Destination path must be under /Game: %s"), *NormalizedDest));
+			return nullptr;
+		}
+
+		FString AssetName = ObjectTools::SanitizeObjectName(
+			DesiredName.IsEmpty() ? FPaths::GetBaseFilename(Filename) : DesiredName);
+		if (AssetName.IsEmpty())
+		{
+			ImportSetError(OutError, TEXT("Asset name is empty after sanitizing."));
+			return nullptr;
+		}
+
+		FString PackageName = NormalizedDest / AssetName;
+		bool bReplaceExisting = false;
+		if (ImportAssetExists(PackageName, AssetName))
+		{
+			switch (ConflictPolicy)
+			{
+			case EPBRImportConflictPolicy::Cancel:
+				if (OutError)
+				{
+					*OutError = FString::Printf(TEXT("Name conflict: %s"), *PackageName);
+				}
+				UE_LOG(LogPBRTextureLab, Warning, TEXT("ImportLocalImageFile name conflict (cancel): %s"), *PackageName);
+				return nullptr;
+			case EPBRImportConflictPolicy::Replace:
+				if (!PrepareExistingPackageForReplace(PackageName, OutError))
+				{
+					return nullptr;
+				}
+				bReplaceExisting = ImportAssetExists(PackageName, AssetName);
+				break;
+			case EPBRImportConflictPolicy::UniqueName:
+				{
+					FString UniquePackage;
+					FString UniqueName;
+					GetAssetTools().CreateUniqueAssetName(PackageName, TEXT(""), UniquePackage, UniqueName);
+					PackageName = UniquePackage;
+					AssetName = UniqueName;
+				}
+				break;
+			}
+		}
+
+		FString ImportFilename = Filename;
+		TUniquePtr<FStagingSession> Staging;
+		if (bMakeSeamless)
+		{
+			const FString SessionDir = FPaths::Combine(GetStagingRootDirectory(), FGuid::NewGuid().ToString(EGuidFormats::Digits));
+			Staging = MakeUnique<FStagingSession>(SessionDir);
+			IFileManager::Get().MakeDirectory(*SessionDir, true);
+			const FString StagingFile = FPaths::Combine(SessionDir, AssetName + TEXT(".png"));
+			if (!MakeLocalFileSeamless(Filename, Kind, StagingFile, OutError))
+			{
+				return nullptr;
+			}
+			ImportFilename = StagingFile;
+		}
+
+		UTextureFactory* Factory = NewObject<UTextureFactory>(GetTransientPackage());
+		Factory->bCreateMaterial = 0;
+		Factory->CompressionSettings = CompressionForKind(Kind == EPBRMapKind::Unknown ? EPBRMapKind::BaseColor : Kind);
+		Factory->ColorSpaceMode = ColorSpaceForKind(Kind == EPBRMapKind::Unknown ? EPBRMapKind::BaseColor : Kind);
+		Factory->LODGroup = GroupForKind(Kind);
+		Factory->bFlipNormalMapGreenChannel = 0;
+		UTextureFactory::SuppressImportOverwriteDialog(true);
+
+		UAssetImportTask* Task = NewObject<UAssetImportTask>(GetTransientPackage());
+		Task->Filename = ImportFilename;
+		Task->DestinationPath = NormalizedDest;
+		Task->DestinationName = AssetName;
+		Task->bReplaceExisting = bReplaceExisting;
+		Task->bReplaceExistingSettings = bReplaceExisting;
+		Task->bAutomated = true;
+		Task->bAsync = false;
+		Task->bSave = false;
+		Task->Factory = Factory;
+
+		{
+			FScopedTransaction Transaction(NSLOCTEXT("PBRTextureLab", "ImportLocalImage", "Import Local PBR Image"));
+			TArray<UAssetImportTask*> Tasks;
+			Tasks.Add(Task);
+			ImportAssetTasks(Tasks);
+		}
+
+		UTexture2D* Texture = FindImportedTexture(Task, AssetName);
+		if (!Texture)
+		{
+			ImportSetError(OutError, FString::Printf(TEXT("Import failed for %s"), *Filename));
+			return nullptr;
+		}
+
+		if (Kind != EPBRMapKind::Unknown)
+		{
+			ApplyKindSettings(Texture, Kind);
+		}
+
+		if (bSave)
+		{
+			TArray<UPackage*> Packages;
+			Packages.Add(Texture->GetOutermost());
+			if (!UEditorLoadingAndSavingUtils::SavePackages(Packages, false))
+			{
+				ImportSetError(OutError, FString::Printf(TEXT("Failed to save imported texture %s"), *Texture->GetPathName()));
+				return nullptr;
+			}
+		}
+
+		UE_LOG(LogPBRTextureLab, Log, TEXT("Imported local image %s -> %s"), *Filename, *Texture->GetPathName());
+		return Texture;
+	}
+
+	EPBRImportStatus ImportPBRMapsFromLocalFolder(
+		const FString& FolderPath,
+		const FString& DestinationPath,
+		const FString& BaseName,
+		EPBRImportConflictPolicy ConflictPolicy,
+		bool bSave,
+		FPBRImportedTextures& OutTextures,
+		FString* OutError,
+		const bool bMakeSeamless)
+	{
+		OutTextures = FPBRImportedTextures();
+		if (!ImportIsGameThread(OutError))
+		{
+			return EPBRImportStatus::Failed;
+		}
+		if (FolderPath.IsEmpty() || !IFileManager::Get().DirectoryExists(*FolderPath))
+		{
+			ImportSetError(OutError, FString::Printf(TEXT("Local folder does not exist: %s"), *FolderPath));
+			return EPBRImportStatus::Failed;
+		}
+
+		TArray<FString> Files;
+		IFileManager::Get().FindFiles(Files, *(FolderPath / TEXT("*.*")), true, false);
+		int32 Imported = 0;
+		for (const FString& File : Files)
+		{
+			if (!IsSupportedLocalImageExtension(FPaths::GetExtension(File)))
+			{
+				continue;
+			}
+			const FString FullPath = FolderPath / File;
+			const EPBRMapKind Kind = GuessPBRMapKindFromFilename(File);
+			UTexture2D** Slot = TextureSlotForKind(OutTextures, Kind);
+			if (!Slot || *Slot)
+			{
+				continue;
+			}
+
+			FString DesiredName = ObjectTools::SanitizeObjectName(BaseName);
+			if (DesiredName.IsEmpty())
+			{
+				DesiredName = FPaths::GetBaseFilename(File);
+			}
+			else
+			{
+				switch (Kind)
+				{
+				case EPBRMapKind::BaseColor:
+					DesiredName += TEXT("_BaseColor");
+					break;
+				case EPBRMapKind::Normal:
+					DesiredName += TEXT("_Normal");
+					break;
+				case EPBRMapKind::Roughness:
+					DesiredName += TEXT("_Roughness");
+					break;
+				case EPBRMapKind::Metallic:
+					DesiredName += TEXT("_Metallic");
+					break;
+				case EPBRMapKind::Height:
+					DesiredName += TEXT("_Height");
+					break;
+				case EPBRMapKind::AO:
+					DesiredName += TEXT("_AO");
+					break;
+				default:
+					break;
+				}
+			}
+
+			FString FileError;
+			UTexture2D* Texture = ImportLocalImageFile(
+				FullPath,
+				DestinationPath,
+				DesiredName,
+				Kind,
+				ConflictPolicy,
+				bSave,
+				&FileError,
+				bMakeSeamless);
+			if (!Texture)
+			{
+				UE_LOG(LogPBRTextureLab, Warning, TEXT("Skipped local map %s: %s"), *FullPath, *FileError);
+				continue;
+			}
+			*Slot = Texture;
+			++Imported;
+		}
+
+		if (Imported == 0)
+		{
+			ImportSetError(OutError, FString::Printf(TEXT("No matching PBR images in folder: %s"), *FolderPath));
+			return EPBRImportStatus::Failed;
+		}
+
+		UE_LOG(LogPBRTextureLab, Log, TEXT("Imported %d local PBR maps from %s"), Imported, *FolderPath);
+		return EPBRImportStatus::Success;
 	}
 
 	EPBRImportStatus ImportPBRMaps(
@@ -311,8 +794,7 @@ namespace PBRTextureLab
 			{ TEXT("_Normal"), &Maps.Normal, &OutTextures.Normal, TC_Normalmap, false, TEXTUREGROUP_WorldNormalMap, ETextureSourceColorSpace::Linear, Request.ExportFlags.bNormal },
 			{ TEXT("_AO"), &Maps.AO, &OutTextures.AO, TC_Grayscale, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear, Request.ExportFlags.bAO },
 			{ TEXT("_Roughness"), &Maps.Roughness, &OutTextures.Roughness, TC_Grayscale, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear, Request.ExportFlags.bRoughness },
-			{ TEXT("_Metallic"), &Maps.Metallic, &OutTextures.Metallic, TC_Grayscale, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear, Request.ExportFlags.bMetallic },
-			{ TEXT("_ORM"), &Maps.ORM, &OutTextures.ORM, TC_Masks, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear, Request.ExportFlags.bORM }
+			{ TEXT("_Metallic"), &Maps.Metallic, &OutTextures.Metallic, TC_Grayscale, false, TEXTUREGROUP_World, ETextureSourceColorSpace::Linear, Request.ExportFlags.bMetallic }
 		};
 
 		for (const FChannelJob& Job : Jobs)
@@ -396,7 +878,14 @@ namespace PBRTextureLab
 				continue;
 			}
 			const FString StagingFile = FPaths::Combine(SessionDir, Resolved[Index].AssetName + TEXT(".png"));
-			if (!EncodePng(*Jobs[Index].Image, Jobs[Index].bSRGB, StagingFile, OutError))
+			FPBRImageRgba8 SeamlessImage = *Jobs[Index].Image;
+			if (Request.bMakeSeamless
+				&& !MakeSeamlessImage(SeamlessImage, Jobs[Index].Compression == TC_Normalmap))
+			{
+				ImportSetError(OutError, TEXT("Failed to convert imported map to a seamless tile."));
+				return EPBRImportStatus::Failed;
+			}
+			if (!EncodePng(SeamlessImage, Jobs[Index].bSRGB, StagingFile, OutError))
 			{
 				return EPBRImportStatus::Failed;
 			}

@@ -173,10 +173,14 @@ bool FPBRTextureLabUVAbsolutePresets::RunTest(const FString& Parameters)
 
 	FPBRUVScaleRequest Request;
 	FString Error;
-	TestEqual(TEXT("Apply 100"), static_cast<int32>(ApplyUVPreset(Mesh, EPBRUVPreset::Scale100, Request, &Error)), static_cast<int32>(EPBRUVStatus::Success));
+	TestEqual(TEXT("Apply 100 LOD0"), static_cast<int32>(ApplyUVPreset(Mesh, EPBRUVPreset::Scale100, Request, &Error)), static_cast<int32>(EPBRUVStatus::Success));
 	TestEqual(TEXT("Applied scale 100"), GetAppliedUVScale(Mesh), 100);
 	UVsNearlyEqual(*this, TEXT("LOD0 after 100"), ReadUvChannel(Mesh, 0, 0), ScaleUVs(Baseline0, 100.0f));
-	UVsNearlyEqual(*this, TEXT("LOD1 after 100"), ReadUvChannel(Mesh, 1, 0), ScaleUVs(Baseline1, 100.0f));
+	UVsNearlyEqual(*this, TEXT("LOD1 unchanged by default"), ReadUvChannel(Mesh, 1, 0), Baseline1);
+
+	Request.bApplyOtherLods = true;
+	TestEqual(TEXT("Apply 100 other LODs"), static_cast<int32>(ApplyUVPreset(Mesh, EPBRUVPreset::Scale100, Request, &Error)), static_cast<int32>(EPBRUVStatus::Success));
+	UVsNearlyEqual(*this, TEXT("LOD1 after sync 100"), ReadUvChannel(Mesh, 1, 0), ScaleUVs(Baseline1, 100.0f));
 
 	TestEqual(TEXT("Apply 500"), static_cast<int32>(ApplyUVPreset(Mesh, EPBRUVPreset::Scale500, Request, &Error)), static_cast<int32>(EPBRUVStatus::Success));
 	TestEqual(TEXT("Applied scale 500"), GetAppliedUVScale(Mesh), 500);
@@ -276,15 +280,15 @@ bool FPBRTextureLabUVCancelAndUnsupported::RunTest(const FString& Parameters)
 
 	Mesh->SetLightMapCoordinateIndex(0);
 	AddExpectedMessagePlain(
-		TEXT("Refusing to modify UV0 because it is the Lightmap UV channel"),
+		TEXT("Lightmap coordinate index is UV0"),
 		ELogVerbosity::Warning,
 		EAutomationExpectedMessageFlags::Contains,
 		1);
 	TestEqual(
-		TEXT("Lightmap is UV0"),
+		TEXT("Lightmap is UV0 still scales"),
 		static_cast<int32>(ApplyUVPreset(Mesh, EPBRUVPreset::Scale100, FPBRUVScaleRequest(), &Error)),
-		static_cast<int32>(EPBRUVStatus::Unsupported));
-	UVsNearlyEqual(*this, TEXT("Lightmap refuse leaves UV"), ReadUvChannel(Mesh, 0, 0), Before);
+		static_cast<int32>(EPBRUVStatus::Success));
+	UVsNearlyEqual(*this, TEXT("Lightmap UV0 scaled"), ReadUvChannel(Mesh, 0, 0), ScaleUVs(Before, 100.0f));
 	return true;
 }
 

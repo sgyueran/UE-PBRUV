@@ -96,6 +96,28 @@ namespace PBRTextureLab
 		}
 	}
 
+	inline void SetMaterialInstanceVector(
+		UMaterialInstanceConstant* MaterialInstance,
+		FName ParameterName,
+		const FLinearColor& Value)
+	{
+		if (MaterialInstance)
+		{
+			MaterialInstance->SetVectorParameterValueEditorOnly(FMaterialParameterInfo(ParameterName), Value);
+		}
+	}
+
+	inline void SetMaterialInstanceStaticSwitch(
+		UMaterialInstanceConstant* MaterialInstance,
+		const FMaterialParameterInfo& ParameterInfo,
+		const bool bValue)
+	{
+		if (MaterialInstance)
+		{
+			MaterialInstance->SetStaticSwitchParameterValueEditorOnly(ParameterInfo, bValue);
+		}
+	}
+
 #if PBRTEXTURELAB_HAS_MIC_PARAMETER_COLLECTION_EDITORONLY
 	inline void SetMaterialInstanceParameterCollection(
 		UMaterialInstanceConstant* MaterialInstance,

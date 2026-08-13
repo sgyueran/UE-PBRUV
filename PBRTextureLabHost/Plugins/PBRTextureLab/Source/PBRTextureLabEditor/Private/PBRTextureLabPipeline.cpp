@@ -3,6 +3,7 @@
 #include "PBRTextureLabPixelCore.h"
 
 #include "Engine/Texture2D.h"
+#include "Materials/MaterialInstanceConstant.h"
 #include "HAL/FileManager.h"
 #include "ImageCore.h"
 #include "ImageUtils.h"
@@ -10,6 +11,8 @@
 #include "Misc/PackageName.h"
 #include "Misc/Paths.h"
 #include "ObjectTools.h"
+#include "PackageTools.h"
+#include "UObject/Package.h"
 
 namespace PBRTextureLab
 {
@@ -40,6 +43,19 @@ namespace PBRTextureLab
 			{
 				PipelineSetError(OutError, FString::Printf(TEXT("Destination path must be under /Game: %s"), *RootDest));
 				return EPBRImportStatus::Failed;
+			}
+
+			if (Request.bModifyExisting)
+			{
+				UMaterialInstanceConstant* Existing = Request.ExistingInstance;
+				if (!IsValid(Existing))
+				{
+					PipelineSetError(OutError, TEXT("Modify requires an existing material instance."));
+					return EPBRImportStatus::Failed;
+				}
+				OutMaterialName = Existing->GetName();
+				OutFolder = FPackageName::GetLongPackagePath(Existing->GetOutermost()->GetName());
+				return EPBRImportStatus::Success;
 			}
 
 			OutMaterialName = ObjectTools::SanitizeObjectName(
@@ -87,17 +103,83 @@ namespace PBRTextureLab
 			return EPBRImportStatus::Success;
 		}
 
-		UTexture2D* DuplicateTextureIntoFolder(UTexture2D* Source, const FString& Folder, const FString& AssetName)
+		bool RewriteTextureSeamless(UTexture2D* Texture)
+		{
+			if (!Texture)
+			{
+				return false;
+			}
+			FPBRImageRgba8 Image;
+			if (!ReadSourceTexture2D(Texture, Image, nullptr))
+			{
+				return false;
+			}
+			if (!MakeSeamlessImage(Image, Texture->CompressionSettings == TC_Normalmap))
+			{
+				return false;
+			}
+			TArray<uint8> Bytes;
+			Bytes.SetNumUninitialized(Image.Pixels.Num() * sizeof(FColor));
+			FMemory::Memcpy(Bytes.GetData(), Image.Pixels.GetData(), Bytes.Num());
+			Texture->PreEditChange(nullptr);
+			Texture->Source.Init(Image.Width, Image.Height, 1, 1, TSF_BGRA8, Bytes.GetData());
+			Texture->AddressX = TA_Wrap;
+			Texture->AddressY = TA_Wrap;
+			Texture->UpdateResource();
+			Texture->PostEditChange();
+			Texture->MarkPackageDirty();
+			return true;
+		}
+
+		UTexture2D* DuplicateTextureIntoFolder(
+			UTexture2D* Source,
+			const FString& Folder,
+			const FString& AssetName,
+			const bool bMakeSeamless)
 		{
 			if (!Source)
 			{
 				return nullptr;
 			}
-			if (UObject* Duplicated = GetAssetTools().DuplicateAsset(AssetName, Folder, Source))
+			const FString DestPackage = Folder / AssetName;
+			if (Source->GetOutermost()->GetName() == DestPackage)
 			{
-				return Cast<UTexture2D>(Duplicated);
+				if (bMakeSeamless)
+				{
+					RewriteTextureSeamless(Source);
+				}
+				return Source;
 			}
-			return Source;
+			if (FPackageName::DoesPackageExist(DestPackage))
+			{
+				if (UPackage* ExistingPackage = FindPackage(nullptr, *DestPackage))
+				{
+					ResetLoaders(ExistingPackage);
+					TArray<UPackage*> ToUnload;
+					ToUnload.Add(ExistingPackage);
+					FText UnloadError;
+					UPackageTools::UnloadPackages(ToUnload, UnloadError, true);
+				}
+				FString Filename;
+				if (FPackageName::DoesPackageExist(DestPackage, &Filename))
+				{
+					IFileManager::Get().Delete(*Filename, false, true, true);
+				}
+			}
+			UTexture2D* Duplicated = nullptr;
+			if (UObject* Object = GetAssetTools().DuplicateAsset(AssetName, Folder, Source))
+			{
+				Duplicated = Cast<UTexture2D>(Object);
+			}
+			if (!Duplicated)
+			{
+				return Source;
+			}
+			if (bMakeSeamless)
+			{
+				RewriteTextureSeamless(Duplicated);
+			}
+			return Duplicated;
 		}
 
 		bool PipelineCopyBgra(const FImage& Bgra, FPBRImageRgba8& OutImage, FString* OutError)
@@ -322,6 +404,12 @@ namespace PBRTextureLab
 			return EPBRImportStatus::Failed;
 		}
 
+		if (Request.bMakeSeamless && !MakeSeamlessImage(OutResult.WorkingImage, false))
+		{
+			PipelineSetError(OutError, TEXT("Failed to convert the source image to a seamless tile."));
+			return EPBRImportStatus::Failed;
+		}
+
 		if (!Request.ExportFlags.WantsAnyTexture() && !Request.bCreateMaterial)
 		{
 			PipelineSetError(OutError, TEXT("Select at least one map or enable material creation."));
@@ -349,6 +437,7 @@ namespace PBRTextureLab
 		ImportRequest.BaseName = MaterialName;
 		ImportRequest.ConflictPolicy = Request.ConflictPolicy;
 		ImportRequest.ExportFlags = Request.ExportFlags;
+		ImportRequest.bMakeSeamless = false;
 		ImportRequest.bSave = Request.bSave;
 		ImportRequest.bCancelled = false;
 
@@ -374,8 +463,14 @@ namespace PBRTextureLab
 		MaterialRequest.ParentMaterial = Request.ParentMaterial;
 		MaterialRequest.ConflictPolicy = Request.ConflictPolicy;
 		MaterialRequest.NormalStrength = Request.MaterialNormalStrength;
+		MaterialRequest.RoughnessStrength = Request.MaterialRoughnessStrength;
+		MaterialRequest.MetallicStrength = Request.MaterialMetallicStrength;
 		MaterialRequest.HeightAmount = Request.MaterialHeightAmount;
 		MaterialRequest.UVScale = Request.MaterialUVScale;
+		MaterialRequest.RoughnessBrightness = Request.MaterialRoughnessBrightness;
+		MaterialRequest.EnabledMaps = Request.ExportFlags;
+		MaterialRequest.ExistingInstance = Request.ExistingInstance;
+		MaterialRequest.bModifyExisting = Request.bModifyExisting;
 		MaterialRequest.bSave = Request.bSave;
 		MaterialRequest.bCancelled = false;
 
@@ -426,13 +521,12 @@ namespace PBRTextureLab
 
 		if (Request.bCopyExistingTexturesToFolder)
 		{
-			OutResult.Textures.BaseColor = DuplicateTextureIntoFolder(ExistingTextures.BaseColor, OutputFolder, MaterialName + TEXT("_BaseColor"));
-			OutResult.Textures.Normal = DuplicateTextureIntoFolder(ExistingTextures.Normal, OutputFolder, MaterialName + TEXT("_Normal"));
-			OutResult.Textures.Height = DuplicateTextureIntoFolder(ExistingTextures.Height, OutputFolder, MaterialName + TEXT("_Height"));
-			OutResult.Textures.AO = DuplicateTextureIntoFolder(ExistingTextures.AO, OutputFolder, MaterialName + TEXT("_AO"));
-			OutResult.Textures.Roughness = DuplicateTextureIntoFolder(ExistingTextures.Roughness, OutputFolder, MaterialName + TEXT("_Roughness"));
-			OutResult.Textures.Metallic = DuplicateTextureIntoFolder(ExistingTextures.Metallic, OutputFolder, MaterialName + TEXT("_Metallic"));
-			OutResult.Textures.ORM = DuplicateTextureIntoFolder(ExistingTextures.ORM, OutputFolder, MaterialName + TEXT("_ORM"));
+			OutResult.Textures.BaseColor = DuplicateTextureIntoFolder(ExistingTextures.BaseColor, OutputFolder, MaterialName + TEXT("_BaseColor"), Request.bMakeSeamless);
+			OutResult.Textures.Normal = DuplicateTextureIntoFolder(ExistingTextures.Normal, OutputFolder, MaterialName + TEXT("_Normal"), Request.bMakeSeamless);
+			OutResult.Textures.Height = DuplicateTextureIntoFolder(ExistingTextures.Height, OutputFolder, MaterialName + TEXT("_Height"), Request.bMakeSeamless);
+			OutResult.Textures.AO = DuplicateTextureIntoFolder(ExistingTextures.AO, OutputFolder, MaterialName + TEXT("_AO"), Request.bMakeSeamless);
+			OutResult.Textures.Roughness = DuplicateTextureIntoFolder(ExistingTextures.Roughness, OutputFolder, MaterialName + TEXT("_Roughness"), Request.bMakeSeamless);
+			OutResult.Textures.Metallic = DuplicateTextureIntoFolder(ExistingTextures.Metallic, OutputFolder, MaterialName + TEXT("_Metallic"), Request.bMakeSeamless);
 		}
 
 		FPBRMaterialInstanceRequest MaterialRequest;
@@ -442,8 +536,19 @@ namespace PBRTextureLab
 		MaterialRequest.ParentMaterial = Request.ParentMaterial;
 		MaterialRequest.ConflictPolicy = Request.ConflictPolicy;
 		MaterialRequest.NormalStrength = Request.MaterialNormalStrength;
+		MaterialRequest.RoughnessStrength = Request.MaterialRoughnessStrength;
+		MaterialRequest.MetallicStrength = Request.MaterialMetallicStrength;
 		MaterialRequest.HeightAmount = Request.MaterialHeightAmount;
 		MaterialRequest.UVScale = Request.MaterialUVScale;
+		MaterialRequest.RoughnessBrightness = Request.MaterialRoughnessBrightness;
+		MaterialRequest.EnabledMaps.bBaseColor = OutResult.Textures.BaseColor != nullptr;
+		MaterialRequest.EnabledMaps.bNormal = OutResult.Textures.Normal != nullptr;
+		MaterialRequest.EnabledMaps.bRoughness = OutResult.Textures.Roughness != nullptr;
+		MaterialRequest.EnabledMaps.bMetallic = OutResult.Textures.Metallic != nullptr;
+		MaterialRequest.EnabledMaps.bHeight = OutResult.Textures.Height != nullptr;
+		MaterialRequest.EnabledMaps.bAO = OutResult.Textures.AO != nullptr;
+		MaterialRequest.ExistingInstance = Request.ExistingInstance;
+		MaterialRequest.bModifyExisting = Request.bModifyExisting;
 		MaterialRequest.bSave = Request.bSave;
 		return CreateMaterialInstance(
 			OutResult.Textures,

@@ -5,8 +5,10 @@
 #include "Engine/Texture2D.h"
 #include "MaterialEditingLibrary.h"
 #include "Materials/Material.h"
+#include "Materials/MaterialInterface.h"
+#include "Materials/MaterialExpressionScalarParameter.h"
 #include "Materials/MaterialExpressionTextureSampleParameter2D.h"
-#include "Materials/MaterialExpressionUtils.h"
+#include "Materials/MaterialExpressionTextureBase.h"
 #include "Materials/MaterialInstanceConstant.h"
 #include "Misc/AutomationTest.h"
 #include "Misc/PackageName.h"
@@ -94,15 +96,21 @@ bool FPBRTextureLabMaterialParentCompiles::RunTest(const FString& Parameters)
 		TEXT("Default NormalTexture"),
 		UMaterialEditingLibrary::GetMaterialDefaultTextureParameterValue(Parent, PBRTEXTURELAB_PARAM_NormalTexture));
 	TestNotNull(
-		TEXT("Default ORMTexture"),
-		UMaterialEditingLibrary::GetMaterialDefaultTextureParameterValue(Parent, PBRTEXTURELAB_PARAM_ORMTexture));
+		TEXT("Default RoughnessTexture"),
+		UMaterialEditingLibrary::GetMaterialDefaultTextureParameterValue(Parent, PBRTEXTURELAB_PARAM_RoughnessTexture));
+	TestNotNull(
+		TEXT("Default MetallicTexture"),
+		UMaterialEditingLibrary::GetMaterialDefaultTextureParameterValue(Parent, PBRTEXTURELAB_PARAM_MetallicTexture));
+	TestNotNull(
+		TEXT("Default AOTexture"),
+		UMaterialEditingLibrary::GetMaterialDefaultTextureParameterValue(Parent, PBRTEXTURELAB_PARAM_AOTexture));
 	TestNotNull(
 		TEXT("Default HeightTexture"),
 		UMaterialEditingLibrary::GetMaterialDefaultTextureParameterValue(Parent, PBRTEXTURELAB_PARAM_HeightTexture));
 	TestEqual(
 		TEXT("Default NormalStrength"),
 		UMaterialEditingLibrary::GetMaterialDefaultScalarParameterValue(Parent, PBRTEXTURELAB_PARAM_NormalStrength),
-		1.0f);
+		0.1f);
 	TestEqual(
 		TEXT("Default HeightAmount disables bump"),
 		UMaterialEditingLibrary::GetMaterialDefaultScalarParameterValue(Parent, PBRTEXTURELAB_PARAM_HeightAmount),
@@ -110,6 +118,22 @@ bool FPBRTextureLabMaterialParentCompiles::RunTest(const FString& Parameters)
 	TestEqual(
 		TEXT("Default UVScale"),
 		UMaterialEditingLibrary::GetMaterialDefaultScalarParameterValue(Parent, PBRTEXTURELAB_PARAM_UVScale),
+		1.0f);
+	TestEqual(
+		TEXT("Default 基础色"),
+		UMaterialEditingLibrary::GetMaterialDefaultVectorParameterValue(Parent, PBRTEXTURELAB_PARAM_BaseColor),
+		FLinearColor::White);
+	TestEqual(
+		TEXT("Default 粗糙度"),
+		UMaterialEditingLibrary::GetMaterialDefaultScalarParameterValue(Parent, PBRTEXTURELAB_PARAM_Roughness),
+		1.0f);
+	TestEqual(
+		TEXT("Default 高光度"),
+		UMaterialEditingLibrary::GetMaterialDefaultScalarParameterValue(Parent, PBRTEXTURELAB_PARAM_Specular),
+		0.5f);
+	TestEqual(
+		TEXT("Default 金属度"),
+		UMaterialEditingLibrary::GetMaterialDefaultScalarParameterValue(Parent, PBRTEXTURELAB_PARAM_Metallic),
 		1.0f);
 
 	TestTrue(TEXT("Parent package exists on disk"),
@@ -135,7 +159,7 @@ bool FPBRTextureLabMaterialParentCompiles::RunTest(const FString& Parameters)
 					static_cast<int32>(Expected));
 				TestEqual(
 					FString::Printf(TEXT("%s default texture sampler"), ParamName),
-					static_cast<int32>(MaterialExpressionUtils::GetSamplerTypeForTexture(DefaultTexture)),
+					static_cast<int32>(UMaterialExpressionTextureBase::GetSamplerTypeForTexture(DefaultTexture)),
 					static_cast<int32>(Expected));
 			}
 			return;
@@ -144,7 +168,9 @@ bool FPBRTextureLabMaterialParentCompiles::RunTest(const FString& Parameters)
 	};
 	ExpectSampler(Parent, PBRTEXTURELAB_PARAM_BaseColorTexture, SAMPLERTYPE_Color);
 	ExpectSampler(Parent, PBRTEXTURELAB_PARAM_NormalTexture, SAMPLERTYPE_Normal);
-	ExpectSampler(Parent, PBRTEXTURELAB_PARAM_ORMTexture, SAMPLERTYPE_Masks);
+	ExpectSampler(Parent, PBRTEXTURELAB_PARAM_RoughnessTexture, SAMPLERTYPE_LinearGrayscale);
+	ExpectSampler(Parent, PBRTEXTURELAB_PARAM_MetallicTexture, SAMPLERTYPE_LinearGrayscale);
+	ExpectSampler(Parent, PBRTEXTURELAB_PARAM_AOTexture, SAMPLERTYPE_LinearGrayscale);
 	ExpectSampler(Parent, PBRTEXTURELAB_PARAM_HeightTexture, SAMPLERTYPE_LinearGrayscale);
 	return true;
 }
@@ -166,6 +192,7 @@ bool FPBRTextureLabMaterialCreateInstance::RunTest(const FString& Parameters)
 	FPBRMaterialInstanceRequest Request;
 	Request.DestinationPath = TEXT("/Game/PBRTextureLab/Automation");
 	Request.BaseName = PersistMaterialBaseName();
+	Request.ParentMaterial = GetOrCreateParentMaterial();
 	Request.ConflictPolicy = EPBRImportConflictPolicy::Replace;
 	Request.NormalStrength = 0.75f;
 	Request.HeightAmount = 0.0f;
@@ -193,9 +220,17 @@ bool FPBRTextureLabMaterialCreateInstance::RunTest(const FString& Parameters)
 		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_NormalTexture),
 		static_cast<UTexture*>(Textures.Normal));
 	TestEqual(
-		TEXT("Instance ORM"),
-		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_ORMTexture),
-		static_cast<UTexture*>(Textures.ORM));
+		TEXT("Instance Roughness"),
+		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_RoughnessTexture),
+		static_cast<UTexture*>(Textures.Roughness));
+	TestEqual(
+		TEXT("Instance Metallic"),
+		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_MetallicTexture),
+		static_cast<UTexture*>(Textures.Metallic));
+	TestEqual(
+		TEXT("Instance AO"),
+		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_AOTexture),
+		static_cast<UTexture*>(Textures.AO));
 	TestEqual(
 		TEXT("Instance Height"),
 		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_HeightTexture),
@@ -204,6 +239,29 @@ bool FPBRTextureLabMaterialCreateInstance::RunTest(const FString& Parameters)
 		TEXT("Instance NormalStrength"),
 		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, PBRTEXTURELAB_PARAM_NormalStrength),
 		0.75f);
+	TestEqual(
+		TEXT("Inherited 粗糙度 stays editable"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, PBRTEXTURELAB_PARAM_Roughness),
+		1.0f);
+	TestEqual(
+		TEXT("Inherited 高光度 stays editable"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, PBRTEXTURELAB_PARAM_Specular),
+		0.5f);
+	UMaterialEditingLibrary::SetMaterialInstanceScalarParameterValue(Instance, PBRTEXTURELAB_PARAM_Roughness, 0.35f);
+	UMaterialEditingLibrary::SetMaterialInstanceScalarParameterValue(Instance, PBRTEXTURELAB_PARAM_Specular, 0.8f);
+	UMaterialEditingLibrary::SetMaterialInstanceVectorParameterValue(Instance, PBRTEXTURELAB_PARAM_BaseColor, FLinearColor(0.2f, 0.4f, 0.6f));
+	TestEqual(
+		TEXT("Child can set 粗糙度"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, PBRTEXTURELAB_PARAM_Roughness),
+		0.35f);
+	TestEqual(
+		TEXT("Child can set 高光度"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, PBRTEXTURELAB_PARAM_Specular),
+		0.8f);
+	TestEqual(
+		TEXT("Child can set 基础色"),
+		UMaterialEditingLibrary::GetMaterialInstanceVectorParameterValue(Instance, PBRTEXTURELAB_PARAM_BaseColor),
+		FLinearColor(0.2f, 0.4f, 0.6f));
 	TestEqual(
 		TEXT("Instance HeightAmount"),
 		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, PBRTEXTURELAB_PARAM_HeightAmount),
@@ -215,6 +273,243 @@ bool FPBRTextureLabMaterialCreateInstance::RunTest(const FString& Parameters)
 
 	TestTrue(TEXT("Instance package exists on disk"),
 		FPackageName::DoesPackageExist(Instance->GetOutermost()->GetName()));
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(
+	FPBRTextureLabMaterialReuseUserParent,
+	"PBRTextureLab.Material.ReuseUserParent",
+	MaterialTestFlags)
+
+bool FPBRTextureLabMaterialReuseUserParent::RunTest(const FString& Parameters)
+{
+	using namespace PBRTextureLab;
+	FPBRImportedTextures Textures;
+	if (!GenerateAndImport(*this, Textures, FString::Printf(TEXT("T4Reuse%d%d"), PBRTEXTURELAB_ENGINE_MAJOR, PBRTEXTURELAB_ENGINE_MINOR)))
+	{
+		return false;
+	}
+
+	UMaterial* UserParent = NewObject<UMaterial>(GetTransientPackage(), TEXT("T4UserParent"));
+	TestNotNull(TEXT("User-style parent"), UserParent);
+	if (!UserParent)
+	{
+		return false;
+	}
+
+	auto AddTexture = [UserParent](const TCHAR* Name, const int32 Y)
+	{
+		UMaterialExpressionTextureSampleParameter2D* Sample = Cast<UMaterialExpressionTextureSampleParameter2D>(
+			UMaterialEditingLibrary::CreateMaterialExpression(
+				UserParent,
+				UMaterialExpressionTextureSampleParameter2D::StaticClass(),
+				-200,
+				Y));
+		if (Sample)
+		{
+			Sample->ParameterName = Name;
+		}
+	};
+	auto AddScalar = [UserParent](const TCHAR* Name, const int32 Y)
+	{
+		UMaterialExpressionScalarParameter* Scalar = Cast<UMaterialExpressionScalarParameter>(
+			UMaterialEditingLibrary::CreateMaterialExpression(
+				UserParent,
+				UMaterialExpressionScalarParameter::StaticClass(),
+				0,
+				Y));
+		if (Scalar)
+		{
+			Scalar->ParameterName = Name;
+			Scalar->DefaultValue = 0.0f;
+		}
+	};
+	AddTexture(TEXT("基础贴图"), 0);
+	AddTexture(TEXT("法线贴图"), 80);
+	AddTexture(TEXT("粗糙贴图"), 160);
+	AddTexture(TEXT("金属贴图"), 240);
+	AddTexture(TEXT("置换贴图"), 320);
+
+	const FPBRParentParamTitles Titles = InspectParentParamTitles(UserParent);
+	TestEqual(TEXT("Title 基础贴图"), Titles.BaseColorTexture, FString(TEXT("基础贴图")));
+	TestEqual(TEXT("Title 法线贴图"), Titles.NormalTexture, FString(TEXT("法线贴图")));
+	TestEqual(TEXT("Title 粗糙贴图"), Titles.RoughnessTexture, FString(TEXT("粗糙贴图")));
+	TestEqual(TEXT("Title 金属贴图"), Titles.MetallicTexture, FString(TEXT("金属贴图")));
+	TestEqual(TEXT("Title 置换贴图"), Titles.HeightTexture, FString(TEXT("置换贴图")));
+	TestEqual(TEXT("Title 法线强度"), Titles.NormalStrength, FString(TEXT("法线强度")));
+	TestEqual(TEXT("Title 粗糙强度"), Titles.RoughnessStrength, FString(TEXT("粗糙强度")));
+	TestEqual(TEXT("Title UV缩放"), Titles.UVScale, FString(TEXT("UV缩放")));
+	AddScalar(TEXT("基础贴图开关"), 0);
+	AddScalar(TEXT("粗糙贴图开关"), 80);
+	AddScalar(TEXT("金属贴图开关"), 160);
+	AddScalar(TEXT("置换贴图开关"), 240);
+	AddScalar(TEXT("法线强度"), 320);
+	AddScalar(TEXT("粗糙强度"), 400);
+	AddScalar(TEXT("金属强度"), 480);
+	AddScalar(TEXT("置换强度"), 560);
+	AddScalar(TEXT("UV缩放"), 640);
+	AddScalar(TEXT("UV缩放3"), 720);
+
+	FPBRMaterialInstanceRequest Request;
+	Request.DestinationPath = TEXT("/Game/PBRTextureLab/Automation");
+	Request.BaseName = FString::Printf(TEXT("T4ReuseInst%d%d"), PBRTEXTURELAB_ENGINE_MAJOR, PBRTEXTURELAB_ENGINE_MINOR);
+	Request.ParentMaterial = UserParent;
+	Request.ConflictPolicy = EPBRImportConflictPolicy::Replace;
+	Request.NormalStrength = 0.8f;
+	Request.RoughnessStrength = 1.5f;
+	Request.MetallicStrength = 0.4f;
+	Request.HeightAmount = 0.2f;
+	Request.UVScale = 4.0f;
+	Request.bSave = true;
+
+	UMaterialInstanceConstant* Instance = nullptr;
+	FString Error;
+	TestEqual(
+		TEXT("Reuse create"),
+		static_cast<int32>(CreateMaterialInstance(Textures, Request, Instance, &Error)),
+		static_cast<int32>(EPBRImportStatus::Success));
+	TestNotNull(TEXT("Reuse instance"), Instance);
+	if (!Instance)
+	{
+		return false;
+	}
+
+	TestEqual(
+		TEXT("Bound 基础贴图"),
+		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, TEXT("基础贴图")),
+		static_cast<UTexture*>(Textures.BaseColor));
+	TestEqual(
+		TEXT("Bound 粗糙贴图"),
+		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, TEXT("粗糙贴图")),
+		static_cast<UTexture*>(Textures.Roughness));
+	TestEqual(
+		TEXT("基础贴图开关"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, TEXT("基础贴图开关")),
+		1.0f);
+	TestEqual(
+		TEXT("粗糙贴图开关"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, TEXT("粗糙贴图开关")),
+		1.0f);
+	TestEqual(
+		TEXT("法线强度"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, TEXT("法线强度")),
+		0.8f);
+	TestEqual(
+		TEXT("粗糙强度"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, TEXT("粗糙强度")),
+		1.5f);
+	TestEqual(
+		TEXT("金属强度"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, TEXT("金属强度")),
+		0.4f);
+	TestEqual(
+		TEXT("置换强度"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, TEXT("置换强度")),
+		0.2f);
+	TestEqual(
+		TEXT("UV缩放"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, TEXT("UV缩放")),
+		4.0f);
+	TestEqual(
+		TEXT("UV缩放3"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, TEXT("UV缩放3")),
+		4.0f);
+
+	Request.EnabledMaps.bRoughness = false;
+	Request.EnabledMaps.bMetallic = false;
+	Request.EnabledMaps.bHeight = false;
+	Request.EnabledMaps.bNormal = false;
+	Request.bModifyExisting = true;
+	Request.ExistingInstance = Instance;
+	TestEqual(
+		TEXT("Reuse modify with maps off"),
+		static_cast<int32>(CreateMaterialInstance(Textures, Request, Instance, &Error)),
+		static_cast<int32>(EPBRImportStatus::Success));
+	TestEqual(
+		TEXT("Unchecked 粗糙贴图 turns switch off"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, TEXT("粗糙贴图开关")),
+		0.0f);
+	TestEqual(
+		TEXT("Unchecked 金属贴图 turns switch off"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, TEXT("金属贴图开关")),
+		0.0f);
+	TestEqual(
+		TEXT("Unchecked 置换贴图 turns switch off"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, TEXT("置换贴图开关")),
+		0.0f);
+	TestEqual(
+		TEXT("Unchecked 置换 zeros 置换强度"),
+		UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, TEXT("置换强度")),
+		0.0f);
+
+	if (UMaterialInterface* BundledParent = LoadBundledParentByName(TEXT("000基础材质")))
+	{
+		FPBRMaterialInstanceRequest BundledRequest;
+		BundledRequest.DestinationPath = TEXT("/Game/PBRTextureLab/Automation");
+		BundledRequest.BaseName = FString::Printf(TEXT("T4BundledInst%d%d"), PBRTEXTURELAB_ENGINE_MAJOR, PBRTEXTURELAB_ENGINE_MINOR);
+		BundledRequest.ParentMaterial = BundledParent;
+		BundledRequest.ConflictPolicy = EPBRImportConflictPolicy::Replace;
+		BundledRequest.NormalStrength = 0.1f;
+		BundledRequest.bSave = true;
+		UMaterialInstanceConstant* BundledInst = nullptr;
+		TestEqual(
+			TEXT("Bundled 000基础材质 create"),
+			static_cast<int32>(CreateMaterialInstance(Textures, BundledRequest, BundledInst, &Error)),
+			static_cast<int32>(EPBRImportStatus::Success));
+		if (BundledInst)
+		{
+			auto MapSwitchOn = [](UMaterialInstanceConstant* Inst, const TCHAR* Name) -> bool
+			{
+				if (UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Inst, Name) > 0.5f)
+				{
+					return true;
+				}
+				TArray<FMaterialParameterInfo> Infos;
+				TArray<FGuid> Guids;
+				Inst->GetAllStaticSwitchParameterInfo(Infos, Guids);
+				for (const FMaterialParameterInfo& Info : Infos)
+				{
+					if (Info.Name != FName(Name))
+					{
+						continue;
+					}
+					bool bValue = false;
+					FGuid Unused;
+					Inst->GetStaticSwitchParameterValue(
+						FHashedMaterialParameterInfo(Info.Name, Info.Association, Info.Index),
+						bValue,
+						Unused);
+					return bValue;
+				}
+				return false;
+			};
+			TestTrue(
+				TEXT("Bundled 粗糙贴图开关 on"),
+				MapSwitchOn(BundledInst, TEXT("粗糙贴图开关")));
+			TestTrue(
+				TEXT("Bundled 金属贴图开关 on"),
+				MapSwitchOn(BundledInst, TEXT("金属贴图开关")));
+			BundledRequest.EnabledMaps.bRoughness = false;
+			BundledRequest.EnabledMaps.bMetallic = false;
+			BundledRequest.EnabledMaps.bNormal = false;
+			BundledRequest.bModifyExisting = true;
+			BundledRequest.ExistingInstance = BundledInst;
+			TestEqual(
+				TEXT("Bundled modify with maps off"),
+				static_cast<int32>(CreateMaterialInstance(Textures, BundledRequest, BundledInst, &Error)),
+				static_cast<int32>(EPBRImportStatus::Success));
+			TestFalse(
+				TEXT("Bundled unchecked 粗糙贴图开关 off"),
+				MapSwitchOn(BundledInst, TEXT("粗糙贴图开关")));
+			TestFalse(
+				TEXT("Bundled unchecked 金属贴图开关 off"),
+				MapSwitchOn(BundledInst, TEXT("金属贴图开关")));
+		}
+	}
+	else
+	{
+		AddWarning(TEXT("Bundled 000基础材质 not loaded; skipped real-parent switch test."));
+	}
 	return true;
 }
 
@@ -291,8 +586,12 @@ bool FPBRTextureLabMaterialReloadAfterRestart::RunTest(const FString& Parameters
 		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_BaseColorTexture) != nullptr);
 	TestTrue(TEXT("Reloaded Normal still bound"),
 		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_NormalTexture) != nullptr);
-	TestTrue(TEXT("Reloaded ORM still bound"),
-		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_ORMTexture) != nullptr);
+	TestTrue(TEXT("Reloaded Roughness still bound"),
+		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_RoughnessTexture) != nullptr);
+	TestTrue(TEXT("Reloaded Metallic still bound"),
+		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_MetallicTexture) != nullptr);
+	TestTrue(TEXT("Reloaded AO still bound"),
+		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_AOTexture) != nullptr);
 	TestTrue(TEXT("Reloaded Height still bound"),
 		UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_HeightTexture) != nullptr);
 	TestEqual(

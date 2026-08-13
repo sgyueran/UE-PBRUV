@@ -1,5 +1,7 @@
 #include "PBRTextureLabTextureImport.h"
 #include "PBRTextureLabCompat.h"
+#include "PBRTextureLabPipeline.h"
+#include "Engine/Texture.h"
 #include "Engine/Texture2D.h"
 #include "HAL/FileManager.h"
 #include "Misc/AutomationTest.h"
@@ -75,6 +77,8 @@ namespace
 		}
 		Test.TestEqual(FString::Printf(TEXT("%s compression"), Label), Texture->CompressionSettings, Compression);
 		Test.TestEqual(FString::Printf(TEXT("%s sRGB"), Label), static_cast<int32>(Texture->SRGB), bSRGB ? 1 : 0);
+		Test.TestEqual(FString::Printf(TEXT("%s AddressX wrap"), Label), Texture->AddressX, TA_Wrap);
+		Test.TestEqual(FString::Printf(TEXT("%s AddressY wrap"), Label), Texture->AddressY, TA_Wrap);
 	}
 
 	void ExpectAllSettings(FAutomationTestBase& Test, const PBRTextureLab::FPBRImportedTextures& Textures)
@@ -85,7 +89,6 @@ namespace
 		ExpectTextureSettings(Test, Textures.AO, TEXT("AO"), TC_Grayscale, false);
 		ExpectTextureSettings(Test, Textures.Roughness, TEXT("Roughness"), TC_Grayscale, false);
 		ExpectTextureSettings(Test, Textures.Metallic, TEXT("Metallic"), TC_Grayscale, false);
-		ExpectTextureSettings(Test, Textures.ORM, TEXT("ORM"), TC_Masks, false);
 	}
 }
 
@@ -250,7 +253,7 @@ bool FPBRTextureLabImportCreateAndSave::RunTest(const FString& Parameters)
 	const FString Base = PersistImportBaseName();
 	const TCHAR* Suffixes[] = {
 		TEXT("_BaseColor"), TEXT("_Height"), TEXT("_Normal"), TEXT("_AO"),
-		TEXT("_Roughness"), TEXT("_Metallic"), TEXT("_ORM")
+		TEXT("_Roughness"), TEXT("_Metallic")
 	};
 	for (const TCHAR* Suffix : Suffixes)
 	{
@@ -281,8 +284,7 @@ bool FPBRTextureLabImportReloadAfterRestart::RunTest(const FString& Parameters)
 		{ TEXT("_Normal"), TC_Normalmap, false },
 		{ TEXT("_AO"), TC_Grayscale, false },
 		{ TEXT("_Roughness"), TC_Grayscale, false },
-		{ TEXT("_Metallic"), TC_Grayscale, false },
-		{ TEXT("_ORM"), TC_Masks, false }
+		{ TEXT("_Metallic"), TC_Grayscale, false }
 	};
 
 	for (const FExpected& Item : Expected)
@@ -297,6 +299,103 @@ bool FPBRTextureLabImportReloadAfterRestart::RunTest(const FString& Parameters)
 			TestEqual(FString::Printf(TEXT("%s sRGB after reload"), *ObjectPath), static_cast<int32>(Texture->SRGB), Item.bSRGB ? 1 : 0);
 		}
 	}
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(
+	FPBRTextureLabImportLocalFolder,
+	"PBRTextureLab.Import.LocalFolder",
+	ImportTestFlags)
+
+bool FPBRTextureLabImportLocalFolder::RunTest(const FString& Parameters)
+{
+	using namespace PBRTextureLab;
+	TestEqual(
+		TEXT("albedo"),
+		static_cast<int32>(GuessPBRMapKindFromFilename(TEXT("wood_albedo.png"))),
+		static_cast<int32>(EPBRMapKind::BaseColor));
+	TestEqual(
+		TEXT("normal suffix"),
+		static_cast<int32>(GuessPBRMapKindFromFilename(TEXT("T_Rock_N.png"))),
+		static_cast<int32>(EPBRMapKind::Normal));
+	TestEqual(
+		TEXT("roughness"),
+		static_cast<int32>(GuessPBRMapKindFromFilename(TEXT("floor_roughness.jpg"))),
+		static_cast<int32>(EPBRMapKind::Roughness));
+	TestEqual(
+		TEXT("metallic"),
+		static_cast<int32>(GuessPBRMapKindFromFilename(TEXT("panel_metallic.png"))),
+		static_cast<int32>(EPBRMapKind::Metallic));
+	TestEqual(
+		TEXT("height"),
+		static_cast<int32>(GuessPBRMapKindFromFilename(TEXT("brick_height.png"))),
+		static_cast<int32>(EPBRMapKind::Height));
+	TestEqual(
+		TEXT("ao"),
+		static_cast<int32>(GuessPBRMapKindFromFilename(TEXT("wall_ao.png"))),
+		static_cast<int32>(EPBRMapKind::AO));
+	TestEqual(
+		TEXT("orm ignored"),
+		static_cast<int32>(GuessPBRMapKindFromFilename(TEXT("pack_orm.png"))),
+		static_cast<int32>(EPBRMapKind::Unknown));
+	TestEqual(
+		TEXT("chinese roughness"),
+		static_cast<int32>(GuessPBRMapKindFromFilename(TEXT("木地板_粗糙度.png"))),
+		static_cast<int32>(EPBRMapKind::Roughness));
+	TestEqual(
+		TEXT("unknown"),
+		static_cast<int32>(GuessPBRMapKindFromFilename(TEXT("readme.txt"))),
+		static_cast<int32>(EPBRMapKind::Unknown));
+
+	const FString Folder = FPaths::ConvertRelativePathToFull(
+		FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("PBRTextureLab"), TEXT("LocalFolderTest")));
+	IFileManager::Get().DeleteDirectory(*Folder, false, true);
+	IFileManager::Get().MakeDirectory(*Folder, true);
+
+	const FPBRImageRgba8 Albedo = MakeImportSolid(8, 8, FColor(180, 90, 40, 255));
+	const FPBRImageRgba8 Normal = MakeImportSolid(8, 8, FColor(128, 128, 255, 255));
+	const FPBRImageRgba8 Rough = MakeImportSolid(8, 8, FColor(80, 80, 80, 255));
+	FString WriteError;
+	TestTrue(TEXT("write albedo"), WriteRgba8Png(Albedo, Folder / TEXT("wood_albedo.png"), &WriteError));
+	TestTrue(TEXT("write normal"), WriteRgba8Png(Normal, Folder / TEXT("wood_normal.png"), &WriteError));
+	TestTrue(TEXT("write rough"), WriteRgba8Png(Rough, Folder / TEXT("wood_roughness.png"), &WriteError));
+
+	FPBRImportedTextures Imported;
+	FString Error;
+	const FString DestName = FString::Printf(
+		TEXT("T3Local%d%d"),
+		PBRTEXTURELAB_ENGINE_MAJOR,
+		PBRTEXTURELAB_ENGINE_MINOR);
+	const EPBRImportStatus Status = ImportPBRMapsFromLocalFolder(
+		Folder,
+		TEXT("/Game/PBRTextureLab/Automation"),
+		DestName,
+		EPBRImportConflictPolicy::Replace,
+		true,
+		Imported,
+		&Error);
+	TestEqual(TEXT("folder import status"), static_cast<int32>(Status), static_cast<int32>(EPBRImportStatus::Success));
+	TestEqual(TEXT("folder import error"), Error, FString());
+	TestNotNull(TEXT("folder BaseColor"), Imported.BaseColor);
+	TestNotNull(TEXT("folder Normal"), Imported.Normal);
+	TestNotNull(TEXT("folder Roughness"), Imported.Roughness);
+	TestTrue(TEXT("folder leaves unused empty"), Imported.Metallic == nullptr && Imported.AO == nullptr);
+	if (Imported.BaseColor)
+	{
+		TestEqual(TEXT("local albedo sRGB"), static_cast<int32>(Imported.BaseColor->SRGB), 1);
+		TestEqual(TEXT("local albedo compression"), Imported.BaseColor->CompressionSettings, TC_Default);
+	}
+	if (Imported.Normal)
+	{
+		TestEqual(TEXT("local normal compression"), Imported.Normal->CompressionSettings, TC_Normalmap);
+		TestEqual(TEXT("local normal sRGB"), static_cast<int32>(Imported.Normal->SRGB), 0);
+	}
+	if (Imported.Roughness)
+	{
+		TestEqual(TEXT("local rough compression"), Imported.Roughness->CompressionSettings, TC_Grayscale);
+	}
+
+	IFileManager::Get().DeleteDirectory(*Folder, false, true);
 	return true;
 }
 

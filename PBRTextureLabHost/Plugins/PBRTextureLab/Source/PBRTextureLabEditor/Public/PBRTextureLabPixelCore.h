@@ -36,7 +36,7 @@ namespace PBRTextureLab
 		float HeightContrast = 1.0f;
 		int32 HeightBlurRadius = 1;
 		bool bInvertHeight = false;
-		float NormalStrength = 1.0f;
+		float NormalStrength = 0.1f;
 		float RoughnessScale = 2.0f;
 		float RoughnessBias = 0.0f;
 		EPBRMetallicMode MetallicMode = EPBRMetallicMode::AllBlack;
@@ -56,6 +56,13 @@ namespace PBRTextureLab
 	};
 
 	bool IsValidImage(const FPBRImageRgba8& Image);
+
+	/**
+	 * Blend opposite edges so the image tiles without a hard seam.
+	 * Normal maps are lerped as vectors and renormalized.
+	 * Safe to call from a worker thread.
+	 */
+	bool MakeSeamlessImage(FPBRImageRgba8& Image, bool bIsNormalMap = false);
 
 	/**
 	 * Generate BaseColor, Height, Normal, AO, Roughness, Metallic, ORM.

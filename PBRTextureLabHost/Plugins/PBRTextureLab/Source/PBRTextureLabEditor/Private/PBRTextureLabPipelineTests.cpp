@@ -337,6 +337,89 @@ bool FPBRTextureLabPipelineAssembleExisting::RunTest(const FString& Parameters)
 }
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(
+	FPBRTextureLabPipelineModifyExisting,
+	"PBRTextureLab.Pipeline.ModifyExisting",
+	PipelineTestFlags)
+
+bool FPBRTextureLabPipelineModifyExisting::RunTest(const FString& Parameters)
+{
+	using namespace PBRTextureLab;
+	AddExpectedMessagePlain(
+		FString(MetallicDisclaimer),
+		ELogVerbosity::Warning,
+		EAutomationExpectedMessageFlags::Contains,
+		2);
+
+	UTexture2D* FirstSource = CreatePipelineSourceTexture(
+		GetTransientPackage(),
+		TEXT("T7ModifySrcA"),
+		8,
+		8,
+		FColor(20, 40, 80, 255));
+	FPBRGenerateRequest Create;
+	Create.SourceTexture = FirstSource;
+	Create.PixelParams.HeightBlurRadius = 0;
+	Create.DestinationPath = TEXT("/Game/PBRTextureLab/Automation");
+	Create.MaterialInstanceName = FString::Printf(TEXT("T7Mod%d%d"), PBRTEXTURELAB_ENGINE_MAJOR, PBRTEXTURELAB_ENGINE_MINOR);
+	Create.ConflictPolicy = EPBRImportConflictPolicy::Replace;
+	Create.bSave = true;
+
+	FPBRGenerateResult Created;
+	FString Error;
+	TestEqual(
+		TEXT("Create first"),
+		static_cast<int32>(GenerateAndImportFromSource(Create, Created, &Error)),
+		static_cast<int32>(EPBRImportStatus::Success));
+	TestNotNull(TEXT("Created MIC"), Created.MaterialInstance);
+	if (!Created.MaterialInstance)
+	{
+		return false;
+	}
+
+	UMaterialInstanceConstant* Original = Created.MaterialInstance;
+	const FString OriginalPath = Original->GetPathName();
+
+	UTexture2D* SecondSource = CreatePipelineSourceTexture(
+		GetTransientPackage(),
+		TEXT("T7ModifySrcB"),
+		8,
+		8,
+		FColor(200, 10, 10, 255));
+	FPBRGenerateRequest Modify;
+	Modify.SourceTexture = SecondSource;
+	Modify.PixelParams.HeightBlurRadius = 0;
+	Modify.DestinationPath = Create.DestinationPath;
+	Modify.MaterialInstanceName = Create.MaterialInstanceName;
+	Modify.ExistingInstance = Original;
+	Modify.bModifyExisting = true;
+	Modify.ConflictPolicy = EPBRImportConflictPolicy::Replace;
+	Modify.bSave = true;
+
+	FPBRGenerateResult Modified;
+	TestEqual(
+		TEXT("Modify status"),
+		static_cast<int32>(GenerateAndImportFromSource(Modify, Modified, &Error)),
+		static_cast<int32>(EPBRImportStatus::Success));
+	TestTrue(TEXT("Same MIC object"), Modified.MaterialInstance == Original);
+	TestEqual(TEXT("Same path"), Modified.MaterialInstance ? Modified.MaterialInstance->GetPathName() : FString(), OriginalPath);
+	TestEqual(TEXT("Same folder"), Modified.OutputFolder, Created.OutputFolder);
+
+	UMaterialInstanceConstant* UnusedOut = nullptr;
+	FPBRMaterialInstanceRequest Missing;
+	Missing.bModifyExisting = true;
+	Missing.ExistingInstance = nullptr;
+	AddExpectedErrorPlain(
+		TEXT("Modify requires an existing material instance"),
+		EAutomationExpectedErrorFlags::Contains,
+		1);
+	TestEqual(
+		TEXT("Modify without target"),
+		static_cast<int32>(CreateMaterialInstance(Created.Textures, Missing, UnusedOut, &Error)),
+		static_cast<int32>(EPBRImportStatus::Failed));
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(
 	FPBRTextureLabPipelineCancelAndInvalid,
 	"PBRTextureLab.Pipeline.CancelAndInvalid",
 	PipelineTestFlags)
@@ -526,8 +609,8 @@ bool FPBRTextureLabIntegrationReloadAfterRestart::RunTest(const FString& Paramet
 			TEXT("Reloaded BaseColor"),
 			UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_BaseColorTexture) != nullptr);
 		TestTrue(
-			TEXT("Reloaded ORM"),
-			UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_ORMTexture) != nullptr);
+			TEXT("Reloaded Roughness"),
+			UMaterialEditingLibrary::GetMaterialInstanceTextureParameterValue(Instance, PBRTEXTURELAB_PARAM_RoughnessTexture) != nullptr);
 		TestEqual(
 			TEXT("Reloaded NormalStrength"),
 			UMaterialEditingLibrary::GetMaterialInstanceScalarParameterValue(Instance, PBRTEXTURELAB_PARAM_NormalStrength),
