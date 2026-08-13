@@ -1,0 +1,4 @@
+interface:
+  display_name: "UE Development Orchestrator"
+  short_description: "Route UE work with review and token budgets"
+  default_prompt: "Use $ue-development-orchestrator to route this Unreal Engine task, stay within a context budget, and complete an evidence-based review."

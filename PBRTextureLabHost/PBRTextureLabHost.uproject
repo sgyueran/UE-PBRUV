@@ -1,0 +1,23 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "5.8",
+	"Category": "Editor",
+	"Description": "Minimal C++ host for compiling and validating the PBRTextureLab Editor plugin on UE 5.6-5.8.",
+	"Modules": [
+		{
+			"Name": "PBRTextureLabHost",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "PBRTextureLab",
+			"Enabled": true
+		},
+		{
+			"Name": "ConnecterUEPlugin",
+			"Enabled": false
+		}
+	]
+}

@@ -1,0 +1,43 @@
+Using bundled DotNet SDK version: 8.0.300 win-x64
+Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" PBRTextureLabHostEditor Win64 Development -Project=C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\PBRTextureLabHost.uproject -WaitMutex
+Log file: C:\Users\Administrator\AppData\Local\UnrealBuildTool\Log.txt
+Creating makefile for PBRTextureLabHostEditor (makefile version does not match)
+Available x64 toolchains (1):
+ * C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207
+    (Family=14.44.35207, FamilyRank=1, Version=14.44.35228, HostArchitecture=x64, ReleaseChannel=Latest, Architecture=x64)
+Visual Studio 2022 compiler version 14.44.35228 is not a preferred version. Please use the latest preferred version 14.38.33130
+Parsing headers for PBRTextureLabHostEditor
+  Running Internal UnrealHeaderTool C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\PBRTextureLabHost.uproject C:\Users\Administrator\Desktop\Plughins\PBRTextureLabHost\Intermediate\Build\Win64\PBRTextureLabHostEditor\Development\PBRTextureLabHostEditor.uhtmanifest -WarningsAsErrors -installed
+Total of 0 written
+Reflection code generated for PBRTextureLabHostEditor in 1.0277571 seconds
+Building PBRTextureLabHostEditor...
+Using Visual Studio 2022 14.44.35228 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207) and Windows 10.0.22621.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+Warning: Visual Studio 2022 compiler is not a preferred version
+[Adaptive Build] Excluded from PBRTextureLabEditor unity file: PBRTextureLabApiProbe.cpp, PBRTextureLabEditorModule.cpp
+Determining max actions to execute in parallel (20 physical cores, 28 logical cores)
+  Executing up to 20 processes, one per physical core
+Using Unreal Build Accelerator local executor to run 13 action(s)
+  Storage capacity 40Gb
+---- Starting trace: 260813_133518 ----
+UbaSessionServer - Disable remote execution (remote sessions will finish current processes)
+------ Building 13 action(s) started ------
+[1/13] Resource Default.rc2
+[2/13] Resource Default.rc2
+[3/13] Compile [x64] SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.cpp
+[4/13] Compile [x64] PerModuleInline.gen.cpp
+[5/13] Compile [x64] Module.PBRTextureLabEditor.cpp
+[6/13] Compile [x64] PBRTextureLabEditorModule.cpp
+[7/13] Compile [x64] PBRTextureLabHost.cpp
+[8/13] Link [x64] UnrealEditor-PBRTextureLabHost.lib
+  正在创建库 C:/Users/Administrator/Desktop/Plughins/PBRTextureLabHost/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabHost/UnrealEditor-PBRTextureLabHost.lib 和对象 C:/Users/Administrator/Desktop/Plughins/PBRTextureLabHost/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabHost/UnrealEditor-PBRTextureLabHost.exp
+[9/13] Link [x64] UnrealEditor-PBRTextureLabHost.dll
+[10/13] Compile [x64] PBRTextureLabApiProbe.cpp
+[11/13] Link [x64] UnrealEditor-PBRTextureLabEditor.lib
+  正在创建库 C:/Users/Administrator/Desktop/Plughins/PBRTextureLabHost/Plugins/PBRTextureLab/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabEditor/UnrealEditor-PBRTextureLabEditor.lib 和对象 C:/Users/Administrator/Desktop/Plughins/PBRTextureLabHost/Plugins/PBRTextureLab/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabEditor/UnrealEditor-PBRTextureLabEditor.exp
+[12/13] Link [x64] UnrealEditor-PBRTextureLabEditor.dll
+[13/13] WriteMetadata PBRTextureLabHostEditor.target (UBA disabled)
+Trace written to file C:/Users/Administrator/AppData/Local/UnrealBuildTool/Log.uba with size 7.3kb
+Total time in Unreal Build Accelerator local executor: 31.69 seconds
+
+Result: Succeeded
+Total execution time: 37.60 seconds

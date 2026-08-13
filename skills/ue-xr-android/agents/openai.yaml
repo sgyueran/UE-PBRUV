@@ -1,0 +1,4 @@
+interface:
+  display_name: "UE XR and Android"
+  short_description: "Guide OpenXR and Android UE delivery"
+  default_prompt: "Use $ue-xr-android to diagnose and verify this Unreal Engine XR or Android task on the target device."

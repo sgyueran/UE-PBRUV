@@ -1,0 +1,63 @@
+{
+  "goal": "实现 UE 5.6-5.8 Editor-only PBRTextureLab 插件：离线 Metallic/Roughness 贴图生成与 UV 100x/500x",
+  "tier": "complex",
+  "risk": "R2",
+  "project": {
+    "root": "C:\\Users\\Administrator\\Desktop\\Plughins\\PBRTextureLabHost",
+    "uproject": "PBRTextureLabHost.uproject",
+    "engine_association": "5.8",
+    "plugin": "PBRTextureLab"
+  },
+  "baseline_revision": "",
+  "requirements": [
+    "T1-host-plugin-skeleton",
+    "T1-api-inventory-5.6-5.8",
+    "T1-build-dev-editor-three-versions"
+  ],
+  "approvals": [],
+  "loaded_sources": [
+    {
+      "source": "AGENTS.md",
+      "estimated_tokens": 500
+    },
+    {
+      "source": "tasks/01-ue-api-and-build-baseline.md",
+      "estimated_tokens": 200
+    },
+    {
+      "source": "skills/ue-development-orchestrator/SKILL.md",
+      "estimated_tokens": 800
+    }
+  ],
+  "loaded_token_estimate": 1500,
+  "edits": [
+    "PBRTextureLabHost skeleton + PBRTextureLab Editor module + compat/probe"
+  ],
+  "evidence": [
+    {
+      "id": "build-ue56",
+      "command": "UE_5.6\\Engine\\Build\\BatchFiles\\Build.bat PBRTextureLabHostEditor Win64 Development",
+      "exit_code": 0,
+      "result": "Succeeded"
+    },
+    {
+      "id": "build-ue57",
+      "command": "UE_5.7\\Engine\\Build\\BatchFiles\\Build.bat PBRTextureLabHostEditor Win64 Development",
+      "exit_code": 0,
+      "result": "Succeeded after disabling engine ConnecterUEPlugin"
+    },
+    {
+      "id": "build-ue58",
+      "command": "UE_5.8\\Engine\\Build\\BatchFiles\\Build.bat PBRTextureLabHostEditor Win64 Development",
+      "exit_code": 0,
+      "result": "Succeeded"
+    }
+  ],
+  "evidence_fresh": true,
+  "open_risks": [
+    "Engine/Plugins/Connecter is third-party and EnabledByDefault on 5.6/5.7",
+    "MSVC 14.44 is not UE 5.6 preferred 14.38"
+  ],
+  "next_action": "Task 2 offline PBR pixel core; Task 5 may start in parallel",
+  "updated_at": "2026-08-13T05:36:00+00:00"
+}

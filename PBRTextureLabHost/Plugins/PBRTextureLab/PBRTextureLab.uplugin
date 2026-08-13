@@ -1,0 +1,25 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "0.1.0",
+	"FriendlyName": "PBR Texture Lab",
+	"Description": "Editor-only offline Metallic/Roughness map generation and Static Mesh UV0 100x/500x absolute scale presets.",
+	"Category": "Editor",
+	"CreatedBy": "PBRTextureLab",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"EnabledByDefault": false,
+	"Modules": [
+		{
+			"Name": "PBRTextureLabEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	]
+}
