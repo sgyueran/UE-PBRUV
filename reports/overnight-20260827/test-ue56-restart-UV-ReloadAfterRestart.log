@@ -1,0 +1,1237 @@
+﻿Log file open, 08/27/26 03:31:31
+LogConfig: No local boot hotfix file found at: [../../../../../../Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Saved/PersistentDownloadDir/HotfixForNextBoot.txt]
+LogAudio: Display: Pre-Initializing Audio Device Manager...
+LogAudio: Display: AudioInfo: 'OPUS' Registered
+LogAudioDebug: Display: Lib vorbis DLL was dynamically loaded.
+LogAudio: Display: AudioInfo: 'OGG' Registered
+LogAudio: Display: AudioInfo: 'ADPCM' Registered
+LogAudio: Display: AudioInfo: 'PCM' Registered
+LogAudio: Display: AudioInfo: 'BINKA' Registered
+LogAudio: Display: AudioInfo: 'RADA' Registered
+LogAudio: Display: Audio Device Manager Pre-Initialized
+LogPluginManager: Looking for build plugins target receipt
+LogPluginManager: Found matching target receipt: ../../../../../../Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Binaries/Win64/PBRTextureLabHostEditor.target
+LogPluginManager: Looking for enabled plugins target receipt
+LogConfig: Display: Loading Android ini files took 0.03 seconds
+LogConfig: Display: Loading VulkanPC ini files took 0.03 seconds
+LogConfig: Display: Loading IOS ini files took 0.03 seconds
+LogPluginManager: Found matching target receipt: ../../../../../../Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Binaries/Win64/PBRTextureLabHostEditor.target
+LogConfig: Display: Loading Mac ini files took 0.03 seconds
+LogAssetRegistry: Display: Asset registry cache read as 66.6 MiB from ../../../../../../Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Intermediate/CachedAssetRegistry_0.bin.
+LogConfig: Display: Loading Linux ini files took 0.04 seconds
+LogConfig: Display: Loading Windows ini files took 0.04 seconds
+LogConfig: Display: Loading Unix ini files took 0.04 seconds
+LogConfig: Display: Loading TVOS ini files took 0.04 seconds
+LogConfig: Display: Loading VisionOS ini files took 0.04 seconds
+LogPluginManager: Mounting Engine plugin Bridge
+LogPluginManager: Mounting Engine plugin ChaosCloth
+LogPluginManager: Mounting Engine plugin ChaosInsights
+LogPluginManager: Mounting Engine plugin ChaosVD
+LogPluginManager: Mounting Engine plugin CmdLinkServer
+LogPluginManager: Mounting Engine plugin EnhancedInput
+LogPluginManager: Mounting Engine plugin Fab
+LogPluginManager: Mounting Engine plugin FastBuildController
+LogPluginManager: Mounting Engine plugin IoStoreInsights
+LogPluginManager: Mounting Engine plugin MassInsights
+LogPluginManager: Mounting Engine plugin MeshPainting
+LogPluginManager: Mounting Engine plugin RenderGraphInsights
+LogPluginManager: Mounting Engine plugin TraceUtilities
+LogPluginManager: Mounting Engine plugin UbaController
+LogPluginManager: Mounting Engine plugin WorldMetrics
+LogPluginManager: Mounting Engine plugin XGEController
+LogPluginManager: Mounting Engine plugin DatasmithContent
+LogPluginManager: Mounting Engine plugin GLTFExporter
+LogPluginManager: Mounting Engine plugin VariantManager
+LogPluginManager: Mounting Engine plugin VariantManagerContent
+LogPluginManager: Mounting Engine plugin Cascade
+LogPluginManager: Mounting Engine plugin Niagara
+LogPluginManager: Mounting Engine plugin NiagaraSimCaching
+LogPluginManager: Mounting Engine plugin InterchangeAssets
+LogPluginManager: Mounting Engine plugin InterchangeEditor
+LogPluginManager: Mounting Engine plugin Interchange
+LogPluginManager: Mounting Engine plugin AndroidMedia
+LogPluginManager: Mounting Engine plugin AvfMedia
+LogPluginManager: Mounting Engine plugin ImgMedia
+LogPluginManager: Mounting Engine plugin MediaCompositing
+LogPluginManager: Mounting Engine plugin MediaPlate
+LogPluginManager: Mounting Engine plugin MediaPlayerEditor
+LogPluginManager: Mounting Engine plugin WebMMedia
+LogPluginManager: Mounting Engine plugin WmfMedia
+LogPluginManager: Mounting Engine plugin NNEDenoiser
+LogPluginManager: Mounting Engine plugin NNERuntimeORT
+LogPluginManager: Mounting Engine plugin MetaHumanSDK
+LogPluginManager: Mounting Engine plugin InterchangeTests
+LogPluginManager: Mounting Engine plugin Paper2D
+LogPluginManager: Mounting Engine plugin AISupport
+LogPluginManager: Mounting Engine plugin EnvironmentQueryEditor
+LogPluginManager: Mounting Engine plugin ACLPlugin
+LogPluginManager: Mounting Engine plugin AnimationData
+LogPluginManager: Mounting Engine plugin AnimationModifierLibrary
+LogPluginManager: Mounting Engine plugin BlendSpaceMotionAnalysis
+LogPluginManager: Mounting Engine plugin ControlRig
+LogPluginManager: Mounting Engine plugin ControlRigSpline
+LogPluginManager: Mounting Engine plugin DeformerGraph
+LogPluginManager: Mounting Engine plugin ControlRigModules
+LogPluginManager: Mounting Engine plugin GameplayInsights
+LogPluginManager: Mounting Engine plugin IKRig
+LogPluginManager: Mounting Engine plugin RigLogic
+LogPluginManager: Mounting Engine plugin SkeletalMeshModelingTools
+LogPluginManager: Mounting Engine plugin TweeningUtils
+LogPluginManager: Mounting Engine plugin CameraShakePreviewer
+LogPluginManager: Mounting Engine plugin EngineCameras
+LogPluginManager: Mounting Engine plugin GameplayCameras
+LogPluginManager: Mounting Engine plugin OodleNetwork
+LogPluginManager: Mounting Engine plugin AnimationSharing
+LogPluginManager: Mounting Engine plugin CLionSourceCodeAccess
+LogPluginManager: Mounting Engine plugin CodeLiteSourceCodeAccess
+LogPluginManager: Mounting Engine plugin DumpGPUServices
+LogPluginManager: Mounting Engine plugin KDevelopSourceCodeAccess
+LogPluginManager: Mounting Engine plugin GitSourceControl
+LogPluginManager: Mounting Engine plugin N10XSourceCodeAccess
+LogPluginManager: Mounting Engine plugin NamingTokens
+LogPluginManager: Mounting Engine plugin NullSourceCodeAccess
+LogPluginManager: Mounting Engine plugin PerforceSourceControl
+LogPluginManager: Mounting Engine plugin PlasticSourceControl
+LogPluginManager: Mounting Engine plugin PluginUtils
+LogPluginManager: Mounting Engine plugin ProjectLauncher
+LogPluginManager: Mounting Engine plugin PropertyAccessNode
+LogPluginManager: Mounting Engine plugin RenderDocPlugin
+LogPluginManager: Mounting Engine plugin RiderSourceCodeAccess
+LogPluginManager: Mounting Engine plugin SubversionSourceControl
+LogPluginManager: Mounting Engine plugin PixWinPlugin
+LogPluginManager: Mounting Engine plugin TextureFormatOodle
+LogPluginManager: Mounting Engine plugin UObjectPlugin
+LogPluginManager: Mounting Engine plugin VisualStudioCodeSourceCodeAccess
+LogPluginManager: Mounting Engine plugin XCodeSourceCodeAccess
+LogPluginManager: Mounting Engine plugin AssetManagerEditor
+LogPluginManager: Mounting Engine plugin VisualStudioSourceCodeAccess
+LogPluginManager: Mounting Engine plugin BlueprintHeaderView
+LogPluginManager: Mounting Engine plugin ChangelistReview
+LogPluginManager: Mounting Engine plugin ColorGrading
+LogPluginManager: Mounting Engine plugin CryptoKeys
+LogPluginManager: Mounting Engine plugin CurveEditorTools
+LogPluginManager: Mounting Engine plugin DataValidation
+LogPluginManager: Mounting Engine plugin EditorDebugTools
+LogPluginManager: Mounting Engine plugin EditorScriptingUtilities
+LogPluginManager: Mounting Engine plugin FacialAnimation
+LogPluginManager: Mounting Engine plugin EngineAssetDefinitions
+LogPluginManager: Mounting Engine plugin GeometryMode
+LogPluginManager: Mounting Engine plugin MacGraphicsSwitching
+LogPluginManager: Mounting Engine plugin GameplayTagsEditor
+LogPluginManager: Mounting Engine plugin MaterialAnalyzer
+LogPluginManager: Mounting Engine plugin MeshLODToolset
+LogPluginManager: Mounting Engine plugin ModelingToolsEditorMode
+LogPluginManager: Mounting Engine plugin MobileLauncherProfileWizard
+LogPluginManager: Mounting Engine plugin PluginBrowser
+LogPluginManager: Mounting Engine plugin ProxyLODPlugin
+LogPluginManager: Mounting Engine plugin SequencerAnimTools
+LogPluginManager: Mounting Engine plugin SpeedTreeImporter
+LogPluginManager: Mounting Engine plugin StylusInput
+LogPluginManager: Mounting Engine plugin UVEditor
+LogPluginManager: Mounting Engine plugin UMGWidgetPreview
+LogPluginManager: Mounting Engine plugin WorldPartitionHLODUtilities
+LogPluginManager: Mounting Engine plugin AdvancedRenamer
+LogPluginManager: Mounting Engine plugin AutomationUtils
+LogPluginManager: Mounting Engine plugin BackChannel
+LogPluginManager: Mounting Engine plugin ChaosCaching
+LogPluginManager: Mounting Engine plugin ChaosEditor
+LogPluginManager: Mounting Engine plugin ChaosNiagara
+LogPluginManager: Mounting Engine plugin ChaosSolverPlugin
+LogPluginManager: Mounting Engine plugin CharacterAI
+LogPluginManager: Mounting Engine plugin ChaosUserDataPT
+LogPluginManager: Mounting Engine plugin Dataflow
+LogPluginManager: Mounting Engine plugin EditorDataStorage
+LogPluginManager: Mounting Engine plugin EditorDataStorageFeatures
+LogPluginManager: Mounting Engine plugin EditorTelemetry
+LogPluginManager: Mounting Engine plugin EditorPerformance
+LogPluginManager: Mounting Engine plugin Fracture
+LogPluginManager: Mounting Engine plugin FullBodyIK
+LogPluginManager: Mounting Engine plugin GeometryDataflow
+LogPluginManager: Mounting Engine plugin GeometryCollectionPlugin
+LogPluginManager: Mounting Engine plugin GeometryFlow
+LogPluginManager: Mounting Engine plugin LevelSequenceNavigatorBridge
+LogPluginManager: Mounting Engine plugin LocalizableMessage
+LogPluginManager: Mounting Engine plugin MeshModelingToolsetExp
+LogPluginManager: Mounting Engine plugin LowLevelNetTrace
+LogPluginManager: Mounting Engine plugin NFORDenoise
+LogPluginManager: Mounting Engine plugin PlanarCut
+LogPluginManager: Mounting Engine plugin PlatformCrypto
+LogPluginManager: Mounting Engine plugin PythonScriptPlugin
+LogPluginManager: Mounting Engine plugin RuntimeTelemetry
+LogPluginManager: Mounting Engine plugin SequenceNavigator
+LogPluginManager: Mounting Engine plugin SkeletalReduction
+LogPluginManager: Mounting Engine plugin ToolPresets
+LogPluginManager: Mounting Engine plugin AlembicImporter
+LogPluginManager: Mounting Engine plugin TcpMessaging
+LogPluginManager: Mounting Engine plugin ActorSequence
+LogPluginManager: Mounting Engine plugin LevelSequenceEditor
+LogPluginManager: Mounting Engine plugin SequencerScripting
+LogPluginManager: Mounting Engine plugin TemplateSequence
+LogPluginManager: Mounting Engine plugin EOSShared
+LogPluginManager: Mounting Engine plugin OnlineBase
+LogPluginManager: Mounting Engine plugin OnlineSubsystem
+LogPluginManager: Mounting Engine plugin OnlineSubsystemUtils
+LogPluginManager: Mounting Engine plugin OnlineServices
+LogPluginManager: Mounting Engine plugin OnlineSubsystemNull
+LogPluginManager: Mounting Engine plugin ActorLayerUtilities
+LogPluginManager: Mounting Engine plugin AndroidFileServer
+LogPluginManager: Mounting Engine plugin LauncherChunkInstaller
+LogPluginManager: Mounting Engine plugin AppleImageUtils
+LogPluginManager: Mounting Engine plugin AndroidDeviceProfileSelector
+LogPluginManager: Mounting Engine plugin AndroidPermission
+LogPluginManager: Mounting Engine plugin UdpMessaging
+LogPluginManager: Mounting Engine plugin AndroidMoviePlayer
+LogPluginManager: Mounting Engine plugin ArchVisCharacter
+LogPluginManager: Mounting Engine plugin AssetTags
+LogPluginManager: Mounting Engine plugin AppleMoviePlayer
+LogPluginManager: Mounting Engine plugin AudioSynesthesia
+LogPluginManager: Mounting Engine plugin AudioWidgets
+LogPluginManager: Mounting Engine plugin AudioCapture
+LogPluginManager: Mounting Engine plugin ComputeFramework
+LogPluginManager: Mounting Engine plugin CableComponent
+LogPluginManager: Mounting Engine plugin ChunkDownloader
+LogPluginManager: Mounting Engine plugin CustomMeshComponent
+LogPluginManager: Mounting Engine plugin ExampleDeviceProfileSelector
+LogPluginManager: Mounting Engine plugin GooglePAD
+LogPluginManager: Mounting Engine plugin GoogleCloudMessaging
+LogPluginManager: Mounting Engine plugin GeometryCache
+LogPluginManager: Mounting Engine plugin GeometryProcessing
+LogPluginManager: Mounting Engine plugin HairStrands
+LogPluginManager: Mounting Engine plugin IOSDeviceProfileSelector
+LogPluginManager: Mounting Engine plugin LocationServicesBPLibrary
+LogPluginManager: Mounting Engine plugin LinuxDeviceProfileSelector
+LogPluginManager: Mounting Engine plugin MeshModelingToolset
+LogPluginManager: Mounting Engine plugin Metasound
+LogPluginManager: Mounting Engine plugin InputDebugging
+LogPluginManager: Mounting Engine plugin MobilePatchingUtils
+LogPluginManager: Mounting Engine plugin MsQuic
+LogPluginManager: Mounting Engine plugin ProceduralMeshComponent
+LogPluginManager: Mounting Engine plugin PropertyAccessEditor
+LogPluginManager: Mounting Engine plugin PropertyBindingUtils
+LogPluginManager: Mounting Engine plugin ResonanceAudio
+LogPluginManager: Mounting Engine plugin SignificanceManager
+LogPluginManager: Mounting Engine plugin RigVM
+LogPluginManager: Mounting Engine plugin SoundFields
+LogPluginManager: Mounting Engine plugin Synthesis
+LogPluginManager: Mounting Engine plugin StateTree
+LogPluginManager: Mounting Engine plugin WindowsDeviceProfileSelector
+LogPluginManager: Mounting Engine plugin WaveTable
+LogPluginManager: Mounting Engine plugin WebMMoviePlayer
+LogPluginManager: Mounting Engine plugin WindowsMoviePlayer
+LogPluginManager: Mounting Engine plugin CameraCalibrationCore
+LogPluginManager: Mounting Engine plugin Takes
+LogPluginManager: Mounting Engine plugin OnlineSubsystemGooglePlay
+LogPluginManager: Mounting Engine plugin LightMixer
+LogPluginManager: Mounting Engine plugin ObjectMixer
+LogPluginManager: Mounting Engine plugin ContentBrowserAssetDataSource
+LogPluginManager: Mounting Engine plugin ContentBrowserFileDataSource
+LogPluginManager: Mounting Engine plugin PortableObjectFileDataSource
+LogPluginManager: Mounting Engine plugin OnlineSubsystemIOS
+LogPluginManager: Mounting Engine plugin XInputDevice
+LogPluginManager: Mounting Engine plugin ContentBrowserClassDataSource
+LogPluginManager: Mounting Engine plugin CompositeCore
+LogPluginManager: Mounting Engine plugin BaseCharacterFXEditor
+LogPluginManager: Mounting Project plugin PBRTextureLab
+SourceControl: Revision control is disabled
+SourceControl: Revision control is disabled
+SourceControl: Revision control is disabled
+LogConfig: Applying CVar settings from Section [/Script/RenderDocPlugin.RenderDocPluginSettings] File [Engine]
+RenderDocPlugin: Display: RenderDoc plugin will not be loaded. Use '-AttachRenderDoc' on the cmd line or enable 'renderdoc.AutoAttach' in the plugin settings.
+LogWindows: Failed to load 'WinPixGpuCapturer.dll' (GetLastError=126)
+LogWindows: File 'WinPixGpuCapturer.dll' does not exist
+PixWinPlugin: PIX capture plugin failed to initialize! Check that the process is launched from PIX.
+LogStudioTelemetry: Started StudioTelemetry Session
+LogNFORDenoise: NFORDenoise function starting up
+LogEOSShared: Loaded "C:/Program Files/Epic Games/UE_5.6/Engine/Binaries/Win64/EOSSDK-Win64-Shipping.dll"
+LogEOSShared: FEOSSDKManager::Initialize Initializing EOSSDK Version:1.17.0-41373641
+LogInit: Using libcurl 8.12.1
+LogInit:  - built for Windows
+LogInit:  - supports SSL with OpenSSL/1.1.1t
+LogInit:  - supports HTTP deflate (compression) using libz 1.3
+LogInit:  - other features:
+LogInit:      CURL_VERSION_SSL
+LogInit:      CURL_VERSION_LIBZ
+LogInit:      CURL_VERSION_IPV6
+LogInit:      CURL_VERSION_ASYNCHDNS
+LogInit:      CURL_VERSION_LARGEFILE
+LogInit:      CURL_VERSION_TLSAUTH_SRP
+LogInit:      CURL_VERSION_HTTP2
+LogInit:  CurlRequestOptions (configurable via config and command line):
+LogInit:  - bVerifyPeer = true  - Libcurl will verify peer certificate
+LogInit:  - bUseHttpProxy = true  - Libcurl will use HTTP proxy
+LogInit:  - HttpProxyAddress = '127.0.0.1:7890'
+LogInit:  - bDontReuseConnections = false  - Libcurl will reuse connections
+LogInit:  - MaxHostConnections = 16  - Libcurl will limit the number of connections to a host
+LogInit:  - LocalHostAddr = Default
+LogInit:  - BufferSize = 65536
+LogInit: CreateHttpThread using FCurlMultiPollEventLoopHttpThread
+LogInit: Creating http thread with maximum 256 concurrent requests
+LogInit: WinSock: version 1.1 (2.2), MaxSocks=32767, MaxUdp=65467
+LogOnline: OSS: Created online subsystem instance for: NULL
+LogOnline: OSS: TryLoadSubsystemAndSetDefault: Loaded subsystem for type [NULL]
+LogConfig: Applying CVar settings from Section [/Script/CompositeCore.CompositeCorePluginSettings] File [Engine]
+LogInit: ExecutableName: UnrealEditor-Cmd.exe
+LogInit: Build: ++UE5+Release-5.6-CL-44394996
+LogInit: Platform=WindowsEditor
+LogInit: MachineId=c304a4382e6e4d4da158e72278bdf3fe
+LogInit: DeviceId=
+LogInit: Engine Version: 5.6.1-44394996+++UE5+Release-5.6
+LogInit: Compatible Engine Version: 5.6.0-43139311+++UE5+Release-5.6
+LogInit: Net CL: 43139311
+LogInit: OS: Windows 11 (24H2) [10.0.26100.8737] (), CPU: Intel(R) Core(TM) i7-14700KF, GPU: NVIDIA GeForce RTX 5070 Ti
+LogInit: Compiled (64-bit): Jul 28 2025 20:53:34
+LogInit: Architecture: x64
+LogInit: Compiled with Visual C++: 19.38.33130.00
+LogInit: Build Configuration: Development
+LogInit: Branch Name: ++UE5+Release-5.6
+LogInit: Command Line: -unattended -nop4 -nosplash -NullRHI -stdout -FullStdOutLogOutput -AbsLog=C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop\reports\overnight-20260827\test-ue56-restart-UV-ReloadAfterRestart.log -ReportExportPath=C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop\reports\overnight-20260827\automation-ue56-restart-UV-ReloadAfterRestart -ExecCmds="Automation RunTests PBRTextureLab.UV.ReloadAfterRestart;Quit"
+LogInit: Base Directory: C:/Program Files/Epic Games/UE_5.6/Engine/Binaries/Win64/
+LogInit: Allocator: Mimalloc
+LogInit: Installed Engine Build: 1
+LogInit: This binary is optimized with LTO: no, PGO: no, instrumented for PGO data collection: no
+LogDevObjectVersion: Number of dev versions registered: 37
+LogDevObjectVersion:   Dev-Blueprints (B0D832E4-1F89-4F0D-ACCF-7EB736FD4AA2): 10
+LogDevObjectVersion:   Dev-Build (E1C64328-A22C-4D53-A36C-8E866417BD8C): 0
+LogDevObjectVersion:   Dev-Core (375EC13C-06E4-48FB-B500-84F0262A717E): 4
+LogDevObjectVersion:   Dev-Editor (E4B068ED-F494-42E9-A231-DA0B2E46BB41): 40
+LogDevObjectVersion:   Dev-Framework (CFFC743F-43B0-4480-9391-14DF171D2073): 37
+LogDevObjectVersion:   Dev-Mobile (B02B49B5-BB20-44E9-A304-32B752E40360): 3
+LogDevObjectVersion:   Dev-Networking (A4E4105C-59A1-49B5-A7C5-40C4547EDFEE): 0
+LogDevObjectVersion:   Dev-Online (39C831C9-5AE6-47DC-9A44-9C173E1C8E7C): 0
+LogDevObjectVersion:   Dev-Physics (78F01B33-EBEA-4F98-B9B4-84EACCB95AA2): 20
+LogDevObjectVersion:   Dev-Platform (6631380F-2D4D-43E0-8009-CF276956A95A): 0
+LogDevObjectVersion:   Dev-Rendering (12F88B9F-8875-4AFC-A67C-D90C383ABD29): 49
+LogDevObjectVersion:   Dev-Sequencer (7B5AE74C-D270-4C10-A958-57980B212A5A): 13
+LogDevObjectVersion:   Dev-VR (D7296918-1DD6-4BDD-9DE2-64A83CC13884): 3
+LogDevObjectVersion:   Dev-LoadTimes (C2A15278-BFE7-4AFE-6C17-90FF531DF755): 1
+LogDevObjectVersion:   Private-Geometry (6EACA3D4-40EC-4CC1-B786-8BED09428FC5): 3
+LogDevObjectVersion:   Dev-AnimPhys (29E575DD-E0A3-4627-9D10-D276232CDCEA): 17
+LogDevObjectVersion:   Dev-Anim (AF43A65D-7FD3-4947-9873-3E8ED9C1BB05): 15
+LogDevObjectVersion:   Dev-ReflectionCapture (6B266CEC-1EC7-4B8F-A30B-E4D90942FC07): 1
+LogDevObjectVersion:   Dev-Automation (0DF73D61-A23F-47EA-B727-89E90C41499A): 1
+LogDevObjectVersion:   FortniteMain (601D1886-AC64-4F84-AA16-D3DE0DEAC7D6): 207
+LogDevObjectVersion:   FortniteValkyrie (8DBC2C5B-54A7-43E0-A768-FCBB7DA29060): 8
+LogDevObjectVersion:   FortniteSeason (5B4C06B7-2463-4AF8-805B-BF70CDF5D0DD): 13
+LogDevObjectVersion:   FortniteRelease (E7086368-6B23-4C58-8439-1B7016265E91): 17
+LogDevObjectVersion:   Dev-Enterprise (9DFFBCD6-494F-0158-E221-12823C92A888): 11
+LogDevObjectVersion:   Dev-Niagara (F2AED0AC-9AFE-416F-8664-AA7FFA26D6FC): 1
+LogDevObjectVersion:   Dev-Destruction (174F1F0B-B4C6-45A5-B13F-2EE8D0FB917D): 10
+LogDevObjectVersion:   Dev-Physics-Ext (35F94A83-E258-406C-A318-09F59610247C): 41
+LogDevObjectVersion:   Dev-PhysicsMaterial-Chaos (B68FC16E-8B1B-42E2-B453-215C058844FE): 1
+LogDevObjectVersion:   Dev-CineCamera (B2E18506-4273-CFC2-A54E-F4BB758BBA07): 1
+LogDevObjectVersion:   Dev-VirtualProduction (64F58936-FD1B-42BA-BA96-7289D5D0FA4E): 1
+LogDevObjectVersion:   UE5-Main (697DD581-E64F-41AB-AA4A-51ECBEB7B628): 121
+LogDevObjectVersion:   UE5-Release (D89B5E42-24BD-4D46-8412-ACA8DF641779): 56
+LogDevObjectVersion:   UE5-SpecialProject (59DA5D52-1232-4948-B878-597870B8E98B): 9
+LogDevObjectVersion:   Dev-MediaFramework (6F0ED827-A609-4895-9C91-998D90180EA4): 2
+LogDevObjectVersion:   Dev-NaniteResearch (30D58BE3-95EA-4282-A6E3-B159D8EBB06A): 1
+LogDevObjectVersion:   Dev-ComputeFramework (6304A3E7-0059-4F59-8CFC-21BD7721FD4E): 0
+LogDevObjectVersion:   LensFileVersion (8652A554-966A-466C-9FD7-1C6DD61B1ADB): 1
+LogInit: Presizing for max 25165824 objects, including 0 objects not considered by GC.
+LogInit: Object subsystem initialized
+LogConfig: Set CVar [[con.DebugEarlyDefault:1]]
+LogConfig: CVar [[con.DebugLateDefault:1]] deferred - dummy variable created
+LogConfig: CVar [[con.DebugLateCheat:1]] deferred - dummy variable created
+LogConfig: CVar [[LogNamedEventFilters:Frame *]] deferred - dummy variable created
+LogConfig: Set CVar [[r.setres:1280x720]]
+LogConfig: CVar [[framepro.ScopeMinTimeMicroseconds:10]] deferred - dummy variable created
+LogConfig: Set CVar [[fx.NiagaraAllowRuntimeScalabilityChanges:1]]
+LogConfig: CVar [[QualityLevelMapping:high]] deferred - dummy variable created
+LogConfig: CVar [[r.Occlusion.SingleRHIThreadStall:1]] deferred - dummy variable created
+LogConfig: Set CVar [[r.Nanite.Streaming.ReservedResources:1]]
+LogConfig: CVar [[D3D12.Bindless.ResourceDescriptorHeapSize:32768]] deferred - dummy variable created
+LogConfig: CVar [[D3D12.Bindless.SamplerDescriptorHeapSize:2048]] deferred - dummy variable created
+LogConfig: Set CVar [[r.PSOPrecache.GlobalShaders:1]]
+LogConfig: Set CVar [[r.VRS.EnableSoftware:1]]
+LogConfig: Set CVar [[r.VRS.ContrastAdaptiveShading:1]]
+[2026.08.26-19.31.31:914][  0]LogConfig: Set CVar [[r.VSync:0]]
+[2026.08.26-19.31.31:914][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererSettings] File [Engine]
+[2026.08.26-19.31.31:914][  0]LogConfig: CVar [[VisualizeCalibrationColorMaterialPath:/Engine/EngineMaterials/PPM_DefaultCalibrationColor.PPM_DefaultCalibrationColor]] deferred - dummy variable created
+[2026.08.26-19.31.31:914][  0]LogConfig: CVar [[VisualizeCalibrationGrayscaleMaterialPath:/Engine/EngineMaterials/PPM_DefaultCalibrationGrayscale.PPM_DefaultCalibrationGrayscale]] deferred - dummy variable created
+[2026.08.26-19.31.31:914][  0]LogConfig: Set CVar [[r.GPUCrashDebugging:0]]
+[2026.08.26-19.31.31:914][  0]LogConfig: CVar [[MaxSkinBones:(Default=65536,PerPlatform=(("Mobile", 256)))]] deferred - dummy variable created
+[2026.08.26-19.31.31:914][  0]LogConfig: Set CVar [[r.Shaders.RemoveUnusedInterpolators:1]]
+[2026.08.26-19.31.31:914][  0]LogConfig: Set CVar [[r.Shadow.DetectVertexShaderLayerAtRuntime:1]]
+[2026.08.26-19.31.31:914][  0]LogConfig: Set CVar [[r.GenerateMeshDistanceFields:0]]
+[2026.08.26-19.31.31:914][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererOverrideSettings] File [Engine]
+[2026.08.26-19.31.31:916][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.StreamingSettings] File [Engine]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[s.MinBulkDataSizeForAsyncLoading:131072]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[s.AsyncLoadingThreadEnabled:1]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[s.EventDrivenLoaderEnabled:1]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[s.WarnIfTimeLimitExceeded:0]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[s.TimeLimitExceededMultiplier:1.5]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[s.TimeLimitExceededMinTime:0.005]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[s.UseBackgroundLevelStreaming:1]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[s.PriorityAsyncLoadingExtraTime:15.0]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[s.LevelStreamingActorsUpdateTimeLimit:5.0]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[s.PriorityLevelStreamingActorsUpdateExtraTime:5.0]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[s.LevelStreamingComponentsRegistrationGranularity:10]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[s.UnregisterComponentsTimeLimit:1.0]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[s.LevelStreamingComponentsUnregistrationGranularity:5]]
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[s.MaxPackageSummarySize:16384]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[s.FlushStreamingOnExit:1]]
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[FixedBootOrder:/Script/Engine/Default__SoundBase]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[FixedBootOrder:/Script/Engine/Default__MaterialInterface]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[FixedBootOrder:/Script/Engine/Default__DeviceProfileManager]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.GarbageCollectionSettings] File [Engine]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[gc.MaxObjectsNotConsideredByGC:1]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[gc.FlushStreamingOnGC:0]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[gc.NumRetriesBeforeForcingGC:10]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[gc.AllowParallelGC:1]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[gc.TimeBetweenPurgingPendingKillObjects:61.1]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[gc.MaxObjectsInEditor:25165824]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[gc.IncrementalBeginDestroyEnabled:1]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[gc.CreateGCClusters:1]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[gc.MinGCClusterSize:5]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[gc.AssetClustreringEnabled:0]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[gc.ActorClusteringEnabled:0]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[gc.VerifyUObjectsAreNotFGCObjects:0]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Set CVar [[gc.GarbageEliminationEnabled:1]]
+[2026.08.26-19.31.31:916][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.NetworkSettings] File [Engine]
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[NetworkEmulationProfiles:(ProfileName="Average",ToolTip="Simulates average internet conditions")]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[NetworkEmulationProfiles:(ProfileName="Bad",ToolTip="Simulates laggy internet conditions")]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: Applying CVar settings from Section [/Script/UnrealEd.CookerSettings] File [Engine]
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[DefaultASTCQualityBySpeed:2]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[DefaultASTCQualityBySize:3]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[DefaultASTCQualityBySizeHQ:4]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:WidgetBlueprint]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:GroupActor]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:MetaData]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:ObjectRedirector]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:NavMeshRenderingComponent]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:ReflectionCaptureComponent]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:TextRenderComponent]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:Font]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:InterpCurveEdSetup]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:MaterialExpression]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:NiagaraEmitter]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:NiagaraScript]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:ParticleEmitter]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:ParticleLODLevel]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:ParticleModule]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:SubUVAnimation]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:SoundNode]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:GameplayEffectUIData]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedServer:AmbientSound]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedClient:WidgetBlueprint]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedClient:GroupActor]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedClient:MetaData]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedClient:ObjectRedirector]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[ClassesExcludedOnDedicatedClient:InterpCurveEdSetup]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.AllowStaticLighting]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.MaterialEditor.LWCTruncateMode]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.GBuffer]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.VelocityOutputPass]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.SelectiveBasePassOutputs]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.DBuffer]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.Mobile.DBuffer]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.Shaders.Symbols]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.Shaders.GenerateSymbols]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.Shaders.WriteSymbols]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.Shaders.AllowUniqueSymbols]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.Shaders.ExtraData]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.Shaders.Optimize]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.CompileShadersForDevelopment]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.MobileHDR]] deferred - dummy variable created
+[2026.08.26-19.31.31:916][  0]LogConfig: CVar [[VersionedIntRValues:r.UsePreExposure]] deferred - dummy variable created
+[2026.08.26-19.31.31:917][  0]LogCsvProfiler: Display: Metadata set : systemresolution.resx="2560"
+[2026.08.26-19.31.31:917][  0]LogCsvProfiler: Display: Metadata set : systemresolution.resy="1440"
+[2026.08.26-19.31.31:917][  0]LogConfig: Applying CVar settings from Section [ViewDistanceQuality@3] File [Scalability]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.SkeletalMeshLODBias:0]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.ViewDistanceScale:1.0]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Applying CVar settings from Section [AntiAliasingQuality@3] File [Scalability]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.FXAA.Quality:4]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.TemporalAA.Quality:2]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.TSR.History.R11G11B10:1]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.TSR.History.ScreenPercentage:200]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.TSR.History.UpdateQuality:3]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.TSR.ShadingRejection.Flickering:1]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.TSR.RejectionAntiAliasingQuality:2]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.TSR.ReprojectionField:1]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.TSR.Resurrection:1]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Applying CVar settings from Section [ShadowQuality@3] File [Scalability]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.LightFunctionQuality:1]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.ShadowQuality:5]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.CSM.MaxCascades:10]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.MaxResolution:2048]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.MaxCSMResolution:2048]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.RadiusThreshold:0.01]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.DistanceScale:1.0]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.CSM.TransitionScale:1.0]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.PreShadowResolutionFactor:1.0]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.DistanceFieldShadowing:1]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.VolumetricFog:1]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.VolumetricFog.GridPixelSize:8]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.VolumetricFog.GridSizeZ:128]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.VolumetricFog.HistoryMissSupersampleCount:4]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.LightMaxDrawDistanceScale:1]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.CapsuleShadows:1]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.Virtual.MaxPhysicalPages:4096]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasDirectional:-1.5]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasDirectionalMoving:-1.5]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasLocal:0.0]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasLocalMoving:1.0]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.Virtual.SMRT.RayCountDirectional:8]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.Virtual.SMRT.SamplesPerRayDirectional:4]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.Virtual.SMRT.RayCountLocal:8]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Shadow.Virtual.SMRT.SamplesPerRayLocal:4]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Applying CVar settings from Section [GlobalIlluminationQuality@3] File [Scalability]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.DistanceFieldAO:1]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.SkylightIntensityMultiplier:1.0]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.AOQuality:2]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Lumen.DiffuseIndirect.Allow:1]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.LumenScene.DirectLighting.MaxLightsPerTile:8]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.LumenScene.DirectLighting.UpdateFactor:32]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.LumenScene.Radiosity.UpdateFactor:64]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.LumenScene.Radiosity.ProbeSpacing:4]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.LumenScene.Radiosity.HemisphereProbeResolution:4]]
+[2026.08.26-19.31.31:917][  0]LogConfig: Set CVar [[r.Lumen.TraceMeshSDFs.Allow:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.RadianceCache.ProbeResolution:32]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.RadianceCache.NumProbesToTraceBudget:100]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.DownsampleFactor:16]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.NumAdaptiveProbes:8]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.TracingOctahedronResolution:8]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.IrradianceFormat:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.StochasticInterpolation:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.FullResolutionJitterWidth:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.TwoSidedFoliageBackfaceDiffuse:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.ScreenTraces.HZBTraversal.FullResDepth:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.ShortRangeAO.HardwareRayTracing:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.ShortRangeAO.BentNormal:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyVolume.GridPixelSize:32]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyVolume.TraceFromVolume:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyVolume.TracingOctahedronResolution:3]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyVolume.RadianceCache.ProbeResolution:8]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyVolume.RadianceCache.NumProbesToTraceBudget:70]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.RayTracing.Scene.BuildMode:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Applying CVar settings from Section [ReflectionQuality@3] File [Scalability]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SSR.Quality:3]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SSR.HalfResSceneColor:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.Reflections.Allow:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.Reflections.DownsampleFactor:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.Reflections.MaxRoughnessToTraceForFoliage:0.4]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.MaxRoughnessToEvaluateRoughSpecularForFoliage:0.8]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.Reflections.ScreenSpaceReconstruction.NumSamples:5]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.Reflections.ScreenSpaceReconstruction.MinWeight:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyReflections.FrontLayer.Allow:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyReflections.FrontLayer.Enable:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Applying CVar settings from Section [PostProcessQuality@3] File [Scalability]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.MotionBlurQuality:4]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.MotionBlur.HalfResGather:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.AmbientOcclusionMipLevelFactor:0.4]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.AmbientOcclusionMaxQuality:100]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.AmbientOcclusionLevels:-1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.AmbientOcclusionRadiusScale:1.0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DepthOfFieldQuality:2]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.RenderTargetPoolMin:400]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.LensFlareQuality:2]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SceneColorFringeQuality:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.EyeAdaptationQuality:2]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.BloomQuality:5]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Bloom.ScreenPercentage:50.000]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.FastBlurThreshold:100]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Upscale.Quality:3]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.LightShaftQuality:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Filter.SizeScale:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Tonemapper.Quality:5]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DOF.Gather.ResolutionDivisor:2         ; lower gathering resolution]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DOF.Gather.AccumulatorQuality:1        ; higher gathering accumulator quality]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DOF.Gather.PostfilterMethod:1          ; Median3x3 postfilering method]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DOF.Gather.EnableBokehSettings:0       ; no bokeh simulation when gathering]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DOF.Gather.RingCount:4                 ; medium number of samples when gathering]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DOF.Scatter.ForegroundCompositing:1    ; additive foreground scattering]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DOF.Scatter.BackgroundCompositing:2    ; additive background scattering]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DOF.Scatter.EnableBokehSettings:1      ; bokeh simulation when scattering]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DOF.Scatter.MaxSpriteRatio:0.1         ; only a maximum of 10% of scattered bokeh]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DOF.Recombine.Quality:1                ; cheap slight out of focus]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DOF.Recombine.EnableBokehSettings:0    ; no bokeh simulation on slight out of focus]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DOF.TemporalAAQuality:1                ; more stable temporal accumulation]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DOF.Kernel.MaxForegroundRadius:0.025]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DOF.Kernel.MaxBackgroundRadius:0.025]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Applying CVar settings from Section [TextureQuality@3] File [Scalability]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Streaming.MipBias:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Streaming.AmortizeCPUToGPUCopy:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Streaming.MaxNumTexturesToStreamPerFrame:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Streaming.Boost:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.MaxAnisotropy:8]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.VT.MaxAnisotropy:8]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Streaming.LimitPoolSizeToVRAM:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Streaming.PoolSize:1000]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Streaming.MaxEffectiveScreenSize:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Applying CVar settings from Section [EffectsQuality@3] File [Scalability]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.TranslucencyLightingVolumeDim:64]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.RefractionQuality:2]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SceneColorFormat:4]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DetailMode:3]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.TranslucencyVolumeBlur:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.MaterialQualityLevel:1 ; High quality]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SSS.Scale:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SSS.SampleSet:2]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SSS.Quality:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SSS.HalfRes:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SSGI.Quality:3]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.EmitterSpawnRateScale:1.0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.ParticleLightQuality:2]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.FastApplyOnOpaque:1 ; Always have FastSkyLUT 1 in this case to avoid wrong sky]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.SampleCountMaxPerSlice:4]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.DepthResolution:16.0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SkyAtmosphere.FastSkyLUT:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SkyAtmosphere.FastSkyLUT.SampleCountMin:4.0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SkyAtmosphere.FastSkyLUT.SampleCountMax:128.0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SkyAtmosphere.SampleCountMin:4.0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SkyAtmosphere.SampleCountMax:128.0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SkyAtmosphere.TransmittanceLUT.UseSmallFormat:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SkyAtmosphere.TransmittanceLUT.SampleCount:10.0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.SkyAtmosphere.MultiScatteringLUT.SampleCount:15.0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[fx.Niagara.QualityLevel:3]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.Refraction.OffsetQuality:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.HeterogeneousVolumes.DownsampleFactor:2]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.HeterogeneousVolumes.MaxStepCount:256]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.HeterogeneousVolumes.Shadows.Resolution:256]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.HeterogeneousVolumes.Shadows.MaxSampleCount:8]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.HeterogeneousVolumes.UseExistenceMask:0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Applying CVar settings from Section [FoliageQuality@3] File [Scalability]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[foliage.DensityScale:1.0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[grass.DensityScale:1.0]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Applying CVar settings from Section [ShadingQuality@3] File [Scalability]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.HairStrands.SkyLighting.IntegrationType:2]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.HairStrands.SkyAO.SampleCount:4]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.HairStrands.Visibility.MSAA.SamplePerPixel:4]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.AnisotropicMaterials:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Applying CVar settings from Section [LandscapeQuality@3] File [Scalability]
+[2026.08.26-19.31.31:918][  0]LogInit: Selected Device Profile: [WindowsEditor]
+[2026.08.26-19.31.31:918][  0]LogHAL: Display: Platform has ~ 64 GB [68541632512 / 68719476736 / 64], which maps to Largest [LargestMinGB=32, LargerMinGB=12, DefaultMinGB=8, SmallerMinGB=6, SmallestMinGB=0)
+[2026.08.26-19.31.31:918][  0]LogDeviceProfileManager: Going up to parent DeviceProfile [Windows]
+[2026.08.26-19.31.31:918][  0]LogDeviceProfileManager: Going up to parent DeviceProfile []
+[2026.08.26-19.31.31:918][  0]LogDeviceProfileManager: Pushing Device Profile CVar: [[UI.SlateSDFText.RasterizationMode:Bitmap -> Msdf]]
+[2026.08.26-19.31.31:918][  0]LogDeviceProfileManager: Pushing Device Profile CVar: [[UI.SlateSDFText.ResolutionLevel:2 -> 2]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Applying CVar settings from Section [Startup] File [../../../Engine/Config/ConsoleVariables.ini]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[r.DumpShaderDebugInfo:2]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[p.chaos.AllowCreatePhysxBodies:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: Set CVar [[fx.SkipVectorVMBackendOptimizations:1]]
+[2026.08.26-19.31.31:918][  0]LogConfig: CVar [[ds.CADTranslator.Meshing.ActivateThinZoneMeshing:0]] deferred - dummy variable created
+[2026.08.26-19.31.31:918][  0]LogConfig: CVar [[ds.CADTranslator.Stitching.RemoveThinFaces:0]] deferred - dummy variable created
+[2026.08.26-19.31.31:918][  0]LogConfig: Applying CVar settings from Section [Startup_Windows] File [../../../Engine/Config/ConsoleVariables.ini]
+[2026.08.26-19.31.31:918][  0]LogConfig: Applying CVar settings from Section [ConsoleVariables] File [Engine]
+[2026.08.26-19.31.31:918][  0]LogConfig: Applying CVar settings from Section [ConsoleVariables] File [C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Saved/Config/WindowsEditor/Editor.ini]
+[2026.08.26-19.31.31:918][  0]LogInit: Computer: DESKTOP-JK4SRF5
+[2026.08.26-19.31.31:918][  0]LogInit: User: Administrator
+[2026.08.26-19.31.31:918][  0]LogInit: CPU Page size=4096, Cores=20
+[2026.08.26-19.31.31:918][  0]LogInit: High frequency timer resolution =10.000000 MHz
+[2026.08.26-19.31.31:918][  0]LogMemory: Process is running as part of a Windows Job with separate resource limits
+[2026.08.26-19.31.31:918][  0]LogMemory: Memory total: Physical=63.8GB (64GB approx) Virtual=83.4GB
+[2026.08.26-19.31.31:918][  0]LogMemory: Platform Memory Stats for WindowsEditor
+[2026.08.26-19.31.31:918][  0]LogMemory: Process Physical Memory: 626.96 MB used, 626.96 MB peak
+[2026.08.26-19.31.31:918][  0]LogMemory: Process Virtual Memory: 653.39 MB used, 653.39 MB peak
+[2026.08.26-19.31.31:918][  0]LogMemory: Physical Memory: 26514.32 MB used,  38852.07 MB free, 65366.39 MB total
+[2026.08.26-19.31.31:918][  0]LogMemory: Virtual Memory: 39310.05 MB used,  46056.34 MB free, 85366.39 MB total
+[2026.08.26-19.31.31:918][  0]LogCsvProfiler: Display: Metadata set : extradevelopmentmemorymb="0"
+[2026.08.26-19.31.31:919][  0]LogWindows: WindowsPlatformFeatures enabled
+[2026.08.26-19.31.31:922][  0]LogChaosDD: Chaos Debug Draw Startup
+[2026.08.26-19.31.31:922][  0]LogInit: Physics initialised using underlying interface: Chaos
+[2026.08.26-19.31.31:922][  0]LogInit: Using OS detected language (zh-CN).
+[2026.08.26-19.31.31:922][  0]LogInit: Using OS detected locale (zh-CN).
+[2026.08.26-19.31.31:924][  0]LogTextLocalizationManager: No specific localization for 'zh-CN' exists, so 'zh-Hans' will be used for the language.
+[2026.08.26-19.31.32:139][  0]LogTextLocalizationResource: LocRes '../../../Engine/Content/Localization/Editor/zh/Editor.locres' could not be opened for reading!
+[2026.08.26-19.31.32:139][  0]LogTextLocalizationResource: LocRes '../../../Engine/Content/Localization/EditorTutorials/zh/EditorTutorials.locres' could not be opened for reading!
+[2026.08.26-19.31.32:139][  0]LogTextLocalizationResource: LocRes '../../../Engine/Content/Localization/Keywords/zh/Keywords.locres' could not be opened for reading!
+[2026.08.26-19.31.32:139][  0]LogTextLocalizationResource: LocRes '../../../Engine/Content/Localization/Category/zh/Category.locres' could not be opened for reading!
+[2026.08.26-19.31.32:139][  0]LogTextLocalizationResource: LocRes '../../../Engine/Content/Localization/ToolTips/zh/ToolTips.locres' could not be opened for reading!
+[2026.08.26-19.31.32:139][  0]LogTextLocalizationResource: LocRes '../../../Engine/Content/Localization/PropertyNames/zh/PropertyNames.locres' could not be opened for reading!
+[2026.08.26-19.31.32:139][  0]LogTextLocalizationResource: LocRes '../../../Engine/Content/Localization/Engine/zh/Engine.locres' could not be opened for reading!
+[2026.08.26-19.31.32:139][  0]LogTextLocalizationResource: LocRes '../../../Engine/Plugins/MetaHuman/MetaHumanSDK/Content/Localization/MetaHumanSDK/zh/MetaHumanSDK.locres' could not be opened for reading!
+[2026.08.26-19.31.32:139][  0]LogTextLocalizationResource: LocRes '../../../Engine/Plugins/Online/OnlineSubsystem/Content/Localization/OnlineSubsystem/zh/OnlineSubsystem.locres' could not be opened for reading!
+[2026.08.26-19.31.32:139][  0]LogTextLocalizationResource: LocRes '../../../Engine/Plugins/Online/OnlineSubsystemUtils/Content/Localization/OnlineSubsystemUtils/zh/OnlineSubsystemUtils.locres' could not be opened for reading!
+[2026.08.26-19.31.32:139][  0]LogTextLocalizationResource: LocRes '../../../Engine/Plugins/Online/Android/OnlineSubsystemGooglePlay/Content/Localization/OnlineSubsystemGooglePlay/zh/OnlineSubsystemGooglePlay.locres' could not be opened for reading!
+[2026.08.26-19.31.32:139][  0]LogTextLocalizationResource: LocRes '../../../Engine/Plugins/Online/IOS/OnlineSubsystemIOS/Content/Localization/OnlineSubsystemIOS/zh/OnlineSubsystemIOS.locres' could not be opened for reading!
+[2026.08.26-19.31.32:211][  0]LogWindowsTextInputMethodSystem: Available input methods:
+[2026.08.26-19.31.32:211][  0]LogWindowsTextInputMethodSystem:   - 简体中文(中国大陆) - 微信输入法 (TSF IME).
+[2026.08.26-19.31.32:211][  0]LogWindowsTextInputMethodSystem:   - 英语(美国) - (Keyboard).
+[2026.08.26-19.31.32:211][  0]LogWindowsTextInputMethodSystem:   - 简体中文(中国大陆) - 触控输入更正 (TSF IME).
+[2026.08.26-19.31.32:211][  0]LogWindowsTextInputMethodSystem: Activated input method: 简体中文(中国大陆) - 微信输入法 (TSF IME).
+[2026.08.26-19.31.32:213][  0]LogWindowsTouchpad: Display: CacheForceMaxTouchpadSensitivityMode SetMaxTouchpadSensitivity
+[2026.08.26-19.31.32:214][  0]LogObj: Display: Attempting to load config data for Default__SlateThemeManager before the Class has been constructed/registered/linked (likely during module loading or early startup). This will result in the load silently failing and should be fixed.
+[2026.08.26-19.31.32:217][  0]LogSlate: New Slate User Created. Platform User Id 0, User Index 0, Is Virtual User: 0
+[2026.08.26-19.31.32:217][  0]LogSlate: Slate User Registered.  User Index 0, Is Virtual User: 0
+[2026.08.26-19.31.32:277][  0]LogVRS: Current RHI does not support Variable Rate Shading
+[2026.08.26-19.31.32:278][  0]LogCsvProfiler: Display: Metadata set : verbatimrhiname="Null"
+[2026.08.26-19.31.32:278][  0]LogCsvProfiler: Display: Metadata set : rhiname="Null"
+[2026.08.26-19.31.32:278][  0]LogCsvProfiler: Display: Metadata set : rhifeaturelevel="SM6"
+[2026.08.26-19.31.32:278][  0]LogCsvProfiler: Display: Metadata set : shaderplatform="PCD3D_SM6"
+[2026.08.26-19.31.32:278][  0]LogInit: Initializing FReadOnlyCVARCache
+[2026.08.26-19.31.32:281][  0]LogTextureFormatASTC: Display: ASTCEnc version 5.0.1 library loaded
+[2026.08.26-19.31.32:281][  0]LogTextureFormatManager: Display: Loaded Base TextureFormat: TextureFormatASTC
+[2026.08.26-19.31.32:281][  0]LogTextureFormatManager: Display: Loaded Base TextureFormat: TextureFormatDXT
+[2026.08.26-19.31.32:281][  0]LogTextureFormatManager: Display: Loaded Base TextureFormat: TextureFormatETC2
+[2026.08.26-19.31.32:281][  0]LogTextureFormatManager: Display: Loaded Base TextureFormat: TextureFormatIntelISPCTexComp
+[2026.08.26-19.31.32:281][  0]LogTextureFormatManager: Display: Loaded Base TextureFormat: TextureFormatUncompressed
+[2026.08.26-19.31.32:281][  0]LogTextureFormatOodle: Display: Oodle Texture TFO init; latest sdk version = 2.9.13
+[2026.08.26-19.31.32:281][  0]LogTextureFormatOodle: Display: Oodle Texture loading DLL: oo2tex_win64_2.9.13.dll
+[2026.08.26-19.31.32:282][  0]LogTextureFormatOodle: Display: Oodle Texture loading DLL: oo2tex_win64_2.9.5.dll
+[2026.08.26-19.31.32:282][  0]LogTextureFormatManager: Display: Loaded Base TextureFormat: TextureFormatOodle
+[2026.08.26-19.31.32:298][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android'
+[2026.08.26-19.31.32:298][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ASTC'
+[2026.08.26-19.31.32:298][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_DXT'
+[2026.08.26-19.31.32:298][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC2'
+[2026.08.26-19.31.32:298][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_OpenXR'
+[2026.08.26-19.31.32:298][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'AndroidClient'
+[2026.08.26-19.31.32:298][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ASTCClient'
+[2026.08.26-19.31.32:298][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_DXTClient'
+[2026.08.26-19.31.32:298][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC2Client'
+[2026.08.26-19.31.32:298][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_OpenXRClient'
+[2026.08.26-19.31.32:298][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_Multi'
+[2026.08.26-19.31.32:298][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_MultiClient'
+[2026.08.26-19.31.32:306][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'IOS'
+[2026.08.26-19.31.32:306][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'IOSClient'
+[2026.08.26-19.31.32:314][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Linux'
+[2026.08.26-19.31.32:314][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxEditor'
+[2026.08.26-19.31.32:314][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxServer'
+[2026.08.26-19.31.32:314][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxClient'
+[2026.08.26-19.31.32:322][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Mac'
+[2026.08.26-19.31.32:322][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacEditor'
+[2026.08.26-19.31.32:322][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacServer'
+[2026.08.26-19.31.32:322][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'MacClient'
+[2026.08.26-19.31.32:329][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'TVOS'
+[2026.08.26-19.31.32:329][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'TVOSClient'
+[2026.08.26-19.31.32:337][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Windows'
+[2026.08.26-19.31.32:337][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsEditor'
+[2026.08.26-19.31.32:337][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsServer'
+[2026.08.26-19.31.32:337][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsClient'
+[2026.08.26-19.31.32:337][  0]LogTargetPlatformManager: Display: Building Assets For WindowsEditor
+[2026.08.26-19.31.32:359][  0]LogTargetPlatformManager: Unable to find shader format SF_METAL_ES3_1_IOS from hinted modules, loading all potential format modules to find it
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager: Loaded format module MetalShaderFormat
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   SF_METAL_ES3_1_IOS
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   SF_METAL_SM5_IOS
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   SF_METAL_ES3_1_TVOS
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   SF_METAL_SM5_TVOS
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   SF_METAL_SM5
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   SF_METAL_SM6
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   SF_METAL_SIM
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   SF_METAL_ES3_1
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager: Loaded format module ShaderFormatD3D
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   PCD3D_SM6
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   PCD3D_SM5
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   PCD3D_ES31
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager: Loaded format module ShaderFormatOpenGL
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   GLSL_150_ES31
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   GLSL_ES3_1_ANDROID
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager: Loaded format module ShaderFormatVectorVM
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   VVM_1_0
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager: Loaded format module VulkanShaderFormat
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   SF_VULKAN_SM5
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   SF_VULKAN_ES31_ANDROID
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   SF_VULKAN_ES31
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   SF_VULKAN_SM5_ANDROID
+[2026.08.26-19.31.32:363][  0]LogTargetPlatformManager:   SF_VULKAN_SM6
+[2026.08.26-19.31.32:363][  0]LogRendererCore: Ray tracing is disabled. Reason: disabled through project setting (r.RayTracing=0).
+[2026.08.26-19.31.32:365][  0]LogDerivedDataCache: Display: Memory: Max Cache Size: -1 MB
+[2026.08.26-19.31.32:365][  0]LogDerivedDataCache: FDerivedDataBackendGraph: Pak pak cache file ../../../../../../Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/DerivedDataCache/DDC.ddp not found, will not use a pak cache.
+[2026.08.26-19.31.32:365][  0]LogDerivedDataCache: Unable to find inner node Pak for hierarchy Hierarchy.
+[2026.08.26-19.31.32:365][  0]LogDerivedDataCache: FDerivedDataBackendGraph: CompressedPak pak cache file ../../../../../../Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
+[2026.08.26-19.31.32:365][  0]LogDerivedDataCache: Unable to find inner node CompressedPak for hierarchy Hierarchy.
+[2026.08.26-19.31.32:497][  0]LogDerivedDataCache: Display: ../../../Engine/DerivedDataCache/Compressed.ddp: Opened pak cache for reading. (1350 MiB)
+[2026.08.26-19.31.32:497][  0]LogDerivedDataCache: FDerivedDataBackendGraph: EnterprisePak pak cache file ../../../Enterprise/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
+[2026.08.26-19.31.32:497][  0]LogDerivedDataCache: Unable to find inner node EnterprisePak for hierarchy Hierarchy.
+[2026.08.26-19.31.32:498][  0]LogZenServiceInstance: Found Zen config default=C:/Users/Administrator/AppData/Local/UnrealEngine/Common/Zen/Data
+[2026.08.26-19.31.32:498][  0]LogZenServiceInstance: InTree version at 'C:/Program Files/Epic Games/UE_5.6/Engine/Binaries/Win64/zenserver.exe' is '5.6.6-202504241958-windows-x64-release-f090a03'
+[2026.08.26-19.31.32:498][  0]LogZenServiceInstance: Installed version at 'C:/Users/Administrator/AppData/Local/UnrealEngine/Common/Zen/Install/zenserver.exe' is '5.8.13-202605190912-windows-x64-release-094f62c2'
+[2026.08.26-19.31.32:498][  0]LogZenServiceInstance: No current process using the data dir found, launching a new instance
+[2026.08.26-19.31.32:498][  0]LogZenServiceInstance: Display: Launching executable 'C:/Users/Administrator/AppData/Local/UnrealEngine/Common/Zen/Install/zenserver.exe', working dir 'C:/Users/Administrator/AppData/Local/UnrealEngine/Common/Zen/Install', data dir 'C:/Users/Administrator/AppData/Local/UnrealEngine/Common/Zen/Data', args '--port 8558 --data-dir "C:\Users\Administrator\AppData\Local\UnrealEngine\Common\Zen\Data" --http asio --gc-cache-duration-seconds 1209600 --gc-interval-seconds 21600 --gc-low-diskspace-threshold 2147483648 --quiet --http-forceloopback --owner-pid 16620  --child-id Zen_16620_Startup'
+[2026.08.26-19.31.32:779][  0]LogZenServiceInstance: Display: Unreal Zen Storage Server HTTP service at [::1]:8558 status: OK!.
+[2026.08.26-19.31.32:779][  0]LogZenServiceInstance: Local ZenServer AutoLaunch initialization completed in 0.281 seconds
+[2026.08.26-19.31.32:780][  0]LogDerivedDataCache: Display: ZenLocal: Using ZenServer HTTP service at http://[::1]:8558/ with namespace ue.ddc status: OK!.
+[2026.08.26-19.31.32:782][  0]LogDerivedDataCache: C:/Users/Administrator/AppData/Local/UnrealEngine/Common/DerivedDataCache: Speed tests took 0.00 seconds.
+[2026.08.26-19.31.32:783][  0]LogDerivedDataCache: Display: C:/Users/Administrator/AppData/Local/UnrealEngine/Common/DerivedDataCache: Performance: Latency=0.01ms. RandomReadSpeed=3476.76MBs, RandomWriteSpeed=579.97MBs. Assigned SpeedClass 'Local'
+[2026.08.26-19.31.32:783][  0]LogDerivedDataCache: Local: Using data cache path C:/Users/Administrator/AppData/Local/UnrealEngine/Common/DerivedDataCache: DeleteOnly
+[2026.08.26-19.31.32:783][  0]LogDerivedDataCache: ZenShared: Disabled because Host is set to 'None'
+[2026.08.26-19.31.32:783][  0]LogDerivedDataCache: Unable to find inner node ZenShared for hierarchy Hierarchy.
+[2026.08.26-19.31.32:783][  0]LogDerivedDataCache: Shared: Disabled because no path is configured.
+[2026.08.26-19.31.32:783][  0]LogDerivedDataCache: Unable to find inner node Shared for hierarchy Hierarchy.
+[2026.08.26-19.31.32:783][  0]LogDerivedDataCache: Cloud: Disabled because Host is set to 'None'
+[2026.08.26-19.31.32:783][  0]LogDerivedDataCache: Unable to find inner node Cloud for hierarchy Hierarchy.
+[2026.08.26-19.31.32:784][  0]LogShaderCompilers: Guid format shader working directory is -44 characters bigger than the processId version (../../../../../../Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Intermediate/Shaders/WorkingDirectory/16620/).
+[2026.08.26-19.31.32:784][  0]LogShaderCompilers: Cleaned the shader compiler working directory 'C:/Users/Administrator/AppData/Local/Temp/UnrealShaderWorkingDir/FC34928E450FE2ABCE3C779FA1E668BD/'.
+[2026.08.26-19.31.32:784][  0]LogXGEController: Cannot use XGE Controller as Incredibuild is not installed on this machine.
+[2026.08.26-19.31.32:784][  0]LogUbaHorde: Display: UBA/Horde Configuration [Uba.Provider.Horde]: Not Enabled
+[2026.08.26-19.31.32:784][  0]LogShaderCompilers: Display: Using 14 local workers for shader compilation
+[2026.08.26-19.31.32:785][  0]LogShaderCompilers: Display: Compiling shader autogen file: ../../../../../../Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Intermediate/ShaderAutogen/PCD3D_SM6/AutogenShaderHeaders.ush
+[2026.08.26-19.31.32:785][  0]LogShaderCompilers: Display: Autogen file is unchanged, skipping write.
+[2026.08.26-19.31.33:049][  0]LogSlate: Using FreeType 2.10.0
+[2026.08.26-19.31.33:050][  0]LogSlate: SlateFontServices - WITH_FREETYPE: 1, WITH_HARFBUZZ: 1
+[2026.08.26-19.31.33:054][  0]LogAssetRegistry: FAssetRegistry took 0.0022 seconds to start up
+[2026.08.26-19.31.33:055][  0]LogEditorDomain: Display: EditorDomain is Disabled
+[2026.08.26-19.31.33:151][  0]LogAssetRegistry: Display: AssetDataGatherer spent 0.000s loading caches ../../../../../../Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Intermediate/CachedAssetRegistry_*.bin.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/00基础贴花粗糙.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/0自发光运动2.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/000天空盒.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/0运动.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/000基础自发光呼吸.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/000基础镂空发光.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/000基础透光布纹.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/000基础贴花.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/000基础窗纱.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/000基础材质.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Materials/M_PBRTextureLabMR_57.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/000基础布纹.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Materials/M_PBRTextureLabMR_58.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/000基础次表面.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:152][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/000基础布纹1混合法线.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T5UV58.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7UV58.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/Defaults/6b6963b29938.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4ReuseInst57_Inst.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Reuse58_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/Defaults/T_Brick_Clay_Beveled_N.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Reuse58_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4ReuseInst58_Inst.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Reuse57_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Reuse57_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Reuse57_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Reuse57_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Inst58Maps_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Reuse57_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Inst58Maps_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Reuse58_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Inst58Maps_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T5UV57.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Inst58_Inst.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Reuse58_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Reuse57_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Inst57Maps_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Inst57Maps_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Inst57Maps_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Inst57Maps_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Reuse58_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Conflict57_Inst.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Cancel58_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Cancel58_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Cancel58_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Conflict58_Inst.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Inst57Maps_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Inst57Maps_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Cancel57_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Cancel57_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Cancel58_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4BundledInst58_Inst.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Inst58Maps_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Cancel57_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Inst57_Inst.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Cancel57_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Cancel58_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Inst58Maps_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Cancel58_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Cancel57_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Inst58Maps_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Reload58_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Reload58_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Reload58_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Cancel57_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Reload58_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Reload58_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Reload58_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7UV57.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T4Reuse58_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Reload57_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Reload57_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Reload57_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Reload57_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Reload57_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Local58_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Local57_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Local57_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy58_Roughness1.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy58_Normal1.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy58_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy58_Metallic1.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy58_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Local57_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy58_Height1.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy58_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy58_BaseColor1.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Local58_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Local58_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy58_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy58_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy57_Roughness1.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy58_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Reload57_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy57_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy57_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy57_Metallic1.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy57_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy57_AO1.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:154][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy58_AO1.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy57_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Conflict58_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Conflict58_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Conflict58_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Conflict58_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy57_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy57_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Conflict58_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Conflict58_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy57_BaseColor1.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Conflict57_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy57_Height1.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Conflict57_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Conflict57_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Conflict57_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Conflict57_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Happy57_Normal1.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:155][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T3Conflict57_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Tex58/T7Tex58_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Tex58/T7Tex58_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Tex58/T7Tex58_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Tex58/T7Tex58_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Tex58/T7Tex58_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Tex58/T7Tex58.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Tex57/T7Tex57_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Tex57/T7Tex57_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Tex57/T7Tex57_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Tex57/T7Tex57_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Tex57/T7Tex57.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Tex57/T7Tex57_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Seed58/T7Seed58_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Seed58/T7Seed58_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Seed58/T7Seed58_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Seed58/T7Seed58_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Tex57/T7Tex57_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Seed58/T7Seed58_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Seed57/T7Seed57_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Seed58/T7Seed58.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Seed57/T7Seed57_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Seed58/T7Seed58_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Mod58/T7Mod58_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Mod58/T7Mod58_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Mod58/T7Mod58_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Mod58/T7Mod58_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Mod57/T7Mod57_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Seed57/T7Seed57_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Mod57/T7Mod57_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Seed57/T7Seed57.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Mod57/T7Mod57_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Mod58/T7Mod58_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Mod58/T7Mod58_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Mod57/T7Mod57_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Mod57/T7Mod57_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Mod57/T7Mod57_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Inst58/T7Inst58_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Inst58/T7Inst58_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Inst58/T7Inst58_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Inst58/T7Inst58.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Mod57/T7Mod57.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Inst58/T7Inst58_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Inst57/T7Inst57_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Inst57/T7Inst57_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Seed57/T7Seed57_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Inst57/T7Inst57_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Inst57/T7Inst57_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Inst58/T7Inst58_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Seed57/T7Seed57_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Tex58/T7Tex58_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Inst58/T7Inst58_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Inst57/T7Inst57.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Inst57/T7Inst57_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Mod58/T7Mod58.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Seed57/T7Seed57_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Inst57/T7Inst57_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File58_2/T7File58_2_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File58_2/T7File58_2_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File58_2/T7File58_2_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File58_2/T7File58_2.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File58_2/T7File58_2_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File58/T7File58_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File58/T7File58_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File58/T7File58_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File58/T7File58_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File58_2/T7File58_2_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File58/T7File58_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File58/T7File58.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File57/T7File57_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File57/T7File57_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File57/T7File57_AO.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File57/T7File57_Roughness.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:158][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File57/T7File57_Height.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:159][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File57/T7File57.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:159][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File58_2/T7File58_2_Metallic.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:159][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Asm57/T7Asm57.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:159][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7Asm58/T7Asm58.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:159][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File57/T7File57_BaseColor.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:159][  0]LogAssetRegistry: Warning: Package is unloadable: C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/PBRTextureLab/Automation/T7File58/T7File58_Normal.uasset. Reason: Version is too old. Min Version: 214, Package Version: 0.
+[2026.08.26-19.31.33:216][  0]LogDeviceProfileManager: Display: Deviceprofile LinuxArm64Editor not found.
+[2026.08.26-19.31.33:217][  0]LogDeviceProfileManager: Display: Deviceprofile LinuxArm64 not found.
+[2026.08.26-19.31.33:218][  0]LogDeviceProfileManager: Display: Deviceprofile Swan not found.
+[2026.08.26-19.31.33:218][  0]LogDeviceProfileManager: Display: Deviceprofile PICO4 not found.
+[2026.08.26-19.31.33:219][  0]LogDeviceProfileManager: Display: Deviceprofile Others not found.
+[2026.08.26-19.31.33:237][  0]LogDeviceProfileManager: Active device profile: [000001F7979D1E00][000001F7D6602800 66] WindowsEditor
+[2026.08.26-19.31.33:237][  0]LogCsvProfiler: Display: Metadata set : deviceprofile="WindowsEditor"
+[2026.08.26-19.31.33:240][  0]LogStreaming: Display: FlushAsyncLoading(1): 1 QueuedPackages, 0 AsyncPackages
+[2026.08.26-19.31.33:252][  0]LogStreaming: Display: Flushing package /Engine/Functions/Engine_MaterialFunctions01/Shading/PowerToRoughness (state: WaitingForIo) recursively from another package /Engine/EngineMaterials/DefaultTextMaterialOpaque (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.08.26-19.31.33:252][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultTextMaterialOpaque is adding a dynamic import to package /Engine/Functions/Engine_MaterialFunctions01/Shading/PowerToRoughness because of a recursive sync load
+[2026.08.26-19.31.33:252][  0]LogStreaming: Display: Flushing package /Engine/Functions/Engine_MaterialFunctions01/Shading/PowerToRoughness (state: DeferredPostLoad) recursively from another package /Engine/EngineMaterials/DefaultTextMaterialOpaque (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.08.26-19.31.33:252][  0]LogStreaming: Display: Flushing package /Engine/Functions/Engine_MaterialFunctions01/Shading/ConvertFromDiffSpec (state: WaitingForIo) recursively from another package /Engine/EngineMaterials/DefaultTextMaterialOpaque (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.08.26-19.31.33:253][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultTextMaterialOpaque is adding a dynamic import to package /Engine/Functions/Engine_MaterialFunctions01/Shading/ConvertFromDiffSpec because of a recursive sync load
+[2026.08.26-19.31.33:253][  0]LogStreaming: Display: Flushing package /Engine/Functions/Engine_MaterialFunctions01/Shading/ConvertFromDiffSpec (state: DeferredPostLoad) recursively from another package /Engine/EngineMaterials/DefaultTextMaterialOpaque (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.08.26-19.31.33:253][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/WorldGridMaterial (state: WaitingForIo) recursively from another package /Engine/EngineMaterials/DefaultTextMaterialOpaque (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.08.26-19.31.33:253][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultTextMaterialOpaque is adding a dynamic import to package /Engine/EngineMaterials/T_Default_Material_Grid_M because of a recursive sync load
+[2026.08.26-19.31.33:254][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultTextMaterialOpaque is adding a dynamic import to package /Engine/EngineMaterials/T_Default_Material_Grid_N because of a recursive sync load
+[2026.08.26-19.31.33:254][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultTextMaterialOpaque is adding a dynamic import to package /Engine/Functions/Engine_MaterialFunctions01/Opacity/CameraDepthFade because of a recursive sync load
+[2026.08.26-19.31.33:255][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/DefaultDeferredDecalMaterial (state: WaitingForIo) recursively from another package /Engine/EngineMaterials/WorldGridMaterial (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.08.26-19.31.33:255][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/DefaultLightFunctionMaterial (state: WaitingForIo) recursively from another package /Engine/EngineMaterials/DefaultDeferredDecalMaterial (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.08.26-19.31.33:255][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/DefaultPostProcessMaterial (state: WaitingForIo) recursively from another package /Engine/EngineMaterials/DefaultLightFunctionMaterial (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.08.26-19.31.33:255][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultLightFunctionMaterial is adding a dynamic import to package /Engine/EngineMaterials/DefaultDiffuse because of a recursive sync load
+[2026.08.26-19.31.33:255][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultLightFunctionMaterial is adding a dynamic import to package /Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components because of a recursive sync load
+[2026.08.26-19.31.33:256][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultLightFunctionMaterial is adding a dynamic import to package /Engine/EngineMaterials/DefaultPostProcessMaterial because of a recursive sync load
+[2026.08.26-19.31.33:256][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/DefaultPostProcessMaterial (state: DeferredPostLoad) recursively from another package /Engine/EngineMaterials/DefaultLightFunctionMaterial (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.08.26-19.31.33:256][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultDeferredDecalMaterial is adding a dynamic import to package /Engine/EngineMaterials/DefaultLightFunctionMaterial because of a recursive sync load
+[2026.08.26-19.31.33:256][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/DefaultLightFunctionMaterial (state: DeferredPostLoad) recursively from another package /Engine/EngineMaterials/DefaultDeferredDecalMaterial (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.08.26-19.31.33:256][  0]LogStreaming: Display: Package /Engine/EngineMaterials/WorldGridMaterial is adding a dynamic import to package /Engine/EngineMaterials/DefaultDeferredDecalMaterial because of a recursive sync load
+[2026.08.26-19.31.33:256][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/DefaultDeferredDecalMaterial (state: DeferredPostLoad) recursively from another package /Engine/EngineMaterials/WorldGridMaterial (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.08.26-19.31.33:256][  0]LogStreaming: Display: Package /Engine/EngineMaterials/DefaultTextMaterialOpaque is adding a dynamic import to package /Engine/EngineMaterials/WorldGridMaterial because of a recursive sync load
+[2026.08.26-19.31.33:256][  0]LogStreaming: Display: Flushing package /Engine/EngineMaterials/WorldGridMaterial (state: DeferredPostLoad) recursively from another package /Engine/EngineMaterials/DefaultTextMaterialOpaque (state: CreateLinkerLoadExports) will result in a partially loaded package to avoid a deadlock.
+[2026.08.26-19.31.33:257][  0]LogTextureEncodingSettings: Display: Texture Encode Speed: FinalIfAvailable (editor).
+[2026.08.26-19.31.33:257][  0]LogTextureEncodingSettings: Display: Oodle Texture Encode Speed settings: Fast: RDO Off Lambda=0, Effort=Normal Final: RDO Off Lambda=0, Effort=Normal
+[2026.08.26-19.31.33:257][  0]LogTextureEncodingSettings: Display: Shared linear texture encoding: Disabled
+[2026.08.26-19.31.33:267][  0]LogMeshReduction: Display: Using QuadricMeshReduction for automatic static mesh reduction
+[2026.08.26-19.31.33:267][  0]LogMeshReduction: Display: Using SkeletalMeshReduction for automatic skeletal mesh reduction
+[2026.08.26-19.31.33:267][  0]LogMeshReduction: Display: Using ProxyLODMeshReduction for automatic mesh merging
+[2026.08.26-19.31.33:267][  0]LogMeshReduction: Display: No distributed automatic mesh merging module available
+[2026.08.26-19.31.33:267][  0]LogMeshMerging: No distributed automatic mesh merging module available
+[2026.08.26-19.31.33:388][  0]LogConfig: Applying CVar settings from Section [/Script/CQTest.CQTestSettings] File [Engine]
+[2026.08.26-19.31.33:405][  0]LogVirtualization: Display: VirtualizationSystem name found in ini file: None
+[2026.08.26-19.31.33:405][  0]LogVirtualization: Display: FNullVirtualizationSystem mounted, virtualization will be disabled
+[2026.08.26-19.31.33:405][  0]LogIris: FNetObjectFactoryRegistry::UnregisterFactory is unregistering factory: NetActorFactory name: NetActorFactory id: 0
+[2026.08.26-19.31.33:405][  0]LogIris: FNetObjectFactoryRegistry::UnregisterFactory is unregistering factory: NetSubObjectFactory name: NetSubObjectFactory id: 1
+[2026.08.26-19.31.33:416][  0]LogSlate: Border
+[2026.08.26-19.31.33:416][  0]LogSlate: BreadcrumbButton
+[2026.08.26-19.31.33:416][  0]LogSlate: Brushes.Title
+[2026.08.26-19.31.33:416][  0]LogSlate: ColorPicker.ColorThemes
+[2026.08.26-19.31.33:416][  0]LogSlate: Default
+[2026.08.26-19.31.33:416][  0]LogSlate: Icons.Save
+[2026.08.26-19.31.33:416][  0]LogSlate: Icons.Toolbar.Settings
+[2026.08.26-19.31.33:416][  0]LogSlate: ListView
+[2026.08.26-19.31.33:416][  0]LogSlate: SoftwareCursor_CardinalCross
+[2026.08.26-19.31.33:416][  0]LogSlate: SoftwareCursor_Grab
+[2026.08.26-19.31.33:416][  0]LogSlate: TableView.DarkRow
+[2026.08.26-19.31.33:416][  0]LogSlate: TableView.Row
+[2026.08.26-19.31.33:416][  0]LogSlate: TreeView
+[2026.08.26-19.31.33:434][  0]LogWorldPartition: Display: FWorldPartitionClassDescRegistry::Initialize started...
+[2026.08.26-19.31.33:436][  0]LogWorldPartition: Display: FWorldPartitionClassDescRegistry::Initialize took 1.634 ms
+[2026.08.26-19.31.33:452][  0]LogStats: UGameplayTagsManager::InitializeManager -  0.000 s
+[2026.08.26-19.31.33:456][  0]LogNiagaraDebuggerClient: Niagara Debugger Client Initialized | Session: 9349A10A21B1491F8000000000006900 | Instance: 2EC40EE843D2CDAAC33291B6D382E0B1 (DESKTOP-JK4SRF5-16620).
+[2026.08.26-19.31.33:646][  0]LogNNERuntimeORT: Available graphics and compute adapters:
+[2026.08.26-19.31.33:646][  0]LogNNERuntimeORT: Selecting NPU adapter: NVIDIA GeForce RTX 5070 Ti
+[2026.08.26-19.31.33:771][  0]LogNNERuntimeORT: MakeRuntimeORTDml:
+[2026.08.26-19.31.33:771][  0]LogNNERuntimeORT:   DirectML:  yes
+[2026.08.26-19.31.33:771][  0]LogNNERuntimeORT:   RHI D3D12: no
+[2026.08.26-19.31.33:771][  0]LogNNERuntimeORT:   D3D12:     yes
+[2026.08.26-19.31.33:771][  0]LogNNERuntimeORT:   NPU:       yes
+[2026.08.26-19.31.33:771][  0]LogNNERuntimeORT: Interface availability:
+[2026.08.26-19.31.33:771][  0]LogNNERuntimeORT:   GPU: yes
+[2026.08.26-19.31.33:771][  0]LogNNERuntimeORT:   RDG: no
+[2026.08.26-19.31.33:771][  0]LogNNERuntimeORT:   NPU: yes
+[2026.08.26-19.31.33:898][  0]LogNNERuntimeORT: Available graphics and compute adapters:
+[2026.08.26-19.31.33:898][  0]LogNNERuntimeORT: Selecting NPU adapter: NVIDIA GeForce RTX 5070 Ti
+[2026.08.26-19.31.34:143][  0]LogTcpMessaging: Initializing TcpMessaging bridge
+[2026.08.26-19.31.34:146][  0]LogUdpMessaging: Display: Work queue size set to 1024.
+[2026.08.26-19.31.34:146][  0]LogUdpMessaging: Initializing bridge on interface 0.0.0.0:0 to multicast group 230.0.0.1:6666.
+[2026.08.26-19.31.34:146][  0]LogUdpMessaging: Display: Unicast socket bound to '0.0.0.0:62421'.
+[2026.08.26-19.31.34:148][  0]LogUdpMessaging: Display: Added local interface '192.168.0.4' to multicast group '230.0.0.1:6666'
+[2026.08.26-19.31.34:149][  0]LogUdpMessaging: Display: Using asynchronous task graph for message deserialization.
+[2026.08.26-19.31.34:209][  0]LogMetaSound: Display: MetaSound Page Target Initialized to 'Default'
+[2026.08.26-19.31.34:210][  0]LogAudio: Display: Registering Engine Module Parameter Interfaces...
+[2026.08.26-19.31.34:221][  0]LogMetaSound: MetaSound Engine Initialized
+[2026.08.26-19.31.34:255][  0]LogChaosVDEditor: [FChaosVDExtensionsManager::RegisterExtension] Registering CVD Extension [FChaosVDGenericDebugDrawExtension] ...
+[2026.08.26-19.31.34:255][  0]LogChaosVDEditor: [FChaosVDExtensionsManager::RegisterExtension] Registering CVD Extension [FChaosVDAccelerationStructuresExtension] ...
+[2026.08.26-19.31.34:259][  0]LogTimingProfiler: Initialize
+[2026.08.26-19.31.34:259][  0]LogTimingProfiler: OnSessionChanged
+[2026.08.26-19.31.34:259][  0]LoadingProfiler: Initialize
+[2026.08.26-19.31.34:259][  0]LoadingProfiler: OnSessionChanged
+[2026.08.26-19.31.34:259][  0]LogNetworkingProfiler: Initialize
+[2026.08.26-19.31.34:259][  0]LogNetworkingProfiler: OnSessionChanged
+[2026.08.26-19.31.34:259][  0]LogMemoryProfiler: Initialize
+[2026.08.26-19.31.34:259][  0]LogMemoryProfiler: OnSessionChanged
+[2026.08.26-19.31.34:293][  0]LogConfig: Applying CVar settings from Section [/Script/NNEDenoiser.NNEDenoiserSettings] File [Engine]
+[2026.08.26-19.31.34:345][  0]SourceControl: 版本控制已禁用
+[2026.08.26-19.31.34:384][  0]SourceControl: 版本控制已禁用
+[2026.08.26-19.31.34:486][  0]LogAndroidPermission: UAndroidPermissionCallbackProxy::GetInstance
+[2026.08.26-19.31.34:489][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
+[2026.08.26-19.31.34:489][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
+[2026.08.26-19.31.34:506][  0]LogCollectionManager: Loaded 0 collections in 0.000545 seconds
+[2026.08.26-19.31.34:507][  0]LogFileCache: Scanning file cache for directory 'C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Saved/Collections/' took 0.00s
+[2026.08.26-19.31.34:510][  0]LogFileCache: Scanning file cache for directory 'C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/Developers/Administrator/Collections/' took 0.00s
+[2026.08.26-19.31.34:511][  0]LogFileCache: Scanning file cache for directory 'C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Content/Collections/' took 0.00s
+[2026.08.26-19.31.34:535][  0]LogPBRTextureLab: PBRTextureLabEditor started on UE 5.6.1
+[2026.08.26-19.31.34:535][  0]LogPBRTextureLab: Warning: Metallic is a heuristic mask (constant or luminance threshold), not a reliable physical inversion of metalness.
+[2026.08.26-19.31.34:544][  0]LogEOSSDK: LogEOS: [Boot] EOSSDK Version 1.17.0-41373641 booting at 2026-08-26T19:31:34.544Z using C
+[2026.08.26-19.31.34:544][  0]LogEOSSDK: LogEOS: [Boot] EOSSDK Platform Properties [OS=Windows/10.0.26100.8737.64bit, ClientId=xyza7891REBVsEqSJRRNXmlS7EQHM459, ProductId=86f32f1151354e7cb39c12f8ab2c22a3, SandboxId=a01927f7421a4d4995673fe30ef46945, DeploymentId=a652a72ea1664dcab3a467891eea5f30, ProductName=PBRTextureLabHost, ProductVersion=++UE5+Release-5.6-CL-44394996, IsServer=false, Flags=DisableOverlay]
+[2026.08.26-19.31.34:544][  0]LogEOSSDK: LogEOSAnalytics: Start Session (User: ...)
+[2026.08.26-19.31.34:544][  0]LogEOSSDK: LogEOSOverlay: Overlay will not load, because it was explicitly disabled when creating the platform
+[2026.08.26-19.31.34:547][  0]LogEOSSDK: LogEOSAntiCheat: [AntiCheatClient] Anti-cheat client not available. Verify that the game was started using the anti-cheat bootstrapper if you intend to use it.
+[2026.08.26-19.31.34:547][  0]LogEOSSDK: LogEOS: SetApplicationStatus - OldStatus: EOS_AS_Foreground, NewStatus: EOS_AS_Foreground, Current Time: 0001.01.01-00.00.00
+[2026.08.26-19.31.34:547][  0]LogEOSSDK: LogEOS: SetNetworkStatus - OldStatus: EOS_NS_Online, NewStatus: EOS_NS_Online
+[2026.08.26-19.31.34:547][  0]LogEOSSDK: LogEOS: Updating Platform SDK Config, Time: 0.000041
+[2026.08.26-19.31.34:547][  0]LogFab: Plugin initialized. VersionName: 0.0.9 (Version: 9) - Engine Version 5.6.1-44394996+++UE5+Release-5.6
+[2026.08.26-19.31.34:568][  0]LogUObjectArray: 42343 objects as part of root set at end of initial load.
+[2026.08.26-19.31.34:568][  0]LogUObjectArray: CloseDisregardForGC: 0/0 objects in disregard for GC pool
+[2026.08.26-19.31.34:638][  0]LogAutomationTest: Error: Condition failed
+[2026.08.26-19.31.34:638][  0]LogAutomationTest: Error: Condition failed
+[2026.08.26-19.31.34:638][  0]LogEngine: Initializing Engine...
+[2026.08.26-19.31.34:652][  0]LogTedsSettings: UTedsSettingsEditorSubsystem::Initialize
+[2026.08.26-19.31.34:667][  0]LogChaosDD: Creating Chaos Debug Draw Scene for world Untitled
+[2026.08.26-19.31.34:670][  0]LogNiagara: UAV Float16 is not supported, compressed GPU emitters will be disabled.
+[2026.08.26-19.31.34:673][  0]LogNetVersion: Set ProjectVersion to 1.0.0.0. Version Checksum will be recalculated on next use.
+[2026.08.26-19.31.34:673][  0]LogInit: Texture streaming: Disabled
+[2026.08.26-19.31.34:676][  0]LogAnalytics: Display: [UEEditor.Rocket.Release] AnalyticsET::StartSession ( APIServer = https://datarouter.ol.epicgames.com/datarouter/api/v1/public/data. AppVersion = 5.6.1-44394996+++UE5+Release-5.6 )
+[2026.08.26-19.31.34:679][  0]LogAudio: Display: Initializing Audio Device Manager...
+[2026.08.26-19.31.34:683][  0]LogAudio: Display: Loading Default Audio Settings Objects...
+[2026.08.26-19.31.34:684][  0]LogAudio: Display: No default SoundConcurrencyObject specified (or failed to load).
+[2026.08.26-19.31.34:685][  0]LogAudio: Display: Audio Device Manager Initialized
+[2026.08.26-19.31.34:685][  0]LogAudio: Display: Creating Audio Device:                 Id: 1, Scope: Shared, Realtime: True
+[2026.08.26-19.31.34:685][  0]LogAudioMixer: Display: Audio Mixer Platform Settings:
+[2026.08.26-19.31.34:685][  0]LogAudioMixer: Display: 	Sample Rate:						  48000
+[2026.08.26-19.31.34:685][  0]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
+[2026.08.26-19.31.34:685][  0]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
+[2026.08.26-19.31.34:685][  0]LogAudioMixer: Display: 	Number of buffers to queue:			  1
+[2026.08.26-19.31.34:685][  0]LogAudioMixer: Display: 	Max Channels (voices):				  32
+[2026.08.26-19.31.34:685][  0]LogAudioMixer: Display: 	Number of Async Source Workers:		  4
+[2026.08.26-19.31.34:685][  0]LogAudio: Display: AudioDevice MaxSources: 32
+[2026.08.26-19.31.34:685][  0]LogAudio: Display: Audio Spatialization Plugin: None (built-in).
+[2026.08.26-19.31.34:685][  0]LogAudio: Display: Audio Reverb Plugin: None (built-in).
+[2026.08.26-19.31.34:685][  0]LogAudio: Display: Audio Occlusion Plugin: None (built-in).
+[2026.08.26-19.31.34:688][  0]LogAudioMixer: Display: Initializing audio mixer using platform API: 'XAudio2'
+[2026.08.26-19.31.34:717][  0]LogAudioMixer: Display: Using Audio Hardware Device LS27F61x (NVIDIA High Definition Audio)
+[2026.08.26-19.31.34:717][  0]LogAudioMixer: Display: Initializing Sound Submixes...
+[2026.08.26-19.31.34:718][  0]LogAudioMixer: Display: Creating Master Submix 'MasterSubmixDefault'
+[2026.08.26-19.31.34:718][  0]LogAudioMixer: Display: Creating Master Submix 'MasterReverbSubmixDefault'
+[2026.08.26-19.31.34:719][  0]LogAudioMixer: FMixerPlatformXAudio2::StartAudioStream() called. InstanceID=1
+[2026.08.26-19.31.34:719][  0]LogAudioMixer: Display: Output buffers initialized: Frames=1024, Channels=2, Samples=2048, InstanceID=1
+[2026.08.26-19.31.34:719][  0]LogAudioMixer: Display: Starting AudioMixerPlatformInterface::RunInternal(), InstanceID=1
+[2026.08.26-19.31.34:719][  0]LogAudioMixer: Display: FMixerPlatformXAudio2::SubmitBuffer() called for the first time. InstanceID=1
+[2026.08.26-19.31.34:719][  0]LogInit: FAudioDevice initialized with ID 1.
+[2026.08.26-19.31.34:720][  0]LogAudio: Display: Audio Device (ID: 1) registered with world 'Untitled'.
+[2026.08.26-19.31.34:720][  0]LogAudioMixer: Initializing Audio Bus Subsystem for audio device with ID 1
+[2026.08.26-19.31.34:722][  0]LogCsvProfiler: Display: Metadata set : largeworldcoordinates="1"
+[2026.08.26-19.31.34:724][  0]LogInit: Undo buffer set to 256 MB
+[2026.08.26-19.31.34:724][  0]LogInit: Transaction tracking system initialized
+[2026.08.26-19.31.34:732][  0]LogSourceControl: Display: Uncontrolled Changelist persistency file loaded ../../../../../../Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Saved/SourceControl/UncontrolledChangelists.json
+[2026.08.26-19.31.34:750][  0]LocalizationService: 本地化服务已禁用
+[2026.08.26-19.31.34:789][  0]LogNNEDenoiser: Ray Tracing is not enabled, therefore NNEDenoiser is not registered!
+[2026.08.26-19.31.34:790][  0]LogPython: Python enabled via CVar 'Engine.Python.IsEnabledByDefault'
+[2026.08.26-19.31.34:790][  0]LogPython: Using Python 3.11.8
+[2026.08.26-19.31.34:803][  0]LogPython: Display: No pip-enabled plugins with python dependencies found, skipping
+[2026.08.26-19.31.35:006][  0]LogLevelSequenceEditor: LevelSequenceEditor subsystem initialized.
+[2026.08.26-19.31.35:021][  0]LogEditorDataStorage: Initializing
+[2026.08.26-19.31.35:022][  0]LogEditorDataStorage: Initialized
+[2026.08.26-19.31.35:025][  0]LogCore: Display: GameplayInsights module auto-connecting to local trace server...
+[2026.08.26-19.31.35:073][  0]LogInit: Display: Engine is initialized. Leaving FEngineLoop::Init()
+[2026.08.26-19.31.35:076][  0]SourceControl: 版本控制已禁用
+[2026.08.26-19.31.35:076][  0]LogUnrealEdMisc: Loading editor; pre map load, took 3.689
+[2026.08.26-19.31.35:076][  0]Cmd: MAP LOAD FILE="../../../Engine/Content/Maps/Templates/Template_Default.umap" TEMPLATE=1 SHOWPROGRESS=1 FEATURELEVEL=4
+[2026.08.26-19.31.35:078][  0]LogWorld: UWorld::CleanupWorld for Untitled, bSessionEnded=true, bCleanupResources=true
+[2026.08.26-19.31.35:078][  0]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2026.08.26-19.31.35:092][  0]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2026.08.26-19.31.35:094][  0]LogUObjectHash: Compacting FUObjectHashTables data took   0.31ms
+[2026.08.26-19.31.35:100][  0]LogAssetRegistry: Display: Triggering cache save on discovery complete
+[2026.08.26-19.31.35:106][  0]LogAudio: Display: Audio Device (ID: 1) registered with world 'Untitled_1'.
+[2026.08.26-19.31.35:106][  0]LogChaosDD: Creating Chaos Debug Draw Scene for world Untitled_1
+[2026.08.26-19.31.35:109][  0]LogEditorServer: Finished looking for orphan Actors (0.000 secs)
+[2026.08.26-19.31.35:121][  0]LogUObjectHash: Compacting FUObjectHashTables data took   0.30ms
+[2026.08.26-19.31.35:122][  0]Cmd: MAP CHECKDEP NOCLEARLOG
+[2026.08.26-19.31.35:122][  0]MapCheck: 地图检测完成：0个错误、0个警告、完成用时0.106毫秒。
+[2026.08.26-19.31.35:126][  0]LogUnrealEdMisc: Total Editor Startup Time, took 3.741
+[2026.08.26-19.31.35:131][  0]LogSlate: The tab "HomeScreen" attempted to spawn in layout 'UnrealEd_Layout_v1.5' but failed for some reason. It will not be displayed.
+[2026.08.26-19.31.35:131][  0]LogPlacementMode: Display: The Asset Registry is not yet fully loaded so some placeable classes might be missing.
+[2026.08.26-19.31.35:149][  0]LogSlate: The tab "LevelEditorToolBar" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
+[2026.08.26-19.31.35:201][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2026.08.26-19.31.35:248][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2026.08.26-19.31.35:296][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2026.08.26-19.31.35:343][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2026.08.26-19.31.35:373][  0]LogPakFile: Initializing PakPlatformFile
+[2026.08.26-19.31.35:373][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/StarterContent.upack', mount point: 'root:/'
+[2026.08.26-19.31.35:373][  0]LogPakFile: Initializing PakPlatformFile
+[2026.08.26-19.31.35:373][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_FirstPerson.upack', mount point: 'root:/'
+[2026.08.26-19.31.35:373][  0]LogPakFile: Initializing PakPlatformFile
+[2026.08.26-19.31.35:373][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_FirstPersonBP.upack', mount point: 'root:/'
+[2026.08.26-19.31.35:373][  0]LogPakFile: Initializing PakPlatformFile
+[2026.08.26-19.31.35:373][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_HandheldARBP.upack', mount point: 'root:/'
+[2026.08.26-19.31.35:373][  0]LogPakFile: Initializing PakPlatformFile
+[2026.08.26-19.31.35:375][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_ThirdPerson.upack', mount point: 'root:/'
+[2026.08.26-19.31.35:375][  0]LogPakFile: Initializing PakPlatformFile
+[2026.08.26-19.31.35:375][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_ThirdPersonBP.upack', mount point: 'root:/'
+[2026.08.26-19.31.35:375][  0]LogPakFile: Initializing PakPlatformFile
+[2026.08.26-19.31.35:375][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_TopDown.upack', mount point: 'root:/'
+[2026.08.26-19.31.35:375][  0]LogPakFile: Initializing PakPlatformFile
+[2026.08.26-19.31.35:375][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_TopDownBP.upack', mount point: 'root:/'
+[2026.08.26-19.31.35:375][  0]LogPakFile: Initializing PakPlatformFile
+[2026.08.26-19.31.35:375][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_VehicleAdvBP.upack', mount point: 'root:/'
+[2026.08.26-19.31.35:375][  0]LogPakFile: Initializing PakPlatformFile
+[2026.08.26-19.31.35:375][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.6/FeaturePacks/TP_VirtualRealityBP.upack', mount point: 'root:/'
+[2026.08.26-19.31.35:450][  0]LogSlate: The tab "YeCloudTab1" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
+[2026.08.26-19.31.35:526][  0]LogStall: Startup...
+[2026.08.26-19.31.35:527][  0]LogStall: Startup complete.
+[2026.08.26-19.31.35:529][  0]LogLoad: (Engine Initialization) Total time: 4.14 seconds
+[2026.08.26-19.31.35:755][  0]LogAutomationController: Ignoring very large delta of 18043239.93 seconds in calls to FAutomationControllerManager::Tick() and not penalizing unresponsive tests
+[2026.08.26-19.31.35:755][  0]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2026.08.26-19.31.35:755][  0]LogPython: Display: 正在运行启动脚本C:/Program Files/Epic Games/UE_5.6/Engine/Plugins/Animation/ControlRig/Content/Python/init_unreal.py…… started...
+[2026.08.26-19.31.35:772][  0]LogPython: registering <class 'ControlRigWorkflows.workflow_deformation_rig_preset.provider'>
+
+[2026.08.26-19.31.35:776][  0]LogPython: Display: 正在运行启动脚本C:/Program Files/Epic Games/UE_5.6/Engine/Plugins/Animation/ControlRig/Content/Python/init_unreal.py…… took 20.757 ms
+[2026.08.26-19.31.35:777][  0]Cmd: Automation RunTests PBRTextureLab.UV.ReloadAfterRestart;Quit
+[2026.08.26-19.31.35:777][  0]Automation: RunTests='PBRTextureLab.UV.ReloadAfterRestart' Queued.
+[2026.08.26-19.31.35:777][  0]Automation: Quit Command Queued.
+[2026.08.26-19.31.35:935][  1]LogAssetRegistry: Display: Asset registry cache written as 66.6 MiB to ../../../../../../Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Intermediate/CachedAssetRegistry_*.bin
+[2026.08.26-19.31.35:943][  1]LogAssetRegistry: AssetRegistryGather time 0.0925s: AssetDataDiscovery 0.0069s, AssetDataGather 0.0515s, StoreResults 0.0340s. Wall time 2.8900s.
+	NumCachedDirectories 1462. NumUncachedDirectories 18. NumCachedFiles 7463. NumUncachedFiles 0.
+	BackgroundTickInterruptions 0.
+[2026.08.26-19.31.35:953][  1]LogPlacementMode: Display: The Asset Registry is done with its initial scan, the list of placeable classes has been updated.
+[2026.08.26-19.31.35:958][  1]LogCollectionManager: Fixed up redirectors for 0 collections in 0.000000 seconds (updated 0 objects)
+[2026.08.26-19.31.35:958][  1]LogSourceControl: Uncontrolled asset discovery started...
+[2026.08.26-19.31.35:973][  1]LogEngineAutomationLatentCommand: FWaitForInteractiveFrameRate: FApp::CanEverRender() == false. Passing wait immediately.
+[2026.08.26-19.31.35:973][  2]LogAutomationCommandLine: Display: Ready to start automation
+[2026.08.26-19.31.36:054][ 12]LogSourceControl: Uncontrolled asset discovery finished in 0.095359 seconds (Found 7439 uncontrolled assets)
+[2026.08.26-19.31.36:515][ 67]LogEOSSDK: LogEOS: SDK Config Platform Update Request Successful, Time: 1.959041
+[2026.08.26-19.31.36:515][ 67]LogEOSSDK: LogEOSAnalytics: EOS SDK Analytics disabled for route [1].
+[2026.08.26-19.31.36:516][ 67]LogEOSSDK: LogEOS: Updating Product SDK Config, Time: 1.967277
+[2026.08.26-19.31.36:908][112]LogEOSSDK: LogEOSAnalytics: Start Session (User: ...)
+[2026.08.26-19.31.37:350][165]LogEOSSDK: LogEOS: SDK Config Product Update Request Successful, Time: 2.794106
+[2026.08.26-19.31.37:352][165]LogEOSSDK: LogEOS: SDK Config Data - Watermark: -1124465711
+[2026.08.26-19.31.37:352][165]LogEOSSDK: LogEOS: ScheduleNextSDKConfigDataUpdate - Time: 2.794106, Update Interval: 328.838165
+[2026.08.26-19.31.40:985][601]LogAutomationWorker: Received FindWorkersMessage from 119E8A514EEC7260BEFF73BE8E6641D5
+[2026.08.26-19.31.40:992][602]LogAutomationController: Received FindWorkersResponseMessage from 67A00A8043605BF54B5B0C87CBD0E6A7
+[2026.08.26-19.31.40:993][602]LogAutomationController: Requesting test list from 67A00A8043605BF54B5B0C87CBD0E6A7
+[2026.08.26-19.31.40:993][602]LogAutomationWorker: Received RequestTestsMessage from 119E8A514EEC7260BEFF73BE8E6641D5
+[2026.08.26-19.31.41:007][602]LogAutomationWorker: Set 4776 tests to 119E8A514EEC7260BEFF73BE8E6641D5
+[2026.08.26-19.31.41:007][602]LogAutomationController: Received RequestTestsReplyCompleteMessage from 67A00A8043605BF54B5B0C87CBD0E6A7
+[2026.08.26-19.31.41:009][602]LogAutomationController: 4776 tests available on 67A00A8043605BF54B5B0C87CBD0E6A7
+[2026.08.26-19.31.41:027][602]LogAutomationCommandLine: Display: Found 1 automation tests based on 'PBRTextureLab.UV.ReloadAfterRestart'
+[2026.08.26-19.31.41:027][602]LogAutomationCommandLine: Display: 	PBRTextureLab.UV.ReloadAfterRestart
+[2026.08.26-19.31.41:027][602]LogAutomationController: Sending StopTests to 67A00A8043605BF54B5B0C87CBD0E6A7
+[2026.08.26-19.31.41:029][602]LogAutomationController: Display: Loading results html template...
+[2026.08.26-19.31.41:030][602]LogAutomationController: Display: Successfully wrote html results file!
+[2026.08.26-19.31.41:030][602]LogAutomationController: Sending StartTestSession to 67A00A8043605BF54B5B0C87CBD0E6A7
+[2026.08.26-19.31.41:030][602]LogAutomationController: Display: Clearing ../../../../../../Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Saved/Automation/Logs/ and ../../../../../../Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Saved/Automation/Tmp/
+[2026.08.26-19.31.41:030][602]AutomationTestingLog: -----Test Run 3----
+[2026.08.26-19.31.41:031][602]LogAutomationController: Sending RunTest ReloadAfterRestart to 67A00A8043605BF54B5B0C87CBD0E6A7
+[2026.08.26-19.31.41:031][602]LogAutomationController: Display: Test Started. Name={ReloadAfterRestart} Path={PBRTextureLab.UV.ReloadAfterRestart}
+[2026.08.26-19.31.41:031][603]LogAutomationWorker: Received StopTests from 119E8A514EEC7260BEFF73BE8E6641D5
+[2026.08.26-19.31.41:031][603]LogAutomationWorker: Received StartTestSession from 119E8A514EEC7260BEFF73BE8E6641D5
+[2026.08.26-19.31.41:032][603]LogAutomationWorker: Received RunTests ReloadAfterRestart from 119E8A514EEC7260BEFF73BE8E6641D5
+[2026.08.26-19.31.41:032][603]LogStreaming: Display: FlushAsyncLoading(327): 1 QueuedPackages, 0 AsyncPackages
+[2026.08.26-19.31.41:032][603]LogStaticMesh: Display: 正在构建静态网格体T5UV56（所需内存估计：0.010434MB）…
+[2026.08.26-19.31.41:034][603]LogStaticMesh: Built static mesh [0.00s] /Game/PBRTextureLab/Automation/T5UV56.T5UV56
+[2026.08.26-19.31.41:048][605]LogAutomationController: Display: Test Completed. Result={成功} Name={ReloadAfterRestart} Path={PBRTextureLab.UV.ReloadAfterRestart}
+[2026.08.26-19.31.41:048][605]LogAutomationController: BeginEvents: PBRTextureLab.UV.ReloadAfterRestart
+[2026.08.26-19.31.41:048][605]LogAutomationController: EndEvents: PBRTextureLab.UV.ReloadAfterRestart
+[2026.08.26-19.31.41:049][605]LogAutomationController: Display: Exporting Automation Report to C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop\reports\overnight-20260827\automation-ue56-restart-UV-ReloadAfterRestart.
+[2026.08.26-19.31.41:049][605]LogAutomationController: Writing reports to C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop\reports\overnight-20260827\automation-ue56-restart-UV-ReloadAfterRestart...
+[2026.08.26-19.31.41:049][605]LogAutomationController: Display: Converting results to json object...
+[2026.08.26-19.31.41:049][605]LogAutomationController: Display: Successfully wrote json results file!
+[2026.08.26-19.31.41:049][605]LogAutomationController: Exported report to 'C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop\reports\overnight-20260827\automation-ue56-restart-UV-ReloadAfterRestart' in 0.00 Seconds
+[2026.08.26-19.31.41:049][605]LogAutomationController: Display: Report can be opened in the editor at 'C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop\reports\overnight-20260827\automation-ue56-restart-UV-ReloadAfterRestart'
+[2026.08.26-19.31.41:049][605]LogAutomationController: Sending StopTestSession to 67A00A8043605BF54B5B0C87CBD0E6A7
+[2026.08.26-19.31.41:056][606]LogAutomationWorker: Received StopTestSession from 119E8A514EEC7260BEFF73BE8E6641D5
+[2026.08.26-19.31.41:057][606]LogAutomationCommandLine: Shutting down. GIsCriticalError=0
+[2026.08.26-19.31.41:057][606]LogAutomationCommandLine: Display: **** TEST COMPLETE. EXIT CODE: 0 ****
+[2026.08.26-19.31.41:057][606]LogWindows: FPlatformMisc::RequestExitWithStatus(1, 0, <NoCallSiteInfo>)
+[2026.08.26-19.31.41:057][606]LogCore: Engine exit requested (reason: Win RequestExit)

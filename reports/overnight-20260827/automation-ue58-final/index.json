@@ -1,0 +1,584 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "DESKTOP-JK4SRF5",
+			"instance": "AED27896431D117455CDEFAC34696B53",
+			"instanceName": "DESKTOP-JK4SRF5-81132",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (24H2) [10.0.26100.8737] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 5070 Ti",
+			"cPUModel": "Intel(R) Core(TM) i7-14700KF",
+			"rAMInGB": 64,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.08.26-19.33.18",
+	"succeeded": 37,
+	"succeededWithWarnings": 0,
+	"failed": 0,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 1.4205409288406372,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "AssetSelection",
+			"fullTestPath": "PBRTextureLab.Command.AssetSelection",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0084897987544536591,
+			"dateTime": "2026.08.26-19.33.16",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "AssignMaterial",
+			"fullTestPath": "PBRTextureLab.Command.AssignMaterial",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0089805983006954193,
+			"dateTime": "2026.08.26-19.33.16",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "DuplicateAndModify",
+			"fullTestPath": "PBRTextureLab.Command.DuplicateAndModify",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.010551299899816513,
+			"dateTime": "2026.08.26-19.33.16",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "SelectionGuards",
+			"fullTestPath": "PBRTextureLab.Command.SelectionGuards",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0087928026914596558,
+			"dateTime": "2026.08.26-19.33.16",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Shortcuts",
+			"fullTestPath": "PBRTextureLab.Command.Shortcuts",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.16660630702972412,
+			"dateTime": "2026.08.26-19.33.16",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CancelAndConflict",
+			"fullTestPath": "PBRTextureLab.Import.CancelAndConflict",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.027780700474977493,
+			"dateTime": "2026.08.26-19.33.16",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CreateAndSave",
+			"fullTestPath": "PBRTextureLab.Import.CreateAndSave",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.058180402964353561,
+			"dateTime": "2026.08.26-19.33.16",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "FailureCleanup",
+			"fullTestPath": "PBRTextureLab.Import.FailureCleanup",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0081092007458209991,
+			"dateTime": "2026.08.26-19.33.16",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "HappyPath",
+			"fullTestPath": "PBRTextureLab.Import.HappyPath",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.078586205840110779,
+			"dateTime": "2026.08.26-19.33.16",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "LocalFolder",
+			"fullTestPath": "PBRTextureLab.Import.LocalFolder",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.093632802367210388,
+			"dateTime": "2026.08.26-19.33.16",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ReloadAfterRestart",
+			"fullTestPath": "PBRTextureLab.Import.ReloadAfterRestart",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0081482008099555969,
+			"dateTime": "2026.08.26-19.33.16",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "GenerateUVUndoRedo",
+			"fullTestPath": "PBRTextureLab.Integration.GenerateUVUndoRedo",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.10812419652938843,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ReloadAfterRestart",
+			"fullTestPath": "PBRTextureLab.Integration.ReloadAfterRestart",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0056120008230209351,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CancelAndConflict",
+			"fullTestPath": "PBRTextureLab.Material.CancelAndConflict",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.058990500867366791,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CreateInstance",
+			"fullTestPath": "PBRTextureLab.Material.CreateInstance",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.097780704498291016,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ParentCompiles",
+			"fullTestPath": "PBRTextureLab.Material.ParentCompiles",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0083106979727745056,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ReloadAfterRestart",
+			"fullTestPath": "PBRTextureLab.Material.ReloadAfterRestart",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0080102011561393738,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ReuseUserParent",
+			"fullTestPath": "PBRTextureLab.Material.ReuseUserParent",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.061003100126981735,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "TabRegistered",
+			"fullTestPath": "PBRTextureLab.Nomad.TabRegistered",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.17753180861473083,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "AssembleExisting",
+			"fullTestPath": "PBRTextureLab.Pipeline.AssembleExisting",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.030986402183771133,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CancelAndInvalid",
+			"fullTestPath": "PBRTextureLab.Pipeline.CancelAndInvalid",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0083599016070365906,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "FromLocalFile",
+			"fullTestPath": "PBRTextureLab.Pipeline.FromLocalFile",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.060347799211740494,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "FromTexture2D",
+			"fullTestPath": "PBRTextureLab.Pipeline.FromTexture2D",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.094983302056789398,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ModifyExisting",
+			"fullTestPath": "PBRTextureLab.Pipeline.ModifyExisting",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.11544570326805115,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Checkerboard",
+			"fullTestPath": "PBRTextureLab.PixelCore.Checkerboard",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0084279030561447144,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "DeterminismAndMetallic",
+			"fullTestPath": "PBRTextureLab.PixelCore.DeterminismAndMetallic",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0082110017538070679,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "HorizontalGradient",
+			"fullTestPath": "PBRTextureLab.PixelCore.HorizontalGradient",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0084862001240253448,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "InvalidInput",
+			"fullTestPath": "PBRTextureLab.PixelCore.InvalidInput",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0078146979212760925,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MakeSeamless",
+			"fullTestPath": "PBRTextureLab.PixelCore.MakeSeamless",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0083048008382320404,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "SolidColor",
+			"fullTestPath": "PBRTextureLab.PixelCore.SolidColor",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0084194019436836243,
+			"dateTime": "2026.08.26-19.33.17",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "VerticalGradient",
+			"fullTestPath": "PBRTextureLab.PixelCore.VerticalGradient",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0079810991883277893,
+			"dateTime": "2026.08.26-19.33.18",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Primitives",
+			"fullTestPath": "PBRTextureLab.Preview.Primitives",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0082473009824752808,
+			"dateTime": "2026.08.26-19.33.18",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "AbsolutePresets",
+			"fullTestPath": "PBRTextureLab.UV.AbsolutePresets",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0077419020235538483,
+			"dateTime": "2026.08.26-19.33.18",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "BaselineMismatch",
+			"fullTestPath": "PBRTextureLab.UV.BaselineMismatch",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0083381012082099915,
+			"dateTime": "2026.08.26-19.33.18",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CancelAndUnsupported",
+			"fullTestPath": "PBRTextureLab.UV.CancelAndUnsupported",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0084931999444961548,
+			"dateTime": "2026.08.26-19.33.18",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ReloadAfterRestart",
+			"fullTestPath": "PBRTextureLab.UV.ReloadAfterRestart",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0081509016454219818,
+			"dateTime": "2026.08.26-19.33.18",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "UndoRedo",
+			"fullTestPath": "PBRTextureLab.UV.UndoRedo",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"AED27896431D117455CDEFAC34696B53"
+			],
+			"duration": 0.0085797980427742004,
+			"dateTime": "2026.08.26-19.33.18",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		}
+	]
+}

@@ -1,0 +1,52 @@
+Using bundled DotNet SDK version: 10.0 win-x64
+Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" PBRTextureLabHostEditor Win64 Development -Project=C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop\PBRTextureLabHost\PBRTextureLabHost.uproject -WaitMutex
+Log file: C:\Users\Administrator\AppData\Local\UnrealBuildTool\Log.txt
+Determining max actions to execute in parallel (20 physical cores, 28 logical cores)
+  Executing up to 20 processes, one per physical core
+Using 'git status' to determine working set for adaptive non-unity build (C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop).
+Creating makefile for PBRTextureLabHostEditor (.uproject file is newer)
+UbaServer - Listening on 0.0.0.0:1345
+UHT compiled-in object format Default
+Building PBRTextureLabHostEditor...
+===== Toolchain Information =====
+Using ISPC compiler (C:\Program Files\Epic Games\UE_5.8\Engine\Source\ThirdParty\Intel\ISPC\bin\Windows\ispc.exe)
+  Intel(r) Implicit SPMD Program Compiler (Intel(r) ISPC), 1.24.0 (build commit  @ 20250404, LLVM 18.1.2) 
+Using Visual Studio 14.44.35228 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207) and Windows 10.0.22621.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+[Adaptive Build] Excluded from PBRTextureLabEditor unity file: PBRTextureLabUVTests.cpp
+=================================
+Using Unreal Build Accelerator local executor to run 8 action(s)
+  CPU 20 physical cores, 28 logical cores
+  Memory 63.83 GB physical, 39.57 GB/83.37 GB committed
+  UBA Storage capacity 40 GB
+[1/8] Compile [x64] PBRTextureLabHost.cpp
+[2/8] Link [x64] UnrealEditor-PBRTextureLabHost.lib
+  正在创建库 C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabHost/UnrealEditor-PBRTextureLabHost.lib 和对象 C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabHost/UnrealEditor-PBRTextureLabHost.exp
+[3/8] Link [x64] UnrealEditor-PBRTextureLabHost.dll
+[4/8] Compile [x64] PBRTextureLabUVTests.cpp
+[5/8] Compile [x64] Module.PBRTextureLabEditor.cpp
+C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop\PBRTextureLabHost\Plugins\PBRTextureLab\Source\PBRTextureLabEditor\Private\PBRTextureLabMaterial.cpp(241,40): warning C4996: 'UMaterialExpressionTextureBase::GetSamplerTypeForTexture': Use MaterialExpressionUtils::GetSamplerTypeForTexture instead. - Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+				&& UMaterialExpressionTextureBase::GetSamplerTypeForTexture(Sample->Texture) == Expected;
+				                                   ^
+C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop\PBRTextureLabHost\Plugins\PBRTextureLab\Source\PBRTextureLabEditor\Private\PBRTextureLabMaterial.cpp(295,41): warning C4996: 'UMaterialExpressionTextureBase::GetSamplerTypeForTexture': Use MaterialExpressionUtils::GetSamplerTypeForTexture instead. - Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+				if (UMaterialExpressionTextureBase::GetSamplerTypeForTexture(Existing) == SamplerType)
+				                                    ^
+C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop\PBRTextureLabHost\Plugins\PBRTextureLab\Source\PBRTextureLabEditor\Private\PBRTextureLabMaterial.cpp(352,51): warning C4996: 'UMaterialExpressionTextureBase::GetSamplerTypeForTexture': Use MaterialExpressionUtils::GetSamplerTypeForTexture instead. - Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+			if (Texture && UMaterialExpressionTextureBase::GetSamplerTypeForTexture(Texture) == SamplerType)
+			                                               ^
+C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop\PBRTextureLabHost\Plugins\PBRTextureLab\Source\PBRTextureLabEditor\Private\PBRTextureLabMaterial.cpp(360,52): warning C4996: 'UMaterialExpressionTextureBase::GetSamplerTypeForTexture': Use MaterialExpressionUtils::GetSamplerTypeForTexture instead. - Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+				if (Texture && UMaterialExpressionTextureBase::GetSamplerTypeForTexture(Texture) == SamplerType)
+				                                               ^
+C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop\PBRTextureLabHost\Plugins\PBRTextureLab\Source\PBRTextureLabEditor\Private\PBRTextureLabMaterialTests.cpp(162,57): warning C4996: 'UMaterialExpressionTextureBase::GetSamplerTypeForTexture': Use MaterialExpressionUtils::GetSamplerTypeForTexture instead. - Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+					static_cast<int32>(UMaterialExpressionTextureBase::GetSamplerTypeForTexture(DefaultTexture)),
+					                                                   ^
+[6/8] Link [x64] UnrealEditor-PBRTextureLabEditor.lib
+  正在创建库 C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabEditor/UnrealEditor-PBRTextureLabEditor.lib 和对象 C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabEditor/UnrealEditor-PBRTextureLabEditor.exp
+[7/8] Link [x64] UnrealEditor-PBRTextureLabEditor.dll
+[8/8] WriteMetadata PBRTextureLabHostEditor.target [NoUba]
+
+Total time in Unreal Build Accelerator local executor: 14.54 seconds
+Output binary: C:\Program Files\Epic Games\UE_5.8\Engine\Binaries\Win64\UnrealEditor.exe
+
+Result: Succeeded
+Total execution time: 16.73 seconds
+Trace written to file C:\Users\Administrator\AppData\Local\UnrealBuildTool\Trace.uba with size 7.6kb

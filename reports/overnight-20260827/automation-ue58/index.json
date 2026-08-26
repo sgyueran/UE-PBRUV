@@ -1,0 +1,1075 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "DESKTOP-JK4SRF5",
+			"instance": "96F49C9244B23C66E45EF68508578DE0",
+			"instanceName": "DESKTOP-JK4SRF5-86996",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (24H2) [10.0.26100.8737] ",
+			"model": "Default",
+			"gPU": "GameViewer Virtual Display Adapter",
+			"cPUModel": "Intel(R) Core(TM) i7-14700KF",
+			"rAMInGB": 64,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.08.26-19.09.23",
+	"succeeded": 34,
+	"succeededWithWarnings": 1,
+	"failed": 1,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 2.5285120010375977,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "AssetSelection",
+			"fullTestPath": "PBRTextureLab.Command.AssetSelection",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0088150016963481903,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "AssignMaterial",
+			"fullTestPath": "PBRTextureLab.Command.AssignMaterial",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0087145008146762848,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "DuplicateAndModify",
+			"fullTestPath": "PBRTextureLab.Command.DuplicateAndModify",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.017103400081396103,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "SelectionGuards",
+			"fullTestPath": "PBRTextureLab.Command.SelectionGuards",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0086882002651691437,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Shortcuts",
+			"fullTestPath": "PBRTextureLab.Command.Shortcuts",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.16940599679946899,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CancelAndConflict",
+			"fullTestPath": "PBRTextureLab.Import.CancelAndConflict",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.029058899730443954,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CreateAndSave",
+			"fullTestPath": "PBRTextureLab.Import.CreateAndSave",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.074640199542045593,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "FailureCleanup",
+			"fullTestPath": "PBRTextureLab.Import.FailureCleanup",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0082069002091884613,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "HappyPath",
+			"fullTestPath": "PBRTextureLab.Import.HappyPath",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.075476095080375671,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "LocalFolder",
+			"fullTestPath": "PBRTextureLab.Import.LocalFolder",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.090068697929382324,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ReloadAfterRestart",
+			"fullTestPath": "PBRTextureLab.Import.ReloadAfterRestart",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.008143402636051178,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "GenerateUVUndoRedo",
+			"fullTestPath": "PBRTextureLab.Integration.GenerateUVUndoRedo",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.097457602620124817,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ReloadAfterRestart",
+			"fullTestPath": "PBRTextureLab.Integration.ReloadAfterRestart",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0053364001214504242,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CancelAndConflict",
+			"fullTestPath": "PBRTextureLab.Material.CancelAndConflict",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.057071398943662643,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CreateInstance",
+			"fullTestPath": "PBRTextureLab.Material.CreateInstance",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.22228500247001648,
+			"dateTime": "2026.08.26-19.09.21",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Warning",
+						"message": "LogCore: Element 'null - ID: 16' is still externally referenced when being destroyed. Ref-count: 7;",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.22"
+				},
+				{
+					"event":
+					{
+						"type": "Warning",
+						"message": "LogCore: Enable CVar 'TypedElements.EnableReferenceTracking' for Element reference tracking.",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.22"
+				},
+				{
+					"event":
+					{
+						"type": "Warning",
+						"message": "LogCore: Element 'null - ID: 19' is still externally referenced when being destroyed. Ref-count: 7;",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.22"
+				},
+				{
+					"event":
+					{
+						"type": "Warning",
+						"message": "LogCore: Enable CVar 'TypedElements.EnableReferenceTracking' for Element reference tracking.",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.22"
+				},
+				{
+					"event":
+					{
+						"type": "Warning",
+						"message": "LogCore: Element 'null - ID: 20' is still externally referenced when being destroyed. Ref-count: 7;",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.22"
+				},
+				{
+					"event":
+					{
+						"type": "Warning",
+						"message": "LogCore: Enable CVar 'TypedElements.EnableReferenceTracking' for Element reference tracking.",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.22"
+				},
+				{
+					"event":
+					{
+						"type": "Warning",
+						"message": "LogCore: Element 'null - ID: 21' is still externally referenced when being destroyed. Ref-count: 7;",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.22"
+				},
+				{
+					"event":
+					{
+						"type": "Warning",
+						"message": "LogCore: Enable CVar 'TypedElements.EnableReferenceTracking' for Element reference tracking.",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.22"
+				}
+			],
+			"warnings": 8,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ParentCompiles",
+			"fullTestPath": "PBRTextureLab.Material.ParentCompiles",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0081764012575149536,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ReloadAfterRestart",
+			"fullTestPath": "PBRTextureLab.Material.ReloadAfterRestart",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0083010978996753693,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ReuseUserParent",
+			"fullTestPath": "PBRTextureLab.Material.ReuseUserParent",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.044274996966123581,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "TabRegistered",
+			"fullTestPath": "PBRTextureLab.Nomad.TabRegistered",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.16783040761947632,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "AssembleExisting",
+			"fullTestPath": "PBRTextureLab.Pipeline.AssembleExisting",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.027031600475311279,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CancelAndInvalid",
+			"fullTestPath": "PBRTextureLab.Pipeline.CancelAndInvalid",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0081300996243953705,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "FromLocalFile",
+			"fullTestPath": "PBRTextureLab.Pipeline.FromLocalFile",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.065520703792572021,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "FromTexture2D",
+			"fullTestPath": "PBRTextureLab.Pipeline.FromTexture2D",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.11052010208368301,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ModifyExisting",
+			"fullTestPath": "PBRTextureLab.Pipeline.ModifyExisting",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.29892641305923462,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Checkerboard",
+			"fullTestPath": "PBRTextureLab.PixelCore.Checkerboard",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0082622021436691284,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "DeterminismAndMetallic",
+			"fullTestPath": "PBRTextureLab.PixelCore.DeterminismAndMetallic",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.008210599422454834,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "HorizontalGradient",
+			"fullTestPath": "PBRTextureLab.PixelCore.HorizontalGradient",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0080723017454147339,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "InvalidInput",
+			"fullTestPath": "PBRTextureLab.PixelCore.InvalidInput",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0011893995106220245,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MakeSeamless",
+			"fullTestPath": "PBRTextureLab.PixelCore.MakeSeamless",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0081622004508972168,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "SolidColor",
+			"fullTestPath": "PBRTextureLab.PixelCore.SolidColor",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.008056100457906723,
+			"dateTime": "2026.08.26-19.09.22",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "VerticalGradient",
+			"fullTestPath": "PBRTextureLab.PixelCore.VerticalGradient",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.008138999342918396,
+			"dateTime": "2026.08.26-19.09.23",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "AbsolutePresets",
+			"fullTestPath": "PBRTextureLab.UV.AbsolutePresets",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0078507028520107269,
+			"dateTime": "2026.08.26-19.09.23",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "BaselineMismatch",
+			"fullTestPath": "PBRTextureLab.UV.BaselineMismatch",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0081369020044803619,
+			"dateTime": "2026.08.26-19.09.23",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CancelAndUnsupported",
+			"fullTestPath": "PBRTextureLab.UV.CancelAndUnsupported",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0082560032606124878,
+			"dateTime": "2026.08.26-19.09.23",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ReloadAfterRestart",
+			"fullTestPath": "PBRTextureLab.UV.ReloadAfterRestart",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.0085268020629882812,
+			"dateTime": "2026.08.26-19.09.23",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "UndoRedo",
+			"fullTestPath": "PBRTextureLab.UV.UndoRedo",
+			"tags": [],
+			"state": "Fail",
+			"deviceInstance": [
+				"96F49C9244B23C66E45EF68508578DE0"
+			],
+			"duration": 0.82646638154983521,
+			"dateTime": "2026.08.26-19.09.23",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "LogStaticMesh: 正在构建静态网格体T5Undo（所需内存估计：0.010461MB）…",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Warning",
+						"message": "LogOutputDevice: \n\nScript Stack (0 frames) :\n",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: === Handled ensure: ===",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: ",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: Ensure condition failed: RegisteredElementType  [File:D:\\build\\++UE5\\Sync\\Engine\\Source\\Runtime\\TypedElementFramework\\Public\\Elements\\Framework\\TypedElementRegistry.h] [Line: 593] ",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: Element type ID '0' has not been registered!",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: Stack: ",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ffcbe41cefd UnrealEditor-TypedElementFramework.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ffcbe35a3d4 UnrealEditor-TypedElementFramework.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ffc79fce763 UnrealEditor-UnrealEd.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ffc7a1f2de7 UnrealEditor-UnrealEd.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ffc7a1de90c UnrealEditor-UnrealEd.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ffc7a1c71ce UnrealEditor-UnrealEd.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ffc7a1ae4c2 UnrealEditor-UnrealEd.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ffc7a25e51b UnrealEditor-UnrealEd.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ffc7a1f21c4 UnrealEditor-UnrealEd.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00000202563769ad UnrealEditor-PBRTextureLabEditor.dll!FPBRTextureLabUVUndoRedo::RunTest() [C:\\Users\\Administrator\\Desktop\\UE-PBRUV-develop\\UE-PBRUV-develop\\PBRTextureLabHost\\Plugins\\PBRTextureLab\\Source\\PBRTextureLabEditor\\Private\\PBRTextureLabUVTests.cpp:221]",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ffc92f711b6 UnrealEditor-Core.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ffc92f90460 UnrealEditor-Core.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x000002026be6f30f UnrealEditor-AutomationWorker.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x000002026be6e29d UnrealEditor-AutomationWorker.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x000002026be727ba UnrealEditor-AutomationWorker.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x000002026be613fe UnrealEditor-AutomationWorker.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ff73f56325d UnrealEditor-Cmd.exe!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ff73f54c4ac UnrealEditor-Cmd.exe!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ff73f54c5ba UnrealEditor-Cmd.exe!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ff73f551256 UnrealEditor-Cmd.exe!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ff73f565c74 UnrealEditor-Cmd.exe!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ff73f56838a UnrealEditor-Cmd.exe!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ffd886ee957 KERNEL32.DLL!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: [Callstack] 0x00007ffd89c2ad6c ntdll.dll!UnknownFunction []",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "LogOutputDevice: ",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "LogStaticMesh: 正在构建静态网格体T5Undo（所需内存估计：0.010461MB）…",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "EnsureFailed: Ensure condition failed: RegisteredElementType  [File:D:\\build\\++UE5\\Sync\\Engine\\Source\\Runtime\\TypedElementFramework\\Public\\Elements\\Framework\\TypedElementRegistry.h] [Line: 593] \r\nElement type ID '0' has not been registered!\r\nStack: \r\n0x00007ffcbe41cefd UnrealEditor-TypedElementFramework.dll!UnknownFunction []\r\n0x00007ffcbe35a3d4 UnrealEditor-TypedElementFramework.dll!UnknownFunction []\r\n0x00007ffc79fce763 UnrealEditor-UnrealEd.dll!UnknownFunction []\r\n0x00007ffc7a1f2de7 UnrealEditor-UnrealEd.dll!UnknownFunction []\r\n0x00007ffc7a1de90c UnrealEditor-UnrealEd.dll!UnknownFunction []\r\n0x00007ffc7a1c71ce UnrealEditor-UnrealEd.dll!UnknownFunction []\r\n0x00007ffc7a1ae4c2 UnrealEditor-UnrealEd.dll!UnknownFunction []\r\n0x00007ffc7a25e51b UnrealEditor-UnrealEd.dll!UnknownFunction []\r\n0x00007ffc7a1f21c4 UnrealEditor-UnrealEd.dll!UnknownFunction []\r\n0x00000202563769ad UnrealEditor-PBRTextureLabEditor.dll!FPBRTextureLabUVUndoRedo::RunTest() [C:\\Users\\Administrator\\Desktop\\UE-PBRUV-develop\\UE-PBRUV-develop\\PBRTextureLabHost\\Plugins\\PBRTextureLab\\Source\\PBRTextureLabEditor\\Private\\PBRTextureLabUVTests.cpp:221]\r\n0x00007ffc92f711b6 UnrealEditor-Core.dll!UnknownFunction []\r\n0x00007ffc92f90460 UnrealEditor-Core.dll!UnknownFunction []\r\n0x000002026be6f30f UnrealEditor-AutomationWorker.dll!UnknownFunction []\r\n0x000002026be6e29d UnrealEditor-AutomationWorker.dll!UnknownFunction []\r\n0x000002026be727ba UnrealEditor-AutomationWorker.dll!UnknownFunction []\r\n0x000002026be613fe UnrealEditor-AutomationWorker.dll!UnknownFunction []\r\n0x00007ff73f56325d UnrealEditor-Cmd.exe!UnknownFunction []\r\n0x00007ff73f54c4ac UnrealEditor-Cmd.exe!UnknownFunction []\r\n0x00007ff73f54c5ba UnrealEditor-Cmd.exe!UnknownFunction []\r\n0x00007ff73f551256 UnrealEditor-Cmd.exe!UnknownFunction []\r\n0x00007ff73f565c74 UnrealEditor-Cmd.exe!UnknownFunction []\r\n0x00007ff73f56838a UnrealEditor-Cmd.exe!UnknownFunction []\r\n0x00007ffd886ee957 KERNEL32.DLL!UnknownFunction []\r\n0x00007ffd89c2ad6c ntdll.dll!UnknownFunction []\r\n",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.08.26-19.09.23"
+				}
+			],
+			"warnings": 1,
+			"errors": 31,
+			"artifacts": []
+		}
+	]
+}

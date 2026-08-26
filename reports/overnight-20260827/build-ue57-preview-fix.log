@@ -1,0 +1,25 @@
+Using bundled DotNet SDK version: 8.0.412 win-x64
+Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" PBRTextureLabHostEditor Win64 Development -Project=C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop\PBRTextureLabHost\PBRTextureLabHost.uproject -WaitMutex
+Log file: C:\Users\Administrator\AppData\Local\UnrealBuildTool\Log.txt
+Using 'git status' to determine working set for adaptive non-unity build (C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop).
+Building PBRTextureLabHostEditor...
+Using Visual Studio 2022 14.44.35228 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207) and Windows 10.0.22621.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+[Adaptive Build] Excluded from PBRTextureLabEditor unity file: PBRTextureLabApiProbe.cpp, PBRTextureLabMaterial.cpp, PBRTextureLabMaterialTests.cpp, PBRTextureLabPipelineTests.cpp, PBRTextureLabUVTests.cpp, SPBRTextureLabNomad.cpp, SPBRTextureLabPreviewViewport.cpp
+Determining max actions to execute in parallel (20 physical cores, 28 logical cores)
+  Executing up to 20 processes, one per physical core
+Using Unreal Build Accelerator local executor to run 5 action(s)
+  Storage capacity 40Gb
+---- Starting trace: 260827_032409 ----
+UbaSessionServer - Disable remote execution (remote sessions will finish current processes)
+[1/5] Compile [x64] SPBRTextureLabPreviewViewport.cpp
+[2/5] Compile [x64] PBRTextureLabMaterialTests.cpp
+[3/5] Link [x64] UnrealEditor-PBRTextureLabEditor.lib
+  正在创建库 C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabEditor/UnrealEditor-PBRTextureLabEditor.lib 和对象 C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabEditor/UnrealEditor-PBRTextureLabEditor.exp
+[4/5] Link [x64] UnrealEditor-PBRTextureLabEditor.dll
+[5/5] WriteMetadata PBRTextureLabHostEditor.target [NoUba]
+
+Trace written to file C:/Users/Administrator/AppData/Local/UnrealBuildTool/Log.uba with size 3.6kb
+Total time in Unreal Build Accelerator local executor: 2.58 seconds
+
+Result: Succeeded
+Total execution time: 3.19 seconds

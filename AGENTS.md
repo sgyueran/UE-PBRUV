@@ -10,7 +10,8 @@
 - **Task 6 通过**（2026-08-13）：`PBRTextureLab.UVScale100` / `UVScale500` 无默认快捷键；Tools 菜单、工具栏、Content Browser 右键；复制重绑 / 改源资产 / 取消。三版本编译退出码 0；Automation 24/24。报告见 `reports/06-editor-commands-and-selection.md`。未做 Nomad Tab。
 - **Task 7 通过**（2026-08-13）：Nomad Tab（Texture2D / 本地图、输出目录尺寸参数、预览、生成）、接入 UV 命令；三版本编译退出码 0；Automation 30/30；各版本第二进程 `Integration.ReloadAfterRestart` 1/1。独立审查 Critical/High 为 0。报告见 `reports/07-integration-validation-review.md`。
 - **三版本 Development Editor 编译通过**：UE 5.6 / 5.7 / 5.8，均用各引擎本机 `Build.bat`，退出码 0。报告见 `reports/01-ue-api-and-build-baseline.md` 至 `reports/07-integration-validation-review.md`。
-- **Git**：仓库 `https://github.com/sgyueran/UE-PBRUV`，分支 `develop`，Task 7 提交 `a1a2a96`，Task 7 之后当前提交 `d0be9da`。约定每个 Task 完成后单独提交并推送。
+- **Overnight 2026-08-27**：P1 三版本回归 + P2 限制文档 + P3 预览/社区对照 + P4 README。报告 `reports/08`–`10` 与 `reports/README.md`。套件 37 项（含 `Preview.Primitives`）。5.8 最终 37/37；5.7 35+2w；5.6 34+3w；失败 0。第二进程 ReloadAfterRestart 各 1/1。
+- **Git**：仓库 `https://github.com/sgyueran/UE-PBRUV`，分支 `develop`，Task 7 提交 `a1a2a96`，Task 7 之后基线 `d0be9da` / `004fa61`。约定每个有意义改动后单独提交并推送。
 
 ## Task 7 之后（2026-08-13 ~ 2026-08-14）
 
@@ -36,17 +37,21 @@
 
 ### 验证（已跑）
 
-- Host UE 5.8 `Build.bat` PBRTextureLabHostEditor：退出码 0。
-- `PBRTextureLab.Material` Automation（Host 5.8，含开关关断 / `000基础材质`）：5/5，退出码 0。日志 `reports/test-ue58-switch-default-off.log`。
-- A213Editor Win64 Development：退出码 0（同步 Source 后）。
-- 5.6 / 5.7 本轮**未**重跑全套 Automation，标为未验证。
+- Overnight 2026-08-27 三版本 `PBRTextureLab` Automation：失败 0。详见 `reports/08-overnight-regression-ue56-57-58.md`。
+- 5.8 最终：编译 37.36s 退出码 0；同进程 37/37；ReloadAfterRestart 4×1/1。
+- 5.7：编译 48.38s 退出码 0；35 Success + 2 warnings。
+- 5.6：编译 39.24s 退出码 0；34 Success + 3 warnings（含 NullRHI 跳过 UndoTransaction）。
+- A213 本轮**未**同步、未编，标为未验证。
 
 ### 已知限制
 
-- `000基础材质` 没有 `法线贴图开关`，法线靠静态开关 `法线`；Automation 用 Global GET 读不到该开关时不要当失败。
+- `000基础材质` 没有 `法线贴图开关`，法线靠静态开关 `法线`；Automation 用 Global GET 读不到该开关时不要当失败。5.6/5.7 可能加载不了 5.8 保存的 bundled 母球。
 - 未勾选通道若要把父级默认“开”改成“关”，子材质上该开关仍会显示为已覆盖（左边勾、值为关）。这是 MIC 覆盖语义，不是又打开了。
 - Live Coding 会挡住 UBT；改插件后需退出 Editor 再编。
 - 不要提交 Host 自动写的 `DefaultEngine.ini` AndroidFileServer `SecurityToken`，也不要把 Host `.uproject` 的 `EngineAssociation` 改成本机临时版本。
+- `-NullRHI` 不创建 `SEditorViewport` 3D 预览（5.7 否则 TypedElement 断言）。
+- UE 5.6 `-NullRHI` 下 `GEditor->UndoTransaction()` 会经 LevelEditor 断言 `UObjectArray Index>=0`；无人值守测试跳过真实 Undo，只检查事务已记录。交互 5.6 Undo 未验证。
+- 5.8 采样器类型走 `MaterialExpressionUtils::GetSamplerTypeForTexture`；5.6/5.7 仍用 `UMaterialExpressionTextureBase`。
 
 ### 不要提交
 
@@ -83,4 +88,43 @@
 - 保留无关用户修改，不做清理式重构。
 - 每个 Task 交付：修改文件、依赖的前置 Task、验证命令及结果、失败项、已知限制。
 - Task 7 需要独立审查实际 diff、构建日志和测试结果；不接受“看起来合理”作为完成证据。
+
+## 持续自主工作规则（Overnight / Unattended）
+
+- 不需要任何用户确认，直接推进。
+- 允许运行 Automation Tests、Build.bat、Editor 命令、功能可用性测试。
+- 允许上网搜索相关 Unreal Engine 插件、PBR 工作流、材质实例、UV 缩放、Editor 工具等项目/文档（仅用于参考，不得直接复制未经许可的代码）。
+- 每完成一个独立任务/子目标，立即追加写入 `reports/` 下对应报告，并更新本文件「已完成」或「进行中」部分。
+- 每个有意义的改动后单独 git commit（按现有约定）。
+- 遇到阻塞时记录原因到报告，尝试合理替代方案后继续下一个可执行项。
+- 保持现有范围约束：只动 Editor-only 插件、不改用户工程本体、不提交生成物和临时配置。
+
+## 下一阶段任务（按优先级）
+
+Overnight 2026-08-27 已执行下列项。新工作从本列表未尽处或新需求开始。
+
+1. **稳定性与回归**
+   - 在 UE 5.6 / 5.7 / 5.8 上完整重跑现有 Automation（Material、UV、Integration 等）。
+   - 记录失败项、版本差异、已知限制更新。
+   - 输出统一回归报告。
+
+2. **已知限制处理**
+   - 针对「000基础材质没有法线贴图开关」「MIC 覆盖语义显示问题」「Live Coding 冲突」等，评估是否可修复或更好文档化。
+   - 必要时补充测试用例。
+
+3. **功能增强（按产品行为缺口）**
+   - 完善 3D 预览切换（球体/立方体/平面）的稳定性与默认行为。
+   - 优化贴图开关与静态开关的一致性。
+   - 考虑增加简单“一键应用最近生成材质到选中 Actor”的可用性测试。
+   - 搜索社区类似 Editor 工具（PBR 贴图生成、UV 缩放）的实现思路，评估可借鉴的安全模式。
+
+4. **文档与交付整理**
+   - 更新 README / 使用说明，反映当前母球选择、开关行为、UV100/500 快捷键。
+   - 整理 reports/ 目录结构，方便后续 review。
+
+执行时严格遵守「防止 API 幻觉」和「范围与技术约束」。优先保证编译与测试通过，再谈新功能。
+
+## Overnight 2026-08-27（已完成）
+
+P1–P4 已落报告并准备提交。工作副本曾是无 `.git` 的解压目录，已挂回 `origin/develop`。不提交 Host `DefaultEngine.ini` SecurityToken 与 Content 生成物。
 

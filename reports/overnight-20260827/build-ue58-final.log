@@ -1,0 +1,47 @@
+Using bundled DotNet SDK version: 10.0 win-x64
+Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" PBRTextureLabHostEditor Win64 Development -Project=C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop\PBRTextureLabHost\PBRTextureLabHost.uproject -WaitMutex
+Log file: C:\Users\Administrator\AppData\Local\UnrealBuildTool\Log.txt
+Determining max actions to execute in parallel (20 physical cores, 28 logical cores)
+  Executing up to 20 processes, one per physical core
+Using 'git status' to determine working set for adaptive non-unity build (C:\Users\Administrator\Desktop\UE-PBRUV-develop\UE-PBRUV-develop).
+Creating makefile for PBRTextureLabHostEditor (no existing makefile)
+UbaServer - Listening on 0.0.0.0:1345
+UHT compiled-in object format Default
+Building PBRTextureLabHostEditor...
+===== Toolchain Information =====
+Using ISPC compiler (C:\Program Files\Epic Games\UE_5.8\Engine\Source\ThirdParty\Intel\ISPC\bin\Windows\ispc.exe)
+  Intel(r) Implicit SPMD Program Compiler (Intel(r) ISPC), 1.24.0 (build commit  @ 20250404, LLVM 18.1.2) 
+Using Visual Studio 14.44.35228 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207) and Windows 10.0.22621.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+[Adaptive Build] Excluded from PBRTextureLabEditor unity file: PBRTextureLabApiProbe.cpp, PBRTextureLabMaterial.cpp, PBRTextureLabMaterialTests.cpp, PBRTextureLabPipelineTests.cpp, PBRTextureLabUVTests.cpp, SPBRTextureLabNomad.cpp, SPBRTextureLabPreviewViewport.cpp
+=================================
+Using Unreal Build Accelerator local executor to run 18 action(s)
+  CPU 20 physical cores, 28 logical cores
+  Memory 63.83 GB physical, 39.75 GB/83.37 GB committed
+  UBA Storage capacity 40 GB
+[1/18] Compile Resource [x64] Default.rc2
+[2/18] Compile Resource [x64] Default.rc2
+[3/18] Compile [x64] SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.cpp
+[4/18] Compile [x64] PBRTextureLabHost.cpp
+[5/18] Compile [x64] PerModuleInline.gen.cpp
+[6/18] Link [x64] UnrealEditor-PBRTextureLabHost.lib
+  正在创建库 C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabHost/UnrealEditor-PBRTextureLabHost.lib 和对象 C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabHost/UnrealEditor-PBRTextureLabHost.exp
+[7/18] Compile [x64] SPBRTextureLabPreviewViewport.cpp
+[8/18] Link [x64] UnrealEditor-PBRTextureLabHost.dll
+[9/18] Compile [x64] PBRTextureLabApiProbe.cpp
+[10/18] Compile [x64] PBRTextureLabMaterialTests.cpp
+[11/18] Compile [x64] PBRTextureLabUVTests.cpp
+[12/18] Compile [x64] PBRTextureLabMaterial.cpp
+[13/18] Compile [x64] PBRTextureLabPipelineTests.cpp
+[14/18] Compile [x64] Module.PBRTextureLabEditor.cpp
+[15/18] Compile [x64] SPBRTextureLabNomad.cpp
+[16/18] Link [x64] UnrealEditor-PBRTextureLabEditor.lib
+  正在创建库 C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabEditor/UnrealEditor-PBRTextureLabEditor.lib 和对象 C:/Users/Administrator/Desktop/UE-PBRUV-develop/UE-PBRUV-develop/PBRTextureLabHost/Plugins/PBRTextureLab/Intermediate/Build/Win64/x64/UnrealEditor/Development/PBRTextureLabEditor/UnrealEditor-PBRTextureLabEditor.exp
+[17/18] Link [x64] UnrealEditor-PBRTextureLabEditor.dll
+[18/18] WriteMetadata PBRTextureLabHostEditor.target [NoUba]
+
+Total time in Unreal Build Accelerator local executor: 33.10 seconds
+Output binary: C:\Program Files\Epic Games\UE_5.8\Engine\Binaries\Win64\UnrealEditor.exe
+
+Result: Succeeded
+Total execution time: 37.36 seconds
+Trace written to file C:\Users\Administrator\AppData\Local\UnrealBuildTool\Trace.uba with size 11.8kb

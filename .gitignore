@@ -27,3 +27,4 @@ PBRTextureLabHost/Plugins/PBRTextureLab/Content/*
 !PBRTextureLabHost/Plugins/PBRTextureLab/Content/Parents/**
 __pycache__/
 *.pyc
+logs/
