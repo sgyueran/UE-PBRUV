@@ -16,6 +16,12 @@ enum class EPBRPreviewPrimitive : uint8
 	Plane = 2
 };
 
+/** Engine thumbnail mesh, then EngineMeshes/BasicShapes fallbacks. Safe without a viewport. */
+UStaticMesh* PBRTextureLabResolvePreviewMesh(EPBRPreviewPrimitive Primitive);
+
+/** 3D preview needs a real RHI. -NullRHI / commandlets must not construct SEditorViewport. */
+bool PBRTextureLabCanCreatePreviewViewport();
+
 class SPBRTextureLabPreviewViewport final : public SEditorViewport, public FGCObject
 {
 public:

@@ -1,5 +1,6 @@
 #include "PBRTextureLabMaterial.h"
 #include "PBRTextureLabCompat.h"
+#include "PBRTextureLabEditorApi.h"
 #include "PBRTextureLabPixelCore.h"
 #include "PBRTextureLabTextureImport.h"
 #include "Engine/Texture2D.h"
@@ -159,7 +160,7 @@ bool FPBRTextureLabMaterialParentCompiles::RunTest(const FString& Parameters)
 					static_cast<int32>(Expected));
 				TestEqual(
 					FString::Printf(TEXT("%s default texture sampler"), ParamName),
-					static_cast<int32>(UMaterialExpressionTextureBase::GetSamplerTypeForTexture(DefaultTexture)),
+					static_cast<int32>(PBRTextureLab::GetSamplerTypeForTexture(DefaultTexture)),
 					static_cast<int32>(Expected));
 			}
 			return;

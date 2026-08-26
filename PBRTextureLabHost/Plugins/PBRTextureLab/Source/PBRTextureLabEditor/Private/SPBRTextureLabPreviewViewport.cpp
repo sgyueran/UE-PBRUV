@@ -4,8 +4,46 @@
 #include "Editor.h"
 #include "Engine/StaticMesh.h"
 #include "Editor/UnrealEdEngine.h"
+#include "Misc/App.h"
 #include "ThumbnailRendering/ThumbnailManager.h"
 #include "UnrealEdGlobals.h"
+
+bool PBRTextureLabCanCreatePreviewViewport()
+{
+	return FApp::CanEverRender();
+}
+
+UStaticMesh* PBRTextureLabResolvePreviewMesh(const EPBRPreviewPrimitive Primitive)
+{
+	UThumbnailManager* ThumbnailManager = (GUnrealEd) ? GUnrealEd->GetThumbnailManager() : nullptr;
+	UStaticMesh* Mesh = nullptr;
+	const TCHAR* FallbackPath = TEXT("/Engine/EngineMeshes/Sphere.Sphere");
+	switch (Primitive)
+	{
+	case EPBRPreviewPrimitive::Cube:
+		Mesh = ThumbnailManager ? ThumbnailManager->EditorCube.Get() : nullptr;
+		FallbackPath = TEXT("/Engine/EngineMeshes/Cube.Cube");
+		break;
+	case EPBRPreviewPrimitive::Plane:
+		Mesh = ThumbnailManager ? ThumbnailManager->EditorPlane.Get() : nullptr;
+		FallbackPath = TEXT("/Engine/BasicShapes/Plane.Plane");
+		break;
+	case EPBRPreviewPrimitive::Sphere:
+	default:
+		Mesh = ThumbnailManager ? ThumbnailManager->EditorSphere.Get() : nullptr;
+		FallbackPath = TEXT("/Engine/EngineMeshes/Sphere.Sphere");
+		break;
+	}
+	if (!Mesh)
+	{
+		Mesh = LoadObject<UStaticMesh>(nullptr, FallbackPath);
+	}
+	if (!Mesh && Primitive == EPBRPreviewPrimitive::Plane)
+	{
+		Mesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/EngineMeshes/Plane.Plane"));
+	}
+	return Mesh;
+}
 
 void SPBRTextureLabPreviewViewport::Construct(const FArguments& InArgs)
 {
@@ -56,34 +94,7 @@ TSharedRef<FEditorViewportClient> SPBRTextureLabPreviewViewport::MakeEditorViewp
 
 UStaticMesh* SPBRTextureLabPreviewViewport::ResolvePreviewMesh() const
 {
-	UThumbnailManager* ThumbnailManager = (GUnrealEd) ? GUnrealEd->GetThumbnailManager() : nullptr;
-	UStaticMesh* Mesh = nullptr;
-	const TCHAR* FallbackPath = TEXT("/Engine/EngineMeshes/Sphere.Sphere");
-	switch (PreviewPrimitive)
-	{
-	case EPBRPreviewPrimitive::Cube:
-		Mesh = ThumbnailManager ? ThumbnailManager->EditorCube.Get() : nullptr;
-		FallbackPath = TEXT("/Engine/EngineMeshes/Cube.Cube");
-		break;
-	case EPBRPreviewPrimitive::Plane:
-		Mesh = ThumbnailManager ? ThumbnailManager->EditorPlane.Get() : nullptr;
-		FallbackPath = TEXT("/Engine/BasicShapes/Plane.Plane");
-		break;
-	case EPBRPreviewPrimitive::Sphere:
-	default:
-		Mesh = ThumbnailManager ? ThumbnailManager->EditorSphere.Get() : nullptr;
-		FallbackPath = TEXT("/Engine/EngineMeshes/Sphere.Sphere");
-		break;
-	}
-	if (!Mesh)
-	{
-		Mesh = LoadObject<UStaticMesh>(nullptr, FallbackPath);
-	}
-	if (!Mesh && PreviewPrimitive == EPBRPreviewPrimitive::Plane)
-	{
-		Mesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/EngineMeshes/Plane.Plane"));
-	}
-	return Mesh;
+	return PBRTextureLabResolvePreviewMesh(PreviewPrimitive);
 }
 
 void SPBRTextureLabPreviewViewport::ApplyPreviewMesh()

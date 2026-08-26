@@ -9,8 +9,12 @@
 #include "Engine/StaticMesh.h"
 #include "Framework/Commands/Commands.h"
 #include "IAssetTools.h"
+#include "Materials/MaterialExpressionTextureBase.h"
 #include "Materials/MaterialInstanceConstant.h"
 #include "Materials/MaterialParameterCollection.h"
+#if PBRTEXTURELAB_UE_5_8_OR_LATER
+#include "Materials/MaterialExpressionUtils.h"
+#endif
 #include "ScopedTransaction.h"
 #include "Selection.h"
 #include "StaticMeshAttributes.h"
@@ -25,6 +29,15 @@ class UTexture;
  */
 namespace PBRTextureLab
 {
+	inline EMaterialSamplerType GetSamplerTypeForTexture(const UTexture* Texture)
+	{
+#if PBRTEXTURELAB_UE_5_8_OR_LATER
+		return MaterialExpressionUtils::GetSamplerTypeForTexture(Texture);
+#else
+		return UMaterialExpressionTextureBase::GetSamplerTypeForTexture(Texture);
+#endif
+	}
+
 	inline FMeshDescription* GetStaticMeshDescription(UStaticMesh* Mesh, int32 LodIndex)
 	{
 		return Mesh ? Mesh->GetMeshDescription(LodIndex) : nullptr;

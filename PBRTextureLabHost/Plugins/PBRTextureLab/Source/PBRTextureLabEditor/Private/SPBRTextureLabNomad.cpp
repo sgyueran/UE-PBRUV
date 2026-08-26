@@ -9,6 +9,7 @@
 #include "Engine/Texture2D.h"
 #include "Materials/MaterialInstanceConstant.h"
 #include "Materials/MaterialInterface.h"
+#include "Misc/App.h"
 #include "Misc/PackageName.h"
 #include "Framework/Application/SlateApplication.h"
 #include "IDesktopPlatform.h"
@@ -105,7 +106,10 @@ void SPBRTextureLabNomad::Construct(const FArguments& InArgs)
 	Disclaimer = PBRTextureLab::MetallicDisclaimer;
 	RebuildBundledParentOptions();
 	TrySelectDefaultUserParent();
-	PreviewViewport = SNew(SPBRTextureLabPreviewViewport);
+	if (PBRTextureLabCanCreatePreviewViewport())
+	{
+		PreviewViewport = SNew(SPBRTextureLabPreviewViewport);
+	}
 
 	ChildSlot
 	[
@@ -944,7 +948,15 @@ TSharedRef<SWidget> SPBRTextureLabNomad::BuildPreviewPane()
 				[
 					PreviewViewport.IsValid()
 						? StaticCastSharedRef<SWidget>(PreviewViewport.ToSharedRef())
-						: SNullWidget::NullWidget
+						: StaticCastSharedRef<SWidget>(
+							SNew(SBox)
+							.HAlign(HAlign_Center)
+							.VAlign(VAlign_Center)
+							[
+								SNew(STextBlock)
+								.Text(LOCTEXT("Preview3DUnavailable", "当前环境无法显示 3D 预览（需要可渲染的 Editor）。默认形状为球体。"))
+								.AutoWrapText(true)
+							])
 				]
 			]
 		];

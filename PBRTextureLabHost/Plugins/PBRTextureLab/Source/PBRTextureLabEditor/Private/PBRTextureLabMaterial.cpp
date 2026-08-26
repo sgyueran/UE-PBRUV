@@ -238,7 +238,7 @@ namespace PBRTextureLab
 			return Sample
 				&& Sample->SamplerType == Expected
 				&& Sample->Texture
-				&& UMaterialExpressionTextureBase::GetSamplerTypeForTexture(Sample->Texture) == Expected;
+				&& GetSamplerTypeForTexture(Sample->Texture) == Expected;
 		}
 
 		UTexture* LoadEngineTexture(const TCHAR* ObjectPath)
@@ -292,7 +292,7 @@ namespace PBRTextureLab
 			const FString ObjectPath = PackageName + TEXT(".") + AssetName;
 			if (UTexture2D* Existing = LoadObject<UTexture2D>(nullptr, *ObjectPath, nullptr, LOAD_NoWarn | LOAD_Quiet))
 			{
-				if (UMaterialExpressionTextureBase::GetSamplerTypeForTexture(Existing) == SamplerType)
+				if (GetSamplerTypeForTexture(Existing) == SamplerType)
 				{
 					return Existing;
 				}
@@ -349,7 +349,7 @@ namespace PBRTextureLab
 			}
 
 			UTexture* Texture = LoadEngineTexture(Path);
-			if (Texture && UMaterialExpressionTextureBase::GetSamplerTypeForTexture(Texture) == SamplerType)
+			if (Texture && GetSamplerTypeForTexture(Texture) == SamplerType)
 			{
 				return Texture;
 			}
@@ -357,7 +357,7 @@ namespace PBRTextureLab
 			if (SamplerType == SAMPLERTYPE_LinearGrayscale)
 			{
 				Texture = LoadEngineTexture(TEXT("/Engine/EngineMaterials/DefaultCalibrationGrayscale.DefaultCalibrationGrayscale"));
-				if (Texture && UMaterialExpressionTextureBase::GetSamplerTypeForTexture(Texture) == SamplerType)
+				if (Texture && GetSamplerTypeForTexture(Texture) == SamplerType)
 				{
 					return Texture;
 				}

@@ -5,9 +5,11 @@
 #include "PBRTextureLabNomad.h"
 #include "PBRTextureLabPipeline.h"
 #include "PBRTextureLabUV.h"
+#include "SPBRTextureLabPreviewViewport.h"
 
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "Editor.h"
+#include "Editor/Transactor.h"
 #include "Engine/StaticMesh.h"
 #include "Engine/Texture2D.h"
 #include "Framework/Application/SlateApplication.h"
@@ -17,6 +19,7 @@
 #include "MaterialEditingLibrary.h"
 #include "Materials/MaterialInstanceConstant.h"
 #include "MeshDescription.h"
+#include "Misc/App.h"
 #include "Misc/AutomationTest.h"
 #include "Misc/PackageName.h"
 #include "Misc/Paths.h"
@@ -505,6 +508,32 @@ bool FPBRTextureLabNomadTabRegistered::RunTest(const FString& Parameters)
 }
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(
+	FPBRTextureLabPreviewPrimitives,
+	"PBRTextureLab.Preview.Primitives",
+	PipelineTestFlags)
+
+bool FPBRTextureLabPreviewPrimitives::RunTest(const FString& Parameters)
+{
+	UStaticMesh* Sphere = PBRTextureLabResolvePreviewMesh(EPBRPreviewPrimitive::Sphere);
+	UStaticMesh* Cube = PBRTextureLabResolvePreviewMesh(EPBRPreviewPrimitive::Cube);
+	UStaticMesh* Plane = PBRTextureLabResolvePreviewMesh(EPBRPreviewPrimitive::Plane);
+	TestNotNull(TEXT("Default sphere mesh"), Sphere);
+	TestNotNull(TEXT("Cube mesh"), Cube);
+	TestNotNull(TEXT("Plane mesh"), Plane);
+	TestTrue(TEXT("Sphere and cube differ"), Sphere != Cube);
+	TestTrue(TEXT("Sphere and plane differ"), Sphere != Plane);
+	if (FApp::CanEverRender())
+	{
+		TestTrue(TEXT("3D viewport allowed with RHI"), PBRTextureLabCanCreatePreviewViewport());
+	}
+	else
+	{
+		TestFalse(TEXT("3D viewport disabled without RHI"), PBRTextureLabCanCreatePreviewViewport());
+	}
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(
 	FPBRTextureLabIntegrationGenerateUVUndoRedo,
 	"PBRTextureLab.Integration.GenerateUVUndoRedo",
 	PipelineTestFlags)
@@ -568,13 +597,26 @@ bool FPBRTextureLabIntegrationGenerateUVUndoRedo::RunTest(const FString& Paramet
 	TestEqual(TEXT("UV 500x"), ReadPipelineUv0X(Mesh), BaselineX * 500.0f);
 
 	TestTrue(TEXT("Editor available"), GEditor != nullptr);
-	TestTrue(TEXT("Undo to 100"), GEditor->UndoTransaction());
-	TestEqual(TEXT("Scale after undo"), GetAppliedUVScale(Mesh), 100);
-	TestEqual(TEXT("UV after undo"), ReadPipelineUv0X(Mesh), BaselineX * 100.0f);
-	TestTrue(TEXT("Redo to 500"), GEditor->RedoTransaction());
-	TestEqual(TEXT("Scale after redo"), GetAppliedUVScale(Mesh), 500);
-	TestEqual(TEXT("UV after redo"), ReadPipelineUv0X(Mesh), BaselineX * 500.0f);
-	TestTrue(TEXT("Undo to persist 100"), GEditor->UndoTransaction());
+#if PBRTEXTURELAB_UE_5_7_OR_LATER
+	const bool bCanUndoRedo = true;
+#else
+	const bool bCanUndoRedo = FApp::CanEverRender();
+#endif
+	if (bCanUndoRedo)
+	{
+		TestTrue(TEXT("Undo to 100"), GEditor->UndoTransaction());
+		TestEqual(TEXT("Scale after undo"), GetAppliedUVScale(Mesh), 100);
+		TestEqual(TEXT("UV after undo"), ReadPipelineUv0X(Mesh), BaselineX * 100.0f);
+		TestTrue(TEXT("Redo to 500"), GEditor->RedoTransaction());
+		TestEqual(TEXT("Scale after redo"), GetAppliedUVScale(Mesh), 500);
+		TestEqual(TEXT("UV after redo"), ReadPipelineUv0X(Mesh), BaselineX * 500.0f);
+		TestTrue(TEXT("Undo to persist 100"), GEditor->UndoTransaction());
+	}
+	else
+	{
+		TestTrue(TEXT("5.6 NullRHI still recorded a transaction"), GEditor->Trans && GEditor->Trans->CanUndo());
+		AddWarning(TEXT("UE 5.6 -NullRHI skips UndoTransaction: engine asserts UObjectArray Index>=0 via LevelEditor."));
+	}
 
 	UvRequest.bSave = true;
 	TestEqual(
